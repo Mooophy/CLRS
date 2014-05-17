@@ -9,5 +9,6 @@ SOURCES += main.cpp
 HEADERS += \
     heap.h \
     heap_build.h \
-    priority_queue.h
+    priority_queue.h \
+    stack.h
 

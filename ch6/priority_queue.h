@@ -1,12 +1,10 @@
 /***************************************************************************
  *  @file       priority_queue.h
  *  @author     Alan.W
- *  @date       15  May 2014
+ *  @date       17  May 2014
  *  @remark     This code is for Introduction to Algorithms
  *  @note       code style : STL
  ***************************************************************************/
-//! this file implements a stl like priority queue using the algorithms from CLRS and
-
 #ifndef PRIORITY_QUEUE_H
 #define PRIORITY_QUEUE_H
 
