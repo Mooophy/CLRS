@@ -6,3 +6,8 @@ CONFIG += C++11
 
 SOURCES += main.cpp
 
+HEADERS += \
+    heap.h \
+    heap_build.h \
+    priority_queue.h
+

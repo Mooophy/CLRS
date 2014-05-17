@@ -1,10 +1,12 @@
 #include <iostream>
 
-using namespace std;
+
+#include"heap.h"
+#include"heap_build.h"
+#include"priority_queue.h"
 
 int main()
 {
-    cout << "Hello World!" << endl;
     return 0;
 }
 
