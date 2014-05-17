@@ -17,16 +17,16 @@
 #include <assert.h>
 
 
+
 namespace ch6 {
 /**
  *  @brief  priority_queue class template
  *
- *  @note   using the algorithms from CLRS
- *          std::vector is the underlying container.
+ *  @note   using the algorithms from CLRS.
+ *          using std::vector as the underlying container.
  *
  *  @note   std::greater<T> for max priority_queue
- *          std::less<T>    for min priority_queue
- *
+ *          std::less<T>    for min priority_queue 
  */
 template<typename T, typename Compare = std::greater<T> >
 class priority_queue
@@ -93,10 +93,12 @@ public:
      * @param comp  std::greater<T> for max priority_queue
      *              std::less<T>    for min priority_queue
      * @complexity O(lg n)
+     * @note revised using the idea from ex6.5-6
      *
      * Since neither increase_key nor decrease_key interface is provided in boost nor stl,
      * the push function combines the HEAP-INCREASE-KEY and MAX-HEAP-INSERT (or
      * HEAP-DECREASE-KEY and MIN-HEAP-INSERT) together.
+     *
      */
     void push(const ValueType& new_value)
     {
@@ -105,11 +107,11 @@ public:
         Iter first  = container.begin();
         Iter iter   = container.end() - 1;
         CompareType comp = Compare();
-        while(iter > first && comp(*iter, *parent(first, iter)))
-        {
-            std::swap(*iter, *parent(first, iter));
+        while(iter > first && comp(new_value, *parent(first, iter))){
+            *iter = *parent(first, iter);
             iter = parent(first, iter);
         }
+        *iter = new_value;
     }
 
     /**
@@ -178,8 +180,7 @@ private:
         if(r < last  &&  comp(*r, *largest_or_smallest))
             largest_or_smallest = r;
 
-        if(largest_or_smallest != target)
-        {
+        if(largest_or_smallest != target){
             std::swap(*target, *largest_or_smallest);
             heapify(first, last, largest_or_smallest, comp);
         }
