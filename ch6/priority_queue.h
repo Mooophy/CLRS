@@ -116,7 +116,7 @@ private:
         Iter l = left(first, target);
         Iter r = right(first,target);
         Iter largest_or_smallest = (l < last  &&  comp(*l, *last))?     l   :   target;
-        //!                           ^^^^^^^^^^^^^^^
+        //!                                       ^^^^^^^^^^^^^^^
         //!         @attention  :   std::greater<T>  for max priority queue
         //!                         std::less<T>     for min priority queue
 
