@@ -1,4 +1,4 @@
 algorithms_from_CLRS
 ====================
 
-Algorithms from  "Introduction to Algorithms ",implemented  in C++ template.
+This Repo  stores implementations for the book  "Introduction to Algorithms " using C++ template.
