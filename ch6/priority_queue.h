@@ -1,7 +1,7 @@
 /***************************************************************************
  *  @file       priority_queue.h
  *  @author     Alan.W
- *  @date       17  May 2014
+ *  @date       18  May 2014
  *  @remark     This code is for Introduction to Algorithms
  *  @note       code style : STL
  ***************************************************************************/
