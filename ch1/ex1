@@ -1,0 +1,32 @@
+@alan
+
+1.1-1
+Grading system needs the sorting.
+
+1.1-2
+Scalability,correctness
+
+1.1-3
+array,whose size must be fixed when define it, but quite handy to use.
+
+1.1-4
+Both are looking the best path for the lowest cost. However, the destination and the source are different for the shortest-path probelem, where they are the same in the travelling-salesman problem
+
+1.1-5
+Scarces resources allocation always looks for the best option. A student grading system can accept sorting algorithms that are not the fastest one.
+#####################
+1.2-1
+Image processing.It need all kinds of algorithms such as thresholding, learning and so on.
+
+1.2-2
+Based on the problem, an equation was obtained as:
+	8n^2 = 64nlgn
+which could be simplified as:
+	   n = 8lgn
+where n belongs to the region (2,3).
+Hence for value 1,2 insertion sort beat merge sort.
+
+1.2-3
+An equation was obtained as:
+	100n^2 < 2^n
+Hence the smallest value is 15.
