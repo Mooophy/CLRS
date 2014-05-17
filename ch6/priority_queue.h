@@ -57,7 +57,7 @@ public:
      * @brief size
      * @return  the size of this priority_queue.
      */
-    SizeType size()
+    SizeType size() const
     {
         return container.size();
     }
@@ -66,7 +66,7 @@ public:
      * @brief top
      * i.e. HEAP-MAXIMUM OR HEAP-MINIMUM in CLRS. (Page 163)
      */
-    ValueType top()
+    const ValueType& top() const
     {
         return *container.begin();
     }
@@ -78,13 +78,39 @@ public:
      */
     void pop()
     {
-        assert(size() > 1);
-        SizeType size = this->size();
+        assert(this->size() >= 1);
         *container.begin() = *(container.end() - 1);
-        container.resize(size - 1);
-        heapify(container.begin(), container.end(), container.begin() , Compare());
+        container.resize(this->size() - 1);
+        if(this->size() > 1){
+            heapify(container.begin(), container.end(), container.begin(), Compare());
+        }
     }
 
+    /**
+     * @brief push
+     * @param first
+     * @param new_value
+     * @param comp  std::greater<T> for max priority_queue
+     *              std::less<T>    for min priority_queue
+     * @complexity O(lg n)
+     *
+     * Since neither increase_key nor decrease_key interface is provided in boost nor stl,
+     * the push function combines the HEAP-INCREASE-KEY and MAX-HEAP-INSERT (or
+     * HEAP-DECREASE-KEY and MIN-HEAP-INSERT) together.
+     */
+    void push(const ValueType& new_value)
+    {
+        container.push_back(new_value);
+
+        Iter first  = container.begin();
+        Iter iter   = container.end() - 1;
+        CompareType comp = Compare();
+        while(iter > first && comp(*iter, *parent(first, iter)))
+        {
+            std::swap(*iter, *parent(first, iter));
+            iter = parent(first, iter);
+        }
+    }
 
     /**
      * @brief dtor
@@ -100,7 +126,7 @@ private:
      * @brief parent
      * @complexity  constant
      */
-    Iter parent(Iter first, Iter target)
+    Iter parent(Iter first, Iter target) const
     {
         assert(first <= target);
         if(first == target)
@@ -113,7 +139,7 @@ private:
      * @brief left
      * @complexity  constant
      */
-    Iter left(Iter first, Iter target)
+    Iter left(Iter first, Iter target) const
     {
         assert(first <= target);
         return first + 2 * (target - first) + 1;
@@ -123,7 +149,7 @@ private:
      * @brief right
      * @complexity  constant
      */
-    Iter right(Iter first, Iter target)
+    Iter right(Iter first, Iter target) const
     {
         assert(first <= target);
         return first + 2 * (target - first + 1);
@@ -145,7 +171,7 @@ private:
         Iter l = left(first, target);
         Iter r = right(first,target);
         Iter largest_or_smallest = (l < last  &&  comp(*l, *target))?     l   :   target;
-        //!                                       ^^^^^^^^^^^^^^^
+        //!                                       ^^^^^^^^^^^^^^^^^
         //!         @attention  :   std::greater<T>  for max priority queue
         //!                         std::less<T>     for min priority queue
 
@@ -176,11 +202,6 @@ private:
                 heapify(first, last, iter, comp);
     }
 };
-
-
-
-
-
 }//namespace
 
 #endif // PRIORITY_QUEUE_H

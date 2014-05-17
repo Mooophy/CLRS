@@ -5,14 +5,18 @@
 
 int main()
 {
+    //! test:
+    std::vector<std::string> v = {"3","2","44","0","zzzzzzzz"};
+    ch6::priority_queue<std::string, std::less<std::string>> pq(v);
 
-    std::vector<std::string> v = {"3","2","1","0","zzzzzzzz"};
-    ch6::priority_queue<std::string > pq(v);
-    std::cout << pq.top() << std::endl;
-    std::cout << pq.size()<< std::endl;
-    pq.pop();
-    std::cout << pq.size()<< std::endl;
-
+    pq.push("alan");
+    std::cout << pq.size() << std::endl;
+    std::cout << "\n\n" << std::endl;
+    for(unsigned i = 0; i != v.size(); ++i)
+    {
+        std::cout << pq.top() << std::endl;
+        pq.pop();
+    }
 
     return 0;
 }
