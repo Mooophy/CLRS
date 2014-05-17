@@ -13,10 +13,13 @@
 #include <functional>
 #include <vector>
 #include <iterator>
+#include <iostream>
 #include <assert.h>
 
 
 namespace ch6 {
+
+
 
 /**
  *  @brief  priority_queue class template
@@ -40,7 +43,7 @@ public:
     /**
      * @brief default ctor
      */
-    priority_queue()= default;
+    priority_queue() = default;
 
     /**
      * @brief priority_queue
@@ -48,7 +51,9 @@ public:
      */
     explicit priority_queue(const std::vector<ValueType>& v):
         container(v)
-    {}
+    {
+        build_heap(container.begin(), container.end(), Compare());
+    }
 
     /**
      * @brief size
@@ -59,10 +64,16 @@ public:
         return container.size();
     }
 
+    ValueType top()
+    {
+        return *container.begin();
+    }
+
     /**
      * @brief dtor
      */
     ~priority_queue(){}
+
 
 private:
     std::vector<ValueType> container;
@@ -115,7 +126,7 @@ private:
 
         Iter l = left(first, target);
         Iter r = right(first,target);
-        Iter largest_or_smallest = (l < last  &&  comp(*l, *last))?     l   :   target;
+        Iter largest_or_smallest = (l < last  &&  comp(*l, *target))?     l   :   target;
         //!                                       ^^^^^^^^^^^^^^^
         //!         @attention  :   std::greater<T>  for max priority queue
         //!                         std::less<T>     for min priority queue
@@ -128,6 +139,23 @@ private:
             std::swap(*target, *largest_or_smallest);
             heapify(first, last, largest_or_smallest, comp);
         }
+    }
+
+    /**
+     * @brief build_heap
+     * @param first
+     * @param last
+     * @param comp  std::greater<T> for max priority_queue
+     *              std::less<T>    for min priority_queue
+     * @complexity  O(n)
+     */
+    void build_heap(Iter first, Iter last, CompareType comp)
+    {
+        assert(last >= first);
+        SizeType size = last - first;
+        if(size > 1)
+            for(Iter iter = first + size/2 - 1; iter != first - 1; --iter)
+                heapify(first, last, iter, comp);
     }
 };
 
