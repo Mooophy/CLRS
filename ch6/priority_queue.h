@@ -15,7 +15,6 @@
 #include <assert.h>
 
 
-
 namespace ch6 {
 
 template<typename T>
@@ -102,7 +101,7 @@ public:
     void push(const ValueType& new_value)
     {
         container.push_back(new_value);
-        Iter iter   = container.end() - 1;
+        Iter iter   = end() - 1;
         while(iter > begin() && compare(new_value, *parent(iter)))
         {
             *iter = *parent(iter);
@@ -114,7 +113,7 @@ public:
     /**
      * @brief dtor
      */
-    ~priority_queue()= default;
+    ~priority_queue() = default;
 
 
 private:
@@ -145,7 +144,7 @@ private:
     Iter parent(Iter target)
     {
         assert(target >= begin());
-        if(target == this->begin())
+        if(target == begin())
             return target;
         else
             return begin() + (target - begin() - 1)/2;
@@ -184,14 +183,16 @@ private:
 
         Iter l = left(target);
         Iter r = right(target);
-        Iter largest_or_smallest = (l < end()  &&  compare(*l, *target))?     l   :   target;
 
-        if(r < end()  &&  compare(*r, *largest_or_smallest))
+        //! extreme stands for largest or smallest depending on max or min priority queue
+        Iter extreme = (l < end()  &&  compare(*l, *target))?     l   :   target;
+
+        if(r < end()  &&  compare(*r, *extreme))
             largest_or_smallest = r;
 
-        if(largest_or_smallest != target){
-            std::swap(*target, *largest_or_smallest);
-            heapify(largest_or_smallest);
+        if(extreme != target){
+            std::swap(*target, *extreme);
+            heapify(extreme);
         }
     }
 
