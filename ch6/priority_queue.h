@@ -32,9 +32,10 @@ template<typename T, typename Compare = std::greater<T> >
 class priority_queue
 {
 public:
-    using ValueType = T;
-    using SizeType  = typename std::vector<ValueType>::size_type;
-    using Iter      = typename std::vector<ValueType>::iterator;
+    using ValueType     = T;
+    using SizeType      = typename std::vector<ValueType>::size_type;
+    using Iter          = typename std::vector<ValueType>::iterator;
+    using CompareType   = std::function<bool(ValueType,ValueType)>;
 
     /**
      * @brief default ctor
@@ -99,7 +100,35 @@ private:
         return first + 2 * (target - first + 1);
     }
 
-    void heapify();
+    /**
+     * @brief heapify
+     * @param first
+     * @param last
+     * @param target
+     * @param comp  std::greater<T> for max priority_queue
+     *              std::less<T>    for min priority_queue
+     * @complexity  O(lg n)
+     */
+    void heapify(Iter first, Iter last, Iter target, CompareType comp)
+    {
+        assert((first <= target) && (target < last));
+
+        Iter l = left(first, target);
+        Iter r = right(first,target);
+        Iter largest_or_smallest = (l < last  &&  comp(*l, *last))?     l   :   target;
+        //!                           ^^^^^^^^^^^^^^^
+        //!         @attention  :   std::greater<T>  for max priority queue
+        //!                         std::less<T>     for min priority queue
+
+        if(r < last  &&  comp(*r, *largest_or_smallest))
+            largest_or_smallest = r;
+
+        if(largest_or_smallest != target)
+        {
+            std::swap(*target, *largest_or_smallest);
+            heapify(first, last, largest_or_smallest, comp);
+        }
+    }
 };
 
 
