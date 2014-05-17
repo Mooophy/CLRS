@@ -6,6 +6,14 @@
 
 int main()
 {
+    ch6::priority_queue<long> q;
+    q.push(555555555);
+    std::cout << q.top() << std::endl;
+
+    auto q1 = q;
+
+    std::cout << q1.top() << std::endl;
+    /*
     std::vector<std::string> v{"s","al","sss"};
     ch6::priority_queue<std::string> pq(v,std::less<std::string>());
 
@@ -18,6 +26,7 @@ int main()
     }
 
     std::cout << pq.size() << std::endl;
+    */
 
     return 0;
 }

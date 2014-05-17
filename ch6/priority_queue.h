@@ -28,10 +28,13 @@ public:
     /**
      * @brief default ctor
      */
-    priority_queue() = default;
+
+    explicit priority_queue(CompareType c = std::greater<ValueType>()):
+        container(),compare(c)
+    {}
 
     /**
-     * @brief ctor
+     * @brief ctor with std::vector
      */
     explicit priority_queue(const std::vector<ValueType>& v,
                             CompareType c = std::greater<ValueType>()):
@@ -187,7 +190,7 @@ private:
         Iter extreme = (l < end()  &&  compare(*l, *target))?     l   :   target;
 
         if(r < end()  &&  compare(*r, *extreme))
-            largest_or_smallest = r;
+            extreme = r;
 
         if(extreme != target){
             std::swap(*target, *extreme);
