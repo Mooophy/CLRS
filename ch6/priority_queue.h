@@ -14,8 +14,6 @@
 #include <iostream>
 #include <assert.h>
 
-
-
 namespace ch6 {
 
 template<typename T>
