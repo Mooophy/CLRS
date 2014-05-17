@@ -18,9 +18,6 @@
 
 
 namespace ch6 {
-
-
-
 /**
  *  @brief  priority_queue class template
  *
@@ -39,6 +36,7 @@ public:
     using SizeType      = typename std::vector<ValueType>::size_type;
     using Iter          = typename std::vector<ValueType>::iterator;
     using CompareType   = std::function<bool(ValueType,ValueType)>;
+
 
     /**
      * @brief default ctor
@@ -64,15 +62,35 @@ public:
         return container.size();
     }
 
+    /**
+     * @brief top
+     * i.e. HEAP-MAXIMUM OR HEAP-MINIMUM in CLRS. (Page 163)
+     */
     ValueType top()
     {
         return *container.begin();
     }
 
     /**
+     * @brief pop
+     * @complexity  O(lg n)
+     * i.e. HEAP-EXTRACT-MAX or HEAP-EXTRACT-MIN in CLRS. (Page 163)
+     */
+    void pop()
+    {
+        assert(size() > 1);
+        SizeType size = this->size();
+        *container.begin() = *(container.end() - 1);
+        container.resize(size - 1);
+        heapify(container.begin(), container.end(), container.begin() , Compare());
+    }
+
+
+    /**
      * @brief dtor
      */
     ~priority_queue(){}
+
 
 
 private:
