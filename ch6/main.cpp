@@ -7,10 +7,14 @@
 int main()
 {
     std::vector<std::string> v{"s","al","sss"};
-    ch6::priority_queue<std::string> pq(v,std::less<std::string>());
+    ch6::priority_queue<std::string> pq(v,std::greater<std::string>());
 
-    std::cout << pq.top() << std::endl;
 
+    for(int i = 0; i != 3; ++i)
+    {
+        std::cout << pq.top() << std::endl;
+        pq.pop();
+    }
 
     return 0;
 }

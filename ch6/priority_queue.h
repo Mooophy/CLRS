@@ -57,7 +57,16 @@ public:
      */
     const ValueType& top() const
     {
+        assert(!empty());
         return *container.begin();
+    }
+
+    /**
+     * @brief return if empty
+     */
+    bool empty() const
+    {
+        return container.empty();
     }
 
 
@@ -133,10 +142,10 @@ private:
      *
      * @complexity  constant
      */
-    Iter parent(Iter target) const
+    Iter parent(Iter target)
     {
         assert(target >= begin());
-        if(target == begin())
+        if(target == this->begin())
             return target;
         else
             return begin() + (target - begin() - 1)/2;
@@ -201,8 +210,3 @@ private:
 }//namespace
 
 #endif // PRIORITY_QUEUE_H
-
-
-
-
-
