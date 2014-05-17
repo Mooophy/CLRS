@@ -6,10 +6,7 @@
 
 int main()
 {
-    //! test:
-    ch6::stack<std::string> stk;
 
-    std::cout << stk.get_current() << std::endl;
 
     return 0;
 }
