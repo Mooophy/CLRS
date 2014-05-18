@@ -58,7 +58,7 @@ operator >(const element<T>& lhs, const element<T>& rhs)
 /**
  *  @brief class stack
  *
- * priority_queue as the underlying data structur
+ * priority_queue as the underlying data structur as required in ex6.5-7
  */
 template<typename T>
 class stack
