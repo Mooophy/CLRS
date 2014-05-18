@@ -1,78 +1,56 @@
 /***************************************************************************
- *  @file       stack.h
+ *  @file       queue.h
  *  @author     Alan.W
  *  @date       18  May 2014
  *  @remark     This code is for Introduction to Algorithms 3rd
  *  @note       code style : STL
  ***************************************************************************/
-
-#ifndef STACK_H
-#define STACK_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include "priority_queue.h"
-#include <functional>
+#include "stack"
 
 namespace ch6 {
 
 /**
- *  @brief forward declaration
- */
-template<typename T>
-struct element;
-template<typename T>
-bool operator >(const element<T>& lhs, const element<T>& rhs);
-template<typename T>
-class stack;
-
-
-/**
- * @brief The element struct
- */
-template<typename T>
-struct element
-{
-    using ValueType     = T;
-    using PriorityType  = std::size_t;
-
-    element() = default;
-    explicit element(const ValueType& v, PriorityType p):
-        value(v),prio(p)
-    {}
-
-    ValueType value;
-    PriorityType prio;
-};
-
-/**
- * @brief operator >
+ * @brief operator <
  *
  * used for priority_queue to compare elements
  */
 template<typename T>
-bool inline
-operator >(const element<T>& lhs, const element<T>& rhs)
+bool operator <(const element<T>& lhs, const element<T>& rhs)
 {
-    return lhs.prio > rhs.prio;
+    return lhs.prio < rhs.prio;
 }
 
+
 /**
- *  @brief class stack
+ *  @brief class queue
  *
- * priority_queue as the underlying data structur as required in ex6.5-7
+ * priority_queue as underlying data structur, as required in ex6.5-7
  */
 template<typename T>
-class stack
+class queue
 {
 public:
     using ValueType     = T;
     using PriorityType  = typename element<ValueType>::PriorityType;
 
     /**
+     * @brief ctor
+     */
+    queue():
+        q(std::less<element<ValueType>>()), current(0)
+    {}
+
+    /**
      * @brief push
      */
     void push(const ValueType &v)
     {
-        q.push(element<ValueType>(v, top_priority++));
+        assert(current != 4294967295 && "over range");
+        q.push(element<ValueType>(v, current++));
     }
 
     /**
@@ -81,7 +59,6 @@ public:
     void pop()
     {
         q.pop();
-        --top_priority;
     }
 
     /**
@@ -102,10 +79,10 @@ public:
 
 private:
     priority_queue<element<ValueType>> q;
-    PriorityType top_priority = 0;
+    PriorityType current;
 };
 
 
 }//namespace
 
-#endif // STACK_H
+#endif // QUEUE_H

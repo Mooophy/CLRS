@@ -10,5 +10,6 @@ HEADERS += \
     heap.h \
     heap_build.h \
     priority_queue.h \
-    stack.h
+    stack.h \
+    queue.h
 
