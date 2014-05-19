@@ -28,7 +28,6 @@ public:
     /**
      * @brief default ctor
      */
-
     explicit priority_queue(CompareType c = std::greater<ValueType>()):
         container(),compare(c)
     {}

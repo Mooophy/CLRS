@@ -67,6 +67,6 @@ inline children children_d(Iter first, Iter target, std::size_t d)
 }
 
 
-}
+}//namespace
 
 #endif // D_ARY_HEAP_H
