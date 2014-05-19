@@ -10,18 +10,13 @@
 
 int main()
 {
-    ch6::queue<std::string> q;
+    std::vector<std::string> v ={"1","6","5","4","3","2"};
 
-    for(int i = 0; i !=9; ++i)
-    {
-        q.push(std::to_string(i));
-    }
+    ch6::max_heap_d(v.begin(), v.end(), v.begin(), 3);
 
-    for(int i = 0; i !=9; ++i)
-    {
-        std::cout << q.top() << std::endl;
-        q.pop();
-    }
+    for(auto i : v) std::cout << i << std::endl;
+
+    //auto chd = ch6::children_d(v.begin(), v.begin(), 3);
 
     return 0;
 }

@@ -44,7 +44,7 @@ template<typename Iter>
 Iter parent_d(Iter first, Iter target, std::size_t d);
 
 template<typename Iter>
-children<Iter> children_d(Iter first, Iter target, std::size_t d);
+children<Iter> Children_d(Iter first, Iter target, std::size_t d);
 
 template<typename Iter>
 void max_heap_d(Iter first, Iter last, Iter target, std::size_t d);
@@ -71,34 +71,33 @@ inline Iter parent_d(Iter first, Iter target, std::size_t d)
 {
     assert(target >= first);
 
-    if(target == first)
-        return target;
-    else
-        return first + (target - first - 1)/d;
+    if(target == first) return target;
+    else                return first + (target - first - 1)/d;
 }
 
 /**
  * @brief children_d
  */
 template<typename Iter>
-inline children<Iter> children_d(Iter first, Iter target, std::size_t d)
+inline Children<Iter> children_d(Iter first, Iter target, std::size_t d)
 {
     assert(target >= first);
 
     auto distance = target - first;
-    return Children<Iter>(first + d * distance + 1    ,
-                    first + d * distance + 1 + d);
+    return Children<Iter>(  first + d * distance + 1     ,
+                            first + d * distance + 1 + d);
+
 }
 
-template<typename Iter>
 /**
  * @brief max_heap_d
  *
  * @complexity  O(lg n)
- *      that is, O(d * h) = O(d * log_d n) = O(d * (lg n / lg d))
+ *              O(d * h) = O(d * log_d n) = O(d * (lg n / lg d))
  *
  * i.e. d'ary max_heap
  */
+template<typename Iter>
 inline void max_heap_d(Iter first, Iter last, Iter target, std::size_t d)
 {
     assert(first <= target && target < last);
