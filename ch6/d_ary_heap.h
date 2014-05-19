@@ -6,8 +6,7 @@
  *  @note       code style : STL
  ***************************************************************************/
 
-//! this code was implemented for the Problem 6-2
-
+//! this code was implemented for the Problem 6-2 part c
 //! pseudocode for MAX-HEAP-D
 //!
 //! based on MAX-HEAPIFY (Page 154)
@@ -86,7 +85,6 @@ inline Children<Iter> children_d(Iter first, Iter target, std::size_t d)
     auto distance = target - first;
     return Children<Iter>(  first + d * distance + 1     ,
                             first + d * distance + 1 + d);
-
 }
 
 /**
@@ -117,7 +115,8 @@ inline void max_heap_d(Iter first, Iter last, Iter target, std::size_t d)
         }
 
         //! complexity : O(log_d (n))
-        if (*max_child > *target){
+        if (*max_child > *target)
+        {
             std::swap(*max_child, *target);
             max_heap_d(first, last, max_child, d);
         }
