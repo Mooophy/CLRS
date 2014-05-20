@@ -1,5 +1,5 @@
 /***************************************************************************
- *  @file       d_ary_heap.h
+ *  @file       Young_tableau.h
  *  @author     Alan.W
  *  @date       19  May 2014
  *  @remark     This code is for Introduction to Algorithms 3rd
@@ -19,7 +19,9 @@
 
 namespace ch6{
 
-
+/**
+ *  @brief forward declarations
+ */
 template<typename T>
 class Young_tableau;
 template<typename T>
@@ -46,8 +48,12 @@ public:
     Young_tableau() = default;
 
     /**
-     * @brief ctor
+     * @brief ctors
      */
+    Young_tableau(SizeType r, SizeType c ):
+        data(), rows(r), cols(c)
+    {}
+
     Young_tableau(const Container& vec, SizeType r, SizeType c ):
         data(vec), rows(r), cols(c)
     {}
@@ -79,6 +85,14 @@ public:
     }
 
     /**
+     * @brief top
+     */
+    const ValueType& top() const
+    {
+        return data.front();
+    }
+
+    /**
      * @brief pop
      */
     void pop()
@@ -91,6 +105,9 @@ public:
         go_down(begin());
     }
 
+    /**
+     * @brief push
+     */
     void push(const ValueType& val)
     {
         assert(!full());
@@ -98,7 +115,6 @@ public:
         data.push_back(val);
         go_up(end() - 1);
     }
-
 
 
     ~Young_tableau() = default;

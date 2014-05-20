@@ -46,9 +46,6 @@ void heap_sort(Iter first, Iter last);
 
 
 
-
-
-
 /**
  * Implementation
  */
