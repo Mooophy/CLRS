@@ -7,16 +7,14 @@
 #include "queue.h"
 #include <string>
 #include "d_ary_heap.h"
+#include "Young_tableau.h"
 
 int main()
 {
-    std::vector<std::string> v ={"1","6","5","4","3","2"};
+    std::vector<int> v = {42,1,2,3};
+    ch6::Young_tableau<int> matrix(v,3,3);
 
-    ch6::max_heap_d(v.begin(), v.end(), v.begin(), 3);
-
-    for(auto i : v) std::cout << i << std::endl;
-
-    //auto chd = ch6::children_d(v.begin(), v.begin(), 3);
+    std::cout << *matrix(0,3) << std::endl;
 
     return 0;
 }
