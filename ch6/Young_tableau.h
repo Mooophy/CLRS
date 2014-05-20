@@ -71,6 +71,14 @@ public:
     }
 
     /**
+     * @brief full
+     */
+    bool full() const
+    {
+        return data.size() == rows * cols;
+    }
+
+    /**
      * @brief pop
      */
     void pop()
@@ -80,8 +88,17 @@ public:
         data.front() = data.back();
         data.resize(data.size() - 1);
 
-        make_min(begin());
+        go_down(begin());
     }
+
+    void push(const ValueType& val)
+    {
+        assert(!full());
+
+        data.push_back(val);
+        go_up(end() - 1);
+    }
+
 
 
     ~Young_tableau() = default;
@@ -142,7 +159,7 @@ private:
     }
 
     /**
-     * @brief check if target is in the range [begin, end)
+     * @brief check if target within [begin, end)
      */
     bool verify(Iter target)
     {
@@ -150,14 +167,39 @@ private:
     }
 
     /**
-     * @brief make_min
+     * @brief go_up
+     *
+     * @complexity O( rows + cols )
+     *
+     * implemented for Problem 6-3 d, Page 168.
+     */
+    void go_up(Iter target)
+    {
+        Iter u = up(target);
+        Iter l = left(target);
+        Iter most = target;
+
+        //! find the largest one among up, left and target
+        if(verify(u) && *u > *target)   most = u;
+        if(verify(l) && *l > *most)     most = l;
+
+        //! swap and recur, if true.
+        if(most != target)
+        {
+            std::swap(*target, *most);
+            go_up(most);
+        }
+    }
+
+    /**
+     * @brief go_down
      *
      * @complexity O( rows + cols )
      *
      * implemented for Problem 6-3 c, Page 168.
      * the same as max-heapify Page 154.
      */
-    void make_min(Iter target)
+    void go_down(Iter target)
     {
         Iter d = down(target);
         Iter r = right(target);
@@ -171,9 +213,10 @@ private:
         if(least != target)
         {
             std::swap(*target, *least);
-            make_min(least);
+            go_down(least);
         }
     }
+
 };
 
 /**
@@ -194,6 +237,7 @@ inline std::ostream& operator <<(std::ostream& os, const ch6::Young_tableau<T>& 
     }
     return os;
 }
+
 }//namespace
 
 #endif // YOUNG_TABLEAU_H
