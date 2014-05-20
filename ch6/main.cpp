@@ -14,7 +14,7 @@ int main()
     std::vector<int> v = {42,1,2,3};
     ch6::Young_tableau<int> matrix(v,3,3);
 
-    std::cout << *matrix(0,3) << std::endl;
+    std::cout << matrix << std::endl;
 
     return 0;
 }
