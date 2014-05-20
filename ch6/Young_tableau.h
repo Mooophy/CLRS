@@ -54,10 +54,6 @@ public:
         data(), rows(r), cols(c)
     {}
 
-    Young_tableau(const Container& vec, SizeType r, SizeType c ):
-        data(vec), rows(r), cols(c)
-    {}
-
     /**
      * @brief operator ()
      *
@@ -183,7 +179,7 @@ private:
     }
 
     /**
-     * @brief go_up
+     * @brief go up or left
      *
      * @complexity O( rows + cols )
      *
@@ -208,7 +204,7 @@ private:
     }
 
     /**
-     * @brief go_down
+     * @brief go down or right
      *
      * @complexity O( rows + cols )
      *
@@ -232,7 +228,6 @@ private:
             go_down(least);
         }
     }
-
 };
 
 /**
@@ -253,6 +248,8 @@ inline std::ostream& operator <<(std::ostream& os, const ch6::Young_tableau<T>& 
     }
     return os;
 }
+
+
 
 }//namespace
 
