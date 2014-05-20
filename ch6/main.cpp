@@ -11,8 +11,12 @@
 
 int main()
 {
-    std::vector<int> v = {42,1,2,3};
+    std::vector<int> v = {42,1,2,3,4,888};
     ch6::Young_tableau<int> matrix(v,3,3);
+
+    matrix.pop();
+
+
 
     std::cout << matrix << std::endl;
 

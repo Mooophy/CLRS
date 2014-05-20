@@ -15,13 +15,13 @@
 #include <iterator>
 #include <iostream>
 #include <algorithm>
+#include <assert.h>
 
 namespace ch6{
 
 
 template<typename T>
 class Young_tableau;
-
 template<typename T>
 std::ostream& operator <<(std::ostream& os, const Young_tableau<T>& rhs);
 
@@ -62,6 +62,27 @@ public:
         return begin() + r * rows + c;
     }
 
+    /**
+     * @brief empty
+     */
+    bool empty() const
+    {
+        return data.empty();
+    }
+
+    /**
+     * @brief pop
+     */
+    void pop()
+    {
+        assert(!empty());
+
+        data.front() = data.back();
+        data.resize(data.size() - 1);
+
+        make_min(begin());
+    }
+
 
     ~Young_tableau() = default;
 private:
@@ -97,19 +118,19 @@ private:
     }
 
     /**
-     * @brief right
-     */
-    Iter right(Iter target)
-    {
-        return target + 1;
-    }
-
-    /**
      * @brief up
      */
     Iter up(Iter target)
     {
         return target - cols;
+    }
+
+    /**
+     * @brief right
+     */
+    Iter right(Iter target)
+    {
+        return target + 1;
     }
 
     /**
@@ -125,14 +146,34 @@ private:
      */
     bool verify(Iter target)
     {
-        return begin() <= target && target > end();
+        return begin() <= target && target < end();
     }
 
-//    void make_min(Iter target)
-//    {
-//        Iter d = down(target);
-//        Iter r = right(target);
-//    }
+    /**
+     * @brief make_min
+     *
+     * @complexity O( rows + cols )
+     *
+     * implemented for Problem 6-3 c, Page 168.
+     * the same as max-heapify Page 154.
+     */
+    void make_min(Iter target)
+    {
+        Iter d = down(target);
+        Iter r = right(target);
+        Iter least = target;
+
+        //! find the smallest one among right, down and target.
+        if(verify(d) && *d < *target)   least = d;
+        if(verify(r) && *r < *least)    least = r;
+
+        //! swap and recur, if true.
+        if(least != target)
+        {
+            std::swap(*target, *least);
+            make_min(least);
+        }
+    }
 };
 
 /**
@@ -144,7 +185,7 @@ inline std::ostream& operator <<(std::ostream& os, const ch6::Young_tableau<T>& 
     std::size_t count = 0;
     for(const auto& item : rhs.data)
     {
-        os << item << " ";
+        os << item << "    ";
         if(count++ == rhs.cols - 1)
         {
             std::cout << std::endl;
