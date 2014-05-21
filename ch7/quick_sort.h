@@ -5,9 +5,10 @@
  *  @remark     This code is for Introduction to Algorithms
  *  @note       code style : STL
  ***************************************************************************/
-
+//!
 //! pseudocode
 //! based on PARTITION Page 171
+//!
 /*      partition(first, last)
  * 1    def pivot = last - 1
  * 2    def smaller = first - 1
@@ -20,6 +21,18 @@
  * 9    return pivot
  */
 
+//!
+//! pseudocode
+//! based on QUICKSORT Page 171
+//!
+/*      quick_sort(first, last)
+ * 1    if last - first > 1
+ * 2        def pivot = partition(first, last)
+ * 3        quikc_sort(first, pivot)
+ * 4        quick_sort(pivot + 1, last)
+ */
+
+
 #ifndef QUCK_SORT_H
 #define QUCK_SORT_H
 
@@ -28,19 +41,41 @@
 namespace ch7{
 
 template<typename Iter>
+void quick_sort(Iter first, Iter last);
+
+template<typename Iter>
 Iter partition(Iter first, Iter last);
 
 
+/**
+ * @brief quick_sort
+ *
+ * @complexity      worst-cast  :   theta(n^2)
+ *                  average     :   theta(n lg n)
+ */
 template<typename Iter>
+inline void quick_sort(Iter first, Iter last)
+{
+    if(last - first > 1)
+    {
+        Iter pivot = partition(first, last);
+        quick_sort(first, pivot);
+        quick_sort(pivot + 1, last);
+    }
+}
+
 /**
  * @brief partition
  *
+ * @complexty theta(n)
+ *
  * check above for peudocode. refer to Page 171 for detail
  */
+template<typename Iter>
 inline Iter partition(Iter first, Iter last)
 {
     Iter pivot = last - 1;
-    Iter smaller =first - 1;
+    Iter smaller = first - 1;
     for(Iter iter = first; iter != pivot; ++iter)
     {
         if(*iter <= *pivot)
