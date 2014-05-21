@@ -21,5 +21,8 @@
 *.app
 
 # misc added by alan
-
-*.cpp~
+*~
+*.user
+*.pdf
+*build-*-Desktop_gcc-Debug
+*build-*-clang-Release/
