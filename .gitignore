@@ -19,3 +19,7 @@
 *.exe
 *.out
 *.app
+
+# misc added by alan
+
+*.cpp~

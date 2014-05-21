@@ -14,6 +14,8 @@
  * 2    def smaller = first - 1
  * 3    for iter = first to pivot -1
  * 4        if *iter <= *pivot
+ *      //           ^^^    can be changed to >= for nonincreasing order
+ *      //                  as requied in ex7.1 -4
  * 5            ++smaller
  * 6            swap(*smaller, *iter)
  * 7    swap(*++smaller, *pivot)
@@ -52,6 +54,8 @@ Iter partition(Iter first, Iter last);
  *
  * @complexity      worst-cast  :   theta(n^2)
  *                  average     :   theta(n lg n)
+ *
+ * check above for peudocode. refer to Page 171 for detail.
  */
 template<typename Iter>
 inline void quick_sort(Iter first, Iter last)
@@ -90,7 +94,7 @@ inline Iter partition(Iter first, Iter last)
     return pivot;
 }
 
-}
+}//namespace
 
 
 #endif // QUCK_SORT_H
