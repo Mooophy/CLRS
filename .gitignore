@@ -25,4 +25,4 @@
 *.user
 *.pdf
 *build-*-Desktop_gcc-Debug
-*build-*-clang-Release/
+*build-*-clang-*/
