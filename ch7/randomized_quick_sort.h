@@ -47,6 +47,8 @@ void randomized_quicksort(Iter first, Iter last);
 
 /**
  * @brief randmized_partition
+ *
+ * @complexity  O(lg n)
  */
 template<typename Iter>
 inline Iter randomized_partition(Iter first, Iter last)
@@ -63,6 +65,9 @@ inline Iter randomized_partition(Iter first, Iter last)
 
 /**
  * @brief randomized_quicksort
+ *
+ * @complexity      worst-cast  :   theta(n^2)
+ *                  average     :   theta(n lg n)
  */
 template<typename Iter>
 inline void randomized_quicksort(Iter first, Iter last)

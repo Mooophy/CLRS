@@ -8,5 +8,6 @@ SOURCES += main.cpp
 
 HEADERS += \
     quick_sort.h \
-    randomized_quick_sort.h
+    randomized_quick_sort.h \
+    hoare_quicksort.h
 

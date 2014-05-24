@@ -52,8 +52,7 @@ Iter partition(Iter first, Iter last);
 /**
  * @brief quick_sort
  *
- * @complexity      worst-cast  :   theta(n^2)
- *                  average     :   theta(n lg n)
+ * @complexity  O(lg n)
  *
  * check above for peudocode. refer to Page 171 for detail.
  */
@@ -71,7 +70,8 @@ inline void quick_sort(Iter first, Iter last)
 /**
  * @brief partition
  *
- * @complexty theta(n)
+ * @complexity      worst-cast  :   theta(n^2)
+ *                  average     :   theta(n lg n)
  *
  * check above for peudocode. refer to Page 171 for detail
  */

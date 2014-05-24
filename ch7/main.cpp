@@ -4,17 +4,16 @@
 
 #include "quick_sort.h"
 #include "randomized_quick_sort.h"
+#include "hoare_quicksort.h"
 
 int main()
 {
-    std::vector<float> v = {5, 3, 2, 6, 9};
+    std::vector<int> v = {5, 3, 2, 6, 9,13,67,2,1};
 
-/*  -- uncomment for test
-    //! test quick_sort
-    //ch7::quick_sort(v.begin(), v.end());
-    //! test randomized_quick_sort
-    ch7::randomized_quicksort(v.begin(),v.end());
-*/
+    //auto it = ch7::hoare_partition(v.begin(),v.end());
+
+    ch7::hoare_quicksort(v.begin(),v.end());
+
     for(auto i : v)
         std::cout << i << " ";
     std::cout << std::endl;
