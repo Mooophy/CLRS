@@ -9,6 +9,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 #include <vector>
+#include <assert.h>
 
 namespace ch10
 {
@@ -33,7 +34,7 @@ public:
      * @param size
      */
     explicit queue(std::size_t size):
-        c(size), head(c.begin()), tail(c.begin())
+        c(size + 1), head(c.begin()), tail(c.begin())
     {}
 
     /**
@@ -44,6 +45,8 @@ public:
      */
     void enqueue(const T& val)
     {
+        assert(!full());
+
         *tail++ = val;
         if (tail == c.end())
             tail = c.begin();
@@ -56,11 +59,23 @@ public:
      */
     T dequeue()
     {
+        assert(!empty());
+
         T ret = *head++;
         if(head == c.end())
             head = c.begin();
 
         return ret;
+    }
+
+    bool empty() const
+    {
+        return head == tail;
+    }
+
+    bool full () const
+    {
+        return (head == tail + 1) || (head == c.begin() && tail == c.end() -1) ;
     }
 
 

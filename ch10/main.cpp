@@ -7,8 +7,10 @@
 
 int main()
 {
-    ch10::queue<int> q(10);
+    ch10::queue<int> q(3);
 
+    q.enqueue(42);
+    q.enqueue(42);
     q.enqueue(42);
 
     std::cout << q.dequeue() << std::endl;
