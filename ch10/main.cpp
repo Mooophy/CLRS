@@ -2,16 +2,16 @@
 #include <stack>
 #include <vector>
 #include "stack.h"
+#include "queue.h"
 
 
 int main()
 {
-    ch10::stack<int> stk;
+    ch10::queue<int> q(10);
 
-    stk.push(9);
-    //stk.pop();
-    std::cout << stk.top()<< std::endl;
+    q.enqueue(42);
 
+    std::cout << q.dequeue() << std::endl;
 
     return 0;
 }
