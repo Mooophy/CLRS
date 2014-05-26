@@ -48,9 +48,8 @@ public:
     {
         assert(!full() && "overflow");
 
-        *tail++ = val;
-        if (tail == c.end())
-            tail = c.begin();
+        *tail = val;
+        tail = increment(tail);
     }
 
     /**
@@ -62,9 +61,8 @@ public:
     {
         assert(!empty() && "underflow");
 
-        T ret = *head++;
-        if(head == c.end())
-            head = c.begin();
+        T ret = *head;
+        head = increment(head);
 
         return ret;
     }
@@ -80,9 +78,9 @@ public:
     /**
      * @brief full
      */
-    bool full () const
+    bool full ()
     {
-        return (head == tail + 1) || (head == c.begin() && tail == c.end() -1) ;
+        return head == increment(tail) ;
     }
 
     /**
@@ -97,6 +95,19 @@ private:
     Container c;
     Iter head;
     Iter tail;
+
+    /**
+     * @brief increment
+     * @param iter  iterator
+     *
+     * increment iterator and check if reaches end. go back to begin
+     * if true.
+     */
+    Iter increment( Iter iter)
+    {
+        ++iter;
+        return ( iter != c.end() )?    iter    :   c.begin();
+    }
 };
 }
 

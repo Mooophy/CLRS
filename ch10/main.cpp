@@ -12,7 +12,7 @@ int main()
     q.enqueue(42);
     q.enqueue(42);
     q.enqueue(42);
-    q.enqueue(42);
+    //q.enqueue(42);
 
     std::cout << q.dequeue() << std::endl;
 

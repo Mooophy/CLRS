@@ -8,5 +8,6 @@ SOURCES += main.cpp
 
 HEADERS += \
     queue.hpp \
-    stack.hpp
+    stack.hpp \
+    deque.hpp
 
