@@ -35,8 +35,10 @@ public:
      * @param size
      */
     explicit queue(std::size_t size):
-        c(size + 1), head(c.begin()), tail(c.begin())
-    {}
+        c(size)
+    {
+         head = tail = c.begin();
+    }
 
     /**
      * @brief enqueue
@@ -47,6 +49,9 @@ public:
     void enqueue(const T& val)
     {
         assert(!full() && "overflow");
+
+        if(tail == c.end())
+            tail = increment(tail);
 
         *tail = val;
         tail = increment(tail);
@@ -64,6 +69,9 @@ public:
         T ret = *head;
         head = increment(head);
 
+        if(head == c.end())
+            head = increment(head);
+
         return ret;
     }
 
@@ -78,7 +86,7 @@ public:
     /**
      * @brief full
      */
-    bool full ()
+    bool full()
     {
         return head == increment(tail) ;
     }
@@ -103,13 +111,12 @@ private:
      * increment iterator and check if reaches end. go back to begin
      * if true.
      */
-    Iter increment( Iter iter)
+    Iter increment(Iter iter)
     {
-        ++iter;
-        return ( iter != c.end() )?    iter    :   c.begin();
+        return (iter == c.end())?   c.begin()    :   iter + 1 ;
     }
 };
-}
+}//namespace
 
 
 #endif // QUEUE_H

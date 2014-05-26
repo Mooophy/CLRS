@@ -3,6 +3,7 @@
 #include <vector>
 #include "stack.hpp"
 #include "queue.hpp"
+#include "deque.hpp"
 
 
 int main()
@@ -12,9 +13,8 @@ int main()
     q.enqueue(42);
     q.enqueue(42);
     q.enqueue(42);
-    //q.enqueue(42);
 
-    std::cout << q.dequeue() << std::endl;
+    std::cout << q.size() << std::endl;
 
     return 0;
 }
