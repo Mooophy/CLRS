@@ -106,10 +106,9 @@ private:
 
     /**
      * @brief increment
-     * @param iter  iterator
+     * @param iter
      *
-     * increment iterator and check if reaches end. go back to begin
-     * if true.
+     * increment iterator or go back to begin when reached end.
      */
     Iter increment(Iter iter)
     {
