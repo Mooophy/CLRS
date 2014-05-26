@@ -32,8 +32,10 @@ public:
      * @param sz    size of the underlying container
      */
     explicit deque(SizeType sz) :
-        c(sz), head(0), tail(0)
-    {}
+        c(sz)
+    {
+        head = tail = c.begin();
+    }
 
 
     /**
@@ -63,11 +65,11 @@ public:
     /**
      * @brief return top
      */
-    const T& top () const
+    const T& front () const
     {
         assert(!empty());
 
-        return *c.cbegin();
+        return *head;
     }
 
     /**
@@ -76,7 +78,7 @@ public:
     const T& back() const
     {
         assert(!empty());
-        return *c.cbegin();
+        return *tail;
     }
 
     /**
@@ -113,7 +115,6 @@ public:
     void pop_front()
     {
         assert(!empty());
-
         head = increment(head);
     }
 
