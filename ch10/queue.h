@@ -46,7 +46,7 @@ public:
      */
     void enqueue(const T& val)
     {
-        assert(!full());
+        assert(!full() && "overflow");
 
         *tail++ = val;
         if (tail == c.end())
@@ -60,7 +60,7 @@ public:
      */
     T dequeue()
     {
-        assert(!empty());
+        assert(!empty() && "unferflow");
 
         T ret = *head++;
         if(head == c.end())
@@ -92,7 +92,6 @@ public:
     {
         return c.size();
     }
-
 
 private:
     Container c;
