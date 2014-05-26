@@ -60,7 +60,7 @@ public:
      */
     T dequeue()
     {
-        assert(!empty() && "unferflow");
+        assert(!empty() && "underflow");
 
         T ret = *head++;
         if(head == c.end())
