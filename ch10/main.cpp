@@ -16,6 +16,10 @@ int main()
 
     std::cout << q.size() << std::endl;
 
+    ch10::deque<int> dq(10);
+
+    std::cout << dq.top() << std::endl;
+
     return 0;
 }
 

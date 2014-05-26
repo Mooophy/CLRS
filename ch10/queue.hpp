@@ -31,7 +31,7 @@ public:
     using SizeType  = typename Container::size_type;
 
     /**
-     * @brief default ctor
+     * @brief ctor
      * @param size
      */
     explicit queue(std::size_t size):

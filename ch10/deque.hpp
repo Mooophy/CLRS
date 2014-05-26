@@ -10,9 +10,15 @@
 #define DEQUE_HPP
 
 #include <vector>
+#include <assert.h>
 
 namespace ch10 {
 
+/**
+ * @brief The deque class template
+ *
+ * check ex10.1-5 page 236 for detail
+ */
 template<typename T>
 class deque
 {
@@ -22,7 +28,7 @@ public:
     using SizeType  = typename Container::size_type;
 
     /**
-     * @brief deque
+     * @brief ctor
      * @param sz    size of the underlying container
      */
     explicit deque(SizeType sz) :
@@ -54,6 +60,71 @@ public:
         return (decrement(head) == tail) || (head == increment(tail));
     }
 
+    /**
+     * @brief return top
+     */
+    const T& top () const
+    {
+        assert(!empty());
+
+        return *c.cbegin();
+    }
+
+    /**
+     * @brief return back
+     */
+    const T& back() const
+    {
+        assert(!empty());
+        return *c.cbegin();
+    }
+
+    /**
+     * @brief push_front
+     */
+    void push_front(const T& val)
+    {
+        assert(!full());
+
+        if(head == c.end())
+            head = decrement(head);
+
+        *head = val;
+        head = decrement(head);
+    }
+
+    /**
+     * @brief push_back
+     */
+    void push_back(const T& val)
+    {
+        assert(!full());
+
+        if(tail == c.end())
+            tail = increment(tail);
+
+        *tail = val;
+        tail = increment(tail);
+    }
+
+    /**
+     * @brief pop_front
+     */
+    void pop_front()
+    {
+        assert(!empty());
+
+        head = increment(head);
+    }
+
+    /**
+     * @brief pop_back
+     */
+    void pop_back()
+    {
+        assert(!empty());
+        tail = decrement(tail);
+    }
 
 private:
     Container c;
