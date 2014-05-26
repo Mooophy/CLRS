@@ -28,6 +28,7 @@ class queue
 public:
     using Container = std::vector<T>;
     using Iter      = typename Container::iterator;
+    using SizeType  = typename Container::size_type;
 
     /**
      * @brief default ctor
@@ -68,14 +69,28 @@ public:
         return ret;
     }
 
+    /**
+     * @brief empty
+     */
     bool empty() const
     {
         return head == tail;
     }
 
+    /**
+     * @brief full
+     */
     bool full () const
     {
         return (head == tail + 1) || (head == c.begin() && tail == c.end() -1) ;
+    }
+
+    /**
+     * @brief size
+     */
+    SizeType size() const
+    {
+        return c.size();
     }
 
 
