@@ -1,5 +1,5 @@
 /***************************************************************************
- *  @file       stack.h
+ *  @file       stack.hpp
  *  @author     Alan.W
  *  @date       25  May 2014
  *  @remark     This code is for Introduction to Algorithms

@@ -7,6 +7,6 @@ CONFIG += c++11
 SOURCES += main.cpp
 
 HEADERS += \
-    stack.h \
-    queue.h
+    queue.hpp \
+    stack.hpp
 

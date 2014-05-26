@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stack>
 #include <vector>
-#include "stack.h"
-#include "queue.h"
+#include "stack.hpp"
+#include "queue.hpp"
 
 
 int main()
