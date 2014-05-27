@@ -13,6 +13,11 @@
 
 namespace ch10
 {
+template<typename T, typename C = std::vector<T> >
+class queue;
+
+template<typename T>
+bool operator ==(const ch10::queue<T>& lhs, const ch10::queue<T>& rhs);
 
 /**
  * @brief The queue class
@@ -22,9 +27,10 @@ namespace ch10
  *
  * check page 235 for detail.
  */
-template<typename T, typename C = std::vector<T> >
+template<typename T, typename C>
 class queue
 {
+    friend bool operator ==<T>(const queue<T>&, const queue<T>&);
 public:
     using Container = C;
     using Iter      = typename Container::iterator;
@@ -100,7 +106,7 @@ public:
     }
 
     /**
-     * @brief return how many elements are holding
+     * @brief return how many elements are being held
      */
     SizeType size() const
     {
@@ -123,6 +129,19 @@ private:
         return (iter == c.end())?   c.begin()    :   iter + 1 ;
     }
 };
+
+/**
+ * @brief operator ==
+ *
+ * compare two ch10::queue objects
+ * implemented for ch10::stack_by_2queues.
+ */
+template<typename T>
+inline bool
+operator ==(const ch10::queue<T>& lhs, const ch10::queue<T>& rhs)
+{
+    return (lhs.c == rhs.c) && (lhs.head == rhs.head) && (lhs.tail == rhs.tail);
+}
 }//namespace
 
 

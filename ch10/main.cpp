@@ -1,18 +1,17 @@
 #include <iostream>
 #include "queue_by_2stacks.hpp"
+#include "queue.hpp"
+#include <vector>
 
 
 int main()
 {
-    ch10::queue_by_2stacks<int> q;
+    ch10::queue<int> q(10);
+    ch10::queue<int>& r = q;
 
-    for(int i = 0; i != 3 ; ++i)
-        q.enqueue(i);
+    std::cout << (q == r) << std::endl;
 
-    for(int i = 0; i != 3 ; ++i){
-        std::cout << q.dequeue() << std::endl;
-        std::cout << "size=" << q.size() << std::endl << std::endl;
-    }
+
 
 
     return 0;
