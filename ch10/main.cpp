@@ -2,14 +2,12 @@
 #include "queue_by_2stacks.hpp"
 #include "queue.hpp"
 #include <vector>
+#include "stack_by_2queues.hpp"
 
 
 int main()
 {
-    ch10::queue<int> q(10);
-    ch10::queue<int>& r = q;
-
-    std::cout << (q == r) << std::endl;
+    ch10::stack_by_2queues<int> stk(99);
 
 
 

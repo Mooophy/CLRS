@@ -134,7 +134,7 @@ private:
  * @brief operator ==
  *
  * compare two ch10::queue objects
- * implemented for ch10::stack_by_2queues.
+ * to be used in ch10::stack_by_2queues.
  */
 template<typename T>
 inline bool

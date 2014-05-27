@@ -54,4 +54,104 @@
 #ifndef STACK_BY_2QUEUES_HPP
 #define STACK_BY_2QUEUES_HPP
 
+#include <queue.hpp>
+
+namespace ch10 {
+
+template<typename T>
+class stack_by_2queues
+{
+public:
+    using ValueType = T;
+    using Queue     = ch10::queue<ValueType>;
+    using SizeType  = typename Queue::SizeType;
+
+    /**
+     * @brief ctor
+     */
+    explicit stack_by_2queues(SizeType sz):
+        left(sz),right(sz)
+    {}
+
+    /**
+     * @brief push
+     *
+     * @complexity  theta( size + 1)
+     */
+    void push(const ValueType& val)
+    {
+        Queue& destination = which_to_push();
+        destination.enqueue(val);
+
+        Queue& source = (destination == left)?  right   :   left;
+        move(source, destination);
+    }
+
+    /**
+     * @brief pop
+     * @return  the top element by value
+     *
+     * @complexity  theta(1)
+     */
+    ValueType pop()
+    {
+        Queue& target = which_to_pop();
+        return target.dequeue();
+    }
+
+private:
+    Queue left;
+    Queue right;
+
+    /**
+     * @brief return the empty queue to push.
+     */
+    Queue& which_to_push()
+    {
+        return left.empty()?    left    :   right;
+    }
+
+    /**
+     * @brief return the not empty queue to pop.
+     */
+    Queue& which_to_pop()
+    {
+        return left.empty()?    right   :   left;
+    }
+
+    /**
+     * @brief move
+     * @param source queue
+     * @param destination queue
+     *
+     * @complexity  theta(size)
+     *
+     * move all elments from source queue to destination queue.
+     */
+    void move(Queue& source, Queue& destination)
+    {
+        while(!source.empty())
+            destination.enqueue(source.dequeue());
+    }
+};
+
+}//namespace
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif // STACK_BY_2QUEUES_HPP
