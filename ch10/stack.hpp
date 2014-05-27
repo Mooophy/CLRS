@@ -29,6 +29,7 @@ class stack
 public:
     using ValueType = T;
     using Container = C;
+    using SizeType  = typename Container::size_type;
 
     /**
      * @brief default ctor
@@ -47,6 +48,11 @@ public:
     bool empty()
     {
         return c.empty();
+    }
+
+    SizeType size() const
+    {
+        return c.size();
     }
 
     /**
@@ -72,9 +78,12 @@ public:
 
     /**
      * @brief top
+     *
+     * @complexity O(1)
      */
     ValueType& top()
     {
+        assert(!c.empty());
         return c.back();
     }
 private:

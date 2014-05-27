@@ -9,5 +9,6 @@ SOURCES += main.cpp
 HEADERS += \
     queue.hpp \
     stack.hpp \
-    deque.hpp
+    deque.hpp \
+    queue_by_2stacks.hpp
 
