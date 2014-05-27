@@ -61,6 +61,7 @@ class queue_by_2stacks
 {
 public:
     using ValueType = T;
+    using SizeType  = typename ch10::stack<ValueType>::SizeType;
 
     /**
      * @brief enqueue
@@ -89,6 +90,14 @@ public:
         return ret;
     }
 
+    /**
+     * @brief size
+     */
+    SizeType size() const
+    {
+        return in.size() + out.size();
+    }
+
 
 private:
     ch10::stack<ValueType> in;
@@ -108,7 +117,6 @@ private:
         }
     }
 };
-
 
 }//namespace
 
