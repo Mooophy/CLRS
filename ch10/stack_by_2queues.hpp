@@ -58,6 +58,11 @@
 
 namespace ch10 {
 
+/**
+ * @brief stack_by_2queues
+ *
+ * stack implemented by using two queues, as required in ex10.1-7
+ */
 template<typename T>
 class stack_by_2queues
 {
@@ -121,8 +126,6 @@ private:
 
     /**
      * @brief move
-     * @param source queue
-     * @param destination queue
      *
      * @complexity  theta(size)
      *
@@ -136,22 +139,5 @@ private:
 };
 
 }//namespace
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif // STACK_BY_2QUEUES_HPP
