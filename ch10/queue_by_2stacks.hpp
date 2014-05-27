@@ -107,6 +107,8 @@ private:
      * @brief move
      * @param source
      * @param destination
+     *
+     * move elements from source stack to destination stack.
      */
     void move(ch10::stack<ValueType>& source, ch10::stack<ValueType>& destination)
     {
