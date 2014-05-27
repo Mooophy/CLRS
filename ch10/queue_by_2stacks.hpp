@@ -6,7 +6,7 @@
  *  @note       code style : STL
  ***************************************************************************/
 //!
-//! 10.1-6
+//! ex10.1-6
 //! Show how to implement a queue using two stacks. Analyze the running time of the
 //! queue operations.
 //!
