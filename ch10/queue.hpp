@@ -22,11 +22,11 @@ namespace ch10
  *
  * check page 235 for detail.
  */
-template<typename T>
+template<typename T, typename C = std::vector<T> >
 class queue
 {
 public:
-    using Container = std::vector<T>;
+    using Container = C;
     using Iter      = typename Container::iterator;
     using SizeType  = typename Container::size_type;
 
@@ -92,11 +92,19 @@ public:
     }
 
     /**
-     * @brief size
+     * @brief return the max number of elements that can be held.
+     */
+    SizeType capacity() const
+    {
+        return c.size();
+    }
+
+    /**
+     * @brief return how many elements are holding
      */
     SizeType size() const
     {
-        return c.size();
+        return ( tail >= head )?    tail - head     :   capacity() - (head - tail);
     }
 
 private:
