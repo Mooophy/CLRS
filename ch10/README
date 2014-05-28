@@ -1,11 +1,14 @@
 		Chapter 10 Elementary Data Structures
 
 10.1 Stacks and queues
+
 STACK-EMPTY	:	stack.hpp	
 PUSH		:	stack.hpp
 POP		:	stack.hpp
+
 ENQUEUE		:	queue.hpp
 DEQUEUE		:	queue.hpp
+
 ex 10.1-4	:	queue.hpp
 ex 10.1-5	:	deque.hpp
 ex 10.1-6	:	queue_by_2stacks.hpp
