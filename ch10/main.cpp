@@ -3,9 +3,10 @@
 
 int main()
 {
-    ch10::list::single_list<int> list;
-
-    auto end = list.end();
+    using namespace ch10::list;
+    double_list<int> l;
+    l.insert(10);
+    l.insert(10);
 
     std::cout << "test" << std::endl;
 

@@ -17,57 +17,57 @@ namespace list{
 /**
  * @brief The node struct
  *
- * used for singly linked list
+ * @attention next : shared_ptr
+ *            prev : weak_ptr
  */
 template<typename T>
 struct node
 {
     using ValueType = T;
-    using Pointer   = std::shared_ptr<node<ValueType>>;
+    using sPointer  = std::shared_ptr<node<ValueType>>;
+    using wPointer  = std::weak_ptr<node<ValueType>>;
+
+    /**
+     * @brief ctor
+     */
+    explicit node(const ValueType& val):
+        key(val), prev(), next(nullptr)
+    {}
 
     ValueType   key;
-    Pointer     next = nullptr;
+    wPointer    prev;
+    sPointer    next;
 };
 
 template<typename T>
-class single_list
+class double_list
 {
 public:
     using ValueType = T;
-    using Pointer   = std::shared_ptr<node<ValueType>>;
-    using SizeType  = std::size_t;
+    using Node      = node<ValueType>;
+    using sPointer  = std::shared_ptr<node<ValueType>>;
 
-    single_list():
-        head(nullptr)
-    {}
+    double_list() = default;
 
-    void push_back()
+    /**
+     * @brief insert
+     *
+     * @complexity O(1)
+     *
+     * based on LIST-INSERT ,page 238.
+     */
+    void insert(const ValueType& val)
     {
-
+        sPointer p = std::make_shared<Node>(val);
+        if(data != nullptr)
+            data->prev = p;
+        data = p;
     }
 
-    Pointer end()
-    {
-        if(head == nullptr)
-            return nullptr;
-        else
-        {
-            Pointer p = head;
-            while(p->next != nullptr)
-                p = p->next;
-            return p;
-        }
-    }
-
-    Pointer begin()
-    {
-        return head;
-    }
-
-
-private:
-    Pointer head;
+private:    
+    sPointer data = nullptr;
 };
+
 
 }//namespace list
 }//namespace ch10

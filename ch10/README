@@ -13,18 +13,23 @@ ended queue) allows insertion and deletion at both ends. Write four O(1) time
 procedures to insert elements into and delete elements from both ends of a deque 
 implemented by an array.
 
-	ch10/deque.hpp
+	deque.hpp
 
 
 ex 10.1-6
 Show how to implement a queue using two stacks. Analyze the running time of the
 queue operations.
 
-	ch10/queue_by_2stacks.hpp
+	queue_by_2stacks.hpp
 
 
 ex 10.1-7
 Show how to implement a stack using two queues. Analyze the running time of the
 stack operations.
 
-	ch10/stack_by_2queues.hpp
+	stack_by_2queues.hpp
+
+
+LIST-INSERT page 238
+
+	list.hpp
