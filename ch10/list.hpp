@@ -45,7 +45,9 @@ class double_list
 public:
     using ValueType = T;
     using Node      = node<ValueType>;
-    using sPointer  = std::shared_ptr<node<ValueType>>;
+    using sPointer  = std::shared_ptr<Node>;
+    using wPointer  = std::weak_ptr<Node>;
+    using SizeType  = std::size_t;
 
     double_list() = default;
 
@@ -54,18 +56,37 @@ public:
      *
      * @complexity O(1)
      *
-     * based on LIST-INSERT ,page 238.
+     * based on LIST-INSERT, page 238.
      */
     void insert(const ValueType& val)
     {
         sPointer inserted = std::make_shared<Node>(val);
-        if(data != nullptr)
-            data->prev = inserted;
-        data = inserted;
+
+        inserted->next = head;
+        if(head != nullptr)
+            head->prev = inserted;
+        head = inserted;
+    }
+
+    /**
+     * @brief size
+     *
+     * @complexity  O(size)
+     */
+    SizeType size() const
+    {
+        SizeType size = 0;
+        sPointer ptr = head;
+        while(ptr != nullptr)
+        {
+            ++size;
+            ptr = ptr->next;
+        }
+        return size;
     }
 
 private:    
-    sPointer data = nullptr;
+    sPointer head = nullptr;
 };
 
 

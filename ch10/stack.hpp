@@ -50,6 +50,9 @@ public:
         return c.empty();
     }
 
+    /**
+     * @brief size
+     */
     SizeType size() const
     {
         return c.size();
