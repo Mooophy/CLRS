@@ -58,10 +58,10 @@ public:
      */
     void insert(const ValueType& val)
     {
-        sPointer p = std::make_shared<Node>(val);
+        sPointer inserted = std::make_shared<Node>(val);
         if(data != nullptr)
-            data->prev = p;
-        data = p;
+            data->prev = inserted;
+        data = inserted;
     }
 
 private:    
