@@ -1,4 +1,5 @@
 Chapter 10
+
 ex 10.1-4
 Rewrite ENQUEUE and DEQUEUE to detect underflow and overflow of a queue.
 
