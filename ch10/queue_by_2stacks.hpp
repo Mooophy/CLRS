@@ -4,6 +4,7 @@
  *  @date       27  May 2014
  *  @remark     This code is for Introduction to Algorithms
  *  @note       code style : STL
+ *  @attention  bug found, check issue #2 for detail.
  ***************************************************************************/
 //!
 //! ex10.1-6
