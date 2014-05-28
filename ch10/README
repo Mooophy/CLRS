@@ -1,29 +1,12 @@
 		Chapter 10 Elementary Data Structures
 
 10.1 Stacks and queues
-
 ex 10.1-4	:	queue.hpp
-Rewrite ENQUEUE and DEQUEUE to detect underflow and overflow of a queue.
-
 ex 10.1-5	:	deque.hpp
-Whereas a stack allows insertion and deletion of elements at only one end, and a 
-queue allows insertion at one end and deletion at the other end, a deque (double-
-ended queue) allows insertion and deletion at both ends. Write four O(1) time 
-procedures to insert elements into and delete elements from both ends of a deque 
-implemented by an array.
-
 ex 10.1-6	:	queue_by_2stacks.hpp
-Show how to implement a queue using two stacks. Analyze the running time of the
-queue operations.
-
 ex 10.1-7	:	stack_by_2queues.hpp
-Show how to implement a stack using two queues. Analyze the running time of the
-stack operations.
 
-
-10.2 Stacks and queues
-
-LIST-INSERT	:	 list.hpp 
-page 238
+10.2 Linked lists
+LIST-INSERT	:	list.hpp 
 
 
