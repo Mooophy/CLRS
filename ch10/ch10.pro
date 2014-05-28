@@ -11,5 +11,6 @@ HEADERS += \
     stack.hpp \
     deque.hpp \
     queue_by_2stacks.hpp \
-    stack_by_2queues.hpp
+    stack_by_2queues.hpp \
+    list.hpp
 
