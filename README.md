@@ -1,4 +1,4 @@
 algorithms from CLRS
 ====================
 
-Implementations for  "Introduction to Algorithms 3rd", using C++ templates.
+Implementation for  "Introduction to Algorithms 3rd", using C++ templates.
