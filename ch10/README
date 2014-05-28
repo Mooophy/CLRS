@@ -1,2 +1,29 @@
 Chapter 10
+ex 10.1-4
+Rewrite ENQUEUE and DEQUEUE to detect underflow and overflow of a queue.
 
+	ch10/queue.hpp
+
+
+ex 10.1-5
+Whereas a stack allows insertion and deletion of elements at only one end, and a 
+queue allows insertion at one end and deletion at the other end, a deque (double-
+ended queue) allows insertion and deletion at both ends. Write four O(1) time 
+procedures to insert elements into and delete elements from both ends of a deque 
+implemented by an array.
+
+	ch10/deque.hpp
+
+
+ex 10.1-6
+Show how to implement a queue using two stacks. Analyze the running time of the
+queue operations.
+
+	ch10/queue_by_2stacks.hpp
+
+
+ex 10.1-7
+Show how to implement a stack using two queues. Analyze the running time of the
+stack operations.
+
+	ch10/stack_by_2queues.hpp
