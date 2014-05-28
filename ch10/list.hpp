@@ -41,6 +41,11 @@ public:
         head(nullptr)
     {}
 
+    void push_back()
+    {
+
+    }
+
     Pointer end()
     {
         if(head == nullptr)
