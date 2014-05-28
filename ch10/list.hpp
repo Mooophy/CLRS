@@ -23,10 +23,45 @@ template<typename T>
 struct node
 {
     using ValueType = T;
-    using Pointer   = std::shared_ptr<node>;
+    using Pointer   = std::shared_ptr<node<ValueType>>;
 
     ValueType   key;
-    Pointer     next;
+    Pointer     next = nullptr;
+};
+
+template<typename T>
+class single_list
+{
+public:
+    using ValueType = T;
+    using Pointer   = std::shared_ptr<node<ValueType>>;
+    using SizeType  = std::size_t;
+
+    single_list():
+        head(nullptr)
+    {}
+
+    Pointer end()
+    {
+        if(head == nullptr)
+            return nullptr;
+        else
+        {
+            Pointer p = head;
+            while(p->next != nullptr)
+                p = p->next;
+            return p;
+        }
+    }
+
+    Pointer begin()
+    {
+        return head;
+    }
+
+
+private:
+    Pointer head;
 };
 
 }//namespace list
