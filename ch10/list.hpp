@@ -59,6 +59,19 @@ public:
 
     double_list() = default;
 
+    ValueType& operator[](SizeType index) const
+    {
+        assert(index < size());
+
+        SizeType count = 0;
+        sPointer ptr = head;
+        while(count++ != index)
+            ptr = ptr->next;
+
+        return ptr->key;
+
+    }
+
     /**
      * @brief insert
      *
@@ -148,9 +161,11 @@ private:
  * @brief operator <<
  */
 template<typename T>
-inline std::ostream& operator <<(std::ostream& os, const ch10::list::double_list<T>& l)
+inline std::ostream& operator <<(std::ostream& os, const double_list<T>& l)
 {
-    auto ptr = l.begin();
+    using sPointer = typename ch10::list::double_list<T>::sPointer;
+
+    sPointer ptr = l.begin();
     while(ptr != nullptr)
     {
         os << ptr->key << std::endl;

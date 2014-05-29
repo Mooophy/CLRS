@@ -11,7 +11,7 @@ int main()
     l.insert(4);
     l.insert(5);
 
-    std::cout << l;
+    std::cout << l[22] << std::endl;
 
 
 
