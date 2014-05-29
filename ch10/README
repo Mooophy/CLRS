@@ -19,6 +19,7 @@ LIST-INSERT	:	list.hpp
 LIST-SEARCH	:	list.hpp
 LIST-DELETE	:	list.hpp
 
+LIST-INSERT'	:	circular_list.hpp
 
 
 =========

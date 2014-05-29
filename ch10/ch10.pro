@@ -12,5 +12,6 @@ HEADERS += \
     deque.hpp \
     queue_by_2stacks.hpp \
     stack_by_2queues.hpp \
-    list.hpp
+    list.hpp \
+    circular_list.hpp
 

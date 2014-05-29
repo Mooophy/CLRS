@@ -1,7 +1,7 @@
 /***************************************************************************
- *  @file       list.hpp
+ *  @file       circular_list.hpp
  *  @author     Alan.W
- *  @date       28  May 2014
+ *  @date       29  May 2014
  *  @remark     This code is for Introduction to Algorithms
  *  @note       code style : STL
  ***************************************************************************/
