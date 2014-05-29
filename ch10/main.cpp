@@ -9,9 +9,13 @@ int main()
     l.insert(9);
     l.insert(10);
     l.insert(10);
-    l.insert(10);
+    l.insert(12);
 
-    std::cout << l.search(9)->key << std::endl;
+    l.remove(l.search(12));
+
+    std::cout << (l.search(12) != nullptr) << std::endl;
+
+
 
     return 0;
 }

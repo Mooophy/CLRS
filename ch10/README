@@ -17,8 +17,7 @@ ex 10.1-7	:	stack_by_2queues.hpp
 10.2 Linked lists
 LIST-INSERT	:	list.hpp 
 LIST-SEARCH	:	list.hpp
-
-
+LIST-DELETE	:	list.hpp
 
 
 

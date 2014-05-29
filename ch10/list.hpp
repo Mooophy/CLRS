@@ -10,6 +10,7 @@
 #define LIST_H
 
 #include <memory>
+#include <assert.h>
 
 namespace ch10{
 namespace list{
@@ -88,7 +89,7 @@ public:
     /**
      * @brief search
      *
-     * @param key   to be searched
+     * @param key
      *
      * @complexity  O(1)
      */
@@ -98,6 +99,34 @@ public:
         while(ret != nullptr && ret->key != key)
             ret = ret->next;
         return ret;
+    }
+
+    /**
+     * @brief begin
+     *
+     * a const ref to head
+     */
+    const sPointer& begin() const
+    {
+        return head;
+    }
+
+    /**
+     * @brief remove
+     *
+     * @param target    a shared_ptr pointing to a node on the list
+     */
+    void remove(sPointer target)
+    {
+        assert(target != nullptr);
+
+        if(target->prev.lock() != nullptr)
+            target->prev.lock()->next = target->next;
+        else
+            head = target->next;
+
+        if(target->next != nullptr)
+            target->next->prev = target->prev;
     }
 
 private:    
