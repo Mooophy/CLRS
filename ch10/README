@@ -14,12 +14,17 @@ ex 10.1-5	:	deque.hpp
 ex 10.1-6	:	queue_by_2stacks.hpp
 ex 10.1-7	:	stack_by_2queues.hpp
 
+
+
 10.2 Linked lists
+
 LIST-INSERT	:	list.hpp 
 LIST-SEARCH	:	list.hpp
 LIST-DELETE	:	list.hpp
 
 LIST-INSERT'	:	circular_list.hpp
+LIST-SEARCH'	:	circular_list.hpp
+LIST-DELETE'	:	circular_list.hpp
 
 
 =========
