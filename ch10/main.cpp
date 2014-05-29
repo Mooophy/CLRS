@@ -7,7 +7,9 @@ int main()
     ch10::list::circular_list<int> l;
     l.insert(87);
 
-    std::cout << "test" << std::endl;
+    l.remove(l.search(87));
+
+    std::cout << l.size() << std::endl;
 
 
 

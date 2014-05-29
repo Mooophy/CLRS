@@ -47,6 +47,7 @@ struct node
     sPointer    next;
 };
 
+
 template<typename T>
 class double_list
 {
@@ -69,7 +70,6 @@ public:
             ptr = ptr->next;
 
         return ptr->key;
-
     }
 
     /**

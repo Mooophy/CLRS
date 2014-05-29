@@ -30,14 +30,15 @@ public:
     using Node      = node<ValueType>;
     using sPointer  = std::shared_ptr<Node>;
     using wPointer  = std::weak_ptr<Node>;
+    using SizeType  = std::size_t;
 
     /**
      * @brief default ctor
      */
     circular_list():
-        nil(std::make_shared<Node>(12345))
+        keeper(std::make_shared<Node>(12345))
     {
-        nil->prev   =   nil->next   =   nil;
+        keeper->prev   =   keeper->next   =   keeper;
     }
 
     /**
@@ -51,19 +52,77 @@ public:
     {
         sPointer inserted = std::make_shared<Node>(val);
 
-        inserted->next  = nil->next;
-        nil->next->prev = inserted;
-        nil->next       = inserted;
-        inserted->prev  = nil;
+        inserted->next      =   keeper->next;
+        keeper->next->prev  =   inserted;
+        keeper->next        =   inserted;
+        inserted->prev      =   keeper;
     }
 
-private:
-    sPointer nil;
+    /**
+     * @brief remove
+     *
+     * @complexity  O(1)
+     *
+     * implementation for LIST-DELETE' page 238
+     */
+    void remove(sPointer target) const
+    {
+        assert(target != keeper);
+        target->prev.lock()->next   =   target->next;
+        target->next->prev          =   target->prev;
+    }
 
+    /**
+     * @brief search
+     *
+     * @complexity  O(n)
+     *
+     * implementation for LIST-SEARCH' page 239
+     */
+    sPointer search(const ValueType& val) const
+    {
+        sPointer ptr = keeper->next;
+        while(ptr != keeper && ptr->key != val)
+            ptr = ptr->next;
+
+        return ptr;
+    }
+
+    /**
+     * @brief empty
+     */
+    bool empty() const
+    {
+        return keeper->next == keeper;
+    }
+
+    /**
+     * @brief size
+     */
+    SizeType size() const
+    {
+        SizeType size = 0;
+        sPointer ptr = keeper;
+        while(ptr->next != keeper)
+        {
+            ++size;
+            ptr = keeper->next;
+        }
+        return size;
+    }
+
+
+private:
+
+    /**
+     * @brief keeper
+     *
+     * used as a dummy sentinel on the list
+     */
+    sPointer keeper;
 };
+
 }//namespace list
 }//namespace ch10
-
-
 
 #endif // CIRCULAR_LIST_HPP
