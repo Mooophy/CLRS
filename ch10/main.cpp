@@ -11,9 +11,11 @@ int main()
     l.insert(10);
     l.insert(12);
 
+    std::cout << l.size() << std::endl;
+
     l.remove(l.search(12));
 
-    std::cout << (l.search(12) != nullptr) << std::endl;
+    std::cout << l.size() << std::endl;
 
 
 

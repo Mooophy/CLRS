@@ -115,6 +115,8 @@ public:
      * @brief remove
      *
      * @param target    a shared_ptr pointing to a node on the list
+     *
+     * based on LIST-DELETE page 238.
      */
     void remove(sPointer target)
     {
