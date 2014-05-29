@@ -5,11 +5,15 @@
 int main()
 {
     ch10::list::circular_list<int> l;
+
     l.insert(87);
+    l.insert(77);
+    l.insert(77);
 
-    l.remove(l.search(87));
+    auto size = l.size();
 
-    std::cout << l.size() << std::endl;
+    std::cout << size <<std::endl;
+
 
 
 

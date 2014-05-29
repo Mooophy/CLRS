@@ -36,9 +36,9 @@ public:
      * @brief default ctor
      */
     circular_list():
-        keeper(std::make_shared<Node>(12345))
+        nil(std::make_shared<Node>(12345))
     {
-        keeper->prev   =   keeper->next   =   keeper;
+        nil->prev   =   nil->next   =   nil;
     }
 
     /**
@@ -52,10 +52,10 @@ public:
     {
         sPointer inserted = std::make_shared<Node>(val);
 
-        inserted->next      =   keeper->next;
-        keeper->next->prev  =   inserted;
-        keeper->next        =   inserted;
-        inserted->prev      =   keeper;
+        inserted->next      =   nil->next;
+        nil->next->prev     =   inserted;
+        nil->next           =   inserted;
+        inserted->prev      =   nil;
     }
 
     /**
@@ -67,7 +67,7 @@ public:
      */
     void remove(sPointer target) const
     {
-        assert(target != keeper);
+        assert(target != nil);
         target->prev.lock()->next   =   target->next;
         target->next->prev          =   target->prev;
     }
@@ -81,8 +81,8 @@ public:
      */
     sPointer search(const ValueType& val) const
     {
-        sPointer ptr = keeper->next;
-        while(ptr != keeper && ptr->key != val)
+        sPointer ptr = nil->next;
+        while(ptr != nil && ptr->key != val)
             ptr = ptr->next;
 
         return ptr;
@@ -93,7 +93,7 @@ public:
      */
     bool empty() const
     {
-        return keeper->next == keeper;
+        return nil->next == nil;
     }
 
     /**
@@ -102,11 +102,11 @@ public:
     SizeType size() const
     {
         SizeType size = 0;
-        sPointer ptr = keeper;
-        while(ptr->next != keeper)
+        sPointer ptr = nil;
+        while(ptr->next != nil)
         {
             ++size;
-            ptr = keeper->next;
+            ptr = ptr->next;
         }
         return size;
     }
@@ -115,11 +115,11 @@ public:
 private:
 
     /**
-     * @brief keeper
+     * @brief nil
      *
      * used as a dummy sentinel on the list
      */
-    sPointer keeper;
+    sPointer nil;
 };
 
 }//namespace list
