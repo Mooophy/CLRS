@@ -47,7 +47,9 @@ struct node
     sPointer    next;
 };
 
-
+/**
+ * @brief doubly linked list without sentinel
+ */
 template<typename T>
 class double_list
 {
