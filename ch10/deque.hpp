@@ -152,6 +152,6 @@ private:
         return ( iter == c.begin() )?     c.end()     :   iter - 1;
     }
 };
-}//namespace
 
+}//namespace
 #endif // DEQUE_HPP
