@@ -5,16 +5,15 @@
  *  @remark     Chapter 10, Introduction to Algorithms
  *  @note       code style : STL
  ***************************************************************************/
-//!
-//! related part
+
 //!
 //! ex10.2-1
 //! Can you implement the dynamic-set operation INSERT on a singly linked list
 //! in O(1) time? How about DELETE ?
 //!
 //  As shown in the following, INSERT on a singly linked list in O(1) is able to
-//  implment,   but DELETE in O(1) is not.The reason is that prev is not provided
-//  and required O(n) time to find prev.
+//  implment, but DELETE in O(1) is not.The reason is that prev which is not provided
+//  needs O(n) time to find.
 //!
 
 #ifndef SINGLE_LIST_H
@@ -57,6 +56,7 @@ public:
         inserted->next      =   nil->next;
         nil->next           =   inserted;
     }
+
 
 private:
 
