@@ -11,7 +11,7 @@ int main()
     l.insert(10);
     l.insert(10);
 
-    std::cout << l.size() << std::endl;
+    std::cout << l.search(9)->key << std::endl;
 
     return 0;
 }

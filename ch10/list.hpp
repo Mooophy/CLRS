@@ -85,6 +85,21 @@ public:
         return size;
     }
 
+    /**
+     * @brief search
+     *
+     * @param key   to be searched
+     *
+     * @complexity  O(1)
+     */
+    sPointer search(const ValueType& key) const
+    {
+        sPointer ret = head;
+        while(ret != nullptr && ret->key != key)
+            ret = ret->next;
+        return ret;
+    }
+
 private:    
     sPointer head = nullptr;
 };
