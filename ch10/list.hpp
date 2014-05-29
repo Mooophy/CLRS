@@ -10,10 +10,17 @@
 #define LIST_H
 
 #include <memory>
+#include <iostream>
 #include <assert.h>
 
 namespace ch10{
 namespace list{
+
+template<typename T>
+struct node;
+
+template<typename T>
+class double_list;
 
 /**
  * @brief The node struct
@@ -116,6 +123,8 @@ public:
      *
      * @param target    a shared_ptr pointing to a node on the list
      *
+     * @complexity  O(1)
+     *
      * based on LIST-DELETE page 238.
      */
     void remove(sPointer target)
@@ -135,6 +144,20 @@ private:
     sPointer head = nullptr;
 };
 
+/**
+ * @brief operator <<
+ */
+template<typename T>
+inline std::ostream& operator <<(std::ostream& os, const ch10::list::double_list<T>& l)
+{
+    auto ptr = l.begin();
+    while(ptr != nullptr)
+    {
+        os << ptr->key << std::endl;
+        ptr = ptr->next;
+    }
+    return os;
+}
 
 }//namespace list
 }//namespace ch10

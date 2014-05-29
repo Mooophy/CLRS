@@ -5,17 +5,13 @@ int main()
 {
     using namespace ch10::list;
     double_list<int> l;
-    l.insert(10);
-    l.insert(9);
-    l.insert(10);
-    l.insert(10);
-    l.insert(12);
+    l.insert(1);
+    l.insert(2);
+    l.insert(3);
+    l.insert(4);
+    l.insert(5);
 
-    std::cout << l.size() << std::endl;
-
-    l.remove(l.search(12));
-
-    std::cout << l.size() << std::endl;
+    std::cout << l;
 
 
 
