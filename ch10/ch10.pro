@@ -14,5 +14,6 @@ HEADERS += \
     stack_by_2queues.hpp \
     list.hpp \
     circular_list.hpp \
-    single_list.hpp
+    single_list.hpp \
+    stack_by_list.hpp
 
