@@ -11,7 +11,7 @@
 //! Can you implement the dynamic-set operation INSERT on a singly linked list
 //! in O(1) time? How about DELETE ?
 //!
-//  As shown in the following, INSERT on a singly linked list in O(1) is able to
+//  As shown below, INSERT on a singly linked list in O(1) is able to
 //  implment, but DELETE in O(1) is not.The reason is that prev which is not provided
 //  needs O(n) time to find.
 //!
@@ -44,6 +44,20 @@ public:
     }
 
     /**
+     * @brief search
+     *
+     * @complexity  O(n)
+     */
+    sPointer search(const ValueType& val) const
+    {
+        sPointer ptr = nil;
+        while(ptr != nil && ptr->key != val)
+            ptr = ptr->next;
+
+        return ptr;
+    }
+
+    /**
      * @brief insert
      *
      * @complexity O(1)
@@ -57,6 +71,44 @@ public:
         nil->next           =   inserted;
     }
 
+    /**
+     * @brief remove
+     *
+     * @param target    shared pointer
+     *
+     * @complexity  O(n)
+     *
+     * check ex10.2-1 for detail.
+     */
+    void remove(sPointer target) const
+    {
+        assert(target != nil);
+        prev(target)->next    =   target->next;
+    }
+
+    /**
+     * @brief size
+     */
+    SizeType size() const
+    {
+        SizeType size   = 0;
+        sPointer ptr    = nil;
+        while(ptr->next != nil)
+        {
+            ptr = ptr->next;
+            ++size;
+        }
+        return size;
+    }
+
+    /**
+     * @brief empty
+     */
+    bool empty() const
+    {
+        return nil->next == nil;
+    }
+
 
 private:
 
@@ -66,6 +118,18 @@ private:
      * used as a dummy sentinel on the list
      */
     sPointer nil;
+
+    /**
+     * @brief search and return the predecessor of target
+     */
+    sPointer prev(sPointer target) const
+    {
+        sPointer ptr = nil;
+        while(ptr->next != target)
+            ptr = ptr->next;
+
+        return  ptr;
+    }
 };
 
 
