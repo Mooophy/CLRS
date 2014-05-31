@@ -29,7 +29,8 @@ LIST-DELETE'	:	circular_list.hpp
 ex 10.2-1	:	single_list.hpp
 ex 10.2-2	:	stack_by_list.hpp
 ex 10.2-3	:	queue_by_list.hpp
-
+ex 10.2-4	:	circular_list.hpp
+ex 10.2-5	:	single_list.hpp	
 
 =========
 note:

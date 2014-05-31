@@ -15,6 +15,13 @@
 //  implment, but DELETE in O(1) is not.The reason is that prev which is not provided
 //  needs O(n) time to find.
 //!
+//! ex10.2-5
+//! Implement the dictionary operations INSERT, DELETE , and SEARCH using singly
+//! linked, circular lists. What are the running times of your procedures?
+//!
+//  As shown in code below.
+//!
+
 
 #ifndef SINGLE_LIST_H
 #define SINGLE_LIST_H
