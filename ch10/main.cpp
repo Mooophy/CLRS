@@ -14,7 +14,7 @@ int main()
 
     std::cout << l.size() << std::endl;
 
-    auto ptr = l.search(98);
+    auto ptr = l.search(90);
 
     std::cout << ptr->key << std::endl;
 

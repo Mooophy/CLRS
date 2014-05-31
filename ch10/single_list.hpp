@@ -112,6 +112,13 @@ public:
         return nil->next == nil;
     }
 
+    /**
+     * @brief return nil as sentinel
+     */
+    const sPointer& sentinel() const
+    {
+        return nil;
+    }
 
 private:
 
