@@ -28,17 +28,17 @@ public:
     using Node      =   node<ValueType>;
     using sPointer  =   std::shared_ptr<Node>;
     using SizeType  =   std::size_t;
-    using List      =   ch10::list::single_list<ValueType>;
+
 
     stack_by_list() = default;
 
     SizeType size() const
     {
-        return list.size();
+
     }
 
 private:
-    List list;
+
 };
 
 

@@ -7,17 +7,18 @@
 int main()
 {
 
-    ch10::list::single_list<int> l;
+    ch10::list::single_list_ring<int> l;
 
     l.insert(99);
     l.insert(98);
     l.insert(9);
+    l.insert(1);
 
-    std::cout << l.size() << std::endl;
+    //std::cout << l.size() << std::endl;
 
     auto ptr = l.search(90);
 
-    std::cout << l.empty() << std::endl;
+    std::cout << l ;
 
 //    //l.remove(ptr);
 

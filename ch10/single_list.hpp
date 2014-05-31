@@ -28,7 +28,7 @@ namespace list {
  * @brief  singly linked circular list
  */
 template<typename T>
-class single_list
+class single_list_ring
 {
 public:
     using ValueType = T;
@@ -39,7 +39,7 @@ public:
     /**
      * @brief default ctor
      */
-    single_list():
+    single_list_ring():
        count(0), nil(std::make_shared<Node>(12345))
     {
         nil->next   =   nil;
@@ -63,6 +63,16 @@ public:
      * @brief insert
      *
      * @complexity O(1)
+     *
+     *
+     * example: insert(3)
+     * before inserting:    [nil][7][8][9]
+     *                            ^
+     *                            begin
+     * after inserting:     [nil][3][7][8][9]
+     *                            ^
+     *                            begin
+     *
      *
      * as ex10.2-1 required.
      */
@@ -107,13 +117,21 @@ public:
      */
     bool empty() const
     {
-        return nil->next == nil;
+        return begin() == end();
     }
 
     /**
-     * @brief return nil as sentinel
+     * @brief begin
      */
-    const sPointer& sentinel() const
+    const sPointer& begin() const
+    {
+        return nil->next;
+    }
+
+    /**
+     * @brief end
+     */
+    const sPointer& end() const
     {
         return nil;
     }
@@ -145,6 +163,17 @@ private:
     }
 };
 
+template<typename T>
+std::ostream& operator <<(std::ostream& os, const single_list_ring<T>& l)
+{
+    auto ptr = l.begin();
+    while (ptr != l.end())
+    {
+        os << ptr->key << std::endl;
+        ptr = ptr->next;
+    }
+    return os;
+}
 
 }//namespace list
 }//namespace ch10
