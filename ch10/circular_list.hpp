@@ -17,7 +17,7 @@ namespace ch10 {
 namespace list {
 
 /**
- * @brief circular_list
+ * @brief doubly linked, circular list
  *
  * sentinel is used to build this doubly linked list circle,
  * check page 238 - 240 for detail.
