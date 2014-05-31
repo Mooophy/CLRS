@@ -1,15 +1,13 @@
 #include <iostream>
-#include "queue_by_list.h"
+#include "circular_list.hpp"
 
 int main()
 {
-    ch10::list::queue_by_list<long> q;
+    ch10::list::circular_list<int> l;
+    l.insert(1);
+    l.insert(222);
 
-    for(int i = 0; i != 10; ++i)
-        q.enqueue(i);
-
-    for(int i = 0; i != 10; ++i)
-        std::cout << q.dequeue() << std::endl;
+    std::cout << l.search(223)->key << std::endl;
 
     return 0;
 }

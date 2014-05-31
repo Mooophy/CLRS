@@ -5,6 +5,15 @@
  *  @remark     This code is for Introduction to Algorithms
  *  @note       code style : STL
  ***************************************************************************/
+//!
+//! 10.2-4
+//! As written, each loop iteration in the LIST-SEARCH procedure requires two tests:
+//! one for x != L.nil and one for x->key != k. Show how to eliminate the test for
+//! x ! L.nil in each iteration.
+//!
+//  as shown below.
+//!
+
 #ifndef CIRCULAR_LIST_HPP
 #define CIRCULAR_LIST_HPP
 
@@ -36,7 +45,7 @@ public:
      * @brief default ctor
      */
     circular_list():
-        nil(std::make_shared<Node>(12345))
+        nil(std::make_shared<Node>(12345)),count(0)
     {
         nil->prev   =   nil->next   =   nil;
     }
@@ -48,7 +57,7 @@ public:
      *
      * check LIST-INSERT' page 240 for detail
      */
-    void insert(const ValueType& val) const
+    void insert(const ValueType& val)
     {
         sPointer inserted = std::make_shared<Node>(val);
 
@@ -56,6 +65,8 @@ public:
         nil->next->prev     =   inserted;
         nil->next           =   inserted;
         inserted->prev      =   nil;
+
+        ++count;
     }
 
     /**
@@ -70,6 +81,8 @@ public:
         assert(target != nil);
         target->prev.lock()->next   =   target->next;
         target->next->prev          =   target->prev;
+
+        --count;
     }
 
     /**
@@ -78,11 +91,14 @@ public:
      * @complexity  O(n)
      *
      * implementation for LIST-SEARCH' page 239
+     *
+     * revised as required in ex10-2.4
      */
-    sPointer search(const ValueType& val) const
+    sPointer search(const ValueType& val)
     {
-        sPointer ptr = nil->next;
-        while(ptr != nil && ptr->key != val)
+        sPointer ptr =  nil->next;
+        nil->key     =  val;        //added for ex10.2-4, 31 may, 2014 @alan
+        while(ptr->key != val)
             ptr = ptr->next;
 
         return ptr;
@@ -101,14 +117,7 @@ public:
      */
     SizeType size() const
     {
-        SizeType size = 0;
-        sPointer ptr = nil;
-        while(ptr->next != nil)
-        {
-            ++size;
-            ptr = ptr->next;
-        }
-        return size;
+        return count;
     }
 
 
@@ -120,9 +129,30 @@ private:
      * used as a dummy sentinel on the list
      */
     sPointer nil;
+
+    /**
+     * @brief count for size
+     */
+    SizeType count;
 };
 
 }//namespace list
 }//namespace ch10
 
 #endif // CIRCULAR_LIST_HPP
+
+
+//! test code for ex10.2-4
+//#include <iostream>
+//#include "circular_list.hpp"
+
+//int main()
+//{
+//    ch10::list::circular_list<int> l;
+//    l.insert(1);
+//    l.insert(222);
+
+//    std::cout << l.search(223)->key << std::endl;
+
+//    return 0;
+//}
