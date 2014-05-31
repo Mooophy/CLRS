@@ -1,12 +1,15 @@
 #include <iostream>
-#include "list.hpp"
-#include "circular_list.hpp"
-#include "single_list.hpp"
-#include "stack_by_list.hpp"
+#include "queue_by_list.h"
 
 int main()
 {
+    ch10::list::queue_by_list<long> q;
 
+    for(int i = 0; i != 10; ++i)
+        q.enqueue(i);
+
+    for(int i = 0; i != 10; ++i)
+        std::cout << q.dequeue() << std::endl;
 
     return 0;
 }
