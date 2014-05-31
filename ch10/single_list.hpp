@@ -53,7 +53,7 @@ public:
      */
     sPointer search(const ValueType& val) const
     {
-        sPointer ptr = nil;
+        sPointer ptr = nil->next;
         while(ptr != nil && ptr->key != val)
             ptr = ptr->next;
 

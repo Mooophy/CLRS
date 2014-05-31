@@ -14,11 +14,11 @@ int main()
 
     std::cout << l.size() << std::endl;
 
-    auto ptr = l.search(19991);
+    auto ptr = l.search(98);
 
     std::cout << ptr->key << std::endl;
 
-    l.remove(ptr);
+    //l.remove(ptr);
 
 
     return 0;
