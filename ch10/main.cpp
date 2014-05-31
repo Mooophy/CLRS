@@ -2,6 +2,7 @@
 #include "list.hpp"
 #include "circular_list.hpp"
 #include "single_list.hpp"
+#include "stack_by_list.hpp"
 
 int main()
 {
@@ -16,9 +17,9 @@ int main()
 
     auto ptr = l.search(90);
 
-    std::cout << ptr->key << std::endl;
+    std::cout << l.empty() << std::endl;
 
-    //l.remove(ptr);
+//    //l.remove(ptr);
 
 
     return 0;

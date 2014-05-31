@@ -30,7 +30,6 @@ namespace list {
 template<typename T>
 class single_list
 {
-
 public:
     using ValueType = T;
     using Node      = node<ValueType>;
@@ -41,7 +40,7 @@ public:
      * @brief default ctor
      */
     single_list():
-        nil(std::make_shared<Node>(12345))
+       count(0), nil(std::make_shared<Node>(12345))
     {
         nil->next   =   nil;
     }
@@ -67,11 +66,13 @@ public:
      *
      * as ex10.2-1 required.
      */
-    void insert(const ValueType& val) const
+    void insert(const ValueType& val)
     {
         sPointer inserted   =   std::make_shared<Node>(val);
         inserted->next      =   nil->next;
         nil->next           =   inserted;
+
+        ++count;
     }
 
     /**
@@ -85,23 +86,20 @@ public:
      */
     void remove(sPointer target) const
     {
-        assert(target != nil);
+        assert(target != nil && !empty());
         prev(target)->next    =   target->next;
+
+        --count;
     }
 
     /**
      * @brief size
+     *
+     * @complexity  O(1)
      */
     SizeType size() const
     {
-        SizeType size   = 0;
-        sPointer ptr    = nil;
-        while(ptr->next != nil)
-        {
-            ptr = ptr->next;
-            ++size;
-        }
-        return size;
+        return count;
     }
 
     /**
@@ -121,6 +119,11 @@ public:
     }
 
 private:
+
+    /**
+     * @brief size counter
+     */
+    SizeType count;
 
     /**
      * @brief nil
