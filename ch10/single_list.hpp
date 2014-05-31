@@ -24,6 +24,9 @@
 namespace ch10 {
 namespace list {
 
+/**
+ * @brief  singly linked circular list
+ */
 template<typename T>
 class single_list
 {

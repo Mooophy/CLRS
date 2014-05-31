@@ -15,11 +15,31 @@
 #ifndef STACK_BY_LIST_H
 #define STACK_BY_LIST_H
 
-#include "single_list.hpp"
+#include "list.hpp"
 
 namespace ch10{
 namespace list{
 
+template<typename T>
+class stack_by_list
+{
+public:
+    using ValueType = T;
+    using Node      = node<ValueType>;
+    using sPointer  = std::shared_ptr<Node>;
+    using SizeType  = std::size_t;
+
+    stack_by_list():
+        count(0),head(nullptr),tail(nullptr)
+    {}
+
+
+
+private:
+    sPointer head;
+    sPointer tail;
+    SizeType count;
+};
 
 
 }//namespace list
