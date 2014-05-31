@@ -28,17 +28,56 @@ public:
     using Node      =   node<ValueType>;
     using sPointer  =   std::shared_ptr<Node>;
     using SizeType  =   std::size_t;
+    using List      =   single_list_ring<ValueType>;
 
-
+    /**
+     * @brief default ctor
+     */
     stack_by_list() = default;
 
     SizeType size() const
     {
-
+        return data.size();
     }
 
-private:
+    bool empty() const
+    {
+        return data.empty();
+    }
 
+    void print() const
+    {
+        std::cout << data;
+    }
+
+    /**
+     * @brief enqueue
+     *
+     * @complexity  O(1)
+     *
+     * as required in ex10.2-2
+     */
+    void enqueue(const ValueType& val)
+    {
+        data.insert(val);
+    }
+
+    /**
+     * @brief dequeue
+     *
+     * @complexity  O(1)
+     *
+     * as required in ex10.2-2
+     */
+    ValueType dequeue()
+    {
+        ValueType top = data.begin()->key;
+        data.remove(data.begin());
+
+        return top;
+    }
+private:
+    List data;
 };
 
 

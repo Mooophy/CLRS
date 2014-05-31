@@ -94,7 +94,7 @@ public:
      *
      * check ex10.2-1 for detail.
      */
-    void remove(sPointer target) const
+    void remove(sPointer target)
     {
         assert(target != nil && !empty());
         prev(target)->next    =   target->next;
