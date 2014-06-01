@@ -78,6 +78,33 @@ public:
     }
 
     /**
+     * @brief operator +
+     *
+     * @complexity O(1)
+     *
+     * append the rhs to this list, implemented for ex10.2-6.
+     */
+    double_list<ValueType>& operator + (double_list<ValueType>& rhs)
+    {
+        if(rhs.empty())
+            return *this;
+        else
+        {
+            if(this->empty())
+                return rhs;
+            else    //neither is empty
+            {
+                sPointer tail   =   this->tail();
+
+                tail->next      =   rhs.head;
+                rhs.head->prev  =   tail;
+
+                return *this;
+            }
+        }
+    }
+
+    /**
      * @brief insert
      *
      * @complexity O(1)
@@ -131,6 +158,8 @@ public:
     /**
      * @brief begin
      *
+     * @complexity  O(1)
+     *
      * a const ref to head
      */
     const sPointer& begin() const
@@ -171,7 +200,26 @@ public:
 private:    
     sPointer head   =   nullptr;
 
-};
+    /**
+     * @brief return tail
+     *
+     * @complexity  O(n)
+     */
+    sPointer tail() const
+    {
+        if(empty())
+            return head;
+        else
+        {
+            sPointer ret = head;
+            while(ret->next != nullptr)
+                ret = ret->next;
+
+            return ret;
+        }
+    }
+
+};//class double_list
 
 /**
  * @brief operator <<
@@ -194,3 +242,34 @@ inline std::ostream& operator <<(std::ostream& os, const double_list<T>& l)
 }//namespace ch10
 
 #endif // LIST_H
+
+//!
+//! ex10.2-6
+//! The dynamic-set operation UNION takes two disjoint sets S1 and S2 as input, and
+//! it returns a set S = S1 U S2 consisting of all the elements of S 1 and S 2 . The
+//! sets S1 and S2 are usually destroyed by the operation. Show how to support UNION
+//! in O(1) time using a suitable list data structure.
+//!
+//! test code:
+//!
+//#include <iostream>
+//#include "list.hpp"
+
+//int main()
+//{
+//    ch10::list::double_list<int> s1,s2, uni;
+
+//    for(int i = 0; i !=10 ; ++i)
+//    {
+//        s1.insert(i);
+//        s2.insert(i*10);
+//    }
+
+//    uni = s1 + s2;
+
+//    std::cout << s1.empty() << std::endl;
+//    std::cout << s2 << std::endl;
+
+//    std::cout << "uni =\n" << uni << std::endl;
+//}
+
