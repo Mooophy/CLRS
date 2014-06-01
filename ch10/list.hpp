@@ -77,7 +77,6 @@ public:
         return ptr->key;
     }
 
-
     /**
      * @brief insert
      *
@@ -90,8 +89,10 @@ public:
         sPointer inserted = std::make_shared<Node>(val);
 
         inserted->next = head;
-        if(head != nullptr)
-            head->prev = inserted;
+
+        if(!empty())
+            head->prev  = inserted;
+
         head = inserted;
     }
 
@@ -138,13 +139,11 @@ public:
     }
 
     /**
-     * @brief end
-     *
-     * a const ref to end
+     * @brief empty
      */
-    const sPointer& end() const
+    bool empty()const
     {
-        return tail;
+        return head == nullptr;
     }
 
     /**
@@ -171,7 +170,7 @@ public:
 
 private:    
     sPointer head   =   nullptr;
-    sPointer tail   =   nullptr;
+
 };
 
 /**

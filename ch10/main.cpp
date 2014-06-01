@@ -11,7 +11,7 @@ int main()
         s2.insert(i*10);
     }
 
-    std::cout << s1[9] << std::endl;
+    std::cout << s1.empty() << std::endl;
     std::cout << s2 << std::endl;
 }
 
