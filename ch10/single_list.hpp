@@ -21,7 +21,18 @@
 //!
 //  As shown in code below.
 //!
-
+//! ex10.2-7
+//! Give a theta (n)-time nonrecursive procedure that reverses a singly linked list of n
+//! elements. The procedure should use no more than constant storage beyond that
+//! needed for the list itself.
+//!
+/*      reverse
+ * 1    def current =   begin
+ * 2    nil-> next  =   nil
+ * 3    while(current != nil)
+ * 4        insert(current->key)
+ * 5        current = current ->next
+ */
 
 #ifndef SINGLE_LIST_H
 #define SINGLE_LIST_H
@@ -110,6 +121,22 @@ public:
     }
 
     /**
+     * @brief reverse
+     *
+     * @complexity O(n)
+     */
+    void reverse()
+    {
+        sPointer current = begin();
+        nil->next   =   nil;
+        while(current != nil)
+        {
+            insert(current->key);
+            current = current->next;
+        }
+    }
+
+    /**
      * @brief size
      *
      * @complexity  O(1)
@@ -170,6 +197,9 @@ private:
     }
 };
 
+/**
+ * @brief operator <<
+ */
 template<typename T>
 std::ostream& operator <<(std::ostream& os, const single_list_ring<T>& l)
 {
@@ -185,3 +215,18 @@ std::ostream& operator <<(std::ostream& os, const single_list_ring<T>& l)
 }//namespace list
 }//namespace ch10
 #endif // SINGLE_LIST_H
+
+//! test code for ex10.2-7
+//#include <iostream>
+//#include "single_list.hpp"
+
+//int main()
+//{
+//    ch10::list::single_list_ring<int> l;
+//    for(int i = 0; i != 10; ++i)
+//        l.insert(i);
+
+//    l.reverse();
+
+//    std::cout << l << std::endl;
+//}
