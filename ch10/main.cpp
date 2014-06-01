@@ -1,14 +1,17 @@
 #include <iostream>
-#include "circular_list.hpp"
+#include "list.hpp"
 
 int main()
 {
-    ch10::list::circular_list<int> l;
-    l.insert(1);
-    l.insert(222);
+    ch10::list::double_list<int> s1,s2;
 
-    std::cout << l.search(223)->key << std::endl;
+    for(int i = 0; i !=10 ; ++i)
+    {
+        s1.insert(i);
+        s2.insert(i*10);
+    }
 
-    return 0;
+    std::cout << s1[9] << std::endl;
+    std::cout << s2 << std::endl;
 }
 

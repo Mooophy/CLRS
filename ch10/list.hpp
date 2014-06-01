@@ -62,6 +62,9 @@ public:
 
     double_list() = default;
 
+    /**
+     * @brief operator []
+     */
     ValueType& operator[](SizeType index) const
     {
         assert(index < size());
@@ -73,6 +76,7 @@ public:
 
         return ptr->key;
     }
+
 
     /**
      * @brief insert
@@ -134,6 +138,16 @@ public:
     }
 
     /**
+     * @brief end
+     *
+     * a const ref to end
+     */
+    const sPointer& end() const
+    {
+        return tail;
+    }
+
+    /**
      * @brief remove
      *
      * @param target    a shared_ptr pointing to a node on the list
@@ -156,7 +170,8 @@ public:
     }
 
 private:    
-    sPointer head = nullptr;
+    sPointer head   =   nullptr;
+    sPointer tail   =   nullptr;
 };
 
 /**
