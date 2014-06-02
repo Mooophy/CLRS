@@ -28,6 +28,20 @@ struct node
     sPointer right;
 };
 
+template<typename T>
+class B_tree
+{
+public:
+    using ValueType =   T;
+    using Node      =   node<ValueType>;
+    using sPointer  =   std::shared_ptr<Node>;
+    using wPointer  =   std::weak_ptr<Node>;
+
+
+private:
+    sPointer root;
+};
+
 }//namespace tree
 }//namespace ch10
 
