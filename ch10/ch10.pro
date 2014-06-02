@@ -16,5 +16,6 @@ HEADERS += \
     circular_list.hpp \
     single_list.hpp \
     stack_by_list.hpp \
-    queue_by_list.hpp
+    queue_by_list.hpp \
+    tree.hpp
 
