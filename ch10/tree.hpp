@@ -15,6 +15,11 @@
 namespace ch10 {
 namespace tree {
 
+/**
+ * @brief node
+ *
+ * used for binary tree.
+ */
 template<typename T>
 struct node
 {
@@ -23,11 +28,27 @@ struct node
     using sPointer  =   std::shared_ptr<Node>;
     using wPointer  =   std::weak_ptr<Node>;
 
-    wPointer parent;
-    sPointer left;
-    sPointer right;
+    /**
+     * @brief default ctor
+     */
+    node() = default;
+
+    /**
+     * @brief ctor with a key
+     */
+    explicit node(const ValueType& val):
+        key(val)
+    {}
+
+    ValueType   key     = ValueType();
+    wPointer    parent;
+    sPointer    left    = nullptr;
+    sPointer    right   = nullptr;
 };
 
+/**
+ * @brief binary tree
+ */
 template<typename T>
 class B_tree
 {
@@ -37,9 +58,37 @@ public:
     using sPointer  =   std::shared_ptr<Node>;
     using wPointer  =   std::weak_ptr<Node>;
 
+    /**
+     * @brief insert interface
+     */
+    void insert(const ValueType& val)
+    {
+        recur_add(root, val);
+    }
 
 private:
     sPointer root;
+
+    /**
+     * @brief recur_add
+     *
+     * actual work for insert interface
+     */
+    void recur_add(sPointer& ptr, const ValueType& val)
+    {
+        if(ptr == nullptr)
+        {
+            ptr = std::make_shared<Node>(val);
+            return;
+        }
+        else
+        {
+            if(ptr->key > val)
+                recur_add(ptr->left  , val);
+            else
+                recur_add(ptr->right , val);
+        }
+    }
 };
 
 }//namespace tree

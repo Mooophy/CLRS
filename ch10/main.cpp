@@ -1,14 +1,15 @@
 #include <iostream>
-#include "single_list.hpp"
+#include "tree.hpp"
 
 int main()
 {
-    ch10::list::single_list_ring<int> l;
-    for(int i = 0; i != 10; ++i)
-        l.insert(i);
+    ch10::tree::node<int> n;
 
-    l.reverse();
+    ch10::tree::B_tree<int> tree;
 
-    std::cout << l << std::endl;
+    tree.insert(42);
+
+
+
 }
 
