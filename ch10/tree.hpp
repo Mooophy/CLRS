@@ -137,7 +137,7 @@ private:
 
 #endif // TREE_HPP
 
-
+//! test code for ex10.4-2
 //#include <iostream>
 //#include "tree.hpp"
 
