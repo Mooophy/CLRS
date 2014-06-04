@@ -16,6 +16,7 @@
  * 3        print_recur(node->left)
  * 4        print_recur(node->right)
  */
+
 #ifndef TREE_HPP
 #define TREE_HPP
 
@@ -31,8 +32,7 @@ struct node;
 template<typename T>
 class binary_tree;
 
-template<typename T>
-void recur_print(std::shared_ptr<node<T>> node);
+
 
 /**
  * @brief node
@@ -71,7 +71,6 @@ struct node
 template<typename T>
 class binary_tree
 {
-    friend void recur_print<T>(std::shared_ptr<node<T>> node);
 public:
     using ValueType =   T;
     using Node      =   node<ValueType>;
@@ -84,6 +83,11 @@ public:
     void insert(const ValueType& val)
     {
         recur_add(root, val);
+    }
+
+    void print_by_recursion() const
+    {
+        recur_print(root);
     }
 
 private:
@@ -109,27 +113,41 @@ private:
                 recur_add(ptr->right , val);
         }
     }
-};
 
-/**
- * @brief recur_print
- *
- * @complexity O(n)
- *
- * implemented for ex10.4-2
- */
-template<typename T>
-inline void recur_print(std::shared_ptr<node<T>> node)
-{
-    if(node != nullptr)
+    /**
+     * @brief recur_print
+     *
+     * @complexity O(n)
+     *
+     * implemented for ex10.4-2
+     */
+    void recur_print(sPointer node) const
     {
-        std::cout << node->key << std::endl;
-        recur_print(node->left);
-        recur_print(node->right);
+        if(node != nullptr)
+        {
+            std::cout << node->key << std::endl;
+            recur_print(node->left);
+            recur_print(node->right);
+        }
     }
-}
+};
 
 }//namespace tree
 }//namespace ch10
 
 #endif // TREE_HPP
+
+
+//#include <iostream>
+//#include "tree.hpp"
+
+//int main()
+//{
+//    ch10::tree::node<int> n;
+//    ch10::tree::binary_tree<int> tree;
+
+//    for(int i=0; i != 100; ++i)
+//        tree.insert(i);
+
+//    tree.print_by_recursion();
+//}

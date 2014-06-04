@@ -4,15 +4,11 @@
 int main()
 {
     ch10::tree::node<int> n;
-
     ch10::tree::binary_tree<int> tree;
 
-    tree.insert(42);
-    tree.insert(43);
+    for(int i=0; i != 100; ++i)
+        tree.insert(i);
 
-    std::cout << "test" << std::endl;
-
-
-
+    tree.print_by_recursion();
 }
 
