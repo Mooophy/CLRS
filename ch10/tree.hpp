@@ -42,6 +42,7 @@
 
 #include <memory>
 #include <iostream>
+#include <stack.hpp>
 
 namespace ch10 {
 namespace tree {
@@ -51,7 +52,6 @@ struct node;
 
 template<typename T>
 class binary_tree;
-
 
 
 /**
@@ -105,10 +105,43 @@ public:
         recur_add(root, val);
     }
 
+    /**
+     * @brief print_by_recursion
+     *
+     * just an interface,check recur_print() for real work.
+     */
     void print_by_recursion() const
     {
         recur_print(root);
     }
+
+    /**
+     * @brief print_with_stack
+     *
+     * @complexity  O(n)
+     *
+     * implemented for ex10.4-3
+     */
+    void print_with_stack(sPointer node) const
+    {
+        if(node)
+        {
+            ch10::stack<T> stack;
+            stack.push(node);
+            while(!stack.empty())
+            {
+                sPointer current = stack.top();
+                stack.pop();
+                std::cout << current->key << std::endl;
+
+                if(current->left)
+                    stack.push(current->left);
+                if(current->right)
+                    stack.push(current->right);
+            }
+        }
+    }
+
 
 private:
     sPointer root;
