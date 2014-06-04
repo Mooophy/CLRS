@@ -6,7 +6,8 @@
  *  @note       code style : STL
  *  @attention  bug found, check issue #2 for detail.
  ***************************************************************************/
-//! 10.4-2
+//!
+//! ex 10.4-2
 //! Write an O(n)-time recursive procedure that, given an n-node binary tree, prints
 //! out the key of each node in the tree.
 //!
@@ -15,6 +16,25 @@
  * 2        cout << node->data << endl
  * 3        print_recur(node->left)
  * 4        print_recur(node->right)
+ */
+
+//!
+//! ex10.4-3
+//! Write an O(n)-time nonrecursive procedure that, given an n-node binary tree,
+//! prints out the key of each node in the tree. Use a stack as an auxiliary data structure.
+//!
+/*      print_with_stack(node)
+ * 1    if(node)
+ * 2        def stack
+ * 3        stack.push(node)
+ * 4        def current = null
+ * 5        while( ! stack.empty())
+ * 6            current = stack.pop()
+ * 7            cout << current->key
+ * 8            if (current->left)
+ * 9                stack.push(current->left)
+ * 10           if (current->right)
+ * 11               stack.push(current->right)
  */
 
 #ifndef TREE_HPP
