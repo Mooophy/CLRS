@@ -118,30 +118,12 @@ public:
     /**
      * @brief print_with_stack
      *
-     * @complexity  O(n)
-     *
-     * implemented for ex10.4-3
+     * just an interface,check recur_print() for real work.
      */
-    void print_with_stack(sPointer node) const
+    void print_with_stack() const
     {
-        if(node)
-        {
-            ch10::stack<T> stack;
-            stack.push(node);
-            while(!stack.empty())
-            {
-                sPointer current = stack.top();
-                stack.pop();
-                std::cout << current->key << std::endl;
-
-                if(current->left)
-                    stack.push(current->left);
-                if(current->right)
-                    stack.push(current->right);
-            }
-        }
+        nonrecur_print(root);
     }
-
 
 private:
     sPointer root;
@@ -183,6 +165,33 @@ private:
             recur_print(node->right);
         }
     }
+
+    /**
+     * @brief print_with_stack
+     *
+     * @complexity  O(n)
+     *
+     * implemented for ex10.4-3
+     */
+    void nonrecur_print(sPointer node) const
+    {
+        if(node)
+        {
+            ch10::stack<sPointer> stack;
+            stack.push(node);
+            while(!stack.empty())
+            {
+                sPointer current = stack.top();
+                stack.pop();
+                std::cout << current->key << std::endl;
+
+                if(current->left)
+                    stack.push(current->left);
+                if(current->right)
+                    stack.push(current->right);
+            }
+        }
+    }
 };
 
 }//namespace tree
@@ -203,4 +212,17 @@ private:
 //        tree.insert(i);
 
 //    tree.print_by_recursion();
+//}
+
+//! test code for ex10.4-3
+//#include <iostream>
+//#include "tree.hpp"
+
+//int main()
+//{
+//    ch10::tree::binary_tree<int> tree;
+
+//    for(int i=0; i != 100; ++i)
+//        tree.insert(i);
+//    tree.print_with_stack();
 //}
