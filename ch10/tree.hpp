@@ -27,14 +27,13 @@
  * 1    if(node)
  * 2        def stack
  * 3        stack.push(node)
- * 4        def current = null
- * 5        while( ! stack.empty())
- * 6            current = stack.pop()
- * 7            cout << current->key
- * 8            if (current->left)
- * 9                stack.push(current->left)
- * 10           if (current->right)
- * 11               stack.push(current->right)
+ * 4        while( ! stack.empty())
+ * 5            def current = stack.pop()
+ * 6            cout << current->key
+ * 7            if (current->left)
+ * 8                stack.push(current->left)
+ * 9            if (current->right)
+ * 10               stack.push(current->right)
  */
 
 #ifndef TREE_HPP
