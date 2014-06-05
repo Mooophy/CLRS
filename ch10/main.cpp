@@ -3,7 +3,7 @@
 
 int main()
 {
-    ch10::tree::binary_tree<long> tree;
+    ch10::tree::binary_tree<int> tree;
 
     for(int i=50; i != 100; ++i)
         tree.insert(i);

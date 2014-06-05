@@ -48,8 +48,9 @@
  * 3        print(node->left)
  * 4        print(node->right)
  */
+
 //!
-//! 10.4-5 *
+//! ex 10.4-5 *
 //! Write an O(n)-time nonrecursive procedure that, given an n-node binary tree,
 //! prints out the key of each node. Use no more than constant extra space outside
 //! of the tree itself and do not modify the tree, even temporarily, during the proce-
@@ -154,13 +155,18 @@ public:
     /**
      * @brief print_with_stack
      *
-     * just an interface,check recur_print() for real work.
+     * just an interface, check recur_print() for real work.
      */
     void print_with_stack() const
     {
         nonrecur_print(root);
     }
 
+    /**
+     * @brief print_with_prev
+     *
+     * just an interface, checking_prev_print() for real work.
+     */
     void print_with_prev() const
     {
         checking_prev_print(root);
@@ -175,19 +181,20 @@ private:
      *
      * actual work for insert interface
      */
-    void recur_add(sPointer& ptr, const ValueType& val)
+    void recur_add(sPointer& current, const ValueType& val, sPointer prev = nullptr)
     {
-        if(ptr == nullptr)
+        if(current == nullptr)
         {
-            ptr = std::make_shared<Node>(val);
+            current = std::make_shared<Node>(val);
+            current->parent = prev;
             return;
         }
         else
         {
-            if(ptr->key > val)
-                recur_add(ptr->left  , val);
+            if(current->key > val)
+                recur_add(current->left  , val, current);
             else
-                recur_add(ptr->right , val);
+                recur_add(current->right , val, current);
         }
     }
 
@@ -197,6 +204,7 @@ private:
      * @complexity O(n)
      *
      * implemented for ex10.4-2
+     * check above for pseudocode, below for test code.
      */
     void recur_print(sPointer node) const
     {
@@ -209,11 +217,12 @@ private:
     }
 
     /**
-     * @brief print_with_stack
+     * @brief nonrecur_print
      *
      * @complexity  O(n)
      *
      * implemented for ex10.4-3
+     * check above for pseudocode, below for test code.
      */
     void nonrecur_print(sPointer node) const
     {
@@ -238,9 +247,10 @@ private:
     /**
      * @brief checking_prev_print
      *
-     * @complexity  O(n)
+     * @complexity  O(2n) = O(n)
      *
      * for ex10.4-5 *
+     * check above for pseudocode, below for test code.
      */
     void checking_prev_print(sPointer node) const
     {
@@ -302,4 +312,18 @@ private:
 //    for(int i=0; i != 100; ++i)
 //        tree.insert(i);
 //    tree.print_with_stack();
+//}
+
+//! test code for ex10.4-5
+//#include <iostream>
+//#include "tree.hpp"
+
+//int main()
+//{
+//    ch10::tree::binary_tree<int> tree;
+
+//    for(int i=50; i != 100; ++i)
+//        tree.insert(i);
+
+//    tree.print_with_prev();
 //}
