@@ -38,6 +38,10 @@ Exercises
 10.4-2		:	tree.hpp	
 10.4-3		:	tree.hpp
 10.4-4		:	tree.hpp(only pseudocode)
+10.4-5		:	tree.hpp
+
+
+
 =========
 note:
 Use -std=c++11 flag  when compiling.
