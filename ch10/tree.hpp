@@ -48,7 +48,29 @@
  * 3        print(node->left)
  * 4        print(node->right)
  */
-
+//!
+//! 10.4-5 *
+//! Write an O(n)-time nonrecursive procedure that, given an n-node binary tree,
+//! prints out the key of each node. Use no more than constant extra space outside
+//! of the tree itself and do not modify the tree, even temporarily, during the proce-
+//! dure.
+//!
+/*      print_with_prev(node)
+ * 1    def prev = null
+ * 2    def current = node
+ * 3    while(current)
+ * 4        if(prev == current->parent)
+ * 5            cout << current->key
+ * 6            prev = current
+ * 7            current =   current->left?    current->left   :
+ *                              current->right? current->right  :   current->parent
+ * 8        else if (prev == current->left && current->right)
+ * 9            prev = current
+ * 10           current = current->right
+ * 11       else
+ *              prev = current
+ * 12           current = current->parent
+ */
 
 
 #ifndef TREE_HPP
