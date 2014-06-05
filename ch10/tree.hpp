@@ -19,7 +19,7 @@
  */
 
 //!
-//! ex10.4-3
+//! ex 10.4-3
 //! Write an O(n)-time nonrecursive procedure that, given an n-node binary tree,
 //! prints out the key of each node in the tree. Use a stack as an auxiliary data structure.
 //!
@@ -35,6 +35,21 @@
  * 9            if (current->right)
  * 10               stack.push(current->right)
  */
+
+//!
+//! ex 10.4-4
+//! Write an O.n/-time procedure that prints all the keys of an arbitrary rooted tree
+//! with n nodes, where the tree is stored using the left-child, right-sibling representa-
+//! tion.
+//!
+/*      print(node)
+ * 1    if(node)
+ * 2        cout << node->key
+ * 3        print(node->left)
+ * 4        print(node->right)
+ */
+
+
 
 #ifndef TREE_HPP
 #define TREE_HPP
