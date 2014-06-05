@@ -5,8 +5,9 @@ int main()
 {
     ch10::tree::binary_tree<long> tree;
 
-    for(int i=0; i != 100; ++i)
+    for(int i=50; i != 100; ++i)
         tree.insert(i);
-    tree.print_with_stack();
+
+    tree.print_with_prev();
 }
 

@@ -161,6 +161,12 @@ public:
         nonrecur_print(root);
     }
 
+    void print_with_prev() const
+    {
+        checking_prev_print(root);
+    }
+
+
 private:
     sPointer root;
 
@@ -225,6 +231,41 @@ private:
                     stack.push(current->left);
                 if(current->right)
                     stack.push(current->right);
+            }
+        }
+    }
+
+    /**
+     * @brief checking_prev_print
+     *
+     * @complexity  O(n)
+     *
+     * for ex10.4-5 *
+     */
+    void checking_prev_print(sPointer node) const
+    {
+        sPointer prev    = nullptr;
+        sPointer current = node;
+
+        while(current)
+        {
+            if(prev == current->parent.lock())
+            {
+                std::cout << current->key << std::endl;
+                prev = current;
+
+                current = current->left?    current->left :
+                    current->right? current->right  :   current->parent.lock();
+            }
+            else if(prev == current->left && current->right)
+            {
+                prev = current;
+                current = current->right;
+            }
+            else
+            {
+                prev = current;
+                current = current->parent.lock();
             }
         }
     }
