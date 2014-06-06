@@ -1,13 +1,20 @@
 #include <iostream>
-#include "tree.hpp"
+#include "mergeable_heap.hpp"
 
 int main()
 {
-    ch10::tree::binary_tree<int> tree;
+    ch10::mergeable_heap_SL<int> heap;
+    heap.insert(42);
+    heap.insert(48);
+    heap.insert(41);
+    heap.insert(49);
+    heap.insert(41);
+    heap.insert(42);
 
-    for(int i=50; i != 100; ++i)
-        tree.insert(i);
+    if(heap.search(41))
+        std::cout << "found" << std::endl;
 
-    tree.print_with_prev();
+    heap.print();
+
 }
 
