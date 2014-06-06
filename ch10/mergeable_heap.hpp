@@ -13,8 +13,10 @@
 //! cases. Try to make each operation as efficient as possible. Analyze the running
 //! time of each operation in terms of the size of the dynamic set(s) being operated on.
 //!     a. Lists are sorted.
-//          MAKE-HEAP   O(1)            the default ctor
-//          INSERT      O(2n) = O(n)    eliminating duplicats takes one more O(n)
+//          MAKE-HEAP       O(1)            the default ctor
+//          INSERT          O(2n) = O(n)    eliminating duplicats takes one more O(n)
+//          MINIMUM         O(1)
+//          EXTRACT-MIN     O(1)
 //!
 //!     b. Lists are unsorted.
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
@@ -54,6 +56,30 @@ public:
     bool empty() const
     {
         return head == nullptr;
+    }
+
+    /**
+     * @brief minimum
+     *
+     * @complexity  O(1)
+     */
+    sPointer minimum() const
+    {
+        return head;
+    }
+
+    /**
+     * @brief extract_min
+     *
+     * @complexity  O(1)
+     */
+    ValueType extract_min()
+    {
+        assert(!empty());
+        ValueType ret = head->key;
+        head = head->next;
+
+        return ret;
     }
 
     /**
@@ -158,6 +184,7 @@ private:
         return current;
     }
 };
+
 }//namespace ch10
 
 
