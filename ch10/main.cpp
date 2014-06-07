@@ -10,6 +10,9 @@ int main()
     heap.insert(49);
     heap.insert(41);
     heap.insert(42);
+    //heap.extract_min();
+    //heap.extract_min();
+
 
     if(heap.search(41))
         std::cout << "found" << std::endl;

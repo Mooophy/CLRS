@@ -17,6 +17,7 @@
 //          INSERT          O(2n) = O(n)    eliminating duplicats takes one more O(n)
 //          MINIMUM         O(1)
 //          EXTRACT-MIN     O(1)
+//          UNION           O(n)
 //!
 //!     b. Lists are unsorted.
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
@@ -82,6 +83,11 @@ public:
         return ret;
     }
 
+    void operator+(const mergeable_heap_SL<T>& lhs)
+    {
+
+    }
+
     /**
      * @brief search
      *
@@ -143,9 +149,11 @@ private:
      *
      * actual implementation for insert method, maintaining increasing order
      */
-    void insert_node(sPointer& new_node)
+    void insert_node(sPointer& new_node, sPointer position = nullptr)
     {
-        sPointer position = find_first_nonless_than(new_node);
+        //! if no node specified, use the first node that nonless than new_node
+        if(!position)
+            position = find_first_nonless_than(new_node);
 
         if(position)
         {
