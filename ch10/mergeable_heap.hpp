@@ -19,6 +19,26 @@
 //          EXTRACT-MIN     O(1)
 //          UNION           O(n)
 //!
+/*      union(lhs, rhs)
+ * 1    if(rhs.empty())
+ * 2        return lhs
+ * 3    else if (lhs.empty())
+ * 4        return rhs
+ * 5    else
+ * 6        def l = lhs.head
+ * 7        def r = rhs.head
+ * 8        while(r)
+ * 9            while(l && l->key < r->key)
+ * 10               l = l->next
+ * 11           if(l && l->key > r->key)
+ * 12               insert_node(r,l)
+ * 13           else
+ * 14               l.tail->next = r
+ * 15               r.prev       = l.tail
+ * 16               tail = r.tail
+ * 17       return lhs
+ */
+//!
 //!     b. Lists are unsorted.
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
 //!
@@ -30,6 +50,9 @@
 #include <memory>
 
 namespace ch10 {
+
+template<typename T>
+class mergeable_heap_SL;
 
 /**
  * @brief mergeable heap implemented by sorted list
@@ -46,47 +69,7 @@ public:
     using wPointer  = std::weak_ptr<Node>;
     using SizeType  = std::size_t;
 
-    /**
-     * @brief default ctor
-     */
     mergeable_heap_SL() = default;
-
-    /**
-     * @brief empty
-     */
-    bool empty() const
-    {
-        return head == nullptr;
-    }
-
-    /**
-     * @brief minimum
-     *
-     * @complexity  O(1)
-     */
-    sPointer minimum() const
-    {
-        return head;
-    }
-
-    /**
-     * @brief extract_min
-     *
-     * @complexity  O(1)
-     */
-    ValueType extract_min()
-    {
-        assert(!empty());
-        ValueType ret = head->key;
-        head = head->next;
-
-        return ret;
-    }
-
-    void operator+(const mergeable_heap_SL<T>& lhs)
-    {
-
-    }
 
     /**
      * @brief search
@@ -103,13 +86,17 @@ public:
     }
 
     /**
+     * @brief empty
+     */
+    bool empty() const
+    {
+        return head == nullptr;
+    }
+
+    /**
      * @brief insert
      *
-     * @complexity  O(2n) = O(n)
-     *
-     * for problem 10-2.a
-     * This one is just the interface, insert_node method does the
-     * real work.
+     * @complexity  O(n)
      */
     void insert(const ValueType& val)
     {
@@ -118,80 +105,41 @@ public:
             sPointer new_node = std::make_shared<Node>(val);
 
             if(empty())
-                head = tail = new_node;
+                head = new_node;
             else
-                insert_node(new_node);
+            {
+                //! find the first node nonless than val
+                sPointer succ = head;
+                sPointer prev = nullptr;
+                while(succ && succ->key < val)
+                {
+                    prev = succ;
+                    succ = succ->next;
+                }
+
+                //! insert new_node
+                if(!prev)
+                {
+                    new_node->next  =   head;
+                    head            =   new_node;
+                }
+                else if(succ)
+                {
+                    new_node->next  =   succ;
+                    prev->next      =   new_node;
+                }
+                else
+                    prev->next      =   new_node;
+            }
         }
     }
 
-    /**
-     * @brief print
-     *
-     * @complexity  O(n)
-     */
-    void print() const
-    {
-        sPointer current = head;
-        while(current)
-        {
-            std::cout << current->key << std::endl;
-            current = current->next;
-        }
-    }
 private:
     sPointer head = nullptr;
-    sPointer tail = nullptr;
-
-    /**
-     * @brief insert_node
-     *
-     * @complexity  O(n)
-     *
-     * actual implementation for insert method, maintaining increasing order
-     */
-    void insert_node(sPointer& new_node, sPointer position = nullptr)
-    {
-        //! if no node specified, use the first node that nonless than new_node
-        if(!position)
-            position = find_first_nonless_than(new_node);
-
-        if(position)
-        {
-            //! maintain the head pointer
-            if(position == head)
-                head = new_node;
-
-            //! manage new_node
-            new_node->next  = position;
-            new_node->prev  = position->prev.lock();
-
-            //! manage the first less than node
-            if(position->prev.lock())
-                position->prev.lock()->next = new_node;
-            position->prev  = new_node;
-        }
-        else
-        {
-            //! manage the tail pointer
-            tail->next      = new_node;
-            new_node->prev  = tail;
-            tail            = new_node;
-        }
-    }
-
-    /**
-     * @brief return the first node nonless than argument or nullptr
-     *
-     * @complextiy  O(n)
-     */
-    sPointer find_first_nonless_than(sPointer& node) const
-    {
-        sPointer current = head;
-        while(current && current->key < node->key)
-            current = current->next;
-        return current;
-    }
 };
+
+
+
 
 }//namespace ch10
 

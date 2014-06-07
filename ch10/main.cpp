@@ -3,21 +3,13 @@
 
 int main()
 {
-    ch10::mergeable_heap_SL<int> heap;
-    heap.insert(42);
-    heap.insert(48);
-    heap.insert(41);
-    heap.insert(49);
-    heap.insert(41);
-    heap.insert(42);
-    //heap.extract_min();
-    //heap.extract_min();
+    ch10::mergeable_heap_SL<int> lhs;
+
+    lhs.insert(10);
 
 
-    if(heap.search(41))
-        std::cout << "found" << std::endl;
+    std::cout << (lhs.empty()?  "empty" :   "not empty") << std::endl;
 
-    heap.print();
 
 }
 
