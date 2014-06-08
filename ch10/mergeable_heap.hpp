@@ -54,7 +54,6 @@
  */
 
 //!
-//!
 //!     b. Lists are unsorted.
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
 //!
@@ -70,6 +69,10 @@ namespace ch10 {
 template<typename T>
 class mergeable_heap_SL;
 
+template<typename T>
+mergeable_heap_SL<T>
+operator+(const mergeable_heap_SL<T>&, const mergeable_heap_SL<T>&);
+
 /**
  * @brief mergeable heap implemented by sorted list
  *
@@ -78,6 +81,8 @@ class mergeable_heap_SL;
 template<typename T>
 class mergeable_heap_SL
 {
+    friend mergeable_heap_SL<T>
+    operator+<T>(const mergeable_heap_SL<T>&, const mergeable_heap_SL<T>&);
 public:
     using ValueType = T;
     using Node      = ch10::list::node<ValueType>;
@@ -85,6 +90,9 @@ public:
     using wPointer  = std::weak_ptr<Node>;
     using SizeType  = std::size_t;
 
+    /**
+     * @brief default ctor
+     */
     mergeable_heap_SL() = default;
 
     /**
@@ -132,6 +140,9 @@ public:
         return head == nullptr;
     }
 
+    /**
+     * @brief print
+     */
     void print()const
     {
         sPointer current = head;
@@ -187,10 +198,86 @@ private:
     sPointer head = nullptr;
 };
 
+/**
+ * @brief operator +    i.e. UNION
+ *
+ * @complexity  O(n)
+ */
+template<typename T>
+inline mergeable_heap_SL<T>
+operator+(const mergeable_heap_SL<T>& lhs, const mergeable_heap_SL<T>& rhs)
+{
+    using sPointer  =   typename ch10::mergeable_heap_SL<T>::sPointer;
+    using Node      =   typename ch10::mergeable_heap_SL<T>::Node;
 
+    if(rhs.empty())         return lhs;
+    else if (lhs.empty())   return rhs;
+    else
+    {
+        mergeable_heap_SL<T> ret;
+        ret.insert(lhs.head->key);
+        sPointer l          = lhs.head->next;
+        sPointer r          = rhs.head;
+        sPointer current    = ret.head;
 
+        while(l && r)   //when neither exhausted
+        {
+            if(l->key == r->key)
+            {
+                current->next = std::make_shared<Node>(l->key);
+                l = l->next;
+                r = r->next;
+            }
+            else if(l->key < r->key)
+            {
+                current->next = std::make_shared<Node>(l->key);
+                l = l->next;
+            }
+            else
+            {
+                current->next = std::make_shared<Node>(r->key);
+                r = r->next;
+            }
+            current = current->next;
+        }
+        while(!l && r)  //when l exhausted
+        {
+            current->next = std::make_shared<Node>(r->key);
+            r = r->next;
+            current = current->next;
+        }
+        while(l && !r)  //when r exhausted
+        {
+            current->next = std::make_shared<Node>(l->key);
+            l = l->next;
+            current = current->next;
+        }
+        return ret;
+    }
+}
 
 }//namespace ch10
-
-
 #endif // MERGEABLE_HEAP_HPP
+
+
+#include <iostream>
+#include "mergeable_heap.hpp"
+
+//! test code for problem 10-2.a
+//int main()
+//{
+//    ch10::mergeable_heap_SL<int> lhs, rhs;
+
+//    lhs.insert(10);
+//    lhs.insert(11);
+//    lhs.insert(11);
+//    lhs.insert(1);
+
+//    rhs.insert(2);
+//    rhs.insert(3);
+//    rhs.insert(6);
+
+//    ch10::mergeable_heap_SL<int> ret = lhs + rhs;
+
+//    ret.print();
+//}
