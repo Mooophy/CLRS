@@ -260,10 +260,10 @@ operator+(const mergeable_heap_SL<T>& lhs, const mergeable_heap_SL<T>& rhs)
 #endif // MERGEABLE_HEAP_HPP
 
 
-#include <iostream>
-#include "mergeable_heap.hpp"
-
 //! test code for problem 10-2.a
+
+//#include <iostream>
+//#include "mergeable_heap.hpp"
 //int main()
 //{
 //    ch10::mergeable_heap_SL<int> lhs, rhs;
