@@ -18,26 +18,42 @@
 //          MINIMUM         O(1)
 //          EXTRACT-MIN     O(1)
 //          UNION           O(n)
-//!
+
 /*      union(lhs, rhs)
- * 1    if(rhs.empty())
+ * 1    if rhs.empty
  * 2        return lhs
- * 3    else if (lhs.empty())
+ * 3    else if lhs.empty
  * 4        return rhs
  * 5    else
- * 6        def l = lhs.head
- * 7        def r = rhs.head
- * 8        while(r)
- * 9            while(l && l->key < r->key)
- * 10               l = l->next
- * 11           if(l && l->key > r->key)
- * 12               insert_node(r,l)
- * 13           else
- * 14               l.tail->next = r
- * 15               r.prev       = l.tail
- * 16               tail = r.tail
- * 17       return lhs
+ *          def ret
+ * 6        ret.insert (lhs.head->key)
+ * 7        def l = lhs.head->next
+ * 8        def r = rhs.head
+ * 9        def current = ret.head
+ * 10       while(l && r)
+ * 11           if(l->key == r->key)
+ * 12               current->next = new (l->key)
+ * 13               l = l->next
+ * 14               r = r->next
+ * 15           else if(l->key < r->key)
+ * 16               current->next = new (l->key)
+ * 17               l = l->next
+ * 18           else
+ *                  current->next = new (r->key)
+ * 19               r = r->next
+ * 20           current = current->next
+ * 21       while(!l && r)
+ * 22           current->next = new (r->key)
+ * 23           r = r->next
+ * 24           current = current->next
+ * 25       while(l && !r)
+ * 26           current->next = new (l->key)
+ * 27           l = l->next
+ * 28           current = current->next
+ * 29       return ret
  */
+
+//!
 //!
 //!     b. Lists are unsorted.
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
@@ -72,6 +88,29 @@ public:
     mergeable_heap_SL() = default;
 
     /**
+     * @brief minimum
+     *
+     * @complexity  O(1)
+     */
+    sPointer minimum() const
+    {
+        return head;
+    }
+
+    /**
+     * @brief extract_min
+     *
+     * @complexity  O(1)
+     */
+    ValueType extract_min()
+    {
+        assert(!empty());
+        ValueType min = head->key;
+        head = head->next;
+        return min;
+    }
+
+    /**
      * @brief search
      *
      * @complexity O(n)
@@ -91,6 +130,16 @@ public:
     bool empty() const
     {
         return head == nullptr;
+    }
+
+    void print()const
+    {
+        sPointer current = head;
+        while(current)
+        {
+            std::cout << current->key << std::endl;
+            current = current->next;
+        }
     }
 
     /**
