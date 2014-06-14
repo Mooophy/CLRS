@@ -19,7 +19,7 @@
  * 6        last    = right
  * 7        right   = right->next
  * 8        temp    = temp->next->next
- * 9    last->next = nullptr        //break in to two list
+ * 9    last->next = nullptr        //break into two lists
  * 10   left    = merge_sort_for_list(left)
  * 11   right   = merge_sort_for_list(right)
  * 12   def ret, next
