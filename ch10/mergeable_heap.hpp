@@ -300,19 +300,26 @@ public:
     ValueType extract_min()
     {
         assert(head);
-        sPointer prev = nullptr;
+        sPointer prev, prev_min;
+
         sPointer curr, min;
         curr = min = head;
 
         if(head->next)
         {
+            //! seach the node with minimum key and its predecessor
             while(curr)
             {
                 if(curr->key < min->key)
+                {
                     min = curr;
+                    prev_min = prev;
+                }
                 prev = curr;
                 curr = curr->next;
             }
+            //! delete the minimum node
+            prev_min->next = min->next;
         }
         else
             head = nullptr;

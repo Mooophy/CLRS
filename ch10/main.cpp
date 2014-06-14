@@ -5,11 +5,10 @@ int main()
 {
     ch10::mergeable_heap_UL<int> heap;
 
-    heap.extract_min();
+    for(int i=0; i != 100; ++i)
+        heap.insert(i);
 
-
-    //heap.print();
-
-    std::cout<< heap.minimum()->key << std::endl;
+    for(int i=0; i != 100; ++i)
+        std::cout << heap.extract_min() << std::endl;
 }
 
