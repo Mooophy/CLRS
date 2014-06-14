@@ -57,6 +57,7 @@
 //          MAKE-HEAP       O(1)            the default ctor
 //          INSERT          O(n)            eliminating duplicats takes O(n)
 //          MINIMUM         O(n)
+//          EXTRACT-MIN     O(n)
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
 //!
 
@@ -300,9 +301,7 @@ public:
     ValueType extract_min()
     {
         assert(head);
-        sPointer prev, prev_min;
-
-        sPointer curr, min;
+        sPointer prev, prev_min, curr, min;
         curr = min = head;
 
         if(head->next)

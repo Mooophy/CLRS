@@ -18,5 +18,6 @@ HEADERS += \
     stack_by_list.hpp \
     queue_by_list.hpp \
     tree.hpp \
-    mergeable_heap.hpp
+    mergeable_heap.hpp \
+    merge_sort_for_list.hpp
 
