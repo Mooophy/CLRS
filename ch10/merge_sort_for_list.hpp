@@ -39,9 +39,6 @@
  * 26       if(!ret)
  * 27           ret     =   next
  * 28   return ret;
- *
- *
- *
  */
 
 #ifndef MERGE_SORT_FOR_LIST_HPP
