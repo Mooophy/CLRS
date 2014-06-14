@@ -52,9 +52,11 @@
  * 28           current = current->next
  * 29       return ret
  */
-
 //!
 //!     b. Lists are unsorted.
+//          MAKE-HEAP       O(1)            the default ctor
+//          INSERT          O(n)            eliminating duplicats takes O(n)
+//          MINIMUM         O(n)
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
 //!
 
@@ -70,13 +72,16 @@ template<typename T>
 class mergeable_heap_SL;
 
 template<typename T>
+class mergeable_heap_UL;
+
+template<typename T>
 mergeable_heap_SL<T>
 operator+(const mergeable_heap_SL<T>&, const mergeable_heap_SL<T>&);
 
 /**
  * @brief mergeable heap implemented by sorted list
  *
- * for Problem 10-2
+ * for Problem 10-2.a
  */
 template<typename T>
 class mergeable_heap_SL
@@ -120,6 +125,8 @@ public:
 
     /**
      * @brief search
+     *
+     * @return the sPointer to the node whose key equal to val ,or nullptr.
      *
      * @complexity O(n)
      */
@@ -198,6 +205,129 @@ private:
     sPointer head = nullptr;
 };
 
+
+/**
+ * @brief mergeable heap implemented by sorted list
+ *
+ * for Problem 10-2.b
+ */
+template<typename T>
+class mergeable_heap_UL
+{
+public:
+    using ValueType = T;
+    using Node      = ch10::list::node<ValueType>;
+    using sPointer  = std::shared_ptr<Node>;
+    using wPointer  = std::weak_ptr<Node>;
+    using SizeType  = std::size_t;
+
+    /**
+     * @brief default ctor
+     */
+    mergeable_heap_UL() = default;
+
+    /**
+     * @brief search
+     *
+     * @return the sPointer to the node whose key equal to val ,or nullptr.
+     *
+     * @complexity O(n)
+     */
+    sPointer search(const ValueType& val) const
+    {
+        sPointer curr = head;
+        while(curr && curr->key != val)
+            curr = curr->next;
+
+        return curr;
+    }
+
+    /**
+     * @brief insert
+     *
+     * @complexity  O(n)
+     *              used for dupicates searching.
+     */
+    void insert(const ValueType& val)
+    {
+        if(!search(val))
+        {
+            sPointer new_node = std::make_shared<Node>(val);
+            new_node->next  =   head;
+            head            =   new_node;
+        }
+    }
+
+    /**
+     * @brief print
+     */
+    void print() const
+    {
+        sPointer curr = head;
+        while(curr)
+        {
+            std::cout << curr->key << " ";
+            curr = curr->next;
+        }
+        std::cout << std::endl;
+    }
+
+    /**
+     * @brief minimum
+     *
+     * @return an sPointer to the node whose key is the smallest one
+     *
+     * @complexity  O(n)
+     */
+    sPointer minimum() const
+    {
+        sPointer min, curr;
+        min = curr = head;
+        while(curr)
+        {
+            if(curr->key < min->key)
+                min = curr;
+            curr = curr->next;
+        }
+        return min;
+    }
+
+    /**
+     * @brief extract_min
+     *
+     * @complexity  O(n)
+     */
+    ValueType extract_min()
+    {
+        assert(head);
+        sPointer prev = nullptr;
+        sPointer curr, min;
+        curr = min = head;
+
+        if(head->next)
+        {
+            while(curr)
+            {
+                if(curr->key < min->key)
+                    min = curr;
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+        else
+            head = nullptr;
+
+        return min->key;
+    }
+
+
+private:
+    sPointer head = nullptr;
+};
+
+
+
+
 /**
  * @brief operator +    i.e. UNION
  *
@@ -261,7 +391,6 @@ operator+(const mergeable_heap_SL<T>& lhs, const mergeable_heap_SL<T>& rhs)
 
 
 //! test code for problem 10-2.a
-
 //#include <iostream>
 //#include "mergeable_heap.hpp"
 //int main()

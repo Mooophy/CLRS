@@ -3,19 +3,13 @@
 
 int main()
 {
-    ch10::mergeable_heap_SL<int> lhs, rhs;
+    ch10::mergeable_heap_UL<int> heap;
 
-    lhs.insert(10);
-    lhs.insert(11);
-    lhs.insert(11);
-    lhs.insert(1);
+    heap.extract_min();
 
-    rhs.insert(2);
-    rhs.insert(3);
-    rhs.insert(6);
 
-    ch10::mergeable_heap_SL<int> ret = lhs + rhs;
+    //heap.print();
 
-    ret.print();
+    std::cout<< heap.minimum()->key << std::endl;
 }
 
