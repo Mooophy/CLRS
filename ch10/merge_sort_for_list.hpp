@@ -44,4 +44,74 @@
 #ifndef MERGE_SORT_FOR_LIST_HPP
 #define MERGE_SORT_FOR_LIST_HPP
 
+#include "list.hpp"
+#include <memory>
+
+namespace ch10 {
+
+
+template<typename T>
+std::shared_ptr<list::node<T> >
+merge_sort_for_list(const std::shared_ptr<list::node<T> >& node);
+
+template<typename T>
+inline std::shared_ptr<list::node<T> >
+merge_sort_for_list(const std::shared_ptr<list::node<T> >& node)
+{
+    using ValueType = T;
+    using Node      = list::node<ValueType>;
+    using sPointer  = std::shared_ptr<Node>;
+
+    //! recursion stopping condition
+    if(!node || !node->next)    return node;
+
+    //! search for the middle node
+    sPointer left, right, fast, last;
+    left = right = fast = last = node;
+    while(fast && fast->next)
+    {
+        last    =   right;
+        right   =   right->next;
+        fast    =   fast->next->next;
+    }
+
+    //! split the original linked list
+    last->next  =   nullptr;
+
+    //! recur
+    left    =   merge_sort_for_list(left);
+    right   =   merge_sort_for_list(right);
+
+    //! merge
+    sPointer ret, next;
+    while(left || right)
+    {
+        if(!right)      //when right part is exhausted.
+        {
+            next    =   left;
+            left    =   left->next;
+        }
+        else if(!left)  //when left  part is exhausted.
+        {
+            next    =   right;
+            right   =   right->next;
+        }
+        else if(left->key < left->key)
+        {
+            next    =   left;
+            left    =   left->next;
+        }
+        else
+        {
+            next    =   right;
+            right   =   right->next;
+        }
+
+        if(!ret)
+            ret     =   next;
+    }
+    return ret;
+}
+
+}//namespace
 #endif // MERGE_SORT_FOR_LIST_HPP

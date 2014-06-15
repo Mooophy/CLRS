@@ -1,14 +1,11 @@
 #include <iostream>
 #include "mergeable_heap.hpp"
+#include "merge_sort_for_list.hpp"
+#include "list.hpp"
 
 int main()
 {
-    ch10::mergeable_heap_UL<int> heap;
-
-    for(int i=0; i != 100; ++i)
-        heap.insert(i);
-
-    for(int i=0; i != 100; ++i)
-        std::cout << heap.extract_min() << std::endl;
+    std::shared_ptr<ch10::list::node<int>> node = std::make_shared<ch10::list::node<int>>(42);
+    ch10::merge_sort_for_list(node);
 }
 
