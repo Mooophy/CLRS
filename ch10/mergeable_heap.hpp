@@ -340,9 +340,40 @@ public:
         head = merge_sort_for_list(head);
     }
 
+    /**
+     * @brief empty
+     */
+    bool empty() const
+    {
+        return head == nullptr;
+    }
+
 
 private:
     sPointer head = nullptr;
+
+    /**
+     * @brief remove_duplicates
+     *
+     * @complexity  O(n)
+     *
+     * only used after sorting.
+     */
+    void remove_duplicates()
+    {
+        sPointer prev = nullptr;
+        sPointer curr = head;
+        while(curr)
+        {
+            if(prev && prev->key == curr->key)
+                prev->next  =  curr  =  curr->next;
+            else
+            {
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+    }
 };
 
 
