@@ -38,7 +38,9 @@
  * 25           right   =   right->next
  * 26       if(!ret)
  * 27           ret     =   next
- * 28   return ret;
+ * 28       else
+ *              tail->next  =   next
+ * 29   return ret;
  */
 
 #ifndef MERGE_SORT_FOR_LIST_HPP
@@ -48,7 +50,6 @@
 #include <memory>
 
 namespace ch10 {
-
 
 template<typename T>
 std::shared_ptr<list::node<T> >
@@ -93,7 +94,7 @@ merge_sort_for_list(const std::shared_ptr<list::node<T> >& node)
     right   =   merge_sort_for_list(right);
 
     //! merge
-    sPointer ret, next;
+    sPointer ret, next, tail;
     while(left || right)
     {
         if(!right)      //when right part is exhausted.
@@ -117,8 +118,12 @@ merge_sort_for_list(const std::shared_ptr<list::node<T> >& node)
             right   =   right->next;
         }
 
-        if(!ret)
-            ret     =   next;
+        if(!ret)    ret         =   next;
+        else        tail->next  =   next;
+        //!         ^^^^^^^^^^^^^^^^^^^^^
+        //! @attention tail here is for appending.
+
+        tail    =   next;
     }
     return ret;
 }

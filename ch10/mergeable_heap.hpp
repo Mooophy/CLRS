@@ -65,6 +65,7 @@
 #define MERGEABLE_HEAP_HPP
 
 #include "list.hpp"
+#include "merge_sort_for_list.hpp"
 #include <memory>
 
 namespace ch10 {
@@ -324,6 +325,19 @@ public:
             head = nullptr;
 
         return min->key;
+    }
+
+    /**
+     * @brief sort
+     *
+     * @complexity  O(n lg n)
+     *              no extra space needed
+     *
+     * merge sort for linked list.
+     */
+    void sort()
+    {
+        head = merge_sort_for_list(head);
     }
 
 

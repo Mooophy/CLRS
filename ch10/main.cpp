@@ -5,7 +5,21 @@
 
 int main()
 {
-    std::shared_ptr<ch10::list::node<int>> node = std::make_shared<ch10::list::node<int>>(42);
-    ch10::merge_sort_for_list(node);
+    ch10::mergeable_heap_UL<int> heap;
+    heap.insert(42);
+
+    heap.insert(322);
+
+    heap.insert(255);
+
+    heap.insert(267);
+
+    heap.insert(1);
+
+
+
+    heap.sort();
+
+    heap.print();
 }
 
