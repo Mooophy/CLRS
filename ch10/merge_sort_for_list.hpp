@@ -54,6 +54,16 @@ template<typename T>
 std::shared_ptr<list::node<T> >
 merge_sort_for_list(const std::shared_ptr<list::node<T> >& node);
 
+/**
+ * @brief merge_sort_for_list
+ *
+ * @complexity  time:   O(n lg n)
+ *              space:  no extra space needed, compared with the same algorithm on array
+ *                      which requires O(n) extra space.
+ *
+ * check above for pseud code which is based on an alorithm found on SO:
+ * http://stackoverflow.com/questions/7685/merge-sort-a-linked-list
+ */
 template<typename T>
 inline std::shared_ptr<list::node<T> >
 merge_sort_for_list(const std::shared_ptr<list::node<T> >& node)
