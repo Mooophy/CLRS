@@ -61,7 +61,7 @@ merge_sort_for_list(const std::shared_ptr<list::node<T> >& node);
  *              space:  no extra space needed, compared with the same algorithm on array
  *                      which requires O(n) extra space.
  *
- * check above for pseud code which is based on an alorithm found on SO:
+ * check above for pseud code which is based on an alorithm on SO:
  * http://stackoverflow.com/questions/7685/merge-sort-a-linked-list
  */
 template<typename T>
@@ -106,7 +106,7 @@ merge_sort_for_list(const std::shared_ptr<list::node<T> >& node)
             next    =   right;
             right   =   right->next;
         }
-        else if(left->key < left->key)
+        else if(left->key < right->key)
         {
             next    =   left;
             left    =   left->next;
