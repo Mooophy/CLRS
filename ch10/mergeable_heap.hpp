@@ -58,7 +58,10 @@
 //          INSERT          O(n)            eliminating duplicats takes O(n)
 //          MINIMUM         O(n)
 //          EXTRACT-MIN     O(n)
+//          UNION           O(n lg n)
 //!     c. Lists are unsorted, and dynamic sets to be merged are disjoint.
+//          Time complexity of UINON procedure is O(1), since no dupicate to remove.
+//          The rest is the same as part b.
 //!
 
 #ifndef MERGEABLE_HEAP_HPP
@@ -70,6 +73,11 @@
 
 namespace ch10 {
 
+
+/**
+ *  forward declarations
+ */
+
 template<typename T>
 class mergeable_heap_SL;
 
@@ -79,6 +87,10 @@ class mergeable_heap_UL;
 template<typename T>
 mergeable_heap_SL<T>
 operator+(const mergeable_heap_SL<T>&, const mergeable_heap_SL<T>&);
+
+template<typename T>
+mergeable_heap_UL<T>
+operator+(const mergeable_heap_UL<T>&, const mergeable_heap_UL<T>&);
 
 /**
  * @brief mergeable heap implemented by sorted list
@@ -216,6 +228,9 @@ private:
 template<typename T>
 class mergeable_heap_UL
 {
+    friend mergeable_heap_UL<T>
+    operator+<T>(const mergeable_heap_UL<T>&, const mergeable_heap_UL<T>&);
+
 public:
     using ValueType = T;
     using Node      = ch10::list::node<ValueType>;
@@ -377,10 +392,10 @@ private:
 };
 
 
-
-
 /**
- * @brief operator +    i.e. UNION
+ * @brief operator +
+ *
+ * UNION for sorted list
  *
  * @complexity  O(n)
  */
@@ -437,6 +452,56 @@ operator+(const mergeable_heap_SL<T>& lhs, const mergeable_heap_SL<T>& rhs)
     }
 }
 
+
+/**
+ * @brief operator +
+ *
+ * UNION for sorted list
+ *
+ * @complexity  O(n lg n)
+ */
+template<typename T>
+inline mergeable_heap_UL<T>
+operator+(const mergeable_heap_UL<T>& lhs, const mergeable_heap_UL<T>& rhs)
+{
+    using sPointer  =   typename ch10::mergeable_heap_SL<T>::sPointer;
+    using Node      =   typename ch10::mergeable_heap_SL<T>::Node;
+
+    if(lhs.empty())         return rhs;
+    else if (rhs.empty())   return lhs;
+    else
+    {
+        mergeable_heap_UL<T>    uni;
+        sPointer    u   =   nullptr;
+        sPointer    l   =   lhs.head;
+        sPointer    r   =   rhs.head;
+
+        //! deep copy lhs to ret
+        u   =   uni.head    =   std::make_shared<Node>(l->key);
+        l   =   l->next;
+        while(l)
+        {
+            u->next     =   std::make_shared<Node>(l->key);
+            u           =   u->next;
+            l           =   l->next;
+        }
+
+        //! deep copy rhs to ret
+        while(r)
+        {
+            u->next     =   std::make_shared<Node>(r->key);
+            u           =   u->next;
+            r           =   r->next;
+        }
+
+        uni.sort();
+        uni.remove_duplicates();
+
+        return uni;
+    }
+}
+
+
 }//namespace ch10
 #endif // MERGEABLE_HEAP_HPP
 
@@ -461,3 +526,28 @@ operator+(const mergeable_heap_SL<T>& lhs, const mergeable_heap_SL<T>& rhs)
 
 //    ret.print();
 //}
+
+//! test code for problem 10-2.b
+//#include <iostream>
+//#include "mergeable_heap.hpp"
+//#include "merge_sort_for_list.hpp"
+//#include "list.hpp"
+
+//int main()
+//{
+//    ch10::mergeable_heap_UL<int> lhs, rhs, uni;
+
+//    lhs.insert(1);
+//    lhs.insert(3);
+//    lhs.insert(78);
+
+//    rhs.insert(78);
+//    rhs.insert(1);
+//    rhs.insert(2);
+
+//    uni = lhs + rhs;
+
+//    uni.print();
+//}
+
+

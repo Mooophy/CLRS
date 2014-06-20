@@ -5,21 +5,18 @@
 
 int main()
 {
-    ch10::mergeable_heap_UL<int> heap;
-    heap.insert(42);
+    ch10::mergeable_heap_UL<int> lhs, rhs, uni;
 
-    heap.insert(322);
+    lhs.insert(1);
+    lhs.insert(3);
+    lhs.insert(78);
 
-    heap.insert(255);
+    rhs.insert(78);
+    rhs.insert(1);
+    rhs.insert(2);
 
-    heap.insert(267);
+    uni = lhs + rhs;
 
-    heap.insert(1);
-
-
-
-    heap.sort();
-
-    heap.print();
+    uni.print();
 }
 
