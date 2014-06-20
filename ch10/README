@@ -40,7 +40,10 @@ Exercises
 10.4-4		:	tree.hpp(only pseudocode)
 10.4-5		:	tree.hpp
 
-
+Problems
+10-2 Mergeable heaps using linked lists
+		:	mergeable_heap.hpp
+		:	merge_sort_for_list.hpp
 
 =========
 note:
