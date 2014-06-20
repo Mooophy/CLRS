@@ -456,7 +456,7 @@ operator+(const mergeable_heap_SL<T>& lhs, const mergeable_heap_SL<T>& rhs)
 /**
  * @brief operator +
  *
- * UNION for sorted list
+ * UNION for unsorted list
  *
  * @complexity  O(n lg n)
  */
