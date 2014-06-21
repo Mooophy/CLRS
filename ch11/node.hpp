@@ -15,9 +15,6 @@ namespace ch11{
 
 /**
  * @brief The node struct
- *
- * @attention next : shared_ptr
- *            prev : weak_ptr
  */
 template<typename K, typename D>
 struct node
