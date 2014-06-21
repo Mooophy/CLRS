@@ -1,10 +1,18 @@
-#include <iostream>
+/***************************************************************************
+ *  @file       main.cpp
+ *  @author     Alan.W
+ *  @date       21  June 2014
+ *  @remark     Implementations for algorithims from CLRS using C++ templates.
+ *
+ ***************************************************************************/
 
-using namespace std;
+#include <iostream>
+#include <node.hpp>
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    ch11::node<int> node(42);
+
     return 0;
 }
 
