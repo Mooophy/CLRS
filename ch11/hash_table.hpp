@@ -9,6 +9,7 @@
 #define HASH_TABLE_HPP
 
 #include <functional>
+#include <vector>
 #include "node.hpp"
 
 namespace ch11 {
@@ -20,9 +21,11 @@ public:
     using SizeType  =   K;
     using KeyType   =   K;
     using DataType  =   D;
-    using sPointer  =   std::shared_ptr<node<K, D>>;
-    using wPointer  =   std::weak_ptr<node<K, D>>;
+    using Node      =   node<K,D>;
+    using sPointer  =   std::shared_ptr<Node>;
+    using wPointer  =   std::weak_ptr<Node>;
     using Hash      =   std::function<K(K)>;
+    using Container =   std::vector<sPointer>;
 
     hash_table()    =   delete;
 
@@ -30,13 +33,12 @@ public:
      * @brief Ctor
      */
     hash_table(const SizeType& sz, const Hash& h):
-        hash(h), rows(sz)
+        hash(h), container(sz)
     {}
 
 private:
-    SizeType    rows;
     Hash        hash;
-
+    Container   container;
 
 };
 
