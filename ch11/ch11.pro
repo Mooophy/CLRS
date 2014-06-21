@@ -8,5 +8,6 @@ SOURCES += main.cpp
 
 HEADERS += \
     node.hpp \
-    table_da.hpp
+    table_da.hpp \
+    hash_table.hpp
 
