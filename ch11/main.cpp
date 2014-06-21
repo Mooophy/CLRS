@@ -17,7 +17,7 @@ int main()
     table.insert(7,33);
     table.insert(6,42);
 
-    std::cout << table.search(7) << std::endl;
+    std::cout << table.search(6) << std::endl;
 
     return 0;
 }
