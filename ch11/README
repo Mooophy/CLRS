@@ -1,1 +1,9 @@
 		Chapter 11 Hash Table
+
+11.1 Direct-address tables
+DIRECT-ADDRESS-SEARCH(T,k)	:	table_da.hpp
+DIRECT-ADDRESS-INSERT(T,x)	:	table_da.hpp
+DIRECT-ADDRESS-DELETE(T,x)	:	table_da.hpp
+
+11.2 Hash tables
+
