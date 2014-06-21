@@ -7,5 +7,6 @@ CONFIG += c++11
 SOURCES += main.cpp
 
 HEADERS += \
-    node.hpp
+    node.hpp \
+    table_da.hpp
 

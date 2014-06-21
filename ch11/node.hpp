@@ -19,21 +19,26 @@ namespace ch11{
  * @attention next : shared_ptr
  *            prev : weak_ptr
  */
-template<typename T>
+template<typename K, typename D>
 struct node
 {
-    using ValueType = T;
-    using sPointer  = std::shared_ptr<node<ValueType>>;
-    using wPointer  = std::weak_ptr<node<ValueType>>;
+    using KeyType   =   K;
+    using DataType  =   D;
+    using sPointer  =   std::shared_ptr<node<K, D>>;
+    using wPointer  =   std::weak_ptr<node<K, D>>;
 
     /**
      * @brief ctor
      */
-    explicit node(const ValueType& val):
-        key(val), prev(), next(nullptr)
+    explicit node(const KeyType& k, const DataType d):
+        key(k), data(d), prev(), next(nullptr)
     {}
 
-    ValueType   key;
+    /**
+     * @brief members
+     */
+    KeyType     key;
+    DataType    data;
     wPointer    prev;
     sPointer    next;
 };

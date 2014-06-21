@@ -8,10 +8,11 @@
 
 #include <iostream>
 #include <node.hpp>
+#include "table_da.hpp"
 
 int main()
 {
-    ch11::node<int> node(42);
+    ch11::node<int, int> n(42, 99);
 
     return 0;
 }
