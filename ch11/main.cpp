@@ -12,8 +12,12 @@
 
 int main()
 {
-    ch11::node<int, int> n(42, 99);
     ch11::table_da<int, int> table(10);
+
+    table.insert(7,33);
+    table.insert(6,42);
+
+    std::cout << table.search(7) << std::endl;
 
     return 0;
 }
