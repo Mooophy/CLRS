@@ -7,17 +7,25 @@
  ***************************************************************************/
 
 #include <iostream>
-#include <node.hpp>
-#include "table_da.hpp"
+#include <hash_table.hpp>
 
 int main()
 {
-    ch11::table_da<int, int> table(10);
+    auto hash =
+            [](const int key)->int
+            {
+                return key % 9;
+            };
 
-    table.insert(7,33);
-    table.insert(6,42);
+    ch11::hash_table<int, std::string> table(10, hash);
 
-    std::cout << table.search(6) << std::endl;
+    table.insert(6,"first try");
+    table.insert(88,"try 2");
+    table.insert(101,"try");
+
+    table.print();
+
+    std::cout << table.search(101)->data << std::endl;
 
     return 0;
 }
