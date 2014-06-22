@@ -26,6 +26,7 @@ int main()
     table.print();
 
     std::cout << table.search(101)->data << std::endl;
+    table.erase(table.search(101));
 
     return 0;
 }

@@ -98,6 +98,14 @@ public:
     }
 
     /**
+     * @brief erase
+     */
+    void erase(sPointer target)
+    {
+
+    }
+
+    /**
      * @brief print
      *
      * @complexity  O(n)
