@@ -23,11 +23,13 @@ int main()
     table.insert(88,"try 2");
     table.insert(101,"try");
 
+    table.erase(table.search(101));
+    table.erase(table.search(6));
+    table.erase(table.search(88));
+
     table.print();
 
-    std::cout << table.search(101)->data << std::endl;
-    table.erase(table.search(101));
-
+    std::cout << "end" << std::endl;
     return 0;
 }
 

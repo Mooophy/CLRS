@@ -99,10 +99,31 @@ public:
 
     /**
      * @brief erase
+     *
+     * @complexity  O(1)
+     *
+     * refer to figure 11.3 on page 257 for all 4 cases
      */
     void erase(sPointer target)
     {
+        sPointer&   head = container[hash(target->key)];
+        sPointer&   next = target->next;
+        wPointer&   prev = target->prev;
 
+        if(!next && !prev.lock())       //only one node
+            head    =   nullptr;
+        else if(next && !prev.lock())   //the first one of multiple nodes
+        {
+            next->prev.reset();
+            head    =   next;
+        }
+        else if (!next && prev.lock())  //the last one of multiple nodes
+            prev.lock()->next   =   nullptr;
+        else                            //the middle one of multiple nodes
+        {
+            next->prev  =   prev;
+            prev.lock()->next   =   next;
+        }
     }
 
     /**
@@ -134,3 +155,32 @@ private:
 
 }//namespace
 #endif // HASH_TABLE_HPP
+
+
+//! test code
+//#include <iostream>
+//#include <hash_table.hpp>
+
+//int main()
+//{
+//    auto hash =
+//            [](const int key)->int
+//            {
+//                return key % 9;
+//            };
+
+//    ch11::hash_table<int, std::string> table(10, hash);
+
+//    table.insert(6,"first try");
+//    table.insert(88,"try 2");
+//    table.insert(101,"try");
+
+//    table.erase(table.search(101));
+//    table.erase(table.search(6));
+//    table.erase(table.search(88));
+
+//    table.print();
+
+//    std::cout << "end" << std::endl;
+//    return 0;
+//}
