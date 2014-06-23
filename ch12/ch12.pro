@@ -8,5 +8,5 @@ SOURCES += main.cpp
 
 HEADERS += \
     node.hpp \
-    binary_search_tree.h
+    binary_search_tree.hpp
 
