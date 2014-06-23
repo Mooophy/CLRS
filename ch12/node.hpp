@@ -1,7 +1,7 @@
 /***************************************************************************
- *  @file       hash_table.hpp
+ *  @file       node.hpp
  *  @author     Alan.W
- *  @date       22  June 2014
+ *  @date       23  June 2014
  *  @remark     Implementations for algorithims from CLRS using C++ templates.
  ***************************************************************************/
 #ifndef NODE_HPP

@@ -7,5 +7,6 @@ CONFIG += C++11
 SOURCES += main.cpp
 
 HEADERS += \
-    node.hpp
+    node.hpp \
+    binary_search_tree.h
 
