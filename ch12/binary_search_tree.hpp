@@ -70,6 +70,10 @@
  *              curr    =   curr->parent
  */
 
+//! ex12.1-4
+//! Give recursive algorithms that perform preorder and postorder tree walks in
+//! O(n) time on a tree of n nodes.
+
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
@@ -188,6 +192,23 @@ public:
         inorder_tree_walk_nonrecur_with_stack(root);
     }
 
+    /**
+     * @brief preorder_print
+     */
+    void preorder_print()const
+    {
+        preorder_tree_walk(root);
+    }
+
+    /**
+     * @brief postorder_print
+     */
+    void postorder_print()const
+    {
+        postorder_tree_walk(root);
+    }
+
+
 private:
     sPointer root;
 
@@ -235,6 +256,32 @@ private:
             }
         }
     }
+
+    /**
+     * @brief preorder_tree_walk
+     */
+    void preorder_tree_walk(sPointer node) const
+    {
+        if(node)
+        {
+            node->print();
+            inorder_tree_walk(node->left);
+            inorder_tree_walk(node->right);
+        }
+    }
+
+    /**
+     * @brief postorder_tree_walk
+     */
+    void postorder_tree_walk(sPointer node)const
+    {
+        if(node)
+        {
+            inorder_tree_walk(node->left);
+            inorder_tree_walk(node->right);
+            node->print();
+        }
+    }
 };//class binary_search_tree
 
 }//namespace ch12
@@ -242,7 +289,7 @@ private:
 
 #endif // BINARY_SEARCH_TREE_H
 
-//! test code for inorder tree walk and ex12.1-3
+//! test code for inorder tree walk, ex12.1-3 and ex12.1-4
 //#include <iostream>
 //#include <string>
 //#include "node.hpp"
@@ -259,5 +306,9 @@ private:
 //    tree.inorder_print();
 //    tree.inoder_print_nonrecur_with_stack();
 //    tree.inorder_print_nonrecur();
+
+//    tree.preorder_print();
+//    tree.postorder_print();
+//
 //    return 0;
 //}
