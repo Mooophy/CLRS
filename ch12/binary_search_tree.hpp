@@ -25,9 +25,9 @@
 //! page 288
 //! INORDER-TREE-WALK(x)
 //1 if x != NIL
-//2	INORDER-TREE-WALK(x.left)
-//3	print x.key
-//4	INORDER-TREE-WALK(x.right)
+//2     INORDER-TREE-WALK(x.left)
+//3     print x.key
+//4     INORDER-TREE-WALK(x.right)
 
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
@@ -90,8 +90,34 @@ public:
             last->right     =   inserted;
     }
 
+    /**
+     * @brief inorder_print
+     *
+     * i.e. the interface for inorder_print.
+     */
+    void inorder_print()const
+    {
+        inorder_tree_walk(root);
+    }
+
 private:
     sPointer root;
+
+    /**
+     * @brief inorder_tree_walk
+     * @param node
+     *
+     * @complexity  O(n)
+     */
+    void inorder_tree_walk(sPointer node)const
+    {
+        if(node)
+        {
+            inorder_tree_walk(node->left);
+            node->print();
+            inorder_tree_walk(node->right);
+        }
+    }
 };//class binary_search_tree
 
 }//namespace ch12
