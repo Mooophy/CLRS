@@ -143,6 +143,42 @@ public:
     }
 
     /**
+     * @brief inorder_print_nonrecur
+     *
+     * for ex12.1-3
+     */
+    void inorder_print_nonrecur()const
+    {
+        sPointer prev = nullptr;
+        sPointer curr = root;
+        while(curr)
+        {
+            //! print
+            if(!curr->left  ||  prev==left)
+                curr->print();
+
+            //! move curr to next node.
+            if(prev == curr->parent.lock())
+            {
+                prev    =   curr;
+                curr    =   curr->left?    curr->left   :
+                            curr->right?   curr->right  :   curr->parent.lock();
+            }
+            else if(prev == curr->left && curr->right)
+            {
+                prev    =   curr;
+                curr    =   curr->right;
+            }
+            else
+            {
+                prev    =   curr;
+                curr    =   curr->parent.lock();
+            }
+        }
+
+    }
+
+    /**
      * @brief inoder_print_nonrecur_with_stack
      *
      * i.e. the interface for inorder_tree_walk_nonrecur_with_stack
