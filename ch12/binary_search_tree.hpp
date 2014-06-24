@@ -205,7 +205,6 @@ public:
                 curr    =   curr->parent.lock();
             }
         }
-
     }
 
     /**
@@ -261,7 +260,7 @@ public:
      * @param node
      * @return
      */
-    sPointer maximum(sPointer node) const
+    sPointer maximum_itera(sPointer node) const
     {
         while(node->right)
             node    =   node->right;
