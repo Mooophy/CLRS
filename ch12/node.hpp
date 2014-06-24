@@ -32,7 +32,17 @@ struct node
     node() = default;
 
     /**
-     * @brief ctor
+     * @brief Ctor
+     * @param key
+     */
+    explicit node(const KeyType& key):
+        data(), key(key), parent(), left(), right()
+    {}
+
+    /**
+     * @brief Ctor
+     * @param key
+     * @param data
      */
     node(const KeyType& key, const DataType& data):
         data(data), key(key), parent(), left(), right()

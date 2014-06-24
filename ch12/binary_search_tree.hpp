@@ -23,11 +23,21 @@
  */
 
 //! page 288
-//! INORDER-TREE-WALK(x)
+//! INORDER-TREE-WALK(x)    O(h)    =   O(lg n)
 //1 if x != NIL
 //2     INORDER-TREE-WALK(x.left)
 //3     print x.key
 //4     INORDER-TREE-WALK(x.right)
+
+//! page 291
+//! TREE-SEARCH(x,k)        O(h)    =   O(lg n)
+//1 if x == NIL or k == x.key
+//2     return x
+//3 if k < x.key
+//4     return TREE-SEARCH(x.left,  k)
+//5 else
+//6     return TREE-SEARCH(x.right, k)
+
 
 //! ex 12.1-3
 //! Give a nonrecursive algorithm that performs an inorder tree walk. (Hint: An easy
@@ -208,6 +218,16 @@ public:
         postorder_tree_walk(root);
     }
 
+    /**
+     * @brief search_iterative
+     * @param key
+     *
+     * interface
+     */
+    sPointer search_iterative(const KeyType key) const
+    {
+        return search_iterative(root,key);
+    }
 
 private:
     sPointer root;
@@ -282,6 +302,22 @@ private:
             node->print();
         }
     }
+
+    /**
+     * @brief search_iterative
+     * @param node
+     * @param key
+     *
+     * @complexity  O(h)=O(lg n)
+     */
+    sPointer search_iterative(sPointer node, const KeyType key) const
+    {
+        if(!node    ||  key == node->key)
+            return  node;
+
+        sPointer next   =   (key < node->key)?  node->left  :   node->right;
+        return  search_iterative(next, key);
+    }
 };//class binary_search_tree
 
 }//namespace ch12
@@ -289,7 +325,9 @@ private:
 
 #endif // BINARY_SEARCH_TREE_H
 
-//! test code for inorder tree walk, ex12.1-3 and ex12.1-4
+//! test code
+//! for inorder tree walk, ex12.1-3, ex12.1-4
+//! search,
 //#include <iostream>
 //#include <string>
 //#include "node.hpp"
