@@ -1,13 +1,10 @@
           12  Binary Search Trees
 
 12.1 What is a binary search tree?
-
 INORDER-TREE-WALK	:	binary_search_tree.hpp
-
 Exercises
 12.1-3			:	binary_search_tree.hpp
 
 12.2 Querying a binary search tree
-
 TREE-SEARCH		:	binary_search_tree.hpp
 ITERATIVE-TREE-SEARCH	:	binary_search_tree.hpp
