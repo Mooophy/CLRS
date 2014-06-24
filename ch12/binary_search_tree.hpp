@@ -46,7 +46,29 @@
  *                  node.print()
  *                  node = node->right
  */
+//! based on ch10::tree::binary_tree::checking _prev_print
+//! can be found here:
+//! https://github.com/Mooophy/CLRS/blob/master/ch10/tree.hpp
 //!
+//!     inorder_walk_by_checking_prev(node)
+/*      def prev = null
+ *      def curr = node
+ *      while(curr)
+ *
+ *          if(!curr->left  ||  prev == curr->left)     //  for printing
+ *              curr->print
+ *
+ *          if(prev == curr->parent)
+ *              prev    =   curr
+ *              curr    =   curr->left? left    :
+ *                          curr->right?    curr->right :   curr->parent
+ *          else if (prev == left && curr->right)
+ *              prev    =   curr
+ *              curr    =   curr->right
+ *          else
+ *              prev    =   curr
+ *              curr    =   curr->parent
+ */
 
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
@@ -199,6 +221,7 @@ private:
 //    tree.insert(5,"005");
 
 //    tree.inorder_print();
+//    tree.inoder_print_nonrecur_with_stack();
 
 //    return 0;
 //}

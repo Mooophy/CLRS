@@ -12,6 +12,7 @@ int main()
     tree.insert(5,"005");
 
     tree.inorder_print();
+    tree.inoder_print_nonrecur_with_stack();
 
     return 0;
 }
