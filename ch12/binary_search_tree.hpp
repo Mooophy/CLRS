@@ -154,7 +154,7 @@ public:
         while(curr)
         {
             //! print
-            if(!curr->left  ||  prev==left)
+            if(!curr->left  ||  prev==curr->left)
                 curr->print();
 
             //! move curr to next node.
@@ -242,7 +242,7 @@ private:
 
 #endif // BINARY_SEARCH_TREE_H
 
-//! test code for inorder tree walk
+//! test code for inorder tree walk and ex12.1-3
 //#include <iostream>
 //#include <string>
 //#include "node.hpp"
@@ -258,6 +258,6 @@ private:
 
 //    tree.inorder_print();
 //    tree.inoder_print_nonrecur_with_stack();
-
+//    tree.inorder_print_nonrecur();
 //    return 0;
 //}

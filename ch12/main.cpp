@@ -13,6 +13,7 @@ int main()
 
     tree.inorder_print();
     tree.inoder_print_nonrecur_with_stack();
+    tree.inorder_print_nonrecur();
 
     return 0;
 }
