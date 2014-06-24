@@ -46,6 +46,12 @@
 //4		else x = x.right
 //5 	return x
 
+//!     page 291
+//!     TREE-MAXIMUM(x)                 O(h)    =   O(lg n)
+//1     while x.right != NIL
+//2         x = x.right
+//3 	return x
+
 //!
 //! ex 12.1-3
 //! Give a nonrecursive algorithm that performs an inorder tree walk. (Hint: An easy
@@ -65,6 +71,7 @@
  *                  node = node->right
  */
 
+//!
 //! based on ch10::tree::binary_tree::checking _prev_print
 //! can be found here:
 //! https://github.com/Mooophy/CLRS/blob/master/ch10/tree.hpp
@@ -248,6 +255,19 @@ public:
     {
         return search_itera(root, key);
     }
+
+    /**
+     * @brief maximum
+     * @param node
+     * @return
+     */
+    sPointer maximum(sPointer node) const
+    {
+        while(node->right)
+            node    =   node->right;
+        return node;
+    }
+
 private:
     sPointer root;
 
