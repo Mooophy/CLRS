@@ -29,10 +29,30 @@
 //3     print x.key
 //4     INORDER-TREE-WALK(x.right)
 
+//! ex 12.1-3
+//! Give a nonrecursive algorithm that performs an inorder tree walk. (Hint: An easy
+//! solution uses a stack as an auxiliary data structure. A more complicated, but ele-
+//! gant, solution uses no stack but assumes that we can test two pointers for equality.)
+//!
+//!     inorder_walk_nonrecur_with_stack(node)
+/*      if(node)
+ *          def stack
+ *          while(node || !stack.empty())
+ *              while(node)
+ *                  stack.push(node)
+ *                  node = node->left
+ *              if(!stack.empty())
+ *                  node = stack.pop()
+ *                  node.print()
+ *                  node = node->right
+ */
+//!
+
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
 #include "node.hpp"
+#include <stack>
 
 namespace ch12 {
 
@@ -100,6 +120,16 @@ public:
         inorder_tree_walk(root);
     }
 
+    /**
+     * @brief inoder_print_nonrecur_with_stack
+     *
+     * i.e. the interface for inorder_tree_walk_nonrecur_with_stack
+     */
+    void inoder_print_nonrecur_with_stack()const
+    {
+        inorder_tree_walk_nonrecur_with_stack(root);
+    }
+
 private:
     sPointer root;
 
@@ -116,6 +146,35 @@ private:
             inorder_tree_walk(node->left);
             node->print();
             inorder_tree_walk(node->right);
+        }
+    }
+
+    /**
+     * @brief inorder_tree_walk_nonrecur_with_stack
+     * @param node
+     *
+     * for ex 12-1.2
+     */
+    void inorder_tree_walk_nonrecur_with_stack(sPointer node)const
+    {
+        if(node)
+        {
+            std::stack<sPointer> stk;
+            while(node  ||  !stk.empty())
+            {
+                while(node)
+                {
+                    stk.push(node);
+                    node    =   node->left;
+                }
+                if(!stk.empty())
+                {
+                    node    =   stk.top();
+                    stk.pop();
+                    node->print();
+                    node    =   node->right;
+                }
+            }
         }
     }
 };//class binary_search_tree
