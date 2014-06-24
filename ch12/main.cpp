@@ -11,7 +11,8 @@ int main()
     tree.insert(5,"005");
     tree.insert(199,"001");
 
-    tree.search_iterative(5)->print();
+    tree.search_recur(5)->print();
+    tree.search_itera(5)->print();
 
 
     return 0;

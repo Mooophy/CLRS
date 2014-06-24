@@ -22,23 +22,31 @@
  * 13   else    y.right = z
  */
 
-//! page 288
-//! INORDER-TREE-WALK(x)    O(h)    =   O(lg n)
-//1 if x != NIL
-//2     INORDER-TREE-WALK(x.left)
-//3     print x.key
-//4     INORDER-TREE-WALK(x.right)
+//!     page 288
+//!     INORDER-TREE-WALK(x)    O(h)    =   O(lg n)
+//1     if x != NIL
+//2         INORDER-TREE-WALK(x.left)
+//3         print x.key
+//4     I   NORDER-TREE-WALK(x.right)
 
-//! page 291
-//! TREE-SEARCH(x,k)        O(h)    =   O(lg n)
-//1 if x == NIL or k == x.key
-//2     return x
-//3 if k < x.key
-//4     return TREE-SEARCH(x.left,  k)
-//5 else
-//6     return TREE-SEARCH(x.right, k)
+//!     page 291
+//!     TREE-SEARCH(x,k)        O(h)    =   O(lg n)
+//1     if x == NIL or k == x.key
+//2         return x
+//3     if k < x.key
+//4         return TREE-SEARCH(x.left,  k)
+//5     else
+//6         return TREE-SEARCH(x.right, k)
 
+//!     page 291
+//!     ITERATIVE-TREE-SEARCH(x, k)     O(h)    =   O(lg n)
+//1 	while x != NIL and k != x.key
+//2		if k < x.key
+//3			x = x.left
+//4		else x = x.right
+//5 	return x
 
+//!
 //! ex 12.1-3
 //! Give a nonrecursive algorithm that performs an inorder tree walk. (Hint: An easy
 //! solution uses a stack as an auxiliary data structure. A more complicated, but ele-
@@ -56,6 +64,7 @@
  *                  node.print()
  *                  node = node->right
  */
+
 //! based on ch10::tree::binary_tree::checking _prev_print
 //! can be found here:
 //! https://github.com/Mooophy/CLRS/blob/master/ch10/tree.hpp
@@ -224,11 +233,21 @@ public:
      *
      * interface
      */
-    sPointer search_iterative(const KeyType key) const
+    sPointer search_recur(const KeyType& key) const
     {
-        return search_iterative(root,key);
+        return search_recur(root, key);
     }
 
+    /**
+     * @brief search_itera
+     * @param key
+     *
+     * interface
+     */
+    sPointer search_itera(const KeyType& key) const
+    {
+        return search_itera(root, key);
+    }
 private:
     sPointer root;
 
@@ -308,15 +327,29 @@ private:
      * @param node
      * @param key
      *
-     * @complexity  O(h)=O(lg n)
+     * @complexity  O(h)    =   O(lg n)
      */
-    sPointer search_iterative(sPointer node, const KeyType key) const
+    sPointer search_recur(sPointer node, const KeyType key) const
     {
-        if(!node    ||  key == node->key)
+        if(!node  ||  key == node->key)
             return  node;
 
         sPointer next   =   (key < node->key)?  node->left  :   node->right;
-        return  search_iterative(next, key);
+        return  search_recur(next, key);
+    }
+
+    /**
+     * @brief search_itera
+     * @param node
+     * @param key
+     *
+     * @complexity  O(h)    =   O(lg n)
+     */
+    sPointer search_itera(sPointer node, const KeyType& key) const
+    {
+        while(node  &&  key != node->key)
+            node    =   key < node->key?    node->left  :   node->right;
+        return node;
     }
 };//class binary_search_tree
 
@@ -340,6 +373,9 @@ private:
 //    tree.insert(1,"001");
 //    tree.insert(2,"002");
 //    tree.insert(5,"005");
+
+//    tree.search_recur(5)->print();
+//    tree.search_itera(5)->print();
 
 //    tree.inorder_print();
 //    tree.inoder_print_nonrecur_with_stack();
