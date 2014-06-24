@@ -8,6 +8,7 @@
 #define NODE_HPP
 
 #include <memory>
+#include <iostream>
 
 namespace ch12 {
 
@@ -36,6 +37,16 @@ struct node
     node(const KeyType& key, const DataType& data):
         data(data), key(key), parent(), left(), right()
     {}
+
+    /**
+     * @brief print
+     */
+    void print() const
+    {
+        std::cout   << "key = "   <<  key
+                    << "  data = "<<  data
+                    << std::endl;
+    }
 
     DataType    data;
     KeyType     key;

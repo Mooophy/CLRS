@@ -22,6 +22,13 @@
  * 13   else    y.right = z
  */
 
+//! page 288
+//! INORDER-TREE-WALK(x)
+//1 if x != NIL
+//2	INORDER-TREE-WALK(x.left)
+//3	print x.key
+//4	INORDER-TREE-WALK(x.right)
+
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
