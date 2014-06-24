@@ -58,3 +58,16 @@ struct node
 }//namespace ch12
 
 #endif // NODE_HPP
+
+//! test code
+//#include <iostream>
+//#include <string>
+//#include "node.hpp"
+
+//int main()
+//{
+//    ch12::node<int, std::string> node(1,"hello world");
+//    node.print();
+
+//    return 0;
+//}
