@@ -37,7 +37,7 @@
 
 //!
 //! ex 10.4-4
-//! Write an O.n/-time procedure that prints all the keys of an arbitrary rooted tree
+//! Write an O(n)time procedure that prints all the keys of an arbitrary rooted tree
 //! with n nodes, where the tree is stored using the left-child, right-sibling representa-
 //! tion.
 //!
