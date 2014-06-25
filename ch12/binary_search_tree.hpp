@@ -47,7 +47,7 @@
 //5 	return x
 
 //!     page 291
-//!     TREE-MAXIMUM(x)                O(h)    =   O(lg n)
+//!     TREE-MAXIMUM(x)                 O(h)    =   O(lg n)
 //1     while x.right != NIL
 //2         x = x.right
 //3 	return x
@@ -66,6 +66,16 @@
 //5         x = y
 //6         y = y.p
 //7 	return y
+
+//!     page 296
+//!     TRANSPLANT(T, u, v)
+//1 	if u.p == NIL
+//2         T.root = v
+//3 	else if u == u.p.left
+//4         u.p.left = v
+//5 	else 	u.p.right= v
+//6 	if v != NIL
+//7         v.p = u.p
 
 //!
 //! ex 12.1-3
@@ -580,6 +590,27 @@ private:
         return node;
     }
 
+    /**
+     * @brief transplant
+     * @param from
+     * @param to
+     *
+     * @complexity  O(1)
+     *
+     * used for delete()
+     */
+    void transplant(sPointer from, sPointer to)
+    {
+        sPointer parent  =   to->parent.lock();
+        if(!parent)
+            root    =   from;
+        else
+            (to == parent->left?    parent->left    :   parent->right)
+                    =   from;
+        if(from)
+            from->parent    =   to->parent;
+
+    }
 };//class binary_search_tree
 
 }//namespace ch12
