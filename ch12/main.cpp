@@ -17,11 +17,11 @@ int main()
     tree.insert(999,"99");
     tree.insert(23,"23");
 
-    auto node = tree.search_itera(127);
-    auto succ = tree.successor(node);
+    auto node = tree.search_itera(5);
+    auto pred = tree.predecessor(node);
 
-    if(succ)
-        succ->print();
+    if(pred)
+        pred->print();
     else
         std::cout << "null" << std::endl;
 

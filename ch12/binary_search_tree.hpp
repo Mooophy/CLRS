@@ -116,12 +116,25 @@
 //! Give recursive algorithms that perform preorder and postorder tree walks in
 //! O(n) time on a tree of n nodes.
 //!
+//  as below.
+//!
 //! ex12.2-2
 //! Write recursive versions of TREE-MINIMUM and TREE-MAXIMUM .
+//!
+//  as below
 //!
 //! ex12.2-3
 //! Write the TREE-PREDECESSOR procedure.
 //!
+//!     predecessor(node)   O(h) = O(lg n)
+/*      if  node->left
+ *          return maximum(node->left)
+ *      else
+ *          def up = node->parent
+ *          while(up    &&  node == up->left)
+ *              node    =   up
+ *              up      =   up->parent
+ */
 
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
@@ -356,8 +369,10 @@ public:
      * @param node
      *
      * @complexity  O(h)=O(lg n)
+     *
+     * for ex12.2-3
      */
-    sPointer successor(sPointer node)
+    sPointer successor(sPointer node) const
     {
         if(node->right)     // case 1 : find it by going upward.
             return minimum_itera(node->right);
@@ -373,6 +388,26 @@ public:
         }
     }
 
+    /**
+     * @brief predecessor
+     * @param node
+     * @return
+     */
+    sPointer predecessor(sPointer node) const
+    {
+        if(node->left)
+            return maximum_itera(node->left);
+        else
+        {
+            sPointer up = node->parent.lock();
+            while(up    &&  node == up->left)
+            {
+                node    =   up;
+                up      =   up->parent.lock();
+            }
+            return up;
+        }
+    }
 
 private:
     sPointer root;
@@ -529,6 +564,15 @@ private:
 //    auto succ = tree.successor(node);
 //    if(succ)
 //      succ->print();
+//    else
+//      std::cout << "null" << std::endl;
+
+//! test for predecessor
+//    auto node = tree.search_itera(5);
+//    auto pred = tree.predecessor(node);
+
+//    if(pred)
+//      pred->print();
 //    else
 //      std::cout << "null" << std::endl;
 
