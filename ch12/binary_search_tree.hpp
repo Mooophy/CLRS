@@ -27,7 +27,7 @@
 //1     if x != NIL
 //2         INORDER-TREE-WALK(x.left)
 //3         print x.key
-//4     I   NORDER-TREE-WALK(x.right)
+//4         INORDER-TREE-WALK(x.right)
 
 //!     page 291
 //!     TREE-SEARCH(x,k)        O(h)    =   O(lg n)
@@ -52,7 +52,7 @@
 //2         x = x.right
 //3 	return x
 //!     page 291
-//!     TREE-MINIMUM(x)
+//!     TREE-MINIMUM(x)                  O(h)    =   O(lg n)
 //1 	while x.left != NIL
 //2         x = x.left
 //3 	return x
