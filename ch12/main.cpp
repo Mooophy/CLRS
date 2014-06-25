@@ -17,7 +17,7 @@ int main()
     tree.insert(999,"99");
     tree.insert(23,"23");
 
-    auto node = tree.search_itera(5);
+    auto node = tree.search_itera(6);
     auto pred = tree.predecessor(node);
 
     if(pred)

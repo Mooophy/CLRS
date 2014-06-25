@@ -136,6 +136,25 @@
  *              up      =   up->parent
  */
 
+//!
+//! ex12.3-1
+//! Give a recursive version of the T REE -I NSERT procedure.
+//!
+/*      INSERT-RECUR(added)
+ * 1    def function find = (node, key, tracker)
+ * 2        if !node
+ * 3            return tracker
+ * 4        else    def next = key < node->key? node->left  :   node->right
+ * 5            return find(next, key, node)
+ * 6    def parent = find(root, added->key)
+ * 7    added->parent = parent
+ * 8    if (!parent)
+ * 9        root = added
+ * 10   else
+ * 11       def& glue = added->key < parent->key?   parent->left    :   parent->right
+ * 12       glue = added
+ */
+
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
