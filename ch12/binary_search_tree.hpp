@@ -51,6 +51,12 @@
 //1     while x.right != NIL
 //2         x = x.right
 //3 	return x
+//!     page 291
+//!     TREE-MINIMUM(x)
+//1 	while x.left != NIL
+//2         x = x.left
+//3 	return x
+
 
 //!
 //! ex 12.1-3
@@ -96,15 +102,21 @@
  *              curr    =   curr->parent
  */
 
+//!
 //! ex12.1-4
 //! Give recursive algorithms that perform preorder and postorder tree walks in
 //! O(n) time on a tree of n nodes.
+//!
+//! ex12.2-2
+//! Write recursive versions of TREE-MINIMUM and TREE-MAXIMUM .
+//!
 
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
 #include "node.hpp"
 #include <stack>
+#include <functional>
 
 namespace ch12 {
 
@@ -256,9 +268,10 @@ public:
     }
 
     /**
-     * @brief maximum
+     * @brief maximum_itera
      * @param node
-     * @return
+     *
+     * @complexity  O(h)=O(lg n)
      */
     sPointer maximum_itera(sPointer node) const
     {
@@ -266,6 +279,68 @@ public:
             node    =   node->right;
         return node;
     }
+
+    /**
+     * @brief maximum_recur
+     * @param node
+     *
+     * @complexity  O(h)=O(lg n)
+     *
+     * for ex12.2-2
+     */
+    sPointer maximum_recur(sPointer node) const
+    {
+        std::function<sPointer(sPointer)> maximum =
+
+                [&maximum](sPointer node)->sPointer
+        {
+            if(node->right)
+                return  maximum(node->right);
+            else
+                return  node;
+        };
+
+        return maximum(node);
+    }
+
+    /**
+     * @brief mimimum_itera
+     * @param node
+     *
+     * @complexity  O(h)=O(lg n)
+     */
+    sPointer minimum_itera(sPointer node) const
+    {
+        while(node->left)
+            node    =   node->left;
+        return node;
+    }
+
+
+    /**
+     * @brief minimum_recur
+     * @param node
+     *
+     * @complexity  O(h)=O(lg n)
+     *
+     * for ex12.2-2
+     */
+    sPointer minimum_recur(sPointer node) const
+    {
+        std::function<sPointer(sPointer)> minimum =
+                [&minimum](sPointer node)->sPointer
+        {
+            if(node->left)
+                return minimum(node->left);
+            else
+                return node;
+        };
+
+        return minimum(node);
+    }
+
+
+
 
 private:
     sPointer root;
@@ -370,6 +445,7 @@ private:
             node    =   key < node->key?    node->left  :   node->right;
         return node;
     }
+
 };//class binary_search_tree
 
 }//namespace ch12
@@ -392,6 +468,13 @@ private:
 //    tree.insert(1,"001");
 //    tree.insert(2,"002");
 //    tree.insert(5,"005");
+//    tree.insert(199,"199");
+//    tree.insert(6,"006");
+//    tree.insert(123,"123");
+//    tree.insert(127,"127");
+//    tree.insert(666,"666");
+//    tree.insert(999,"99");
+//    tree.insert(23,"23");
 
 //    tree.search_recur(5)->print();
 //    tree.search_itera(5)->print();
@@ -402,6 +485,12 @@ private:
 
 //    tree.preorder_print();
 //    tree.postorder_print();
-//
+
+//    tree.maximum_recur(tree.search_itera(5))->print();
+//    tree.maximum_itera(tree.search_itera(5))->print();
+
+//    tree.minimum_itera(tree.search_itera(123))->print();
+//    tree.minimum_recur(tree.search_itera(123))->print();
+
 //    return 0;
 //}
