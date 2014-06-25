@@ -15,3 +15,6 @@ TREE-SUCCESSOR		:	binary_search_tree.hpp
 Exercises
 12.2-2                  :       binary_search_tree.hpp
 12.2-3			:	binary_search_tree.hpp
+
+12.3 Insertion and deletion
+12.3-1			:	binary_search_tree.hpp
