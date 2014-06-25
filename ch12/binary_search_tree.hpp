@@ -47,16 +47,25 @@
 //5 	return x
 
 //!     page 291
-//!     TREE-MAXIMUM(x)                 O(h)    =   O(lg n)
+//!     TREE-MAXIMUM(x)                O(h)    =   O(lg n)
 //1     while x.right != NIL
 //2         x = x.right
 //3 	return x
 //!     page 291
-//!     TREE-MINIMUM(x)                  O(h)    =   O(lg n)
+//!     TREE-MINIMUM(x)                 O(h)    =   O(lg n)
 //1 	while x.left != NIL
 //2         x = x.left
 //3 	return x
 
+//!     page 292
+//!     TREE-SUCCESSOR(x)               O(h)    =   O(lg n)
+//1 	if x.right != NIL
+//2         return TREE-MINIMUM(x.right)
+//3 	y = x.p
+//4 	while y != NIL and x == y.right
+//5         x = y
+//6         y = y.p
+//7 	return y
 
 //!
 //! ex 12.1-3
@@ -339,7 +348,26 @@ public:
         return minimum(node);
     }
 
-
+    /**
+     * @brief successor
+     * @param node
+     *
+     * @complexity  O(h)=O(lg n)
+     */
+    sPointer successor(sPointer node)
+    {
+        if(node->right)     // case 1 : find it by going upward.
+            return minimum_itera(node->right);
+        else                // case 2 : find it by going downward.
+        {
+            sPointer next = node->parent.lock();
+            while(next  &&  node == next->right)
+            {
+                node    =   next;
+                next    =   next->parent.lock();
+            }
+        }
+    }
 
 
 private:
