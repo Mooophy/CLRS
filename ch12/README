@@ -11,5 +11,6 @@ TREE-SEARCH		:	binary_search_tree.hpp
 ITERATIVE-TREE-SEARCH	:	binary_search_tree.hpp
 TREE-MAXIMUM            :       binary_search_tree.hpp
 TREE-MINIMUM            :       binary_search_tree.hpp
+TREE-SUCCESSOR		:	binary_search_tree.hpp
 Exercises
 12.2-2                  :       binary_search_tree.hpp

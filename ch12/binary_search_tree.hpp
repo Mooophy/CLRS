@@ -119,6 +119,9 @@
 //! ex12.2-2
 //! Write recursive versions of TREE-MINIMUM and TREE-MAXIMUM .
 //!
+//! ex12.2-3
+//! Write the TREE-PREDECESSOR procedure.
+//!
 
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
@@ -360,13 +363,13 @@ public:
             return minimum_itera(node->right);
         else                // case 2 : find it by going downward.
         {
-            sPointer next = node->parent.lock();
-            while(next  &&  node == next->right)
+            sPointer up = node->parent.lock();
+            while(up  &&  node == up->right)
             {
-                node    =   next;
-                next    =   next->parent.lock();
+                node    =   up;
+                up      =   up->parent.lock();
             }
-            return next;
+            return up;
         }
     }
 
