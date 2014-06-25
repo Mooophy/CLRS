@@ -366,6 +366,7 @@ public:
                 node    =   next;
                 next    =   next->parent.lock();
             }
+            return next;
         }
     }
 
@@ -519,6 +520,14 @@ private:
 
 //    tree.minimum_itera(tree.search_itera(123))->print();
 //    tree.minimum_recur(tree.search_itera(123))->print();
+
+//! test for successor
+//    auto node = tree.search_itera(127);
+//    auto succ = tree.successor(node);
+//    if(succ)
+//      succ->print();
+//    else
+//      std::cout << "null" << std::endl;
 
 //    return 0;
 //}

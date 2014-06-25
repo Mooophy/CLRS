@@ -17,15 +17,13 @@ int main()
     tree.insert(999,"99");
     tree.insert(23,"23");
 
+    auto node = tree.search_itera(127);
+    auto succ = tree.successor(node);
 
-    tree.maximum_recur(tree.search_itera(5))->print();
-    tree.maximum_itera(tree.search_itera(5))->print();
-
-    tree.minimum_itera(tree.search_itera(123))->print();
-    tree.minimum_recur(tree.search_itera(123))->print();
-
-
-
+    if(succ)
+        succ->print();
+    else
+        std::cout << "null" << std::endl;
 
     return 0;
 }
