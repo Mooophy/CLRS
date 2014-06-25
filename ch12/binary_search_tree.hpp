@@ -138,8 +138,8 @@
 
 //!
 //! ex12.3-1
-//! Give a recursive version of the T REE -I NSERT procedure.
-//!
+//! Give a recursive version of the TREE -INSERT procedure.
+//! O(h) = O(lg n)
 /*      INSERT-RECUR(added)
  * 1    def function find = (node, key, tracker)
  * 2        if !node
@@ -182,7 +182,7 @@ public:
      * @param key
      * @param data
      *
-     * @complexity  O(lg n)
+     * just an interface
      */
     void insert(const KeyType& key, const DataType& data)
     {
@@ -216,6 +216,54 @@ public:
             last->left      =   inserted;
         else
             last->right     =   inserted;
+    }
+
+    /**
+     * @brief insert_recur
+     * @param key
+     * @param data
+     *
+     * just an interface    for ex12.3-1
+     */
+    void insert_recur(const KeyType& key, const DataType& data)
+    {
+        sPointer inserted   =   std::make_shared<Node>(key, data);
+        insert_recur(inserted);
+    }
+
+    /**
+     * @brief insert_recur
+     * @param inserted  i.e. the new node
+     *
+     * @complexity  O(h) = O(lg n)
+     *
+     * for ex12.3-1
+     */
+    void insert_recur(sPointer inserted)
+    {
+        KeyType key = inserted->key;
+
+        //! recursion lambda for finding parent
+        std::function<sPointer(sPointer, sPointer)> find =
+                [key, &find](sPointer node, sPointer tracker)->sPointer
+        {
+            if(!node)
+                return tracker;
+            else
+            {
+                sPointer next = key < node->key?  node->left  :  node->right;
+                return find(next, node);
+            }
+        };
+
+        //! graft on the inserted.
+        sPointer parent;
+        inserted->parent    =   parent  =   find(root, nullptr);
+        if(!parent)
+            root    =   inserted;
+        else
+            (inserted->key < parent->key?   parent->left    :   parent->right)
+                    =   inserted;
     }
 
     /**
@@ -594,6 +642,26 @@ private:
 //      pred->print();
 //    else
 //      std::cout << "null" << std::endl;
+
+//    return 0;
+//}
+
+//! code for testing ex12.3-1
+//#include <iostream>
+//#include <string>
+//#include "node.hpp"
+//#include "binary_search_tree.hpp"
+
+//int main()
+//{
+//    ch12::binary_search_tree<int, std::string> tree;
+
+//    tree.insert_recur(5,"005");
+//    tree.insert_recur(611,"611");
+//    tree.insert_recur(6,"006");
+//    tree.insert_recur(16,"016");
+
+//    tree.inorder_print();
 
 //    return 0;
 //}
