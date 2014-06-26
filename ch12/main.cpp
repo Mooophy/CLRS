@@ -1,22 +1,17 @@
 #include <iostream>
 #include <string>
 #include "node.hpp"
-#include "binary_search_tree.hpp"
 
 int main()
 {
-    ch12::binary_search_tree<int, std::string> tree;
+    std::shared_ptr<ch12::nodeSucc<int,std::string> > p =
+           std::make_shared<ch12::nodeSucc<int,std::string>>(42,"042");
 
-    tree.insert_recur(5,"005");
-    tree.insert_recur(611,"611");
-    tree.insert_recur(6,"006");
-    tree.insert_recur(16,"016");
+    p->successor = p;
 
-    tree.remove(6);
+    std::cout << (p->successor.lock()->data) << std::endl;
 
-    tree.inorder_print();
 
-    std::cout << "end" << std::endl;
     return 0;
 }
 
