@@ -12,6 +12,34 @@
 //! procedures should operate in time O(h), where h is the height of the tree T .
 //! (Hint:You may wish to implement a subroutine that returns the parent of a node.)
 //!
+//  Note:   1.Predecessor and successor ,if not nil, must be ancestors of new node.
+//          2.Along the path downwared, Predecessor should be the last node with a
+//            key less than that of the new node, whereas successor the last one with
+//            greater key than new node.
+//          3.This can be found from the pseudo codes for predcessor and successor in
+//            this chapter.
+//
+/*      insert(inserted)    //O(h)
+ * 1    def parent, predecessor, successor
+ * 2    def curr = root
+ * 3    while(curr)
+ * 4        parent = curr
+ * 5        if(inserted->key < curr->key)
+ * 6            successor = curr
+ * 7            curr = curr->left
+ * 8        else
+ *              predecessor = curr
+ * 9            curr = curr->right
+ * 10   if(!parent)
+ * 11       root    =   inserted
+ * 12   else
+            (inserted->key < parent->key?   parent->left    :   parent->right)
+                    =   inserted;
+ * 13   inserted->sucessor = successor
+ * 14   if(predecessor)
+ * 15       predecessor->successor = inserted
+ */
+//!
 
 #ifndef BINARY_SEARCH_TREE_SUCC_HPP
 #define BINARY_SEARCH_TREE_SUCC_HPP
@@ -36,12 +64,109 @@ public:
     using sPointer  =   std::shared_ptr<Node>;
     using wPointer  =   std::weak_ptr<Node>;
 
+    /**
+     * @brief insert
+     * @param key
+     * @param data
+     *
+     * @complexity  O(h)
+     */
+    void insert(const KeyType& key, const DataType& data)
+    {
+        sPointer inserted = std::make_shared<Node>(key, data);
+        insert(inserted);
+    }
+
+    /**
+     * @brief insert
+     * @param inserted node
+     *
+     * @complexity  O(h)
+     */
+    void insert(sPointer inserted)
+    {
+        //! find all
+        sPointer parent, predecessor, successor;
+        sPointer curr = root;
+        while(curr)
+        {
+            parent = curr;
+            if(inserted->key    <   curr->key)
+            {
+                successor   =   curr;
+                curr        =   curr->left;
+            }
+            else
+            {
+                predecessor =   curr;
+                curr        =   curr->right;
+            }
+        }
+
+        //! graft on the inserted node.
+        if(!parent)
+            root    =   inserted;
+        else
+            (inserted->key < parent->key?   parent->left    :   parent->right)
+                    =   inserted;
+
+        //! maintain successor and predecessor's successor
+        inserted->successor         =   successor;
+        if(predecessor)
+            predecessor->successor  =   inserted;
+    }
+
+    /**
+     * @brief inorder_print
+     *
+     * @complexity  O(n)
+     *
+     * i.e. the interface for inorder_print.
+     */
+    void inorder_print()const
+    {
+        inorder_tree_walk(root);
+    }
+
 private:
     sPointer root;
 
-
+    /**
+     * @brief inorder_tree_walk
+     * @param node
+     *
+     * @complexity  O(n)
+     */
+    void inorder_tree_walk(sPointer node)const
+    {
+        if(node)
+        {
+            inorder_tree_walk(node->left);
+            node->print();
+            inorder_tree_walk(node->right);
+        }
+    }
 };
 
 }//namespace ch12
 
 #endif // BINARY_SEARCH_TREE_SUCC_HPP
+
+//#include <iostream>
+//#include <string>
+//#include "binary_search_tree_succ.hpp"
+
+//int main()
+//{
+//    ch12::binary_search_tree_succ<int,std::string> tree;
+
+//    tree.insert(1,"001");
+//    tree.insert(9,"009");
+//    tree.insert(99,"099");
+//    tree.insert(5,"005");
+
+//! code for testing inorder tree walk, i.e. print in sorted order
+//    tree.inorder_print();
+
+//    return 0;
+//}
