@@ -78,6 +78,24 @@
 //7         v.p = u.p
 
 //!
+//!     based on TREE-DELETE page 298   O(h)
+//!     delete(target)
+/* 1    if(!target->left)
+ * 2        transplant(target, target->left)
+ * 3    else if (! target->right)
+ * 4        transplant(target, target->right)
+ * 5    else
+ *          def replacer = minimum(target->right)
+ * 6        if(replacer->parent !=  target)
+ * 7            transplant(replacer, replacer->right)
+ * 8            replacer->right =   target->right
+ * 9            replacer->right->parent =   replacer
+ * 10       transplant(target, replacer)
+ * 11       replacer->left  =   target->left
+ * 12       replacer->left->parent  =   replacer
+ */
+
+//!
 //! ex 12.1-3
 //! Give a nonrecursive algorithm that performs an inorder tree walk. (Hint: An easy
 //! solution uses a stack as an auxiliary data structure. A more complicated, but ele-
