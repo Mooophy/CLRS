@@ -1,16 +1,10 @@
 #include <iostream>
 #include <string>
-#include "node.hpp"
+#include "binary_search_tree_succ.hpp"
 
 int main()
 {
-    std::shared_ptr<ch12::nodeSucc<int,std::string> > p =
-           std::make_shared<ch12::nodeSucc<int,std::string>>(42,"042");
-
-    p->successor = p;
-
-    std::cout << (p->successor.lock()->data) << std::endl;
-
+    ch12::binary_search_tree_succ<int,std::string> tree;
 
     return 0;
 }
