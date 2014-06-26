@@ -599,7 +599,7 @@ private:
      *
      * used for delete()
      */
-    void transplant(sPointer from, sPointer to)
+    void transplant(sPointer to, sPointer from)
     {
         sPointer parent  =   to->parent.lock();
         if(!parent)
