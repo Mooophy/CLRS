@@ -12,8 +12,11 @@ int main()
     tree.insert_recur(6,"006");
     tree.insert_recur(16,"016");
 
+    tree.remove(6);
+
     tree.inorder_print();
 
+    std::cout << "end" << std::endl;
     return 0;
 }
 

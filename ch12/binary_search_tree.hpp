@@ -144,12 +144,12 @@
 //! Give recursive algorithms that perform preorder and postorder tree walks in
 //! O(n) time on a tree of n nodes.
 //!
-//  as below.
+//  as codes below.
 //!
 //! ex12.2-2
 //! Write recursive versions of TREE-MINIMUM and TREE-MAXIMUM .
 //!
-//  as below
+//  as codes below
 //!
 //! ex12.2-3
 //! Write the TREE-PREDECESSOR procedure.
@@ -513,14 +513,14 @@ public:
     void remove(sPointer target)
     {
         if(!target->left)
-            transplant(target, target->left);
-        else if(! target->right)
             transplant(target, target->right);
+        else if(! target->right)
+            transplant(target, target->left);
         else
         {
             //! use successor as replacer
             sPointer replacer = minimum_itera(target->right);
-            if(replacer->parent != target)
+            if(replacer->parent.lock() != target)
             {
                 transplant(replacer, replacer->right);
                 replacer->right         =   target->right;
@@ -530,6 +530,15 @@ public:
             replacer->left          =   target->left;
             replacer->left->parent  =   replacer;
         }
+    }
+
+    /**
+     * @brief remove
+     * @param key
+     */
+    void remove(const KeyType& key)
+    {
+        remove(search_itera(key));
     }
 private:
     sPointer root;
@@ -739,5 +748,28 @@ private:
 
 //    tree.inorder_print();
 
+//    return 0;
+//}
+
+//! code for testing delete()
+//#include <iostream>
+//#include <string>
+//#include "node.hpp"
+//#include "binary_search_tree.hpp"
+
+//int main()
+//{
+//    ch12::binary_search_tree<int, std::string> tree;
+
+//    tree.insert_recur(5,"005");
+//    tree.insert_recur(611,"611");
+//    tree.insert_recur(6,"006");
+//    tree.insert_recur(16,"016");
+
+//    tree.remove(6);
+
+//    tree.inorder_print();
+
+//    std::cout << "end" << std::endl;
 //    return 0;
 //}
