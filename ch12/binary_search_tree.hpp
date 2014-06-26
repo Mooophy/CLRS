@@ -79,7 +79,7 @@
 
 //!
 //!     based on TREE-DELETE page 298   O(h)
-//!     delete(target)
+//!     Delete(target)
 /* 1    if(!target->left)
  * 2        transplant(target, target->left)
  * 3    else if (! target->right)
@@ -504,6 +504,33 @@ public:
         }
     }
 
+    /**
+     * @brief remove
+     * @param target
+     *
+     * i.e. the delete() method
+     */
+    void remove(sPointer target)
+    {
+        if(!target->left)
+            transplant(target, target->left);
+        else if(! target->right)
+            transplant(target, target->right);
+        else
+        {
+            //! use successor as replacer
+            sPointer replacer = minimum_itera(target->right);
+            if(replacer->parent != target)
+            {
+                transplant(replacer, replacer->right);
+                replacer->right         =   target->right;
+                replacer->right->parent =   replacer;
+            }
+            transplant(target, replacer);
+            replacer->left          =   target->left;
+            replacer->left->parent  =   replacer;
+        }
+    }
 private:
     sPointer root;
 
