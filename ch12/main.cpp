@@ -15,7 +15,7 @@ int main()
 
     tree.search(99)->key = 88;
 
-    tree.search(88)->print();
+    tree.predessor(tree.search(5))->print();
 
     return 0;
 }

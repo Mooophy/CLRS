@@ -168,7 +168,7 @@ public:
      * @brief maximum
      * @param node
      *
-     * @complexity
+     * @complexity  O(h) = O(lg n)
      */
     sPointer minimum(sPointer node)const
     {
@@ -176,6 +176,34 @@ public:
         while(node->right)
             node    =   node->right;
         return node;
+    }
+
+    /**
+     * @brief predessor
+     * @param node
+     *
+     * @complexity  O(h) = O(lg n)
+     */
+    sPointer predessor(sPointer node)const
+    {
+        if(node->left)
+            return maximum(node->left);
+        else
+        {
+            sPointer curr = root;
+            sPointer pred = nullptr;
+            while(curr && curr->key != node->key)
+            {
+                if(curr->key > node->key)
+                    curr    =   curr->left;
+                else
+                {
+                    pred    =   curr;
+                    curr    =   curr->right;
+                }
+            }
+            return pred;
+        }
     }
 
 private:
@@ -215,11 +243,14 @@ private:
 //    tree.insert(99,"099");
 //    tree.insert(5,"005");
 
-//! code for testing inorder tree walk, i.e. print in sorted order
+//! for testing inorder tree walk, i.e. print in sorted order
 //    tree.inorder_print();
 
-//! code for testing search
+//! for testing search()
 //    tree.search(99)->print();
+
+//! for testing predessor()
+//    tree.predessor(tree.search(5))->print();
 
 //    return 0;
 //}
