@@ -52,6 +52,7 @@
 
 #include "node.hpp"
 #include <memory>
+#include <assert.h>
 
 namespace ch12 {
 
@@ -128,11 +129,11 @@ public:
      *
      * @complexity  O(h)=O(lg n)
      */
-    sPointer search(const KeyType& key)
+    sPointer search(const KeyType& key)const
     {
         sPointer curr = root;
         while(curr && key != curr->key)
-            curr    =   (key<curr->key?  curr->left  :   curr->right);
+            curr    =   key<curr->key?  curr->left  :   curr->right;
         return curr;
     }
 
@@ -146,6 +147,35 @@ public:
     void inorder_print()const
     {
         inorder_tree_walk(root);
+    }
+
+    /**
+     * @brief maximum
+     * @param node
+     *
+     * @complexity
+     */
+    sPointer maximum(sPointer node)const
+    {
+        assert(node);
+        while(node->left)
+            node    =   node->left;
+        return node;
+    }
+
+
+    /**
+     * @brief maximum
+     * @param node
+     *
+     * @complexity
+     */
+    sPointer minimum(sPointer node)const
+    {
+        assert(node);
+        while(node->right)
+            node    =   node->right;
+        return node;
     }
 
 private:

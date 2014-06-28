@@ -13,7 +13,9 @@ int main()
 
     tree.inorder_print();
 
-    tree.search(99)->print();
+    tree.search(99)->key = 88;
+
+    tree.search(88)->print();
 
     return 0;
 }
