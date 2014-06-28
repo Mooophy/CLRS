@@ -39,7 +39,13 @@
  * 14   if(predecessor)
  * 15       predecessor->successor = inserted
  */
-//!
+
+/*      search(key)
+ * 1    def curr = root
+ * 2    while(curr  && key != curr->key)
+ * 3        curr = (key < curr->key?    curr->left  :   curr->right)
+ * 4    return curr
+ */
 
 #ifndef BINARY_SEARCH_TREE_SUCC_HPP
 #define BINARY_SEARCH_TREE_SUCC_HPP
@@ -117,6 +123,20 @@ public:
     }
 
     /**
+     * @brief search
+     * @param key
+     *
+     * @complexity  O(h)=O(lg n)
+     */
+    sPointer search(const KeyType& key)
+    {
+        sPointer curr = root;
+        while(curr && key != curr->key)
+            curr    =   (key<curr->key?  curr->left  :   curr->right);
+        return curr;
+    }
+
+    /**
      * @brief inorder_print
      *
      * @complexity  O(n)
@@ -167,6 +187,9 @@ private:
 
 //! code for testing inorder tree walk, i.e. print in sorted order
 //    tree.inorder_print();
+
+//! code for testing search
+//    tree.search(99)->print();
 
 //    return 0;
 //}

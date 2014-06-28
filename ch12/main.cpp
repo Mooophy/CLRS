@@ -13,6 +13,8 @@ int main()
 
     tree.inorder_print();
 
+    tree.search(99)->print();
+
     return 0;
 }
 
