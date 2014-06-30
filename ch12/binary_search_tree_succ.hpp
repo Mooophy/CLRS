@@ -168,6 +168,21 @@ public:
     }
 
     /**
+     * @brief print
+     *
+     * @complexty   O(n)
+     */
+    void print() const
+    {
+        sPointer curr = minimum(root);
+        while(curr)
+        {
+            curr->print();
+            curr = curr->successor.lock();
+        }
+    }
+
+    /**
      * @brief maximum
      * @param node
      *
@@ -176,8 +191,8 @@ public:
     sPointer maximum(sPointer node)const
     {
         assert(node);
-        while(node->left)
-            node    =   node->left;
+        while(node->right)
+            node    =   node->right;
         return node;
     }
 
@@ -191,8 +206,8 @@ public:
     sPointer minimum(sPointer node)const
     {
         assert(node);
-        while(node->right)
-            node    =   node->right;
+        while(node->left)
+            node    =   node->left;
         return node;
     }
 
@@ -248,7 +263,7 @@ public:
      *
      * @complexity  O(h)
      */
-    void remove(sPointer target)const
+    void remove(sPointer target)
     {
         //! maintain the predessor
         sPointer pred = predessor(target);
@@ -266,7 +281,7 @@ public:
             if(parent(replacer) != target)
             {
                 transplant(replacer, replacer->right);
-                replacer->right     =   target->left;
+                replacer->right     =   target->right;
             }
             transplant(target, replacer);
             replacer->left  =   target->left;
@@ -304,7 +319,7 @@ private:
      */
     void transplant(sPointer to, sPointer from)
     {
-        sPointer parent = parent(to);
+        sPointer parent = this->parent(to);
         if(!parent)
             root    =   from;
         else
@@ -342,6 +357,29 @@ private:
 //! for testing parent
 //    tree.parent(tree.search(0))->print();
 
+
+//    return 0;
+//}
+
+//! for testing remove i.e. delete
+//#include <iostream>
+//#include <string>
+//#include "binary_search_tree_succ.hpp"
+
+//int main()
+//{
+//    ch12::binary_search_tree_succ<int,std::string> tree;
+
+//    tree.insert(3,"003");
+//    tree.insert(9,"009");
+//    tree.insert(99,"099");
+//    tree.insert(5,"005");
+//    tree.insert(2,"002");
+//    tree.insert(6,"006");
+
+//    tree.remove(tree.search(3));
+
+//    tree.print();
 
 //    return 0;
 //}

@@ -6,19 +6,16 @@ int main()
 {
     ch12::binary_search_tree_succ<int,std::string> tree;
 
-    tree.insert(1,"001");
+    tree.insert(3,"003");
     tree.insert(9,"009");
     tree.insert(99,"099");
     tree.insert(5,"005");
-    tree.insert(0,"000");
+    tree.insert(2,"002");
+    tree.insert(6,"006");
 
-//    tree.inorder_print();
+    tree.remove(tree.search(3));
 
-//    tree.search(99)->key = 88;
-
-//    tree.predessor(tree.search(5))->print();
-
-    tree.parent(tree.search(0))->print();
+    tree.print();
 
     return 0;
 }
