@@ -206,6 +206,24 @@ public:
         }
     }
 
+    /**
+     * @brief parent
+     * @param target
+     *
+     * @complexity  O(n)
+     */
+    sPointer parent(sPointer target)const
+    {
+        sPointer curr = root;
+        sPointer tracker = nullptr;
+        while(curr && curr->key != target->key)
+        {
+            tracker =   curr;
+            curr    =   target->key < curr->key?    curr->left  :   curr->right;
+        }
+        return tracker;
+    }
+
 private:
     sPointer root;
 
@@ -251,6 +269,10 @@ private:
 
 //! for testing predessor()
 //    tree.predessor(tree.search(5))->print();
+
+//! for testing parent
+//    tree.parent(tree.search(0))->print();
+
 
 //    return 0;
 //}
