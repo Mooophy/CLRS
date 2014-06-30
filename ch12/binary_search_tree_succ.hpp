@@ -40,11 +40,29 @@
  * 15       predecessor->successor = inserted
  */
 
-/*      search(key)
+/*      search(key)     O(h)
  * 1    def curr = root
  * 2    while(curr  && key != curr->key)
  * 3        curr = (key < curr->key?    curr->left  :   curr->right)
  * 4    return curr
+ */
+
+
+/*      delete(target)  O(h)
+ * 1    def pred = predessor(target)
+ * 2    if(pred)
+ * 3        pred->successor = target->successor
+ * 4    if(!target->left)
+ * 5        transplant(target, target->right)
+ * 6    else if (!target->right)
+ * 7        transplant(target, target->left)
+ * 8    else
+ *          def replacer = minimum(target->right)
+ * 9        if(parent(target) != target)
+ * 10           transplant(replacer, replacer->right)
+ * 11           replacer->right = target->right
+ * 12       transplant(target, replacer)
+ * 13       replacer->left  =  target->left
  */
 
 #ifndef BINARY_SEARCH_TREE_SUCC_HPP
@@ -210,7 +228,7 @@ public:
      * @brief parent
      * @param target
      *
-     * @complexity  O(n)
+     * @complexity  O(h)
      */
     sPointer parent(sPointer target)const
     {
@@ -222,6 +240,38 @@ public:
             curr    =   target->key < curr->key?    curr->left  :   curr->right;
         }
         return tracker;
+    }
+
+    /**
+     * @brief remove
+     * @param target
+     *
+     * @complexity  O(h)
+     */
+    void remove(sPointer target)const
+    {
+        //! maintain the predessor
+        sPointer pred = predessor(target);
+        if(pred)
+            pred->successor     =   target->successor;
+
+        //! tranplant
+        if(!target->left)
+            transplant(target, target->right);
+        else if(!target->right)
+            transplant(target, target->left);
+        else
+        {
+            sPointer replacer = minimum(target->right);
+            if(parent(replacer) != target)
+            {
+                transplant(replacer, replacer->right);
+                replacer->right     =   target->left;
+            }
+            transplant(target, replacer);
+            replacer->left  =   target->left;
+        }
+
     }
 
 private:
@@ -241,6 +291,25 @@ private:
             node->print();
             inorder_tree_walk(node->right);
         }
+    }
+
+    /**
+     * @brief transplant
+     * @param to
+     * @param from
+     *
+     * @complexity  O(h)
+     *
+     * @note    this function violate the successor attribute
+     */
+    void transplant(sPointer to, sPointer from)
+    {
+        sPointer parent = parent(to);
+        if(!parent)
+            root    =   from;
+        else
+            (to == parent->left?    parent->left    :   parent->right)
+                    =   from;
     }
 };
 
