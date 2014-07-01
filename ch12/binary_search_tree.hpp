@@ -183,6 +183,29 @@
  * 12       glue = added
  */
 
+//!
+//! 12.3-6
+//! When node z in TREE-DELETE has two children, we could choose node y as
+//! its predecessor rather than its successor. What other changes to TREE-DELETE
+//! would be necessary if we did so? Some have argued that a fair strategy, giving
+//! equal priority to predecessor and successor, yields better empirical performance.
+//! How might TREE-DELETE be changed to implement such a fair strategy?
+//!
+/*  ...implement case 1 and case 2 as before.
+ *      predecessor = maximum(target->left)
+ *      if(predecessor->parent != target)
+ *          transplant(predecessor, predecessor->left)
+ *          predecessor->left           =   target->left
+ *          predecessor->left->parent   =   predecessor
+ *      transplant(target, predecessor)
+ *      predecessor->right          =   target->right
+ *      predecessor->right->parent  =   predecessor
+ */
+
+//  As for the fair strategy, a static bool variable can be used. Each call of delete
+//  toggle its value and call different underlying procedure depending on the value.
+
+//!
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
