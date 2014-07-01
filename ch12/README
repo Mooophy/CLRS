@@ -2,6 +2,7 @@
 
 12.1 What is a binary search tree?
 INORDER-TREE-WALK	:	binary_search_tree.hpp
+
 Exercises
 12.1-3			:	binary_search_tree.hpp
 12.1-4                  :       binary_search_tree.hpp
@@ -12,6 +13,7 @@ ITERATIVE-TREE-SEARCH	:	binary_search_tree.hpp
 TREE-MAXIMUM            :       binary_search_tree.hpp
 TREE-MINIMUM            :       binary_search_tree.hpp
 TREE-SUCCESSOR		:	binary_search_tree.hpp
+
 Exercises
 12.2-2                  :       binary_search_tree.hpp
 12.2-3			:	binary_search_tree.hpp
@@ -19,6 +21,13 @@ Exercises
 12.3 Insertion and deletion
 TRANSPLANT		:	binary_search_tree.hpp
 Delete			:	binary_search_tree.hpp
+
 Exercises
 12.3-1			:	binary_search_tree.hpp
 12.3-5			:	binary_search_tree_succ.hpp
+12.3-6			:	binary_search_tree.hpp
+
+Problem
+12-2			:	RadixTree.hpp
+
+

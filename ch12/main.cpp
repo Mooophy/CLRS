@@ -1,21 +1,19 @@
 #include <iostream>
 #include <string>
-#include "binary_search_tree_succ.hpp"
+#include "RadixTree.hpp"
 
 int main()
 {
-    ch12::binary_search_tree_succ<int,std::string> tree;
+    ch12::RadixTree radix;
 
-    tree.insert(3,"003");
-    tree.insert(9,"009");
-    tree.insert(99,"099");
-    tree.insert(5,"005");
-    tree.insert(2,"002");
-    tree.insert(6,"006");
-
-    tree.remove(tree.search(3));
-
-    tree.print();
+    radix.insert("1011");
+    radix.insert("100");
+    radix.insert("0");
+    radix.insert("10");
+    radix.insert("011");
+    radix.insert("0000");
+    radix.insert("111");
+    radix.print();
 
     return 0;
 }
