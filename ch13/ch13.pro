@@ -7,5 +7,6 @@ CONFIG += C++11
 SOURCES += main.cpp
 
 HEADERS += \
-    Node.hpp
+    Node.hpp \
+    RedBlackTree.hpp
 

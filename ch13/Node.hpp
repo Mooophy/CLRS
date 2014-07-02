@@ -1,6 +1,6 @@
 /***************************************************************************
  *  @file       binary_search_tree_succ.hpp
- *  @author     Alan.W
+ *  @author     Yue Wang
  *  @date       02  July 2014
  *  @remark     Algorithims implementation for CLRS, using C++ templates.
  ***************************************************************************/
@@ -13,6 +13,9 @@
 
 namespace ch13 {
 
+/**
+ * @brief Color enum
+ */
 enum class Color
 {
     Black   =   0,
