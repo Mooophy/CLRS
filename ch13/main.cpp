@@ -4,6 +4,7 @@
 
 int main()
 {
+    ch13::RedBlackTree<int,std::string> tree;
 
     return 0;
 }
