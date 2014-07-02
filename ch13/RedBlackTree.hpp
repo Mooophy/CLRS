@@ -65,6 +65,36 @@ private:
         target->parent      =   new_parent;
     }
 
+    /**
+     * @brief right_rotate
+     *
+     * @complexity  O(1)
+     *
+     * as required for ex13.2-1
+     */
+    void righ_rotate(sPointer target)
+    {
+        sPointer new_parent = target->left;
+
+        //! turn new_parent's right subtree into target's left subtree
+        target->left    =   new_parent->right;
+        if(new_parent->right    !=  this->nil)
+            new_parent->right->parent.lock()    =   target;
+
+        //! link target's parent to new_parent
+        if(target->parent.lock()    ==  this->nil)
+            this->root  =   new_parent;
+        else
+        {
+            sPointer pnt = target->parent.lock();
+            (target == pnt->left?   pnt->left   :   pnt->right)     =   new_parent;
+        }
+
+        //! put target on new_parent’s right
+        new_parent->right   =   target;
+        target->parent      =   new_parent;
+    }
+
 };
 
 }//namespace ch13
