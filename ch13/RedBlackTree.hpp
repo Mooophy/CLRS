@@ -12,6 +12,9 @@
 
 namespace ch13{
 
+/**
+ * @brief Red Black Tree
+ */
 template<typename K, typename D>
 class RedBlackTree
 {
@@ -27,6 +30,35 @@ public:
     RedBlackTree():
         root(),nil(std::make_shared<Node<K,D>>())
     {}
+
+    /**
+     * @brief insert
+     *
+     * @complexity  O(h)
+     *
+     * based on that of Page 316
+     */
+    void insert(sPointer added)
+    {
+        sPointer tracker    =   this->nil;
+        sPointer curr       =   this->root;
+        while(curr != this->nil)
+        {
+            tracker =   curr;
+            curr    =   (curr->key > added->key?    curr->left  :   curr->right);
+        }
+
+        added->parent   =   tracker;
+        if(tracker  ==  this->nil)
+            this->root  =   added;
+        else
+            (added->key < tracker->key?     tracker->left   :   tracker->right)
+                        =   added;
+
+        added->left     =   added->right    =   this->nil;
+        added->color    =   Color::Red;
+        insert_fixup(added);
+    }
 
 private:
     sPointer root;
