@@ -95,6 +95,62 @@ private:
         target->parent      =   new_parent;
     }
 
+    /**
+     * @brief insert_fixup
+     *
+     * @complexity  O(1)
+     *
+     * based on that on Page 316
+     */
+    void insert_fixup(sPointer target)
+    {
+        while(target->parent.lock()->color ==  Color::Red)
+        {
+            if(target->parent.lock()    ==
+               target->parent.lock()->parent.lock()->left)
+            {
+                sPointer uncle  =   target->parent.lock()->parent.lock()->right;
+                if(uncle->color ==  Color::Red)
+                {
+                    uncle->color = Color::Black;
+                    target->parent.lock()->color = Color::Black;
+                    target->parent.lock()->parent.lock()->color = Color::Red;
+                }
+                else
+                {
+                    if(target   ==  target->parent.lock()->right)
+                    {
+                        target  =   target->parent.lock();
+                        left_rotate(target);
+                    }
+                    target->parent.lock()->color                =   Color::Black;
+                    target->parent.lock()->parent.lock()->color =   Color::Red;
+                    righ_rotate(target->parent.lock()->parent.lock());
+                }
+            }
+            else
+            {
+                sPointer uncle  =   target->parent.lock()->parent.lock()->left;
+                if(uncle->color ==  Color::Red)
+                {
+                    uncle->color = Color::Black;
+                    target->parent.lock()->color = Color::Black;
+                    target->parent.lock()->parent.lock()->color = Color::Red;
+                }
+                else
+                {
+                    if(target   ==  target->parent.lock()->left)
+                    {
+                        target  =   target->parent.lock();
+                        right_rotate(target);
+                    }
+                    target->parent.lock()->color                =   Color::Black;
+                    target->parent.lock()->parent.lock()->color =   Color::Red;
+                    left_rotate(target->parent.lock()->parent.lock());
+                }
+            }
+        }
+    }
 };
 
 }//namespace ch13
