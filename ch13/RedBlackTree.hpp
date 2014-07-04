@@ -8,7 +8,9 @@
 #ifndef REDBLACKTREE_H
 #define REDBLACKTREE_H
 
+#include <functional>
 #include "Node.hpp"
+
 
 namespace ch13{
 
@@ -30,6 +32,19 @@ public:
     RedBlackTree():
         root(),nil(std::make_shared<Node<K,D>>())
     {}
+
+    /**
+     * @brief insert
+     * @param key
+     * @param data
+     *
+     * overloading insert()
+     */
+    void insert(const KeyType& key, const DataType& data)
+    {
+        sPointer added = std::make_shared<Node<KeyType,DataType>>(key, data);
+        insert(added);
+    }
 
     /**
      * @brief insert
@@ -60,6 +75,28 @@ public:
         insert_fixup(added);
     }
 
+    /**
+     * @brief print
+     *
+     * @compplexity O(n)
+     *
+     * i.e. inorder_walk
+     */
+    void print()const
+    {
+        std::function<void(sPointer)> inorder_walk =
+                [&](const sPointer& node)
+        {
+            if(node != nil)
+            {
+                inorder_walk(node->left);
+                node->print();
+                inorder_walk(node->right);
+            }
+        };
+        inorder_walk(root);
+    }
+
 private:
     sPointer root;
     sPointer nil;
@@ -84,7 +121,7 @@ private:
 
         //! link target's parent to new_parent
         new_parent->parent  =   target->parent;
-        if(target->parent   ==  this->nil)
+        if(target->parent.lock()   ==  this->nil)
             this->root  =   new_parent;
         else
         {
@@ -104,7 +141,7 @@ private:
      *
      * as required for ex13.2-1
      */
-    void righ_rotate(sPointer target)
+    void right_rotate(sPointer target)
     {
         sPointer new_parent = target->left;
 
@@ -157,7 +194,7 @@ private:
                     }
                     target->parent.lock()->color                =   Color::Black;
                     target->parent.lock()->parent.lock()->color =   Color::Red;
-                    righ_rotate(target->parent.lock()->parent.lock());
+                    right_rotate(target->parent.lock()->parent.lock());
                 }
             }
             else
