@@ -75,6 +75,10 @@ public:
         added->left     =   added->right    =   this->nil;
         added->color    =   Color::Red;
         insert_fixup(added);
+
+        //! debugging
+        std::cout << "\033[32m\n\n\nnode(" << added->key << ") has been added :\033[0m";
+        print();
     }
 
     /**

@@ -67,9 +67,10 @@ struct Node
         std::cout   << "\nkey = "       <<  key
                     << "  color = "     << (color == Color::Black?  "Black" :   "Red")
                     << "\nself  = "     <<  std::hex << this
+                    << "\nparent= "     <<  std::hex << parent.lock()
                     << "\nleft  = "     <<  std::hex << left
                     << "\nright = "     <<  std::hex << right
-                    << "\nparent= "     <<  std::hex << parent.lock()
+
                     << std::endl;
     }
 
