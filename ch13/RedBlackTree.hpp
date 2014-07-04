@@ -30,8 +30,10 @@ public:
      * @brief default ctor
      */
     RedBlackTree():
-        root(),nil(std::make_shared<Node<K,D>>())
-    {}
+        nil(std::make_shared<Node<K,D>>())
+    {
+        root = nil;
+    }
 
     /**
      * @brief insert
@@ -219,6 +221,8 @@ private:
                 }
             }
         }
+
+        root->color     =   Color::Black;
     }
 };
 

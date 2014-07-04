@@ -64,9 +64,12 @@ struct Node
      */
     void print() const
     {
-        std::cout   << "key = "     <<  key
-                    << "  data = "  <<  data
-                    << "  color = " << (color == Color::Black?  "Black" :   "Red")
+        std::cout   << "\nkey = "       <<  key
+                    << "  color = "     << (color == Color::Black?  "Black" :   "Red")
+                    << "\nself  = "     <<  std::hex << this
+                    << "\nleft  = "     <<  std::hex << left
+                    << "\nright = "     <<  std::hex << right
+                    << "\nparent= "     <<  std::hex << parent.lock()
                     << std::endl;
     }
 
