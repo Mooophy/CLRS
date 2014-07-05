@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <iostream>
+#include <assert.h>
 #include "debug.hpp"
 
 namespace ch13 {
@@ -54,8 +55,51 @@ public:
         key(key),left(),right(), parent(), color(Color::BLACK),data(data)
     {}
 
+    /**
+     * @brief is_left
+     */
+    bool is_left() const
+    {
+        assert(parent.lock());
+        return this == parent.lock()->left.get();
+    }
+
+    /**
+     * @brief is_right
+     */
+    bool is_right() const
+    {
+        assert(parent.lock());
+        return this == parent.lock()->right.get();
+    }
+
+    /**
+     * @brief ascend
+     * @param level
+     */
+    sPointer ascend(int level) const
+    {
+        sPointer curr(this);
+        while(level--)
+        {
+            assert(curr->parent.lock());
+            curr    =   curr->parent.lock();
+        }
+
+        return curr;
+    }
+
+    /**
+     * @brief print
+     */
     void print()const
     {
+        std::cout   <<  "key="  +   debug::green(std::to_string(key)) + " ";
+
+        if(!is_left()   &&  !is_right())
+            std::cout << debug::red("root")  << std::endl;
+        else
+            std::cout << (is_left()?    debug::green("left ")    :   debug::yellow("right "));
     }
 private:
     KeyType     key;
