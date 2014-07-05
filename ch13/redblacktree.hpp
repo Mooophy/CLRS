@@ -57,8 +57,6 @@ public:
             }
         };
         inorder_walk(root);
-
-
     }
 
     /**
@@ -146,6 +144,35 @@ public:
 
         y->left     =   x;
         x->parent   =   y;
+    }
+
+    /**
+     * @brief right_rotate
+     * @param y
+     *
+     *          [y]             [x]
+     *          /       =>         \
+     *        [x]                   [y]
+     *
+     * @complx  O(1)
+     */
+    void right_rotate(sPointer y)
+    {
+        sPointer x = y->left;
+
+        y->left = x->right;
+        if(x->right != this->nil)
+            x->right->parent    =   y;
+
+        x->parent   =   y->parent;
+        if(y->parent.lock() ==  this->nil)
+            root    =   x;
+        else
+            (y->is_left()?  y->parent.lock()->left  :  y->parent.lock()->right)
+                    =   x;
+
+        x->right    =   y;
+        y->parent   =   x;
     }
 private:
     sPointer root;

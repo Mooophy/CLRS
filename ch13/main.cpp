@@ -8,7 +8,7 @@ int main()
 {
     ch13::RedBlackTree<int,std::string> tree;
 
-    std::vector<int> v = {2,6,3};
+    std::vector<int> v = {8,5,7,1};
 
     for(auto i : v)
         tree.insert(i);
@@ -17,7 +17,7 @@ int main()
 
     std::cout << debug::green("after left-rotate:\n\n");
 
-    tree.left_rotate(tree.search(2));
+    tree.right_rotate(tree.search(8));
 
     tree.print();
 
