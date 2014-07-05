@@ -102,7 +102,7 @@ public:
         std::cout << "key= " + debug::green(std::to_string(key)) + " ";
         std::cout << (color == Color::RED?   debug::red("red\n")   :   "black\n");
         std::cout << "parent=" << parent.lock();
-        std::cout << " self=" << this << " left=" << left << " right=" << right ;
+        std::cout << debug::green(" self=") << this << " left=" << left << " right=" << right ;
 
 
         std::cout << std::endl << std::endl;
