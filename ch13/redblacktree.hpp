@@ -75,6 +75,7 @@ public:
      * @brief insert
      * @param added
      *
+     * @page    315
      * O(h)
      */
     void insert(sPointer added)
@@ -97,9 +98,15 @@ public:
         added->left =   added->right    =   nil;
         added->color=   Color::RED;
 
-        //--to do   :   add fixup
+        insert_fixup(added);
     }
 
+    /**
+     * @brief search
+     * @param key
+     *
+     * @complx  O(h)
+     */
     sPointer search(const KeyType& key)const
     {
         sPointer ret  = nullptr;
@@ -126,6 +133,8 @@ public:
      *          [y]            [x]
      *
      * @complx  o(1)
+     *
+     * @page    313
      */
     void left_rotate(sPointer x)
     {
@@ -178,53 +187,71 @@ private:
     sPointer root;
     sPointer nil;
 
+    /**
+     * @brief ascend
+     *
+     * used for insert_fixup
+     */
+    sPointer ascend(sPointer node, int level)
+    {
+        while(level--)
+            node = node->parent.lock();
+        return node;
+    }
 
+    /**
+     * @brief insert_fixup
+     *
+     * @complx  O(1)
+     *
+     * based on the pyseudocode on Page 316
+     */
     void insert_fixup(sPointer added)
     {
-        while(added->ascend(1)->color   ==  Color::RED)
+        while(ascend(added,1)->color   ==  Color::RED)
         {
-            if(added->ascend(1)->is_left())
+            if(ascend(added,1)->is_left())
             {
-                sPointer uncle = added->ascend(2)->right;
+                sPointer uncle = ascend(added,2)->right;
                 if(uncle->color ==  Color::RED)
                 {
                     uncle->color            =   Color::BLACK;
-                    added->ascend(1)->color =   Color::BLACK;
-                    added->ascend(2)->color =   Color::RED;
-                    added   =   added->ascend(2);
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    added   =   ascend(added,2);
                 }
                 else
                 {
                     if(added->is_right())
                     {
-                        added   =   added->ascend(1);
+                        added   =   ascend(added,1);
                         left_rotate(added);
                     }
-                    added->ascend(1)->color =   Color::BLACK;
-                    added->ascend(2)->color =   Color::RED;
-                    right_rotate(added->ascend(2));
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    right_rotate(ascend(added,2));
                 }
             }
             else
             {
-                sPointer uncle = added->ascend(2)->left;
+                sPointer uncle = ascend(added,2)->left;
                 if(uncle->color ==  Color::RED)
                 {
                     uncle->color            =   Color::BLACK;
-                    added->ascend(1)->color =   Color::BLACK;
-                    added->ascend(2)->color =   Color::RED;
-                    added   =   added->ascend(2);
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    added   =   ascend(added,2);
                 }
                 else
                 {
                     if(added->is_left())
                     {
-                        added   =   added->ascend(1);
+                        added   =   ascend(added,1);
                         right_rotate(added);
                     }
-                    added->ascend(1)->color =   Color::BLACK;
-                    added->ascend(2)->color =   Color::RED;
-                    left_rotate(added->ascend(2));
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    left_rotate(ascend(added,2));
                 }
             }
         }
@@ -235,3 +262,24 @@ private:
 
 
 #endif // REDBLACKTREE_HPP
+
+//! testing insert()
+//#include <iostream>
+//#include <vector>
+//#include <node.hpp>
+//#include "redblacktree.hpp"
+
+//int main()
+//{
+//    std::vector<int> v =
+//        {6,5,1,1,2,34,5,6,7,8,9,8,7,4,3,2,2,3,5,6,7,2,345};
+//    ch13::RedBlackTree<int,std::string> tree;
+
+//    for(auto i : v)
+//        tree.insert(i);
+
+//    tree.print();
+//    std::cout << "length = " << v.size() << std::endl;
+
+//    return 0;
+//}

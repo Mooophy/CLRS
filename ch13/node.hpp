@@ -78,21 +78,6 @@ public:
         return this == parent.lock()->right.get();
     }
 
-    /**
-     * @brief ascend
-     * @param level
-     */
-    sPointer ascend(int level) const
-    {
-        sPointer curr(this);
-        while(level--)
-        {
-            assert(curr->parent.lock());
-            curr    =   curr->parent.lock();
-        }
-
-        return curr;
-    }
 
     /**
      * @brief print
@@ -100,12 +85,12 @@ public:
     void print()const
     {
         std::cout << "key= " + debug::green(std::to_string(key)) + " ";
-        std::cout << (color == Color::RED?   debug::red("red\n")   :   "black\n");
+        std::cout << (color == Color::RED?   debug::red("red  ")   :   "blk  ");
         std::cout << "parent=" << parent.lock();
         std::cout << debug::green(" self=") << this << " left=" << left << " right=" << right ;
 
 
-        std::cout << std::endl << std::endl;
+        std::cout << std::endl ;
     }
 private:
     KeyType     key;
