@@ -92,6 +92,52 @@ public:
 
         //--to do   :   add fixup
     }
+
+    sPointer search(const KeyType& key)const
+    {
+        sPointer ret  = nullptr;
+        sPointer curr = this->root;
+        while(curr)
+        {
+            if(curr->key    ==  key)
+            {
+                ret = curr;
+                break;
+            }
+            else
+                curr = (curr->key > key?    curr->left  :   curr->right);
+        }
+        return ret;
+    }
+
+    /**
+     * @brief left_rotate
+     * @param x
+     *
+     *      [x]                    [y]
+     *         \        =>        /
+     *          [y]            [x]
+     *
+     * @complx  o(1)
+     */
+    void left_rotate(sPointer x)
+    {
+        sPointer y = x->right;      //  set y
+
+        x->right    =   y->left;    //  turn y's left into x's right
+        if(y->left  !=  this->nil)
+            y->left->parent = x;
+
+        y->parent   =   x->parent;  //  link x's parent to y
+        if(x->parent    ==  this->nil)
+            this->root  =   y;
+        else
+            (x->is_left()?  x->parent.lock()->left  :  x->parent.lock()->right)
+                        =   y;
+
+        y->left     =   x;
+        x->parent   =   y;
+    }
 private:
     sPointer root;
     sPointer nil;
