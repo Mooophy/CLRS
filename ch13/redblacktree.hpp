@@ -41,7 +41,7 @@ public:
     {
         std::cout << "-----------------------------\n";
         std::cout << debug::yellow("root= ") << root
-                  << " key= " << root->key    << std::endl;
+                  << " key = " << root->key    << std::endl;
 
         std::cout << debug::yellow("nil = ") << nil
                   << std::endl;
@@ -177,6 +177,59 @@ public:
 private:
     sPointer root;
     sPointer nil;
+
+
+    void insert_fixup(sPointer added)
+    {
+        while(added->ascend(1)->color   ==  Color::RED)
+        {
+            if(added->ascend(1)->is_left())
+            {
+                sPointer uncle = added->ascend(2)->right;
+                if(uncle->color ==  Color::RED)
+                {
+                    uncle->color            =   Color::BLACK;
+                    added->ascend(1)->color =   Color::BLACK;
+                    added->ascend(2)->color =   Color::RED;
+                    added   =   added->ascend(2);
+                }
+                else
+                {
+                    if(added->is_right())
+                    {
+                        added   =   added->ascend(1);
+                        left_rotate(added);
+                    }
+                    added->ascend(1)->color =   Color::BLACK;
+                    added->ascend(2)->color =   Color::RED;
+                    right_rotate(added->ascend(2));
+                }
+            }
+            else
+            {
+                sPointer uncle = added->ascend(2)->left;
+                if(uncle->color ==  Color::RED)
+                {
+                    uncle->color            =   Color::BLACK;
+                    added->ascend(1)->color =   Color::BLACK;
+                    added->ascend(2)->color =   Color::RED;
+                    added   =   added->ascend(2);
+                }
+                else
+                {
+                    if(added->is_left())
+                    {
+                        added   =   added->ascend(1);
+                        right_rotate(added);
+                    }
+                    added->ascend(1)->color =   Color::BLACK;
+                    added->ascend(2)->color =   Color::RED;
+                    left_rotate(added->ascend(2));
+                }
+            }
+        }
+        root->color = Color::BLACK;
+    }
 };
 }//namespace
 
