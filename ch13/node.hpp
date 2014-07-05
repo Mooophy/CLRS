@@ -15,6 +15,10 @@
 
 namespace ch13 {
 
+
+template<typename K, typename D>
+class RedBlackTree;
+
 enum class Color
 {
     RED,
@@ -29,6 +33,7 @@ enum class Color
 template<typename K, typename D>
 class Node
 {
+    friend class RedBlackTree<K,D>;
 public:
     using KeyType   =   K;
     using DataType  =   D;
@@ -94,12 +99,11 @@ public:
      */
     void print()const
     {
-        std::cout   <<  "key="  +   debug::green(std::to_string(key)) + " ";
+        std::cout << "key= "  +  debug::green(std::to_string(key)) + " ";
+        std::cout << (color == Color::RED?   debug::red("red")   :   "black");
 
-        if(!is_left()   &&  !is_right())
-            std::cout << debug::red("root")  << std::endl;
-        else
-            std::cout << (is_left()?    debug::green("left ")    :   debug::yellow("right "));
+
+        std::cout << std::endl;
     }
 private:
     KeyType     key;

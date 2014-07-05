@@ -8,5 +8,6 @@ SOURCES += main.cpp
 
 HEADERS += \
     debug.hpp \
-    node.hpp
+    node.hpp \
+    redblacktree.hpp
 
