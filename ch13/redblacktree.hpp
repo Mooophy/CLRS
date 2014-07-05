@@ -188,6 +188,38 @@ private:
     sPointer nil;
 
     /**
+     * @brief transplant
+     * @param to
+     * @param from
+     *
+     * @note    a bit different from the BST version
+     * @complx  O(1)
+     * @page    323
+     */
+    void transplant(sPointer to, sPointer from)
+    {
+        if(ascend(to,1) == this->nil)
+            this->nil   =   from;
+        else
+            (to->is_left()?     to->left    :   from->right)
+                        =   from;
+
+        from->parent    =   to->parent;
+    }
+
+    /**
+     * @brief minimum
+     */
+    sPointer minimum(sPointer node)
+    {
+        assert(node != this->nil);
+
+        while(node != this->nil)
+            node    =   node->left;
+        return node;
+    }
+
+    /**
      * @brief ascend
      *
      * used for insert_fixup

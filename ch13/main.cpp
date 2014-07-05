@@ -15,6 +15,10 @@ int main()
     tree.print();
     std::cout << "length = " << v.size() << std::endl;
 
+
+
+
+
     return 0;
 }
 
