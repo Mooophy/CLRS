@@ -39,6 +39,13 @@ public:
      */
     void print()const
     {
+        std::cout << "-----------------------------\n";
+        std::cout << debug::yellow("root= ") << root
+                  << " key= " << root->key    << std::endl;
+
+        std::cout << debug::yellow("nil = ") << nil
+                  << std::endl;
+
         std::function<void(sPointer node)> inorder_walk =
                 [&inorder_walk,this](sPointer node)
         {
@@ -50,6 +57,8 @@ public:
             }
         };
         inorder_walk(root);
+
+
     }
 
     /**
@@ -129,7 +138,7 @@ public:
             y->left->parent = x;
 
         y->parent   =   x->parent;  //  link x's parent to y
-        if(x->parent    ==  this->nil)
+        if(x->parent.lock()    ==  this->nil)
             this->root  =   y;
         else
             (x->is_left()?  x->parent.lock()->left  :  x->parent.lock()->right)
