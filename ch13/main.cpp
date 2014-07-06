@@ -6,15 +6,16 @@
 int main()
 {    
     std::vector<int> v =
-        {6,5,9,10};
+        {6,5,9};
     ch13::RedBlackTree<int,std::string> tree;
 
     for(auto i : v)
         tree.insert(i);
 
-    tree.remove(tree.search(5));
 
     tree.print();
+
+    tree.sibling(tree.search(9))->print();
 
 
 

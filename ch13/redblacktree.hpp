@@ -234,7 +234,7 @@ public:
      */
     sPointer sibling(sPointer node)
     {
-        assert(node != this->nil);
+        assert(node != this->root);
 
         sPointer pnt = node->parent.lock();
         return node->is_left()?     pnt->right  :   pnt->left;
