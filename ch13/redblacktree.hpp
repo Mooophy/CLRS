@@ -228,7 +228,7 @@ public:
         x->right    =   y;
         y->parent   =   x;
     }
-//private:
+private:
     sPointer root;
     sPointer nil;
 
@@ -260,12 +260,12 @@ public:
         assert(node != this->nil);
 
         sPointer tracker = node;
-
         while(node != this->nil)
         {
             tracker =   node;
             node    =   node->left;
         }
+
         return tracker;
     }
 

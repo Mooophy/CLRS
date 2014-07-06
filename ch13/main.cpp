@@ -14,7 +14,7 @@ int main()
 
     tree.print();
 
-    tree.remove(tree.search(6));
+    tree.remove(tree.search(9));
 
     tree.print();
 
