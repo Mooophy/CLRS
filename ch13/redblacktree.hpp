@@ -74,7 +74,7 @@ public:
 
         if(y_original_color ==  Color::BLACK)
             //  to do   : add fix up function
-            ;
+        {}
     }
 
     /**
@@ -228,7 +228,7 @@ public:
         x->right    =   y;
         y->parent   =   x;
     }
-private:
+//private:
     sPointer root;
     sPointer nil;
 
@@ -241,12 +241,12 @@ private:
      * @complx  O(1)
      * @page    323
      */
-    void transplant(sPointer to, sPointer from)
+    void transplant(sPointer to, sPointer from)    
     {
         if(ascend(to,1) == this->nil)
-            this->nil   =   from;
+            this->root  =   from;
         else
-            (to->is_left()?     to->left    :   from->right)
+            (to->is_left()?     ascend(to,1)->left    :   ascend(to,1)->right)
                         =   from;
 
         from->parent    =   to->parent;
