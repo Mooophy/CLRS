@@ -259,9 +259,14 @@ public:
     {
         assert(node != this->nil);
 
+        sPointer tracker = node;
+
         while(node != this->nil)
+        {
+            tracker =   node;
             node    =   node->left;
-        return node;
+        }
+        return tracker;
     }
 
     /**
