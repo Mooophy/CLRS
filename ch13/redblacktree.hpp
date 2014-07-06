@@ -32,6 +32,51 @@ public:
         root = nil;
     }
 
+    void remove(sPointer target)
+    {
+        sPointer x,y;
+        Color  y_original_color;
+
+        if(target->left == this->nil)
+        {
+            y = target;
+            y_original_color = y->color;
+            x = y->right;
+            transplant(target,x);
+        }
+        else if(target->right   ==  this->nil)
+        {
+            y = target;
+            y_original_color = y->color;
+            x = y->left;
+            transplant(target,x);
+        }
+        else
+        {
+            y = minimum(target->right);
+            y_original_color = y->color;
+            x = y->right;
+
+            if(y->parent.lock() ==  target)
+                x->parent   =   y;
+            else
+            {
+                transplant(y,x);
+                y->right    =   target->right;
+                y->right->parent    =   y;
+            }
+
+            transplant(target, y);
+            y->left         =   target->left;
+            y->left->parent =   y;
+            y->color        =   target->color;
+        }
+
+        if(y_original_color ==  Color::BLACK)
+            //  to do   : add fix up function
+            ;
+    }
+
     /**
      * @brief print
      *
