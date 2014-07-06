@@ -174,7 +174,7 @@ public:
      * @param x
      *
      *      [x]                    [y]
-     *         \        =>        /
+     *         \         =>       /
      *          [y]            [x]
      *
      * @complx  o(1)
@@ -205,7 +205,7 @@ public:
      * @param y
      *
      *          [y]             [x]
-     *          /       =>         \
+     *          /        =>        \
      *        [x]                   [y]
      *
      * @complx  O(1)
@@ -228,6 +228,18 @@ public:
         x->right    =   y;
         y->parent   =   x;
     }
+
+    /**
+     * @brief return the argument's sibling node
+     */
+    sPointer sibling(sPointer node)
+    {
+        assert(node != this->nil);
+
+        sPointer pnt = node->parent.lock();
+        return node->is_left()?     pnt->right  :   pnt->left;
+    }
+
 private:
     sPointer root;
     sPointer nil;
