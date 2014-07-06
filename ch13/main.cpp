@@ -13,10 +13,14 @@ int main()
         tree.insert(i);
 
     tree.print();
-    std::cout << "length = " << v.size() << std::endl;
+
+    tree.remove(tree.search(6));
+
+    tree.print();
 
 
 
+    std::cout << debug::green("\n====end====") << std::endl;
 
 
     return 0;
