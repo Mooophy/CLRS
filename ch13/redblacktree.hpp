@@ -418,6 +418,8 @@ private:
                 std::cout << debug::green("not implemented yet!!") << std::endl;
             }
         }
+
+        x->color  =  Color::BLACK;
     }
 };
 }//namespace
