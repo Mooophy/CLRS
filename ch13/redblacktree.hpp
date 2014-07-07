@@ -415,10 +415,46 @@ private:
             }
             else
             {
-                std::cout << debug::green("not implemented yet!!") << std::endl;
+                sPointer sister = sibling(x);
+
+                //! case 1
+                if(sister->color    ==  Color::RED)
+                {
+                    sister->color       =   Color::BLACK;
+                    ascend(x,1)->color  =   Color::RED;
+                    right_rotate(ascend(x,1));
+                    sister              =   ascend(x,1)->left;
+                }
+
+                //! case 2
+                if(sister->left->color  ==  Color::BLACK
+                        &&
+                            sister->right->color  ==  Color::BLACK)
+                {
+                    sister->color   =   Color::RED;
+                    x   =   ascend(x,1);
+                }
+
+                else
+                {
+                    //! case 3
+                    if(sister->left->color ==  Color::BLACK)
+                    {
+                        sister->right->color    =   Color::BLACK;
+                        sister->color           =   Color::BLACK;
+                        left_rotate(sister);
+                        sister  =  sibling(x);
+                    }
+
+                    //! case 4
+                    sister->color           =   ascend(x,1)->color;
+                    ascend(x,1)->color      =   Color::BLACK;
+                    sister->left->color     =   Color::BLACK;
+                    right_rotate(ascend(x,1));
+                    x   =   root;
+                }
             }
         }
-
         x->color  =  Color::BLACK;
     }
 };
@@ -447,3 +483,28 @@ private:
 
 //    return 0;
 //}
+
+//! testing remove()
+//#include <iostream>
+//#include <vector>
+//#include <node.hpp>
+//#include "redblacktree.hpp"
+
+//int main()
+//{
+//    std::vector<int> v =
+//        {2,3,6,99,22,33,5,67};
+//    ch13::RedBlackTree<int,std::string> tree;
+
+//    for(auto i : v)
+//        tree.insert(i);
+//    tree.print();
+
+//    tree.remove(tree.search(6));
+//    tree.print();
+
+//    std::cout << debug::green("\n====end====") << std::endl;
+
+//    return 0;
+//}
+
