@@ -32,6 +32,13 @@ public:
         root = nil;
     }
 
+    /**
+     * @brief remove
+     *
+     * @compx   O(lg n)
+     *
+     * @page    324
+     */
     void remove(sPointer target)
     {
         sPointer x,y;
@@ -73,8 +80,9 @@ public:
         }
 
         if(y_original_color ==  Color::BLACK)
-            //  to do   : add fix up function
-        {}
+        {
+            remove_fixup(x);
+        }
     }
 
     /**
@@ -244,6 +252,8 @@ private:
     sPointer root;
     sPointer nil;
 
+
+
     /**
      * @brief transplant
      * @param to
@@ -350,6 +360,64 @@ private:
             }
         }
         root->color = Color::BLACK;
+    }
+
+    /**
+     * @brief remove_fixup
+     * @param x
+     *
+     * @complx  O(lg n)
+     * @page    326
+     */
+    void remove_fixup(sPointer x)
+    {
+        while(x != root   &&   x->color != Color::BLACK)
+        {
+            if(x->is_left())
+            {
+                sPointer sister = sibling(x);
+
+                //! case 1
+                if(sister->color    ==  Color::RED)
+                {
+                    sister->color       =   Color::BLACK;
+                    ascend(x,1)->color  =   Color::RED;
+                    left_rotate(ascend(x,1));
+                    sister              =   ascend(x,1)->right;
+                }
+
+                //! case 2
+                if(sister->left->color  ==  Color::BLACK
+                        &&
+                            sister->right->color  ==  Color::BLACK)
+                {
+                    sister->color   =   Color::RED;
+                    x   =   ascend(x,1);
+                }
+                else
+                {
+                    //! case 3
+                    if(sister->right->color ==  Color::BLACK)
+                    {
+                        sister->left->color =   Color::BLACK;
+                        sister->color       =   Color::BLACK;
+                        right_rotate(sister);
+                        sister              =   sibling(x);
+                    }
+
+                    //! case 4
+                    sister->color           =   ascend(x,1)->color;
+                    ascend(x,1)->color      =   Color::BLACK;
+                    sister->right->color    =   Color::BLACK;
+                    left_rotate(ascend(x,1));
+                    x   =   root;
+                }
+            }
+            else
+            {
+                std::cout << debug::green("not implemented yet!!") << std::endl;
+            }
+        }
     }
 };
 }//namespace
