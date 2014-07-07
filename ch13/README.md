@@ -2,9 +2,9 @@
 -------------------
 
 - redblacktree.hpp	
- - 13.2 Rotations
-  - LEFT-ROTATE
-- 13.3 Insertion
+ - LEFT-ROTATE
+ - RIGHT-ROTATE
  - RB-INSERT          
  - RB-INSERT-FIXUP     
-
+ - RB-DELETE
+ - RB-DELETE-FIXUP
