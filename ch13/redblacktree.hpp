@@ -371,7 +371,7 @@ private:
      */
     void remove_fixup(sPointer x)
     {
-        while(x != root   &&   x->color != Color::BLACK)
+        while(x != root   &&   x->color == Color::BLACK)
         {
             if(x->is_left())
             {
