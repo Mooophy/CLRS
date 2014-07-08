@@ -509,8 +509,7 @@ private:
 //}
 
 //!
-//! testing for ex13.4-3
-//! 13.4-3
+//! ex13.4-3
 //! In Exercise 13.3-2, you found the red-black tree that results from successively
 //! inserting the keys 41; 38; 31; 12; 19; 8 into an initially empty tree. Now show the
 //! red-black trees that result from the successive deletion of the keys in the order
@@ -549,7 +548,7 @@ private:
 //    return 0;
 //}
 //!
-//! 13.4-7
+//! ex13.4-7
 //! Suppose that a node x is inserted into a red-black tree with RB-I NSERT and then
 //! is immediately deleted with RB-D ELETE . Is the resulting red-black tree the same
 //! as the initial red-black tree? Justify your answer.
