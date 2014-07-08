@@ -508,3 +508,44 @@ private:
 //    return 0;
 //}
 
+//!
+//! testing for ex13.4-3
+//! 13.4-3
+//! In Exercise 13.3-2, you found the red-black tree that results from successively
+//! inserting the keys 41; 38; 31; 12; 19; 8 into an initially empty tree. Now show the
+//! red-black trees that result from the successive deletion of the keys in the order
+//! 8; 12; 19; 31; 38; 41.
+//!
+//#include <iostream>
+//#include <vector>
+//#include <node.hpp>
+//#include "redblacktree.hpp"
+
+//int main()
+//{
+//    std::vector<int> v =
+//        {41,38,31,12,19,8};
+//    ch13::RedBlackTree<int,std::string> tree;
+
+//    for(auto i : v)
+//        tree.insert(i);
+//    tree.print();
+
+//    tree.remove(tree.search(8));
+//    tree.print();
+//    tree.remove(tree.search(12));
+//    tree.print();
+//    tree.remove(tree.search(19));
+//    tree.print();
+//    tree.remove(tree.search(31));
+//    tree.print();
+//    tree.remove(tree.search(38));
+//    tree.print();
+//    tree.remove(tree.search(41));
+//    tree.print();
+
+//    std::cout << debug::green("\n====end====") << std::endl;
+
+//    return 0;
+//}
+
