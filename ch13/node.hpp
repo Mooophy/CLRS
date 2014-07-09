@@ -19,6 +19,9 @@ namespace ch13 {
 template<typename K, typename D>
 class RedBlackTree;
 
+template<typename K, typename D>
+class PersistentTree;
+
 enum class Color
 {
     RED,
@@ -34,6 +37,7 @@ template<typename K, typename D>
 class Node
 {
     friend class RedBlackTree<K,D>;
+    friend class PersistentTree<K,D>;
 public:
     using KeyType   =   K;
     using DataType  =   D;
@@ -99,9 +103,6 @@ private:
     wPointer    parent;
     Color       color = Color::BLACK;
     DataType    data;
-
-
-
 };
 
 

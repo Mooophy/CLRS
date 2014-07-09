@@ -9,5 +9,6 @@ SOURCES += main.cpp
 HEADERS += \
     debug.hpp \
     node.hpp \
-    redblacktree.hpp
+    redblacktree.hpp \
+    persistent_tree.hpp
 
