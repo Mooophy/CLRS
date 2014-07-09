@@ -5,26 +5,7 @@
  *  @remark     Algorithims implementation for CLRS, using C++ templates.
  ***************************************************************************/
 //!
-//! Problem
-//! 13-1 Persistent dynamic sets
-//! During the course of an algorithm, we sometimes find that we need to maintain past
-//! versions of a dynamic set as it is updated. We call such a set persistent. One way to
-//! implement a persistent set is to copy the entire set whenever it is modified, but this
-//! approach can slow down a program and also consume much space. Sometimes, we
-//! can do much better.
-//! Consider a persistent set S with the operations I NSERT , D ELETE , and S EARCH ,
-//! which we implement using binary search trees as shown in Figure 13.8(a). We
-//! maintain a separate root for every version of the set. In order to insert the key 5
-//! into the set, we create a new node with key 5. This node becomes the left child
-//! of a new node with key 7, since we cannot modify the existing node with key 7.
-//! Similarly, the new node with key 7 becomes the left child of a new node with
-//! key 8 whose right child is the existing node with key 10. The new node with key 8
-//! becomes, in turn, the right child of a new root r 0 with key 4 whose left child is the
-//! existing node with key 3. We thus copy only part of the tree and share some of the
-//! nodes with the original tree, as shown in Figure 13.8(b).
-//! Assume that each tree node has the attributes key, left, and right but no parent.
-//! (See also Exercise 13.3-6.)
-//!
+//! Problem 13-1
 //! a. For a general persistent binary search tree, identify the nodes that we need to
 //! change to insert a key k or delete a node y
 //  For k, nodes on the path to search for it need to be changed.
@@ -42,7 +23,9 @@
 #define PERSISTENT_TREE_HPP
 
 #include "node.hpp"
+#include "debug.hpp"
 #include <vector>
+#include <functional>
 
 namespace ch13 {
 
@@ -89,9 +72,33 @@ public:
         return versions.empty();
     }
 
+    void print()const
+    {
+        //! lambda for printing a version
+        std::function<void(sPointer)> inorder_walk=
+                [&](sPointer node)
+        {
+            if(node)
+            {
+                inorder_walk(node->left);
+                node->print();
+                inorder_walk(node->right);
+            }
+        };
+
+        //! print all
+        int ver = 0;
+        for(const auto& root : versions)
+        {
+            std::string verStr = debug::green(std::to_string(ver++));
+            std::cout << debug::green("version " + verStr) << std::endl;
+            inorder_walk(root);
+        }
+    }
 
 private:
     Vector  versions;
+
 
     /**
      * @brief insert
@@ -143,26 +150,33 @@ private:
             }
 
             //! graft on the inserted node
-            (new_curr->key < added->key?   new_curr->left  :   new_curr->right)
+            (new_curr->key < added->key?   new_curr->right  :   new_curr->left)
                     =   added;
         }
     }
 };
 
 }//namespace
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif // PERSISTENT_TREE_HPP
+
+
+//! testing insert i.e.part b
+//#include <iostream>
+//#include <vector>
+//#include "persistent_tree.hpp"
+
+//int main()
+//{
+//    ch13::PersistentTree<int, std::string> tree;
+
+//    tree.insert(1,"001");
+//    tree.insert(2);
+//    tree.insert(3);
+//    tree.insert(0);
+
+//    tree.print();
+
+//    std::cout << "\nend" << std::endl;
+
+//    return 0;
+//}
