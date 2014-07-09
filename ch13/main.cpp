@@ -10,6 +10,7 @@ int main()
     tree.insert(2);
     tree.insert(3);
     tree.insert(0);
+    tree.insert(99);
 
     tree.print();
 

@@ -10,7 +10,6 @@
 #include <functional>
 #include "node.hpp"
 
-
 namespace ch13{
 
 /**

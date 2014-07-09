@@ -12,12 +12,33 @@
 //  For y, when less than 2 children, same as k. when 2 children nodes on path to search
 //  for y's replacer need to be changed.
 //!
-//! b. Write a procedure P ERSISTENT -T REE -I NSERT that, given a persistent tree T
+//! b.  Write a procedure P ERSISTENT -T REE -I NSERT that, given a persistent tree T
 //! and a key k to insert, returns a new persistent tree T 0 that is the result of insert-
 //! ing k into T .
 //!
 //  Shown as the class PersistentTree below
 //!
+//! c.  If the height of the persistent binary search tree T is h, what are the time and
+//! space requirements of your implementation of PERSISTENT-TREE-INSERT()
+//! (The space requirement is proportional to the number of new nodes allocated.)
+//!
+//      time complexity     :   O(h)
+//      space complexity    :   O(h)
+//!
+//! d.  Suppose that we had included the parent attribute in each node. In this case,
+//! PERSISTENT-TREE-INSERT would need to perform additional copying. Prove
+//! that PERSISTENT-TREE-INSERT would then require omega(n) time and space,
+//! where n is the number of nodes in the tree.
+//!
+//  It implies that all nodes have to copy to build a new tree, otherwise some nodes would have
+//  multiple parents
+//!
+//! e.  Show how to use red-black trees to guarantee that the worst-case running time
+//! and space are O(lg n) per insertion or deletion.
+//!
+
+
+
 
 #ifndef PERSISTENT_TREE_HPP
 #define PERSISTENT_TREE_HPP
@@ -29,6 +50,11 @@
 
 namespace ch13 {
 
+/**
+ * @brief PersistentTree
+ *
+ * the Binary Search Tree version
+ */
 template<typename K, typename D>
 class PersistentTree
 {
@@ -67,11 +93,17 @@ public:
         insert(added);
     }
 
+    /**
+     * @brief empty
+     */
     bool empty()const
     {
         return versions.empty();
     }
 
+    /**
+     * @brief print
+     */
     void print()const
     {
         //! lambda for printing a version
@@ -154,8 +186,7 @@ private:
                     =   added;
         }
     }
-};
-
+};//class persistent tree
 }//namespace
 #endif // PERSISTENT_TREE_HPP
 
