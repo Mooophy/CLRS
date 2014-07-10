@@ -25,6 +25,7 @@ public:
     using NodeType  =   Node<K,D>;
     using sPointer  =   std::shared_ptr<NodeType>;
     using wPointer  =   std::weak_ptr<NodeType>;
+    using Vector    =   std::vector<sPointer>;
 
     RedBlackTree():
         nil(std::make_shared<NodeType>())
@@ -248,45 +249,6 @@ public:
         return node->is_left()?     pnt->right  :   pnt->left;
     }
 
-    /**
-     * @brief insert_without_parent
-     * @param key
-     *
-     * @complx  O(lg n)
-     * for ex13.3-6
-     */
-    void insert_without_parent(const KeyType& key)
-    {
-        //! allocation
-        sPointer added = std::make_shared<NodeType>(key);
-
-        //! search the appropriate position
-        sPointer curr = root;
-        std::vector<sPointer> path;
-        path.push_back(nil);
-        while(curr != nil)
-        {
-            path.push_back(curr);
-            curr    =   (curr->key > added->key?   curr->left  :  curr->right);
-        }
-
-        //! graft on the new node
-        if(root == nil)
-            root    =   added;
-        else
-        {
-            sPointer& tail = path.back();
-            (added->key < tail->key?    tail->left  :   tail->right)
-                    =   added;
-        }
-        added->left     =   added->right    =   nil;
-        added->color    =   Color::RED;
-        path.push_back(added);
-
-        //! fix up
-        //to do :   insert_fixup_without_parent(path)
-    }
-
 private:
     sPointer root;
     sPointer nil;
@@ -494,6 +456,7 @@ private:
         }
         x->color  =  Color::BLACK;
     }
+
 };
 }//namespace
 
