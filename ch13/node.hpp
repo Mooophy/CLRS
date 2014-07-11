@@ -22,6 +22,9 @@ class RedBlackTree;
 template<typename K, typename D>
 class PersistentTree;
 
+template<typename K,typename D>
+class RedBlackTreeNoParent;
+
 enum class Color
 {
     RED,
@@ -38,6 +41,7 @@ class Node
 {
     friend class RedBlackTree<K,D>;
     friend class PersistentTree<K,D>;
+    friend class RedBlackTreeNoParent<K,D>;
 public:
     using KeyType   =   K;
     using DataType  =   D;

@@ -187,6 +187,7 @@ private:
         }
     }
 };//class persistent tree
+
 }//namespace
 #endif // PERSISTENT_TREE_HPP
 

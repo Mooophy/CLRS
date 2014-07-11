@@ -1,14 +1,12 @@
 #include <iostream>
 #include <vector>
-#include "redblacktree.hpp"
+#include "red_black_tree_no_parent.hpp"
 
 int main()
 {    
+    ch13::RedBlackTreeNoParent<int,std::string> tree;
 
-    ch13::RedBlackTree<int,std::string> tree;
-
-    std::vector<int> v = {3,1,0,2,4,5,1};
-
+    std::vector<int> v = {2,6,7,88,1,55,23};
     for(auto i : v)
         tree.insert(i);
 

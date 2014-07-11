@@ -10,5 +10,6 @@ HEADERS += \
     debug.hpp \
     node.hpp \
     redblacktree.hpp \
-    persistent_tree.hpp
+    persistent_tree.hpp \
+    red_black_tree_no_parent.hpp
 
