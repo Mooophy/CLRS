@@ -25,7 +25,7 @@ public:
     using NodeType  =   Node<K,D>;
     using sPointer  =   std::shared_ptr<NodeType>;
     using wPointer  =   std::weak_ptr<NodeType>;
-    using Vector    =   std::vector<sPointer>;
+
 
     RedBlackTree():
         nil(std::make_shared<NodeType>())
