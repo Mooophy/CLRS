@@ -174,7 +174,7 @@ private:
                         new_curr->left  =
                                 std::make_shared<NodeType>(*old_curr->left);
                         new_curr    =   new_curr->left;
-                        old_curr    =   old_curr->right;
+                        old_curr    =   old_curr->left;
                     }
                     else
                         break;
