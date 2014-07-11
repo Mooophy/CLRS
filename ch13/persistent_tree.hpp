@@ -37,9 +37,6 @@
 //! and space are O(lg n) per insertion or deletion.
 //!
 
-
-
-
 #ifndef PERSISTENT_TREE_HPP
 #define PERSISTENT_TREE_HPP
 
