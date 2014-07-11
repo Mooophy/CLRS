@@ -33,9 +33,6 @@
 //  It implies that all nodes have to copy to build a new tree, otherwise some nodes would have
 //  multiple parents
 //!
-//! e.  Show how to use red-black trees to guarantee that the worst-case running time
-//! and space are O(lg n) per insertion or deletion.
-//!
 
 #ifndef PERSISTENT_TREE_HPP
 #define PERSISTENT_TREE_HPP

@@ -25,6 +25,11 @@ class PersistentTree;
 template<typename K,typename D>
 class RedBlackTreeNoParent;
 
+/**
+ * @brief The Color enum
+ *
+ * for red black tree
+ */
 enum class Color
 {
     RED,
@@ -70,6 +75,9 @@ public:
 
     /**
      * @brief is_left
+     *
+     * Since no parent can be used for persistent trees, this metod can not
+     * used directly
      */
     bool is_left() const
     {
@@ -79,6 +87,9 @@ public:
 
     /**
      * @brief is_right
+     *
+     * Since no parent can be used for persistent trees, this metod can not
+     * used directly
      */
     bool is_right() const
     {
