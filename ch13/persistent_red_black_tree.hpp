@@ -86,12 +86,54 @@ private:
 
     void insert(sPointer added)
     {
+       //!  initial case
        if(empty())
-           versions.push_back(added);
-       else
        {
-            std::cout << debug::green("not implemented!!") << std::endl;
+           versions.push_back(added);
+           return;
        }
+
+       //!  previous and current version
+       sPointer prev = versions.back();
+       sPointer curr = std::make_shared<NodeType>(*prev);
+       versions.push_back(curr);
+
+       //!  search for the appropriate position, building the path.
+       Vector   path = {nil, curr};
+       while(true)
+       {
+            if(prev->key < added->key)
+            {
+                //! use existing node
+                curr->left  =   prev->left;
+
+                if(prev->right  ==  nil)    break;
+
+                curr->right =   std::make_shared<NodeType>(*prev->right);
+                prev        =   prev->right;
+                curr        =   curr->right;
+            }
+            else
+            {
+                //! use existing node
+                curr->right =   prev->right;
+
+                if(prev->left   ==  nil)    break;
+
+                curr->left  =   std::make_shared<NodeType>(*prev->left);
+                prev        =   prev->left;
+                curr        =   curr->left;
+            }
+            path.push_back(curr);
+       }
+
+       //!  graft on the inserted node
+       (curr->key < added->key?     curr->right :   curr->left)     =   added;
+       added->left  =   added->right    =   nil;
+       added->color =   Color::RED;
+
+       //!  @todo
+       //insert_fixup(path);
     }
 };
 
