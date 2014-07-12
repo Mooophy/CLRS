@@ -10,6 +10,9 @@
 //! e.  Show how to use red-black trees to guarantee that the worst-case running time
 //! and space are O(lg n) per insertion or deletion.
 //!
+//  as implemented below, the red black tree guarantee that only the searching path is
+//  needed,which means that O(lg n) is the worst-case time and space requirement.
+//!
 #ifndef PERSISTENT_RED_BLACK_TREE_HPP
 #define PERSISTENT_RED_BLACK_TREE_HPP
 
@@ -35,7 +38,6 @@ public:
     using sPointer  =   std::shared_ptr<NodeType>;
     using wPointer  =   std::weak_ptr<NodeType>;
     using Vector    =   std::vector<sPointer>;
-
 
     /**
      * @brief default Ctor
@@ -76,7 +78,6 @@ public:
         sPointer added = std::make_shared<NodeType>(key, data);
         insert(added);
     }
-
 
     /**
      * @brief print

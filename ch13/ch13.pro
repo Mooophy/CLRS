@@ -12,5 +12,6 @@ HEADERS += \
     redblacktree.hpp \
     persistent_tree.hpp \
     red_black_tree_no_parent.hpp \
-    persistent_red_black_tree.hpp
+    persistent_red_black_tree.hpp \
+    red_black_tree_with_bh.hpp
 

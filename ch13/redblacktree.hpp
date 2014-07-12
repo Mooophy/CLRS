@@ -249,7 +249,7 @@ public:
         return node->is_left()?     pnt->right  :   pnt->left;
     }
 
-private:
+protected:
     sPointer root;
     sPointer nil;
 
