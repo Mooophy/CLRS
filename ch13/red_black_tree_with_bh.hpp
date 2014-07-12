@@ -14,7 +14,9 @@
 //! termine the black-height of each node we visit in O(1) time per node visited.
 //!
 //  Insert  :   as shown by running the testing code below, black hight only increments
-//              when the root changes to red.So black height can be maintained like so.
+//              when the root changes to red. This property can also be proven  through
+//              its symmetry.
+//              So black height can be maintained like so.
 //!
 
 #ifndef RED_BLACK_TREE_WITH_BH_HPP
@@ -46,7 +48,7 @@ public:
      */
 
     RedBlackTreeWithBh():
-        RedBlackTree<K,D>(),black_height(0)
+        Base(),black_height(0)
     {}
 
     /**
@@ -81,9 +83,62 @@ public:
         insert(added);
     }
 
+    virtual void remove(sPointer target)
+    {
+        sPointer x,y;
+        Color  y_original_color;
+
+        if(target->left == this->nil)
+        {
+            y = target;
+            y_original_color = y->color;
+            x = y->right;
+            Base::transplant(target,x);
+        }
+        else if(target->right   ==  this->nil)
+        {
+            y = target;
+            y_original_color = y->color;
+            x = y->left;
+            Base::transplant(target,x);
+        }
+        else
+        {
+            y = Base::minimum(target->right);
+            y_original_color = y->color;
+            x = y->right;
+
+            if(y->parent.lock() ==  target)
+                x->parent   =   y;
+            else
+            {
+                Base::transplant(y,x);
+                y->right    =   target->right;
+                y->right->parent    =   y;
+            }
+
+            Base::transplant(target, y);
+            y->left         =   target->left;
+            y->left->parent =   y;
+            y->color        =   target->color;
+        }
+
+        if(y_original_color ==  Color::BLACK)
+        {
+            --black_height;
+            remove_fixup(x);
+        }
+    }
+
+    virtual ~RedBlackTreeWithBh(){ }
+protected:
+    SizeType    black_height;
+
     /**
      * @brief insert
      * @param added
+     *
+     * @complx  O(h)
      */
     virtual void insert(sPointer added)
     {
@@ -108,13 +163,12 @@ public:
         insert_fixup(added);
     }
 
-    virtual ~RedBlackTreeWithBh(){ }
-
-
-protected:
-
-    SizeType    black_height;
-
+    /**
+     * @brief insert_fixup
+     * @param added
+     *
+     * @complx O(h)
+     */
     virtual void insert_fixup(sPointer added)
     {
         while(Base::ascend(added,1)->color   ==  Color::RED)
@@ -168,13 +222,113 @@ protected:
         //! @attention:
         //!     maintain the black height data member
         //!     as required in problem 13-1.a
-        if(Base::root->color    ==  Color::RED)
+        if(Base::root->color    ==  Color::RED
+                &&
+                    (Base::root->left    !=  Base::nil
+                        ||
+                            Base::root->right   !=  Base::nil)
+                )
             ++black_height;
 
         Base::root->color = Color::BLACK;
     }
 
+    /**
+     * @brief remove_fixup
+     * @param x
+     *
+     * @complx  O(lg n)
+     * @page    326
+     */
+    virtual void remove_fixup(sPointer x)
+    {
+        while(x != Base::root   &&   x->color == Color::BLACK)
+        {
+            if(x->is_left())
+            {
+                sPointer sister = Base::sibling(x);
 
+                //! case 1
+                if(sister->color    ==  Color::RED)
+                {
+                    sister->color               =   Color::BLACK;
+                    Base::ascend(x,1)->color    =   Color::RED;
+                    Base::left_rotate(Base::ascend(x,1));
+                    sister                      =   Base::ascend(x,1)->right;
+                }
+
+                //! case 2
+                if(sister->left->color  ==  Color::BLACK
+                        &&
+                            sister->right->color  ==  Color::BLACK)
+                {
+                    sister->color   =   Color::RED;
+                    x   =   Base::ascend(x,1);
+                }
+                else
+                {
+                    //! case 3
+                    if(sister->right->color ==  Color::BLACK)
+                    {
+                        sister->left->color =   Color::BLACK;
+                        sister->color       =   Color::BLACK;
+                        Base::right_rotate(sister);
+                        sister              =   Base::sibling(x);
+                    }
+
+                    //! case 4
+                    sister->color           =   Base::ascend(x,1)->color;
+                    Base::ascend(x,1)->color=   Color::BLACK;
+                    sister->right->color    =   Color::BLACK;
+                    Base::left_rotate(Base::ascend(x,1));
+                    x   =   Base::root;
+                }
+            }
+            else
+            {
+                sPointer sister = Base::sibling(x);
+
+                //! case 1
+                if(sister->color    ==  Color::RED)
+                {
+                    sister->color               =   Color::BLACK;
+                    Base::ascend(x,1)->color    =   Color::RED;
+                    Base::right_rotate(Base::ascend(x,1));
+                    sister                      =   Base::ascend(x,1)->left;
+                }
+
+                //! case 2
+                if(sister->left->color  ==  Color::BLACK
+                        &&
+                            sister->right->color  ==  Color::BLACK)
+                {
+                    sister->color   =   Color::RED;
+                    x   =   Base::ascend(x,1);
+                }
+
+                else
+                {
+                    //! case 3
+                    if(sister->left->color ==  Color::BLACK)
+                    {
+                        sister->right->color    =   Color::BLACK;
+                        sister->color           =   Color::BLACK;
+                        Base::left_rotate(sister);
+                        sister  =  Base::sibling(x);
+                    }
+
+                    //! case 4
+                    sister->color               =   Base::ascend(x,1)->color;
+                    Base::ascend(x,1)->color    =   Color::BLACK;
+                    sister->left->color         =   Color::BLACK;
+                    Base::right_rotate(Base::ascend(x,1));
+                    x   =   Base::root;
+                }
+            }
+        }
+
+        x->color  =  Color::BLACK;
+    }
 };
 
 }//namespace
