@@ -91,7 +91,7 @@ public:
      *
      * O(n)
      */
-    void print()const
+    virtual void print()const
     {
         std::cout << "-----------------------------\n";
         std::cout << debug::yellow("root= ") << root
@@ -117,11 +117,24 @@ public:
      * @brief insert
      * @param key
      *
-     * O(h)
+     * just an interface
      */
-    void insert(const KeyType& key)
+    virtual void insert(const KeyType& key)
     {
         sPointer added = std::make_shared<NodeType>(key);
+        insert(added);
+    }
+
+    /**
+     * @brief insert
+     * @param key
+     * @param data
+     *
+     * just an interface
+     */
+    virtual void insert(const KeyType &key, const DataType& data)
+    {
+        sPointer added = std::make_shared<NodeType>(key,data);
         insert(added);
     }
 
@@ -132,7 +145,7 @@ public:
      * @page    315
      * O(h)
      */
-    void insert(sPointer added)
+    virtual void insert(sPointer added)
     {
         sPointer tracker = nil;
         sPointer curr = root;
@@ -249,9 +262,9 @@ public:
         return node->is_left()?     pnt->right  :   pnt->left;
     }
 
+    virtual ~RedBlackTree(){}
+
 protected:
-    sPointer root;
-    sPointer nil;
 
     /**
      * @brief transplant
@@ -457,6 +470,8 @@ protected:
         x->color  =  Color::BLACK;
     }
 
+    sPointer root;
+    sPointer nil;
 };
 }//namespace
 

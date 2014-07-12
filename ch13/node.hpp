@@ -28,6 +28,9 @@ class RedBlackTreeNoParent;
 template<typename K, typename D>
 class PersistentRedBlackTree;
 
+template<typename K, typename D>
+class RedBlackTreeWithBh;
+
 
 /**
  * @brief The Color enum
@@ -49,6 +52,7 @@ template<typename K, typename D>
 class Node
 {
     friend class RedBlackTree<K,D>;
+    friend class RedBlackTreeWithBh<K,D>;
     friend class PersistentTree<K,D>;
     friend class RedBlackTreeNoParent<K,D>;
     friend class PersistentRedBlackTree<K,D>;
