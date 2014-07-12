@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *  @file       redblacktree.hpp
  *  @author     Yue Wang
  *  @date       09  July 2014
@@ -36,17 +36,41 @@ public:
     using wPointer  =   std::weak_ptr<NodeType>;
     using Vector    =   std::vector<sPointer>;
 
+
+    /**
+     * @brief default Ctor
+     */
+    PersistentRedBlackTree():
+        nil(std::make_shared<NodeType>(12345))
+    {}
+
+    /**
+     * @brief empty
+     */
     bool empty()const
     {
         return versions.empty();
     }
 
+    /**
+     * @brief insert
+     * @param key
+     *
+     * just an interface
+     */
     void insert(const KeyType& key)
     {
         sPointer added = std::make_shared<NodeType>(key);
         insert(added);
     }
 
+    /**
+     * @brief insert
+     * @param key
+     * @param data
+     *
+     * just an interface
+     */
     void insert(const KeyType &key, const DataType& data)
     {
         sPointer added = std::make_shared<NodeType>(key, data);
@@ -63,7 +87,7 @@ public:
         std::function<void(sPointer)> inorder_walk=
                 [&](sPointer node)
         {
-            if(node)
+            if(node != nil)
             {
                 inorder_walk(node->left);
                 node->print();
@@ -84,11 +108,18 @@ private:
     Vector  versions;
     sPointer nil;
 
+    /**
+     * @brief insert
+     * @param added
+     *
+     * @complx  O(lg n)
+     */
     void insert(sPointer added)
     {
        //!  initial case
        if(empty())
-       {
+       {           
+           added->left  =   added->right    =   nil;
            versions.push_back(added);
            return;
        }
@@ -132,10 +163,130 @@ private:
        added->left  =   added->right    =   nil;
        added->color =   Color::RED;
 
-       //!  @todo
-       //insert_fixup(path);
+       //!  fixup
+       insert_fixup(path);
     }
-};
+
+    /**
+     * @brief left_rotate
+     * @param x
+     * @param parent
+     *
+     * @complx  O(1)
+     */
+    void left_rotate(sPointer x, sPointer parent, sPointer root)
+    {
+        sPointer y  =   x->right;
+        x->right    =   y->left;
+
+        if(parent   ==  nil)
+            root    =   y;
+        else
+            (x == parent->left?     parent->left    :   parent->right)
+                    =   y;
+
+        y->left     =   x;
+    }
+
+    /**
+     * @brief right_rotate
+     * @param y
+     * @param parent
+     *
+     * @complx  O(1)
+     */
+    void right_rotate(sPointer y, sPointer parent, sPointer root)
+    {
+        sPointer x  =   y->left;
+        y->left     =   x->right;
+
+        if(parent   ==  nil)
+            root    =   x;
+        else
+            (y == parent->left?     parent->left    :   parent->right)
+                    =   x;
+
+        x->right    =   y;
+    }
+
+    /**
+     * @brief insert_fixup
+     * @param path
+     *
+     * @complx  O(lg n)
+     * using path vector instead of parent attribute
+     */
+    void insert_fixup(const Vector& path)
+    {
+        auto curr   =   path.size() - 1;
+        while(path[curr-1]->color   ==  Color::RED)
+        {
+            if(path[curr - 1]   ==  path[curr - 2]->left)
+            {
+                sPointer uncle  =   path[curr - 2]->right;
+                if(uncle->color ==  Color::RED)
+                {
+                    uncle->color            =   Color::BLACK;
+                    path[curr - 1]->color   =   Color::BLACK;
+                    path[curr - 2]->color   =   Color::RED;
+                    curr -=  2;
+                }
+                else
+                {
+                    if(path[curr] == path[curr - 1]->right)
+                    {
+                        --curr;
+                        left_rotate(path[curr], path[curr - 1], path[1]);
+                    }
+                    path[curr - 1]->color   =   Color::BLACK;
+                    path[curr - 2]->color   =   Color::RED;
+                    right_rotate(path[curr - 2], path[curr - 3], path[1]);
+                }
+            }
+            else
+            {
+                sPointer uncle  =   path[curr - 2]->left;
+                if(uncle->color ==  Color::RED)
+                {
+                    uncle->color            =   Color::BLACK;
+                    path[curr - 1]->color   =   Color::BLACK;
+                    path[curr - 2]->color   =   Color::RED;
+                    curr -=  2;
+                }
+                else
+                {
+                    if(path[curr] == path[curr - 1]->left)
+                    {
+                        --curr;
+                        right_rotate(path[curr], path[curr - 1], path[1]);
+                    }
+                    path[curr - 1]->color   =   Color::BLACK;
+                    path[curr - 2]->color   =   Color::RED;
+                    left_rotate(path[curr - 2], path[curr - 3], path[1]);
+                }
+            }
+        }
+        path[1]->color = Color::BLACK;
+    }
+};//class
 
 }//namespace
 #endif // PERSISTENT_RED_BLACK_TREE_HPP
+
+//! code for testing prblem 13-1.e
+//#include <iostream>
+//#include <vector>
+//#include "persistent_red_black_tree.hpp"
+
+//int main()
+//{
+//    ch13::PersistentRedBlackTree<int, std::string> tree;
+//    std::vector<int> v = {3,2,6,7,4,9,8};
+//    for(auto i : v)
+//        tree.insert(i);
+
+//    tree.print();
+//    std::cout << debug::green("\nend") << std::endl;
+
+//    return 0;
+//}

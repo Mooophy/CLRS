@@ -6,13 +6,12 @@
 int main()
 {
     ch13::PersistentRedBlackTree<int, std::string> tree;
-
-    tree.insert(1);
-    tree.insert(2);
-    tree.insert(0);
-    tree.insert(9);
+    std::vector<int> v = {3,2,6,7,4,9,8};
+    for(auto i : v)
+        tree.insert(i);
 
     tree.print();
+    std::cout << debug::green("\nend") << std::endl;
 
     return 0;
 }
