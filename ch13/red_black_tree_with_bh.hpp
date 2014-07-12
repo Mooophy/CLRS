@@ -60,6 +60,9 @@ public:
         std::cout << debug::yellow("black Height = ")
                   << black_height
                   << std::endl;
+
+
+        std::cout << "\n" << std::endl;
     }
 
     /**
@@ -124,10 +127,8 @@ public:
         }
 
         if(y_original_color ==  Color::BLACK)
-        {
-            --black_height;
             remove_fixup(x);
-        }
+
     }
 
     virtual ~RedBlackTreeWithBh(){ }
@@ -226,8 +227,7 @@ protected:
                 &&
                     (Base::root->left    !=  Base::nil
                         ||
-                            Base::root->right   !=  Base::nil)
-                )
+                            Base::root->right   !=  Base::nil))
             ++black_height;
 
         Base::root->color = Color::BLACK;
@@ -238,7 +238,7 @@ protected:
      * @param x
      *
      * @complx  O(lg n)
-     * @page    326
+     * @todo    find a way to maintain bh when deleting
      */
     virtual void remove_fixup(sPointer x)
     {

@@ -40,7 +40,7 @@ public:
      *
      * @page    324
      */
-    void remove(sPointer target)
+    virtual void remove(sPointer target)
     {
         sPointer x,y;
         Color  y_original_color;
@@ -381,7 +381,7 @@ protected:
      * @complx  O(lg n)
      * @page    326
      */
-    void remove_fixup(sPointer x)
+    virtual void remove_fixup(sPointer x)
     {
         while(x != root   &&   x->color == Color::BLACK)
         {
