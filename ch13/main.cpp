@@ -12,6 +12,8 @@ int main()
         tree.insert(i);
     tree.print();
 
+    std::cout << tree.get_bh(41) << std::endl;
+
     std::cout << debug::green("\n\nend") << std::endl;
 
     return 0;

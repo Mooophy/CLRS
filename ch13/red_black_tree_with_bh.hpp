@@ -153,8 +153,31 @@ public:
 
     }
 
+    /**
+     * @brief get_bh
+     * @param key
+     *
+     * @complx O(h)
+     *
+     * @note    this function takes O(h) time for decending
+     *          but the running time for getting black_height of each node
+     *          visited takes O(1)
+     */
+    SizeType get_bh(const KeyType& key)const
+    {
+        SizeType bh = black_height;
+        sPointer curr = root;
+        while(curr != nil  &&  curr->key != key)
+        {
+            if(curr != root  &&  curr->color == Color::BLACK)
+                --bh;
 
+            curr = (curr->key < key?    curr->right     :   curr->left);
+        }
 
+        assert(curr != nil);
+        return bh;
+    }
 
     virtual ~RedBlackTreeWithBh(){ }
 protected:
@@ -373,5 +396,9 @@ protected:
 //        tree.insert(i);
 
 //    tree.print();
+
+//! for testing geting bh when visiting a node
+//    std::cout << tree.get_bh(41) << std::endl;
+
 //    return 0;
 //}
