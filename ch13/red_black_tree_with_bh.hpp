@@ -42,6 +42,7 @@ template<typename K, typename D>
 class RedBlackTreeWithBh : public RedBlackTree<K,D>
 {
 public:
+    //! types def
     using Base      =   RedBlackTree<K,D>;
     using sPointer  =   typename Base::sPointer;
     using KeyType   =   typename Base::KeyType;
@@ -49,10 +50,20 @@ public:
     using NodeType  =   typename Base::NodeType;
     using SizeType  =   std::size_t;
 
+    //! members from base class
+    using Base::transplant;
+    using Base::ascend;
+    using Base::left_rotate;
+    using Base::right_rotate;
+    using Base::minimum;
+    using Base::sibling;
+
+    using Base::nil;
+    using Base::root;
+
     /**
      * @brief default Ctor
      */
-
     RedBlackTreeWithBh():
         Base(),black_height(0)
     {}
@@ -66,7 +77,6 @@ public:
         std::cout << debug::yellow("black Height = ")
                   << black_height
                   << std::endl;
-
 
         std::cout << "\n" << std::endl;
     }
@@ -92,6 +102,12 @@ public:
         insert(added);
     }
 
+    /**
+     * @brief remove
+     * @param target
+     *
+     * @todo    find a way to record bh decrementing
+     */
     virtual void remove(sPointer target)
     {
         sPointer x,y;
@@ -102,18 +118,18 @@ public:
             y = target;
             y_original_color = y->color;
             x = y->right;
-            Base::transplant(target,x);
+            transplant(target,x);
         }
         else if(target->right   ==  this->nil)
         {
             y = target;
             y_original_color = y->color;
             x = y->left;
-            Base::transplant(target,x);
+            transplant(target,x);
         }
         else
         {
-            y = Base::minimum(target->right);
+            y = minimum(target->right);
             y_original_color = y->color;
             x = y->right;
 
@@ -121,12 +137,12 @@ public:
                 x->parent   =   y;
             else
             {
-                Base::transplant(y,x);
+                transplant(y,x);
                 y->right    =   target->right;
                 y->right->parent    =   y;
             }
 
-            Base::transplant(target, y);
+            transplant(target, y);
             y->left         =   target->left;
             y->left->parent =   y;
             y->color        =   target->color;
@@ -152,8 +168,8 @@ protected:
      */
     virtual void insert(sPointer added)
     {
-        sPointer tracker = Base::nil;
-        sPointer curr = Base::root;
+        sPointer tracker = nil;
+        sPointer curr = root;
         while(curr != Base::nil)
         {
             tracker =   curr;
@@ -161,13 +177,13 @@ protected:
         }
 
         added->parent   =   tracker;
-        if(tracker == Base::nil)
-            Base::root    =   added;
+        if(tracker == nil)
+            root    =   added;
         else
             (added->key < tracker->key?     tracker->left   :   tracker->right)
                     =   added;
 
-        added->left =   added->right    =   Base::nil;
+        added->left =   added->right    =   nil;
         added->color=   Color::RED;
 
         insert_fixup(added);
@@ -181,50 +197,50 @@ protected:
      */
     virtual void insert_fixup(sPointer added)
     {
-        while(Base::ascend(added,1)->color   ==  Color::RED)
+        while(ascend(added,1)->color   ==  Color::RED)
         {
-            if(Base::ascend(added,1)->is_left())
+            if(ascend(added,1)->is_left())
             {
-                sPointer uncle = Base::ascend(added,2)->right;
+                sPointer uncle = ascend(added,2)->right;
                 if(uncle->color ==  Color::RED)
                 {
                     uncle->color            =   Color::BLACK;
-                    Base::ascend(added,1)->color  =   Color::BLACK;
-                    Base::ascend(added,2)->color  =   Color::RED;
-                    added   =   Base::ascend(added,2);
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    added   =   ascend(added,2);
                 }
                 else
                 {
                     if(added->is_right())
                     {
-                        added   =   Base::ascend(added,1);
-                        Base::left_rotate(added);
+                        added   =   ascend(added,1);
+                        left_rotate(added);
                     }
-                    Base::ascend(added,1)->color  =   Color::BLACK;
-                    Base::ascend(added,2)->color  =   Color::RED;
-                    Base::right_rotate(Base::ascend(added,2));
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    right_rotate(ascend(added,2));
                 }
             }
             else
             {
-                sPointer uncle = Base::ascend(added,2)->left;
+                sPointer uncle = ascend(added,2)->left;
                 if(uncle->color ==  Color::RED)
                 {
-                    uncle->color                    =   Color::BLACK;
-                    Base::ascend(added,1)->color    =   Color::BLACK;
-                    Base::ascend(added,2)->color    =   Color::RED;
-                    added   =   Base::ascend(added,2);
+                    uncle->color            =   Color::BLACK;
+                    ascend(added,1)->color  =   Color::BLACK;
+                    ascend(added,2)->color  =   Color::RED;
+                    added   =   ascend(added,2);
                 }
                 else
                 {
                     if(added->is_left())
                     {
-                        added   =   Base::ascend(added,1);
-                        Base::right_rotate(added);
+                        added   =   ascend(added,1);
+                        right_rotate(added);
                     }
-                    Base::ascend(added,1)->color    =   Color::BLACK;
-                    Base::ascend(added,2)->color    =   Color::RED;
-                    Base::left_rotate(Base::ascend(added,2));
+                    ascend(added,1)->color    =   Color::BLACK;
+                    ascend(added,2)->color    =   Color::RED;
+                    left_rotate(ascend(added,2));
                 }
             }
         }
@@ -232,14 +248,14 @@ protected:
         //! @attention:
         //!     maintain the black height data member
         //!     as required in problem 13-1.a
-        if(Base::root->color    ==  Color::RED
+        if(root->color    ==  Color::RED
                 &&
-                    (Base::root->left    !=  Base::nil
+                    (root->left    !=  nil
                         ||
-                            Base::root->right   !=  Base::nil))
+                            root->right   !=  nil))
             ++black_height;
 
-        Base::root->color = Color::BLACK;
+        root->color = Color::BLACK;
     }
 
     /**
@@ -251,19 +267,19 @@ protected:
      */
     virtual void remove_fixup(sPointer x)
     {
-        while(x != Base::root   &&   x->color == Color::BLACK)
+        while(x != root   &&   x->color == Color::BLACK)
         {
             if(x->is_left())
             {
-                sPointer sister = Base::sibling(x);
+                sPointer sister = sibling(x);
 
                 //! case 1
                 if(sister->color    ==  Color::RED)
                 {
                     sister->color               =   Color::BLACK;
-                    Base::ascend(x,1)->color    =   Color::RED;
-                    Base::left_rotate(Base::ascend(x,1));
-                    sister                      =   Base::ascend(x,1)->right;
+                    ascend(x,1)->color          =   Color::RED;
+                    left_rotate(ascend(x,1));
+                    sister                      =   ascend(x,1)->right;
                 }
 
                 //! case 2
@@ -272,7 +288,7 @@ protected:
                             sister->right->color  ==  Color::BLACK)
                 {
                     sister->color   =   Color::RED;
-                    x   =   Base::ascend(x,1);
+                    x   =   ascend(x,1);
                 }
                 else
                 {
@@ -281,29 +297,29 @@ protected:
                     {
                         sister->left->color =   Color::BLACK;
                         sister->color       =   Color::BLACK;
-                        Base::right_rotate(sister);
-                        sister              =   Base::sibling(x);
+                        right_rotate(sister);
+                        sister              =   sibling(x);
                     }
 
                     //! case 4
-                    sister->color           =   Base::ascend(x,1)->color;
-                    Base::ascend(x,1)->color=   Color::BLACK;
+                    sister->color           =   ascend(x,1)->color;
+                    ascend(x,1)->color      =   Color::BLACK;
                     sister->right->color    =   Color::BLACK;
-                    Base::left_rotate(Base::ascend(x,1));
-                    x   =   Base::root;
+                    left_rotate(ascend(x,1));
+                    x   =   root;
                 }
             }
             else
             {
-                sPointer sister = Base::sibling(x);
+                sPointer sister = sibling(x);
 
                 //! case 1
                 if(sister->color    ==  Color::RED)
                 {
                     sister->color               =   Color::BLACK;
-                    Base::ascend(x,1)->color    =   Color::RED;
-                    Base::right_rotate(Base::ascend(x,1));
-                    sister                      =   Base::ascend(x,1)->left;
+                    ascend(x,1)->color          =   Color::RED;
+                    right_rotate(ascend(x,1));
+                    sister                      =   ascend(x,1)->left;
                 }
 
                 //! case 2
@@ -312,7 +328,7 @@ protected:
                             sister->right->color  ==  Color::BLACK)
                 {
                     sister->color   =   Color::RED;
-                    x   =   Base::ascend(x,1);
+                    x   =   ascend(x,1);
                 }
 
                 else
@@ -322,16 +338,16 @@ protected:
                     {
                         sister->right->color    =   Color::BLACK;
                         sister->color           =   Color::BLACK;
-                        Base::left_rotate(sister);
-                        sister  =  Base::sibling(x);
+                        left_rotate(sister);
+                        sister  =  sibling(x);
                     }
 
                     //! case 4
-                    sister->color               =   Base::ascend(x,1)->color;
-                    Base::ascend(x,1)->color    =   Color::BLACK;
-                    sister->left->color         =   Color::BLACK;
-                    Base::right_rotate(Base::ascend(x,1));
-                    x   =   Base::root;
+                    sister->color       =   ascend(x,1)->color;
+                    ascend(x,1)->color  =   Color::BLACK;
+                    sister->left->color =   Color::BLACK;
+                    right_rotate(ascend(x,1));
+                    x   =   root;
                 }
             }
         }
