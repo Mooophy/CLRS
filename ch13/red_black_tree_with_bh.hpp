@@ -24,10 +24,20 @@
 //              as get_bh() shows.
 //
 //!
-//! b.  Assume that T1.bh T2.bh. Describe an O(lg n)-time algorithm that finds a
+//! b.  Assume that T1.bh >= T2.bh. Describe an O(lg n)-time algorithm that finds a
 //!     black node y in T1 with the largest key from among those nodes whose black-
 //!     height is T2.bh.
 //!
+//  As shown in join() function below.
+//!
+//! c.  Let Ty be the subtree rooted at y. Describe how Ty U {x} U T2 can replace Ty
+//!     in (1) time without destroying the binary-search-tree property.
+//!
+//  As shown in join() function below.
+//!
+
+
+
 
 
 #ifndef RED_BLACK_TREE_WITH_BH_HPP
@@ -166,7 +176,6 @@ public:
 
         if(y_original_color ==  Color::BLACK)
             remove_fixup(x);
-
     }
 
     /**
@@ -425,15 +434,17 @@ join(
 {
     using Tree      =               RedBlackTreeWithBh<K,D>;
     using sPointer  =   typename    Tree::sPointer;
+    using SizeType  =   typename    Tree::SizeType;
 
-    Tree& sml   =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
-    Tree& big   =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
+    Tree& sml       =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
+    Tree& big       =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
 
-    //! find the node with largest key and bh equal to sml.bh
+
     //! problem 13-2. part b
+    //! find the node with largest key and bh equal to sml.bh
     //! at the end of while loop, curr is just the y looked for
     sPointer curr   =   big.root;
-    auto bh         =   big.black_height;
+    SizeType bh     =   big.black_height;
     while(bh != sml.black_height)
     {
         assert(curr != big.nil);
@@ -442,8 +453,17 @@ join(
         curr =  (curr->right != big.nil?     curr->right     :   curr->left);
     }
 
-    //! part c
+
+    //! problem 13-2    part c
     //! graft on the smaller tree.
+    //!
+    //! @attention      each tree has an unique nil, which need to manange.
+    //!
+
+//    big.transplant(curr, x);
+//    x->left     =   curr;
+
+    return big;
 
 }
 
