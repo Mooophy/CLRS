@@ -6,6 +6,7 @@ int main()
 {
     using Tree      =   ch13::RedBlackTreeWithBh<int, std::string>;
     using NodeType  =   ch13::Node<int, std::string>;
+    using sPointer  =   typename ch13::RedBlackTree<int, std::string>::sPointer;
     using namespace ch13;
 
     std::vector<int> v;
@@ -22,8 +23,10 @@ int main()
         rhs.insert(i);
     rhs.print();
 
-    NodeType x(5);
+    sPointer x = std::make_shared<NodeType>(41);
     join(lhs,x,rhs);
+
+    std::cout << debug::green("end\n");
 
     return 0;
 }

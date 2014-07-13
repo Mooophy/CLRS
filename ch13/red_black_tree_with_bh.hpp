@@ -45,9 +45,14 @@ class RedBlackTreeWithBh;
 
 template<typename K, typename D>
 RedBlackTreeWithBh<K,D>
-join(RedBlackTreeWithBh<K,D>& lhs,
-     Node<K,D>& x,
-     RedBlackTreeWithBh<K,D>& rhs);
+join(
+                RedBlackTreeWithBh<K,D>& lhs,
+     typename   RedBlackTreeWithBh<K,D>::sPointer x,
+                RedBlackTreeWithBh<K,D>& rhs
+    );
+
+
+
 
 /**
  * @brief The RedBlackTreeWithBh class
@@ -57,18 +62,20 @@ join(RedBlackTreeWithBh<K,D>& lhs,
 template<typename K, typename D>
 class RedBlackTreeWithBh : public RedBlackTree<K,D>
 {
-    friend RedBlackTreeWithBh<K,D> join<K,D>(RedBlackTreeWithBh<K,D>& lhs,
-                                             Node<K,D>& x,
-                                             RedBlackTreeWithBh<K,D>& rhs);
+    friend  RedBlackTreeWithBh<K,D> join<K,D>
+                (
+                                RedBlackTreeWithBh<K,D>& lhs,
+                    typename    RedBlackTreeWithBh<K,D>::sPointer x,
+                                RedBlackTreeWithBh<K,D>& rhs
+                );
 public:
     //! types def
-    using Base      =   RedBlackTree<K,D>;
-    using sPointer  =   typename Base::sPointer;
-    using KeyType   =   typename Base::KeyType;
-    using DataType  =   typename Base::DataType;
-    using NodeType  =   typename Base::NodeType;
-    using SizeType  =   std::size_t;
-
+    using Base      =               RedBlackTree<K,D>;
+    using sPointer  =   typename    Base::sPointer;
+    using KeyType   =   typename    Base::KeyType;
+    using DataType  =   typename    Base::DataType;
+    using NodeType  =   typename    Base::NodeType;
+    using SizeType  =               std::size_t;
 
     /**
      * @brief default Ctor
@@ -410,16 +417,20 @@ protected:
  */
 template<typename K, typename D>
 inline RedBlackTreeWithBh<K,D>
-join(RedBlackTreeWithBh<K,D>& lhs, Node<K,D>& x, RedBlackTreeWithBh<K,D>& rhs)
+join(
+                RedBlackTreeWithBh<K,D>& lhs,
+     typename   RedBlackTreeWithBh<K,D>::sPointer x,
+                RedBlackTreeWithBh<K,D>& rhs
+        )
 {
-    using Tree      =   RedBlackTreeWithBh<K,D>;
-    using sPointer  =   typename Tree::sPointer;
+    using Tree      =               RedBlackTreeWithBh<K,D>;
+    using sPointer  =   typename    Tree::sPointer;
 
-    Tree& big   =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
-    Tree& sml   =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
+    Tree& sml   =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
+    Tree& big   =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
 
     //! find the node with largest key and bh equal to sml.bh
-    //! problem 13-2.b
+    //! problem 13-2. part b
     //! at the end of while loop, curr is just the y looked for
     sPointer curr   =   big.root;
     auto bh         =   big.black_height;
@@ -427,10 +438,13 @@ join(RedBlackTreeWithBh<K,D>& lhs, Node<K,D>& x, RedBlackTreeWithBh<K,D>& rhs)
     {
         assert(curr != big.nil);
 
-        if(curr != big.root  &&  curr->color == Color::BLACK)
-            --bh;
-        curr = curr->right;
+        bh  -=  (curr != big.root  &&  curr->color == Color::BLACK)?  1  :  0;
+        curr =  (curr->right != big.nil?     curr->right     :   curr->left);
     }
+
+    //! part c
+    //! graft on the smaller tree.
+
 }
 
 
