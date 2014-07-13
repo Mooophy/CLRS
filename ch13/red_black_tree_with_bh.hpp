@@ -17,6 +17,12 @@
 //              when the root changes to red. This property can also be proven  through
 //              its symmetry.
 //              So black height can be maintained like so.
+//
+//  Deletion:   to be done.
+//
+//  deterining the node's bh in O(1) time:
+//              as get_bh() shows
+//
 //!
 
 #ifndef RED_BLACK_TREE_WITH_BH_HPP
@@ -130,6 +136,9 @@ public:
             remove_fixup(x);
 
     }
+
+
+
 
     virtual ~RedBlackTreeWithBh(){ }
 protected:
