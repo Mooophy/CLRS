@@ -21,7 +21,7 @@
 //  Deletion:   to be done.
 //
 //  deterining the node's bh in O(1) time:
-//              as get_bh() shows
+//              as get_bh() shows.
 //
 //!
 
@@ -32,6 +32,14 @@
 
 namespace ch13
 {
+/**
+ *  @brief  foward declarations
+ */
+template<typename K, typename D>
+class RedBlackTreeWithBh;
+template<typename K, typename D>
+RedBlackTreeWithBh<K,D>
+join(RedBlackTreeWithBh<K,D>& lhs, Node<K,D>& x, RedBlackTreeWithBh<K,D>& rhs);
 
 /**
  * @brief The RedBlackTreeWithBh class
@@ -41,6 +49,9 @@ namespace ch13
 template<typename K, typename D>
 class RedBlackTreeWithBh : public RedBlackTree<K,D>
 {
+    friend RedBlackTreeWithBh<K,D> join<K,D>(RedBlackTreeWithBh<K,D>& lhs,
+                                             Node<K,D>& x,
+                                             RedBlackTreeWithBh<K,D>& rhs);
 public:
     //! types def
     using Base      =   RedBlackTree<K,D>;
@@ -378,6 +389,24 @@ protected:
         x->color  =  Color::BLACK;
     }
 };
+
+/**
+ * @brief join
+ * @param lhs
+ * @param x
+ * @param rhs
+ *
+ * for problem 13-2.b c d e
+ */
+template<typename K, typename D>
+inline RedBlackTreeWithBh<K,D>
+join(RedBlackTreeWithBh<K,D>& lhs, Node<K,D>& x, RedBlackTreeWithBh<K,D>& rhs)
+{
+    using Tree = RedBlackTreeWithBh<K,D>;
+    Tree& smaller =     (lhs.black_height < rhs.black_height?   lhs   :   rhs);
+    Tree& greater =     (lhs.black_height < rhs.black_height?   rhs   :   lhs);
+}
+
 
 }//namespace
 #endif // RED_BLACK_TREE_WITH_BH_HPP
