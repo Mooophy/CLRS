@@ -31,6 +31,14 @@ class PersistentRedBlackTree;
 template<typename K, typename D>
 class RedBlackTreeWithBh;
 
+template<typename K, typename D>
+class Node;
+
+template<typename K, typename D>
+RedBlackTreeWithBh<K,D>
+join(RedBlackTreeWithBh<K,D>& lhs,
+     Node<K,D>& x,
+     RedBlackTreeWithBh<K,D>& rhs);
 
 /**
  * @brief The Color enum
@@ -56,6 +64,10 @@ class Node
     friend class PersistentTree<K,D>;
     friend class RedBlackTreeNoParent<K,D>;
     friend class PersistentRedBlackTree<K,D>;
+
+    friend RedBlackTreeWithBh<K,D> join<K,D>(RedBlackTreeWithBh<K,D>& lhs,
+                                             Node<K,D>& x,
+                                             RedBlackTreeWithBh<K,D>& rhs);
 public:
     using KeyType   =   K;
     using DataType  =   D;

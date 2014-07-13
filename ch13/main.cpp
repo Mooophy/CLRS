@@ -4,24 +4,26 @@
 
 int main()
 {
+    using Tree      =   ch13::RedBlackTreeWithBh<int, std::string>;
+    using NodeType  =   ch13::Node<int, std::string>;
+    using namespace ch13;
+
     std::vector<int> v;
 
-    ch13::RedBlackTreeWithBh<int, std::string> lhs;
+    Tree lhs;
     v = {41,38,31,12,19,8,7,5,2,0};
     for(auto i : v)
         lhs.insert(i);
     lhs.print();
 
-    ch13::RedBlackTreeWithBh<int, std::string> rhs;
+    Tree rhs;
     v = {3,8,1,2};
     for(auto i : v)
         rhs.insert(i);
     rhs.print();
 
-    ch13::Node<int, std::string> x(5);
-
-    ch13::join(lhs,x,rhs);
-
+    NodeType x(5);
+    join(lhs,x,rhs);
 
     return 0;
 }

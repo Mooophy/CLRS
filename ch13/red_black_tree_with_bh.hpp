@@ -24,6 +24,11 @@
 //              as get_bh() shows.
 //
 //!
+//! b.  Assume that T1.bh T2.bh. Describe an O(lg n)-time algorithm that finds a
+//!     black node y in T1 with the largest key from among those nodes whose black-
+//!     height is T2.bh.
+//!
+
 
 #ifndef RED_BLACK_TREE_WITH_BH_HPP
 #define RED_BLACK_TREE_WITH_BH_HPP
@@ -64,16 +69,6 @@ public:
     using NodeType  =   typename Base::NodeType;
     using SizeType  =   std::size_t;
 
-    //! members from base class
-    using Base::transplant;
-    using Base::ascend;
-    using Base::left_rotate;
-    using Base::right_rotate;
-    using Base::minimum;
-    using Base::sibling;
-
-    using Base::nil;
-    using Base::root;
 
     /**
      * @brief default Ctor
@@ -196,6 +191,18 @@ public:
     virtual ~RedBlackTreeWithBh(){ }
 protected:
     SizeType    black_height;
+
+    //! members from base class
+    using Base::transplant;
+    using Base::ascend;
+    using Base::left_rotate;
+    using Base::right_rotate;
+    using Base::minimum;
+    using Base::sibling;
+
+    using Base::nil;
+    using Base::root;
+
 
     /**
      * @brief insert
@@ -405,9 +412,25 @@ template<typename K, typename D>
 inline RedBlackTreeWithBh<K,D>
 join(RedBlackTreeWithBh<K,D>& lhs, Node<K,D>& x, RedBlackTreeWithBh<K,D>& rhs)
 {
-    using Tree = RedBlackTreeWithBh<K,D>;
-    Tree& smaller =     (lhs.black_height < rhs.black_height?   lhs   :   rhs);
-    Tree& greater =     (lhs.black_height < rhs.black_height?   rhs   :   lhs);
+    using Tree      =   RedBlackTreeWithBh<K,D>;
+    using sPointer  =   typename Tree::sPointer;
+
+    Tree& big   =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
+    Tree& sml   =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
+
+    //! find the node with largest key and bh equal to sml.bh
+    //! problem 13-2.b
+    //! at the end of while loop, curr is just the y looked for
+    sPointer curr   =   big.root;
+    auto bh         =   big.black_height;
+    while(bh != sml.black_height)
+    {
+        assert(curr != big.nil);
+
+        if(curr != big.root  &&  curr->color == Color::BLACK)
+            --bh;
+        curr = curr->right;
+    }
 }
 
 
