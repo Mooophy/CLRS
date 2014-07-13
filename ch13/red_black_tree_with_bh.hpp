@@ -37,9 +37,12 @@ namespace ch13
  */
 template<typename K, typename D>
 class RedBlackTreeWithBh;
+
 template<typename K, typename D>
 RedBlackTreeWithBh<K,D>
-join(RedBlackTreeWithBh<K,D>& lhs, Node<K,D>& x, RedBlackTreeWithBh<K,D>& rhs);
+join(RedBlackTreeWithBh<K,D>& lhs,
+     Node<K,D>& x,
+     RedBlackTreeWithBh<K,D>& rhs);
 
 /**
  * @brief The RedBlackTreeWithBh class

@@ -4,17 +4,24 @@
 
 int main()
 {
-    ch13::RedBlackTreeWithBh<int, std::string> tree;
+    std::vector<int> v;
 
-    std::vector<int> v = {41,38,31,12,19,8,7,5,2,0};
-
+    ch13::RedBlackTreeWithBh<int, std::string> lhs;
+    v = {41,38,31,12,19,8,7,5,2,0};
     for(auto i : v)
-        tree.insert(i);
-    tree.print();
+        lhs.insert(i);
+    lhs.print();
 
-    std::cout << tree.get_bh(41) << std::endl;
+    ch13::RedBlackTreeWithBh<int, std::string> rhs;
+    v = {3,8,1,2};
+    for(auto i : v)
+        rhs.insert(i);
+    rhs.print();
 
-    std::cout << debug::green("\n\nend") << std::endl;
+    ch13::Node<int, std::string> x(5);
+
+    ch13::join(lhs,x,rhs);
+
 
     return 0;
 }
