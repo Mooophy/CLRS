@@ -448,6 +448,8 @@ protected:
  * @param x
  * @param rhs
  *
+ * @note    as required, this procedure destories both lhs and rhs
+ *
  * for problem 13-2.b c d e
  */
 template<typename K, typename D>
@@ -462,35 +464,42 @@ join(
     using sPointer  =   typename    Tree::sPointer;
     using SizeType  =   typename    Tree::SizeType;
 
-    Tree& sml       =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
-    Tree& big       =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
+    Tree& low       =   (lhs.black_height < rhs.black_height?   lhs :   rhs);
+    Tree& high      =   (lhs.black_height < rhs.black_height?   rhs :   lhs);
 
 
     //! problem 13-2. part b
     //! find the node with largest key and bh equal to sml.bh
     //! at the end of while loop, curr is just the y looked for
-    sPointer curr   =   big.root;
-    SizeType bh     =   big.black_height;
-    while(bh != sml.black_height)
+    sPointer curr   =   high.root;
+    SizeType bh     =   high.black_height;
+    while(bh != low.black_height)
     {
-        assert(curr != big.nil);
+        assert(curr != high.nil);
 
-        bh  -=  (curr != big.root  &&  curr->color == Color::BLACK)?  1  :  0;
-        curr =  (curr->right != big.nil?     curr->right     :   curr->left);
+        bh  -=  (curr != high.root  &&  curr->color == Color::BLACK)?  1  :  0;
+        curr =  (curr->right != high.nil?     curr->right     :   curr->left);
     }
 
 
     //! problem 13-2    part c
     //! graft on the smaller tree.
-    //!
-    //! @attention      each tree has an unique nil, which need to manange.
-    //!
 
-//    big.transplant(curr, x);
-//    x->left     =   curr;
+    //! @attention
+    //!     each tree has an unique nil, which need to manange.
+    low.update_nil(high.nil);
 
-    return big;
+    high.transplant(curr, x);
+    x->color        =   Color::RED;
+    x->left         =   curr;
+    x->right        =   low.root;
+    curr->parent    =   low.root->parent    =   x;
+    Tree ret = high;
 
+    //! destroy old trees, as required
+    high    =   low     =   Tree();
+
+    return ret;
 }
 
 

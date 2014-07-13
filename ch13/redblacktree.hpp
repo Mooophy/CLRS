@@ -95,10 +95,15 @@ public:
     {
         std::cout << "-----------------------------\n";
         std::cout << debug::yellow("root= ") << root
-                  << " key = " << root->key    << std::endl;
-
+                  << " key = " << root->key  << std::endl;
         std::cout << debug::yellow("nil = ") << nil
                   << std::endl;
+
+        if(root == nil)
+        {
+            std::cout << debug::yellow("this is an EMPTY TREE!\n");
+            return;
+        }
 
         std::function<void(sPointer node)> inorder_walk =
                 [&inorder_walk,this](sPointer node)
