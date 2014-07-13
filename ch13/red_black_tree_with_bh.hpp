@@ -219,6 +219,32 @@ protected:
     using Base::nil;
     using Base::root;
 
+    /**
+     * @brief update_nil
+     * @param new_nil
+     *
+     * this function is needed for join () function.
+     */
+    void update_nil(sPointer new_nil)
+    {
+        //! lambda for update nil recursively
+        std::function<void(sPointer)> preorder_walk
+                =   [&](sPointer node)
+        {
+            if(node != new_nil)
+            {
+                if(node->left   ==  nil)        node->left  =   new_nil;
+                if(node->right  ==  nil)        node->right =   new_nil;
+
+                preorder_walk(node->left);
+                preorder_walk(node->right);
+            }
+        };
+
+        //! update
+        preorder_walk(root);
+        root->parent    =   nil    =   new_nil;
+    }
 
     /**
      * @brief insert
