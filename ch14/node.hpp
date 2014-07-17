@@ -11,7 +11,6 @@
 #include <iostream>
 #include <assert.h>
 #include "debug.hpp"
-#include "../ch13/node.hpp"
 
 namespace ch14 {
 /**
@@ -105,12 +104,57 @@ protected:
 };
 
 
-
+/**
+ * @brief The NodeSz class
+ *
+ * node template with a size attribute
+ *
+ * inherited from Node.
+ */
 template<typename K, typename D>
 class NodeSz: public Node<K,D>
 {
+public:
+    using SizeType  =   std::size_t;
+    using B         =   Node<K,D>;
+    using KeyType   =   typename B::KeyType;
+    using DataType  =   typename B::DataType;
+
+    NodeSz() = delete;
+
+    /**
+     * @brief NodeSz
+     * @param key
+     * @param sz
+     */
+    explicit NodeSz(const KeyType &key, SizeType sz = 0):
+        B(key), size(sz)
+    {}
+
+    /**
+     * @brief NodeSz
+     * @param key
+     * @param data
+     * @param sz
+     */
+    NodeSz(const KeyType& key, const DataType& data, SizeType sz = 0):
+        B(key, data), size(sz)
+    {}
+
+    /**
+     * @brief print
+     */
+    void print() const
+    {
+        B::print();
+        std::cout << debug::green(" size=")
+                  << size << " ";
+    }
+
+protected:
+    SizeType    size;
 
 };
-}
+}//namespace
 
 #endif // NODE_HPP

@@ -7,7 +7,9 @@
 
 int main()
 {
+    ch14::NodeSz<int,std::string> node(42);
 
+    node.print();
 
 
     return 0;
