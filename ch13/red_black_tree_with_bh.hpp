@@ -35,9 +35,20 @@
 //!
 //  As shown in join() function below.
 //!
-
-
-
+//! d.  What color should we make x so that red-black properties 1, 3, and 5 are main-
+//!     tained? Describe how to enforce properties 2 and 4 in O(lg n) time.
+//      obviously red.
+//      using the same method as in RB-INSERT-FIXUP() can enforce properties 2 and 4
+//          --  this one is not implemented.
+//! e.  Argue that no generality is lost by making the assumption in part (b). Describe
+//!     the symmetric situation that arises when T1.bh <= T2.bh.
+//!
+//      skipped
+//!
+//! f. Argue that the running time of RB-JOIN is O(lg n)
+//!
+//      obviously
+//!
 
 
 #ifndef RED_BLACK_TREE_WITH_BH_HPP
@@ -526,3 +537,43 @@ join(
 
 //    return 0;
 //}
+
+//! for testing join
+//#include <iostream>
+//#include <vector>
+//#include "red_black_tree_with_bh.hpp"
+
+//int main()
+//{
+//    using Tree      =   ch13::RedBlackTreeWithBh<int, std::string>;
+//    using NodeType  =   ch13::Node<int, std::string>;
+//    using sPointer  =   typename ch13::RedBlackTree<int, std::string>::sPointer;
+//    using namespace ch13;
+
+//    std::vector<int> v;
+
+//    Tree lhs;
+//    v = {41,38,31,12,19,8,7,5,2,0};
+//    for(auto i : v)
+//        lhs.insert(i);
+//    lhs.print();
+
+//    Tree rhs;
+//    v = {333,888,111,222};
+//    for(auto i : v)
+//        rhs.insert(i);
+//    rhs.print();
+
+//    std::cout << debug::green("join:\n");
+//    sPointer x = std::make_shared<NodeType>(100);
+
+//    auto sum = join(lhs,x,rhs);
+//    sum.print();
+
+//    lhs.print();
+//    rhs.print();
+//    std::cout << "end\n";
+
+//    return 0;
+//}
+
