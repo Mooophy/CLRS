@@ -15,6 +15,10 @@ int main()
 
     tree.print();
 
+    tree.remove(tree.search(2));
+
+    tree.print();
+
     std::cout << debug::yellow("\nend") << std::endl;
 
     return 0;

@@ -118,12 +118,100 @@ public:
         insert(added);
     }
 
+    /**
+     * @brief remove
+     *
+     * @compx   O(lg n)
+     *
+     * @page    324
+     */
+    virtual void remove(sPointer target)
+    {
+        sPointer x,y;
+        Color  y_original_color;
+
+        if(target->left == this->nil)
+        {
+            y = target;
+            y_original_color = y->color;
+            x = y->right;
+            transplant(target,x);
+        }
+        else if(target->right   ==  this->nil)
+        {
+            y = target;
+            y_original_color = y->color;
+            x = y->left;
+            transplant(target,x);
+        }
+        else
+        {
+            y = minimum(target->right);
+            y_original_color = y->color;
+            x = y->right;
+
+            if(y->parent.lock() ==  target)
+                x->parent   =   y;
+            else
+            {
+                transplant(y,x);
+                y->right    =   target->right;
+                y->right->parent    =   y;
+            }
+
+            transplant(target, y);
+            y->left         =   target->left;
+            y->left->parent =   y;
+            y->color        =   target->color;
+        }
+
+        if(y_original_color ==  Color::BLACK)
+        {
+            remove_fixup(x);
+        }
+    }
 
     virtual ~RedBlackTree(){}
 protected:
     sPointer root;
     sPointer nil;
 
+    /**
+     * @brief minimum
+     */
+    sPointer minimum(sPointer node)
+    {
+        assert(node != this->nil);
+
+        sPointer tracker = node;
+        while(node != this->nil)
+        {
+            tracker =   node;
+            node    =   node->left;
+        }
+
+        return tracker;
+    }
+
+    /**
+     * @brief transplant
+     * @param to
+     * @param from
+     *
+     * @note    a bit different from the BST version
+     * @complx  O(1)
+     * @page    323
+     */
+    void transplant(sPointer to, sPointer from)
+    {
+        if(ascend(to,1) == this->nil)
+            this->root  =   from;
+        else
+            (to->is_left()?     ascend(to,1)->left    :   ascend(to,1)->right)
+                        =   from;
+
+        from->parent    =   to->parent;
+    }
 
     /**
      * @brief insert
@@ -295,6 +383,102 @@ protected:
 
         sPointer pnt = node->parent.lock();
         return node->is_left()?     pnt->right  :   pnt->left;
+    }
+
+    /**
+     * @brief remove_fixup
+     * @param x
+     *
+     * @complx  O(lg n)
+     * @page    326
+     */
+    virtual void remove_fixup(sPointer x)
+    {
+        while(x != root   &&   x->color == Color::BLACK)
+        {
+            if(x->is_left())
+            {
+                sPointer sister = sibling(x);
+
+                //! case 1
+                if(sister->color    ==  Color::RED)
+                {
+                    sister->color       =   Color::BLACK;
+                    ascend(x,1)->color  =   Color::RED;
+                    left_rotate(ascend(x,1));
+                    sister              =   ascend(x,1)->right;
+                }
+
+                //! case 2
+                if(sister->left->color  ==  Color::BLACK
+                        &&
+                            sister->right->color  ==  Color::BLACK)
+                {
+                    sister->color   =   Color::RED;
+                    x   =   ascend(x,1);
+                }
+                else
+                {
+                    //! case 3
+                    if(sister->right->color ==  Color::BLACK)
+                    {
+                        sister->left->color =   Color::BLACK;
+                        sister->color       =   Color::BLACK;
+                        right_rotate(sister);
+                        sister              =   sibling(x);
+                    }
+
+                    //! case 4
+                    sister->color           =   ascend(x,1)->color;
+                    ascend(x,1)->color      =   Color::BLACK;
+                    sister->right->color    =   Color::BLACK;
+                    left_rotate(ascend(x,1));
+                    x   =   root;
+                }
+            }
+            else
+            {
+                sPointer sister = sibling(x);
+
+                //! case 1
+                if(sister->color    ==  Color::RED)
+                {
+                    sister->color       =   Color::BLACK;
+                    ascend(x,1)->color  =   Color::RED;
+                    right_rotate(ascend(x,1));
+                    sister              =   ascend(x,1)->left;
+                }
+
+                //! case 2
+                if(sister->left->color  ==  Color::BLACK
+                        &&
+                            sister->right->color  ==  Color::BLACK)
+                {
+                    sister->color   =   Color::RED;
+                    x   =   ascend(x,1);
+                }
+
+                else
+                {
+                    //! case 3
+                    if(sister->left->color ==  Color::BLACK)
+                    {
+                        sister->right->color    =   Color::BLACK;
+                        sister->color           =   Color::BLACK;
+                        left_rotate(sister);
+                        sister  =  sibling(x);
+                    }
+
+                    //! case 4
+                    sister->color           =   ascend(x,1)->color;
+                    ascend(x,1)->color      =   Color::BLACK;
+                    sister->left->color     =   Color::BLACK;
+                    right_rotate(ascend(x,1));
+                    x   =   root;
+                }
+            }
+        }
+        x->color  =  Color::BLACK;
     }
 };
 
