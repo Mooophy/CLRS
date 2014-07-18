@@ -13,9 +13,7 @@ int main()
     for(auto i : v)
         tree.insert(i);
 
-
     tree.print();
-
 
     return 0;
 }

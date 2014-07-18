@@ -26,3 +26,5 @@
 *.pdf
 *build-*-Desktop_gcc-Debug
 *build-*-clang-*/
+*lines
+

@@ -15,6 +15,11 @@
 namespace ch14
 {
 
+/**
+ * @brief The RedBlackTree class
+ *
+ * as the base class
+ */
 template<typename K, typename D>
 class RedBlackTree
 {
@@ -30,6 +35,29 @@ public:
         nil(std::make_shared<NodeType>())
     {
         root = nil;
+    }
+
+    /**
+     * @brief search
+     * @param key
+     *
+     * @complx  O(h)
+     */
+    sPointer search(const KeyType& key)const
+    {
+        sPointer ret  = nullptr;
+        sPointer curr = this->root;
+        while(curr)
+        {
+            if(curr->key    ==  key)
+            {
+                ret = curr;
+                break;
+            }
+            else
+                curr = (curr->key > key?    curr->left  :   curr->right);
+        }
+        return ret;
     }
 
     /**
