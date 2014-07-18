@@ -40,7 +40,7 @@ public:
     using sPointer  =   std::shared_ptr<NodeType>;
     using wPointer  =   std::weak_ptr<NodeType>;
 
-    Node() = default;
+    Node(){}
 
     /**
      * @brief Node
@@ -86,7 +86,7 @@ public:
     /**
      * @brief print
      */
-    void print()const
+    virtual void print()const
     {
         std::cout << "key= " + debug::green(std::to_string(key)) + " ";
         std::cout << (color == Color::RED?   debug::red("red  ")   :   "blk  ");
@@ -120,7 +120,9 @@ public:
     using KeyType   =   typename B::KeyType;
     using DataType  =   typename B::DataType;
 
-    NodeSz() = delete;
+    NodeSz():
+        B(),size(0)
+    {}
 
     /**
      * @brief NodeSz
@@ -144,7 +146,7 @@ public:
     /**
      * @brief print
      */
-    void print() const
+    virtual void print() const
     {
         B::print();
         std::cout << debug::green(" size=")

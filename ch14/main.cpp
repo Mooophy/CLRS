@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <memory>
 #include "debug.hpp"
 #include "node.hpp"
@@ -7,9 +8,11 @@
 
 int main()
 {
-    ch14::NodeSz<int,std::string> node(42);
+    std::shared_ptr<ch14::Node<int,std::string>> node
 
-    node.print();
+    = std::make_shared<ch14::NodeSz<int, std::string>>();
+
+    node->print();
 
 
     return 0;
