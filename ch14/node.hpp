@@ -13,6 +13,13 @@
 #include "debug.hpp"
 
 namespace ch14 {
+
+template<typename K, typename D>
+class Node;
+
+template<typename K, typename D>
+class RedBlackTree;
+
 /**
  * @brief The Color enum
  *
@@ -32,6 +39,7 @@ enum class Color
 template<typename K, typename D>
 class Node
 {
+    friend class RedBlackTree<K,D>;
 
 public:
     using KeyType   =   K;
@@ -91,7 +99,10 @@ public:
         std::cout << "key= " + debug::green(std::to_string(key)) + " ";
         std::cout << (color == Color::RED?   debug::red("red  ")   :   "blk  ");
         std::cout << "parent=" << parent.lock();
-        std::cout << debug::green(" self=") << this << " left=" << left << " right=" << right ;
+        std::cout << debug::green(" self=") << this
+                  << " left="   << left
+                  << " right="  << right
+                  << std::endl;
     }
 
 protected:

@@ -1,18 +1,20 @@
 #include <iostream>
 #include <string>
 #include <memory>
-#include "debug.hpp"
-#include "node.hpp"
-
+#include <vector>
+#include "red_black_tree.hpp"
 
 
 int main()
 {
-    std::shared_ptr<ch14::Node<int,std::string>> node
+    ch14::RedBlackTree<int,std::string> tree;
+    std::vector<int> v = {2,5,6,11,1,7};
 
-    = std::make_shared<ch14::NodeSz<int, std::string>>();
+    for(auto i : v)
+        tree.insert(i);
 
-    node->print();
+
+    tree.print();
 
 
     return 0;
