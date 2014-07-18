@@ -15,6 +15,8 @@ int main()
 
     tree.print();
 
+    std::cout << debug::yellow("\nend") << std::endl;
+
     return 0;
 }
 

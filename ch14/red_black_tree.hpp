@@ -119,10 +119,11 @@ public:
     }
 
 
-
+    virtual ~RedBlackTree(){}
 protected:
     sPointer root;
     sPointer nil;
+
 
     /**
      * @brief insert
@@ -283,6 +284,17 @@ protected:
             }
         }
         root->color = Color::BLACK;
+    }
+
+    /**
+     * @brief return the argument's sibling node
+     */
+    sPointer sibling(sPointer node)
+    {
+        assert(node != this->root);
+
+        sPointer pnt = node->parent.lock();
+        return node->is_left()?     pnt->right  :   pnt->left;
     }
 };
 
