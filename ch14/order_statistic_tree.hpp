@@ -12,53 +12,80 @@
 
 namespace ch14 {
 
+/**
+ * @brief The OrderStatisticTree class
+ *
+ * inherited from Red Black Tree
+ */
 template<typename K, typename D>
 class OrderStatisticTree : public RedBlackTree<K,D>
 {
-
 public:
-
     using B         =               RedBlackTree<K,D>;
-    using NodeType  =   typename    B::NodeType;
-    using KeyType   =   typename    B::KeyType;
-    using DataType  =   typename    B::DataType;
     using sPointer  =   typename    B::sPointer;
 
-    /**
-     * @brief insert
-     * @param key
-     *
-     * just an interface
-     */
-    virtual void insert(const KeyType& key)
-    {
-        sPointer added = std::make_shared<NodeType>(key);
-        insert(added);
-    }
-
-    /**
-     * @brief insert
-     * @param key
-     * @param data
-     *
-     * just an interface
-     */
-    virtual void insert(const KeyType &key, const DataType& data)
-    {
-        sPointer added = std::make_shared<NodeType>(key,data);
-        insert(added);
-    }
-
+    //! Dtor
     virtual ~OrderStatisticTree(){  }
 
-protected:
-    virtual void insert(sPointer added)
+private:
+    using B::root;
+    using B::nil;
+    using B::ascend;
+    using B::insert_fixup;
+
+    /**
+     * @brief left_rotate
+     * @param x
+     *
+     * @attention   virtual!
+     *
+     * @complx  O(1)
+     *
+     * based on the pseudocode P343
+     */
+    virtual void left_rotate(sPointer x) override
+    {
+        B::left_rotate(x);
+
+        sPointer parent =   x->parent.lock();
+        parent->size    =   x->size;
+        x->size         =   x->left->size   +   x->right->size  +   1;
+    }
+
+    /**
+     * @brief right_rotate
+     * @param y
+     *
+     * @attention   virtual!
+     *
+     * @complx  O(1)
+     */
+    virtual void right_rotate(sPointer y) override
+    {
+        B::right_rotate(y);
+
+        sPointer parent =   y->parent.lock();
+        parent->size    =   y->size;
+        y->size         =   y->left->size   +   y->right->size  +   1;
+    }
+
+    /**
+     * @brief insert
+     * @param added
+     *
+     * @attention   virtual!
+     *
+     * @complx  O(h)
+     */
+    virtual void insert(sPointer added) override
     {
         sPointer tracker = nil;
         sPointer curr = root;
         while(curr != nil)
         {
             ++curr->size;
+       //!  ^^^^^^^^^^^^^   --  added for o s tree
+
             tracker =   curr;
             curr    =   curr->key > added->key?     curr->left  :   curr->right;
         }
@@ -73,14 +100,40 @@ protected:
         added->left =   added->right    =   nil;
         added->color=   Color::RED;
 
-        //! @todo   add fixup
+        //! fixup
+        insert_fixup(added);
     }
-
-private:
-    using B::root;
-    using B::nil;
 };
 }//namespace
 
 
 #endif // ORDER_STATISTIC_TREE_HPP
+
+//! for testing insert and remove
+//#include <iostream>
+//#include <string>
+//#include <memory>
+//#include <vector>
+//#include "red_black_tree.hpp"
+//#include "order_statistic_tree.hpp"
+
+
+//int main()
+//{
+//    ch14::RedBlackTree<int, std::string>*
+//            tree =
+//                new ch14::OrderStatisticTree<int, std::string>;
+
+//    std::vector<int> v = {3,4,1,5,6,2,7,0,10,65,23};
+//    for(auto i : v)
+//       tree->insert(i);
+
+//    std::cout << debug::red("deleting!!:\n");
+//    tree->remove(tree->search(4));
+
+//    tree->print();
+
+//    std::cout << debug::green("\nend\n");
+//    delete tree;
+//    return 0;
+//}

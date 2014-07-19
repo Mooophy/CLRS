@@ -67,7 +67,7 @@ public:
      */
     void print()const
     {
-        std::cout << "------------red black tree part-----------\n";
+        std::cout << "--------------------------------\n";
         std::cout << debug::yellow("root= ") << root
                   << " key = " << root->key  << std::endl;
         std::cout << debug::yellow("nil = ") << nil
@@ -99,7 +99,7 @@ public:
      *
      * just an interface
      */
-    virtual void insert(const KeyType& key)
+    void insert(const KeyType& key)
     {
         sPointer added = std::make_shared<NodeType>(key);
         insert(added);
@@ -112,7 +112,7 @@ public:
      *
      * just an interface
      */
-    virtual void insert(const KeyType &key, const DataType& data)
+    void insert(const KeyType &key, const DataType& data)
     {
         sPointer added = std::make_shared<NodeType>(key,data);
         insert(added);
@@ -165,10 +165,9 @@ public:
             y->color        =   target->color;
         }
 
-        if(y_original_color ==  Color::BLACK)
-        {
+        if(y_original_color ==  Color::BLACK)     
             remove_fixup(x);
-        }
+
     }
 
     virtual ~RedBlackTree(){}
@@ -404,7 +403,7 @@ protected:
      * @complx  O(lg n)
      * @page    326
      */
-    virtual void remove_fixup(sPointer x)
+    void remove_fixup(sPointer x)
     {
         while(x != root   &&   x->color == Color::BLACK)
         {
