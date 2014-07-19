@@ -3,24 +3,22 @@
 #include <memory>
 #include <vector>
 #include "red_black_tree.hpp"
+#include "order_statistic_tree.hpp"
+
 
 
 int main()
 {
-    ch14::RedBlackTree<int,std::string> tree;
-    std::vector<int> v = {2,5,6,11,1,7};
+    std::shared_ptr<ch14::RedBlackTree<int, std::string>> tree =
+            std::make_shared<ch14::OrderStatisticTree<int, std::string>>();
 
+    std::vector<int> v = {3,5,1,2,8,0};
     for(auto i : v)
-        tree.insert(i);
+        tree->insert(i);
 
-    tree.print();
+    tree->print();
 
-    tree.remove(tree.search(2));
-
-    tree.print();
-
-    std::cout << debug::yellow("\nend") << std::endl;
-
+    std::cout << debug::green("\nend") << std::endl;
     return 0;
 }
 

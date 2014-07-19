@@ -101,8 +101,7 @@ public:
         std::cout << "parent=" << parent.lock();
         std::cout << debug::green(" self=") << this
                   << " left="   << left
-                  << " right="  << right
-                  << std::endl;
+                  << " right="  << right;
     }
 
 protected:
@@ -161,7 +160,7 @@ public:
     {
         B::print();
         std::cout << debug::green(" size=")
-                  << size << " ";
+                  << size << "\n";
     }
 
 protected:

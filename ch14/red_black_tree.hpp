@@ -67,7 +67,7 @@ public:
      */
     virtual void print()const
     {
-        std::cout << "-----------------------------\n";
+        std::cout << "------------red black tree part-----------\n";
         std::cout << debug::yellow("root= ") << root
                   << " key = " << root->key  << std::endl;
         std::cout << debug::yellow("nil = ") << nil
@@ -254,8 +254,10 @@ protected:
      * @complx  o(1)
      *
      * @page    313
+     *
+     * @attention modified to be virtual for this chapter
      */
-    void left_rotate(sPointer x)
+    virtual void left_rotate(sPointer x)
     {
         sPointer y = x->right;      //  set y
 
@@ -284,7 +286,7 @@ protected:
      *
      * @complx  O(1)
      */
-    void right_rotate(sPointer y)
+    virtual void right_rotate(sPointer y)
     {
         sPointer x = y->left;
 
