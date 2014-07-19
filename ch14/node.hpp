@@ -17,14 +17,11 @@ namespace ch14 {
 template<typename K, typename D>
 class Node;
 
-template<typename K, typename D>
-class NodeSz;
 
 template<typename K, typename D>
 class RedBlackTree;
 
-template<typename K, typename D>
-class OrderStatisticTree;
+
 
 /**
  * @brief The Color enum
@@ -46,11 +43,11 @@ template<typename K, typename D>
 class Node
 {
     friend class RedBlackTree<K,D>;
-    friend class OrderStatisticTree<K,D>;
 
 public:
     using KeyType   =   K;
     using DataType  =   D;
+    using SizeType  =   std::size_t;
     using NodeType  =   Node<K,D>;
     using sPointer  =   std::shared_ptr<NodeType>;
     using wPointer  =   std::weak_ptr<NodeType>;
@@ -62,7 +59,7 @@ public:
      * @param key
      */
     explicit Node(const KeyType& key):
-        key(key),left(),right(), parent(), color(Color::BLACK),data()
+        key(key),left(),right(), parent(), color(Color::BLACK),data(),size(0)
     {}
 
     /**
@@ -71,7 +68,7 @@ public:
      * @param data
      */
     Node(const KeyType &key, const DataType& data):
-        key(key),left(),right(), parent(), color(Color::BLACK),data(data)
+        key(key),left(),right(), parent(), color(Color::BLACK),data(data),size(0)
     {}
 
     /**
@@ -101,14 +98,18 @@ public:
     /**
      * @brief print
      */
-    virtual void print()const
+    void print()const
     {
         std::cout << "key= " + debug::green(std::to_string(key)) + " ";
         std::cout << (color == Color::RED?   debug::red("red  ")   :   "blk  ");
         std::cout << "parent=" << parent.lock();
         std::cout << debug::green(" self=") << this
                   << " left="   << left
-                  << " right="  << right;
+                  << " right="  << right
+
+
+                  << debug::green("size=")  << size
+                  << std::endl;
     }
 
 protected:
@@ -118,64 +119,11 @@ protected:
     wPointer    parent;
     Color       color = Color::BLACK;
     DataType    data;
-};
-
-
-/**
- * @brief The NodeSz class
- *
- * node template with a size attribute
- *
- * inherited from Node.
- */
-template<typename K, typename D>
-class NodeSz: public Node<K,D>
-{
-    friend class OrderStatisticTree<K,D>;
-public:
-    using SizeType  =   std::size_t;
-    using B         =   Node<K,D>;
-    using KeyType   =   typename B::KeyType;
-    using DataType  =   typename B::DataType;
-
-    NodeSz():
-        B(),size(0)
-    {}
-
-    /**
-     * @brief NodeSz
-     * @param key
-     * @param sz
-     */
-    explicit NodeSz(const KeyType &key, SizeType sz = 0):
-        B(key), size(sz)
-    {}
-
-    /**
-     * @brief NodeSz
-     * @param key
-     * @param data
-     * @param sz
-     */
-    NodeSz(const KeyType& key, const DataType& data, SizeType sz = 0):
-        B(key, data), size(sz)
-    {}
-
-    /**
-     * @brief print
-     */
-    virtual void print() const
-    {
-        B::print();
-        std::cout << debug::green(" size=")
-                  << size << "\n";
-    }
-
-
-protected:
     SizeType    size;
-
 };
+
+
+
 }//namespace
 
 #endif // NODE_HPP

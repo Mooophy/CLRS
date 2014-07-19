@@ -65,7 +65,7 @@ public:
      *
      * O(n)
      */
-    virtual void print()const
+    void print()const
     {
         std::cout << "------------red black tree part-----------\n";
         std::cout << debug::yellow("root= ") << root
