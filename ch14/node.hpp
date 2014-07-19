@@ -21,6 +21,9 @@ class Node;
 template<typename K, typename D>
 class RedBlackTree;
 
+template<typename K, typename D>
+class OrderStatisticTree;
+
 
 
 /**
@@ -43,6 +46,7 @@ template<typename K, typename D>
 class Node
 {
     friend class RedBlackTree<K,D>;
+    friend class OrderStatisticTree<K,D>;
 
 public:
     using KeyType   =   K;
@@ -101,14 +105,14 @@ public:
     void print()const
     {
         std::cout << "key= " + debug::green(std::to_string(key)) + " ";
-        std::cout << (color == Color::RED?   debug::red("red  ")   :   "blk  ");
+        std::cout << (color == Color::RED?   debug::red("red ")   :   "blk ");
         std::cout << "parent=" << parent.lock();
         std::cout << debug::green(" self=") << this
                   << " left="   << left
                   << " right="  << right
 
 
-                  << debug::green("size=")  << size
+                  << debug::green(" size=")  << size
                   << std::endl;
     }
 

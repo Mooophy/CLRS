@@ -9,5 +9,6 @@ SOURCES += main.cpp
 HEADERS += \
     node.hpp \
     debug.hpp \
-    red_black_tree.hpp
+    red_black_tree.hpp \
+    order_statistic_tree.hpp
 

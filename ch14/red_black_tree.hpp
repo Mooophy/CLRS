@@ -125,7 +125,7 @@ public:
      *
      * @page    324
      */
-    virtual void remove(sPointer target)
+    void remove(sPointer target)
     {
         sPointer x,y;
         Color  y_original_color;
@@ -214,13 +214,12 @@ protected:
     }
 
     /**
-     * @brief insert
+     * @brief insert_first_part
      * @param added
      *
-     * @page    315
-     * O(h)
+     * @complx  O(h)
      */
-    virtual void insert(sPointer added)
+    void insert_first_part(sPointer added)
     {
         sPointer tracker = nil;
         sPointer curr = root;
@@ -239,7 +238,18 @@ protected:
 
         added->left =   added->right    =   nil;
         added->color=   Color::RED;
+    }
 
+    /**
+     * @brief insert
+     * @param added
+     *
+     * @page    315
+     * O(h)
+     */
+    virtual void insert(sPointer added)
+    {
+        insert_first_part(added);
         insert_fixup(added);
     }
 
@@ -324,7 +334,7 @@ protected:
      *
      * based on the pyseudocode on Page 316
      */
-    void insert_fixup(sPointer added)
+    virtual void insert_fixup(sPointer added)
     {
         while(ascend(added,1)->color   ==  Color::RED)
         {
