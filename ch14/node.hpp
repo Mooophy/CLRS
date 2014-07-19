@@ -18,7 +18,13 @@ template<typename K, typename D>
 class Node;
 
 template<typename K, typename D>
+class NodeSz;
+
+template<typename K, typename D>
 class RedBlackTree;
+
+template<typename K, typename D>
+class OrderStatisticTree;
 
 /**
  * @brief The Color enum
@@ -40,6 +46,7 @@ template<typename K, typename D>
 class Node
 {
     friend class RedBlackTree<K,D>;
+    friend class OrderStatisticTree<K,D>;
 
 public:
     using KeyType   =   K;
@@ -124,6 +131,7 @@ protected:
 template<typename K, typename D>
 class NodeSz: public Node<K,D>
 {
+    friend class OrderStatisticTree<K,D>;
 public:
     using SizeType  =   std::size_t;
     using B         =   Node<K,D>;
@@ -162,6 +170,7 @@ public:
         std::cout << debug::green(" size=")
                   << size << "\n";
     }
+
 
 protected:
     SizeType    size;
