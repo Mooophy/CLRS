@@ -17,7 +17,6 @@ namespace ch14 {
 template<typename K, typename D>
 class Node;
 
-
 template<typename K, typename D>
 class RedBlackTree;
 
@@ -100,7 +99,7 @@ public:
     }
 
     /**
-     * @brief rank
+     * @brief return the rank within the subtree rooted at this node.
      *
      * @complx  O(1)
      *
