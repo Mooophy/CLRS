@@ -4,6 +4,10 @@
  *  @date       20  July 2014
  *  @remark     Implementation of CLRS algorithms, using C++ templates.
  ***************************************************************************/
+//!
+//! 14.1-3
+//!     Write a nonrecursive version of OS-SELECT .
+//!
 
 #ifndef ORDER_STATISTIC_TREE_HPP
 #define ORDER_STATISTIC_TREE_HPP
@@ -48,6 +52,34 @@ public:
             return rank < curr?
                         select(target->left,rank)
                             :   select(target->right, rank - curr);
+    }
+
+    /**
+     * @brief select_norecur
+     *
+     * @complx  O(lg n)
+     *
+     * ex14-1.3
+     */
+    sPointer select_norecur(sPointer target, SizeType rank)
+    {
+        //! must be within the range.
+        assert(rank <= target->size + 1);
+
+        SizeType r = target->rank();
+        while(r != rank)
+        {
+            if(rank < r)
+                target  =   target->left;
+            else
+            {
+                target  =   target->right;
+                rank    -=  r;
+            }
+            r   =   target->rank();
+        }
+
+        return target;
     }
 
     /**
@@ -205,7 +237,7 @@ private:
 
 //    std::cout << debug::red("testing select:\n");
 //    auto node   =   tree->search(44);
-//    auto ret    =   tree->select(node,9);
+//    auto ret    =   tree->select(node,7);
 //    ret->print();
 
 //    delete tree;
@@ -235,6 +267,30 @@ private:
 //    auto node   =   tree->search(88);
 //    std::cout << debug::green("the rank is: ");
 //    std::cout << tree->rank(node) << std::endl;
+
+//    delete tree;
+//    std::cout << debug::green("\nend\n");
+//    return 0;
+//}
+
+//! for testing select_nonrecur required in ex14-1.3
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include "order_statistic_tree.hpp"
+
+//int main()
+//{
+//    auto tree = new ch14::OrderStatisticTree<int, std::string>;
+//    std::vector<int> v = {11,22,33,44,55,66,77,88};
+//    for(auto i : v)
+//       tree->insert(i);
+//    tree->print();
+
+//    std::cout << debug::red("testing select:\n");
+//    auto node   =   tree->search(44);
+//    auto ret    =   tree->select_norecur(node,7);
+//    ret->print();
 
 //    delete tree;
 //    std::cout << debug::green("\nend\n");
