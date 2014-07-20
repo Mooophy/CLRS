@@ -5,24 +5,21 @@
 #include "red_black_tree.hpp"
 #include "order_statistic_tree.hpp"
 
-
 int main()
 {
-    ch14::RedBlackTree<int, std::string>*
-            tree =
-                new ch14::OrderStatisticTree<int, std::string>;
-
-    std::vector<int> v = {3,4,1,5,6,2,7,0,10,65,23};
+    auto tree = new ch14::OrderStatisticTree<int, std::string>;
+    std::vector<int> v = {11,22,33,44,55,66,77,88};
     for(auto i : v)
        tree->insert(i);
-
-    std::cout << debug::red("deleting!!:\n");
-    tree->remove(tree->search(4));
-
     tree->print();
 
-    std::cout << debug::green("\nend\n");
+    std::cout << debug::red("testing select:\n");
+    auto node   =   tree->search(44);
+    auto ret    =   tree->select(node,8);
+    ret->print();
+
     delete tree;
+    std::cout << debug::green("\nend\n");
     return 0;
 }
 

@@ -23,6 +23,31 @@ class OrderStatisticTree : public RedBlackTree<K,D>
 public:
     using B         =               RedBlackTree<K,D>;
     using sPointer  =   typename    B::sPointer;
+    using SizeType  =               std::size_t;
+
+    using B::insert;
+
+
+    /**
+     * @brief select
+     *
+     * @complx  O(1)
+     *
+     * @page    341
+     */
+    sPointer select(sPointer target, SizeType rank)
+    {
+        //! must be within the range.
+        assert(rank <= target->size + 1);
+
+        SizeType curr    =   target->rank();
+        if(rank == curr)
+            return target;
+        else
+            return rank < curr?
+                        select(target->left,rank)
+                            :   select(target->right, rank - curr);
+    }
 
     //! Dtor
     virtual ~OrderStatisticTree(){  }
@@ -32,6 +57,7 @@ private:
     using B::nil;
     using B::ascend;
     using B::insert_fixup;
+
 
     /**
      * @brief left_rotate
@@ -137,3 +163,30 @@ private:
 //    delete tree;
 //    return 0;
 //}
+
+//! for testing select()
+//#include <iostream>
+//#include <string>
+//#include <memory>
+//#include <vector>
+//#include "red_black_tree.hpp"
+//#include "order_statistic_tree.hpp"
+
+//int main()
+//{
+//    auto tree = new ch14::OrderStatisticTree<int, std::string>;
+//    std::vector<int> v = {11,22,33,44,55,66,77,88};
+//    for(auto i : v)
+//       tree->insert(i);
+//    tree->print();
+
+//    std::cout << debug::red("testing select:\n");
+//    auto node   =   tree->search(44);
+//    auto ret    =   tree->select(node,9);
+//    ret->print();
+
+//    delete tree;
+//    std::cout << debug::green("\nend\n");
+//    return 0;
+//}
+

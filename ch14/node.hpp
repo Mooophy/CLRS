@@ -100,6 +100,18 @@ public:
     }
 
     /**
+     * @brief rank
+     *
+     * @complx  O(1)
+     *
+     * implemented for Order Statistic Tree
+     */
+    SizeType rank() const
+    {
+        return this->left?  this->left->size + 1    :   0;
+    }
+
+    /**
      * @brief print
      */
     void print()const
