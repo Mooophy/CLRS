@@ -11,10 +11,10 @@ int main()
        tree->insert(i);
     tree->print();
 
-    std::cout << debug::red("testing select_nonrecur:\n");
-    auto node   =   tree->search(44);
-    auto ret    =   tree->select_nonrecur(node,7);
-    ret->print();
+
+    std::cout   <<  debug::green("\ntesting find_rank_with_key(), as required in ex14.1-4:\nrank=")
+                <<  tree->find_rank_with_key(44) << std::endl;
+
 
     delete tree;
     std::cout << debug::green("\nend\n");

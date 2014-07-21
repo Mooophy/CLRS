@@ -20,6 +20,7 @@
 #ifndef ORDER_STATISTIC_TREE_HPP
 #define ORDER_STATISTIC_TREE_HPP
 
+#include <memory>
 #include "red_black_tree.hpp"
 
 namespace ch14 {
@@ -32,10 +33,13 @@ namespace ch14 {
 template<typename K, typename D>
 class OrderStatisticTree : public RedBlackTree<K,D>
 {
-public:
+private:
     using B         =               RedBlackTree<K,D>;
+    using KeyType   =   typename    B::KeyType;
     using sPointer  =   typename    B::sPointer;
     using SizeType  =               std::size_t;
+
+public:
 
     using B::insert;
 //! ^^^^^^^^^^^^^^^ -- needed to call this virtual function from base class
@@ -112,6 +116,26 @@ public:
         return ret;
     }
 
+    SizeType find_rank_with_key(const KeyType& key) const
+    {
+        std::function<SizeType(sPointer)> find_by_recur=
+            [&](sPointer curr)
+        {
+            assert(curr != nil);
+            assert(curr != nullptr);
+
+            if(curr->key == key)
+                return curr->rank();
+            else
+                return curr->key > key?
+                            find_by_recur(curr->left)
+                            :   find_by_recur(curr->right)  +   curr->rank();
+
+        };
+
+        return find_by_recur(root);
+    }
+
     //! Dtor
     virtual ~OrderStatisticTree(){  }
 
@@ -121,7 +145,6 @@ private:
     using B::ascend;
     using B::sibling;
     using B::insert_fixup;
-
 
     /**
      * @brief left_rotate
@@ -302,6 +325,31 @@ private:
 //    auto node   =   tree->search(44);
 //    auto ret    =   tree->select_nonrecur(node,7);
 //    ret->print();
+
+//    delete tree;
+//    std::cout << debug::green("\nend\n");
+//    return 0;
+//}
+
+//! for testing find_rank_with_key()
+//! ex14.1-4
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include "order_statistic_tree.hpp"
+
+//int main()
+//{
+//    auto tree = new ch14::OrderStatisticTree<int, std::string>;
+//    std::vector<int> v = {11,22,33,44,55,66,77,88};
+//    for(auto i : v)
+//       tree->insert(i);
+//    tree->print();
+
+
+//    std::cout   <<  debug::green("\ntesting find_rank_with_key(), as required in ex14.1-4:\nrank=")
+//                <<  tree->find_rank_with_key(44) << std::endl;
+
 
 //    delete tree;
 //    std::cout << debug::green("\nend\n");
