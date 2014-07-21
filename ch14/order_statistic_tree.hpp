@@ -8,6 +8,14 @@
 //! 14.1-3
 //!     Write a nonrecursive version of OS-SELECT .
 //!
+//  as select_nonrecur shown in the code below
+//!
+//! 14.1-4
+//!     Write a recursive procedure OS-KEY-RANK(T,k) that takes as input an order-
+//!     statistic tree T and a key k and returns the rank of k in the dynamic set represented
+//!     by T . Assume that the keys of T are distinct.
+//!
+
 
 #ifndef ORDER_STATISTIC_TREE_HPP
 #define ORDER_STATISTIC_TREE_HPP
