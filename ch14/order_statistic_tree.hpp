@@ -24,15 +24,29 @@
 //!
 //  check below for implementation
 //!
+//! ex14.1-7
+//!     Show how to use an order-statistic tree to count the number of inversions (see
+//!     Problem 2-4) in an array of size n in time O(n lg n)
+//!
+//  use insert and accumulate (count - find_rank_with_key(key)),
+//  as the function:
+//              find_inversions() shows
+//
+//!
 
 
 #ifndef ORDER_STATISTIC_TREE_HPP
 #define ORDER_STATISTIC_TREE_HPP
 
 #include <memory>
+#include <vector>
 #include "red_black_tree.hpp"
 
 namespace ch14 {
+
+template<typename K, typename D = int>
+std::size_t
+find_inversions(const std::vector<K>& v);
 
 /**
  * @brief The OrderStatisticTree class
@@ -274,6 +288,37 @@ private:
         insert_fixup(added);
     }
 };
+
+/**
+ * @brief find_inversions
+ * @param vector
+ *
+ * @complx  O(n lg n)
+ *
+ * for ex14-1.7
+ */
+template<typename K, typename D>
+inline std::size_t
+find_inversions(const std::vector<K>& v)
+{
+    //! types def and initialization
+    using OsTree    =   ch14::OrderStatisticTree<K,D>;
+    using Tree      =   std::shared_ptr<OsTree>;
+    Tree tree = std::make_shared<OsTree>();
+    std::size_t count, inversions;
+    count   =   inversions  =   0;
+
+    //! counting inversions
+    for(const auto& key :   v)                                  //  O(n)
+    {
+        tree->insert(key);
+        std::size_t rank    =   tree->find_rank_with_key(key);  //  O(lg n)
+        inversions  +=  ++count - rank;
+    }
+
+    return inversions;
+}
+
 }//namespace
 
 
@@ -435,6 +480,23 @@ private:
 
 
 //    delete tree;
+//    std::cout << debug::green("\nend\n");
+//    return 0;
+//}
+
+//! for testing ex14-1.7
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include "order_statistic_tree.hpp"
+
+//int main()
+//{
+//    std::vector<int> v = {41,38,31,12,19,8};
+
+//    std::cout << "testing find inversions for ex14.1-7:\ninversions=";
+//    std::cout << ch14::find_inversions(v) << std::endl;
+
 //    std::cout << debug::green("\nend\n");
 //    return 0;
 //}
