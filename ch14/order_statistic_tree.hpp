@@ -63,13 +63,13 @@ public:
     }
 
     /**
-     * @brief select_norecur
+     * @brief select_nonrecur
      *
      * @complx  O(lg n)
      *
      * ex14-1.3
      */
-    sPointer select_norecur(sPointer target, SizeType rank)
+    sPointer select_nonrecur(sPointer target, SizeType rank)
     {
         //! must be within the range.
         assert(rank <= target->size + 1);
@@ -169,6 +169,8 @@ private:
      */
     virtual void insert(sPointer added) override
     {
+        added->size =   1;	//The new node added gets a size of 1.(P343)
+
         sPointer tracker = nil;
         sPointer curr = root;
         while(curr != nil)
@@ -195,6 +197,7 @@ private:
     }
 };
 }//namespace
+
 
 
 #endif // ORDER_STATISTIC_TREE_HPP
@@ -295,9 +298,9 @@ private:
 //       tree->insert(i);
 //    tree->print();
 
-//    std::cout << debug::red("testing select:\n");
+//    std::cout << debug::red("testing select_nonrecur:\n");
 //    auto node   =   tree->search(44);
-//    auto ret    =   tree->select_norecur(node,7);
+//    auto ret    =   tree->select_nonrecur(node,7);
 //    ret->print();
 
 //    delete tree;

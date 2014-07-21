@@ -11,9 +11,9 @@ int main()
        tree->insert(i);
     tree->print();
 
-    std::cout << debug::red("testing select:\n");
+    std::cout << debug::red("testing select_nonrecur:\n");
     auto node   =   tree->search(44);
-    auto ret    =   tree->select_norecur(node,7);
+    auto ret    =   tree->select_nonrecur(node,7);
     ret->print();
 
     delete tree;
