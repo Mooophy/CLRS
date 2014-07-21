@@ -8,12 +8,21 @@
 //! ex14.1-3
 //!     Write a nonrecursive version of OS-SELECT .
 //!
-//  as select_nonrecur shown in the code below
+//  as select_nonrecur shows.
 //!
 //! ex14.1-4
 //!     Write a recursive procedure OS-KEY-RANK(T,k) that takes as input an order-
 //!     statistic tree T and a key k and returns the rank of k in the dynamic set represented
 //!     by T . Assume that the keys of T are distinct.
+//!
+//  as find_rank_with_key() shows
+//!
+//! ex14.1-5
+//!     Given an element x in an n-node order-statistic tree and a natural number i, how
+//!     can we determine the ith successor of x in the linear order of the tree in O(lg n)
+//!     time?
+//!
+//  check below for implementation
 //!
 
 
@@ -40,10 +49,8 @@ private:
     using SizeType  =               std::size_t;
 
 public:
-
     using B::insert;
 //! ^^^^^^^^^^^^^^^ -- needed to call this virtual function from base class
-
 
     /**
      * @brief select
@@ -116,14 +123,26 @@ public:
         return ret;
     }
 
+    /**
+     * @brief find_rank_with_key
+     * @param key
+     * @return the rank looked for
+     *
+     * @complx  O(lg n)
+     *
+     * as required in ex14-1.4
+     */
     SizeType find_rank_with_key(const KeyType& key) const
     {
+        //! define a lambda to do the job recursively
         std::function<SizeType(sPointer)> find_by_recur=
             [&](sPointer curr)
         {
             assert(curr != nil);
             assert(curr != nullptr);
 
+            //! search for the node with the key specified
+            //! and count the rank simultaneously.
             if(curr->key == key)
                 return curr->rank();
             else
@@ -133,8 +152,44 @@ public:
 
         };
 
+        //! call the lambda
         return find_by_recur(root);
     }
+
+    /**
+     * @brief find_ith_successor
+     * @param target
+     * @param ith
+     *
+     * @complx  O(lg n)
+     *
+     * for ex14.1-5
+     */
+    sPointer find_ith_successor(sPointer target, SizeType ith)
+    {
+
+        if(ith  ==  0)
+            return target;
+        else
+        {
+            if(ith <= target->right->size)
+                return select(target->right,ith);
+            else
+            {
+                ith -=  target->right->size;
+
+                sPointer trackor;
+                do{
+                    trackor =   target;
+                    target  =   target->parent.lock();
+                }while(trackor->is_right());
+                --ith;
+
+                return find_ith_successor(target,ith);
+            }
+        }
+    }
+
 
     //! Dtor
     virtual ~OrderStatisticTree(){  }
@@ -349,6 +404,34 @@ private:
 
 //    std::cout   <<  debug::green("\ntesting find_rank_with_key(), as required in ex14.1-4:\nrank=")
 //                <<  tree->find_rank_with_key(44) << std::endl;
+
+
+//    delete tree;
+//    std::cout << debug::green("\nend\n");
+//    return 0;
+//}
+
+//! for testing find_ith_successor()
+//! ex14.1-5
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include "order_statistic_tree.hpp"
+
+//int main()
+//{
+//    auto tree = new ch14::OrderStatisticTree<int, std::string>;
+//    std::vector<int> v = {41,38,31,12,19,8};
+//    for(auto i : v)
+//       tree->insert(i);
+//    tree->print();
+
+
+//    std::cout   <<
+//            debug::red("\ntesting find_ith_successor(), as required in ex14.1-5:\n");
+//    auto node   =   tree->search(38);
+//    auto ret    =   tree->find_ith_successor(node,1);
+//    ret->print();
 
 
 //    delete tree;
