@@ -68,8 +68,8 @@ public:
      * @page    365
      * essentially, implementing MEMOIZED-CUT-ROD
      */
-    RodCutter(Iter first, Iter last):
-        revenue(last - first + 1, std::numeric_limits<ValueType>::min())
+    RodCutter(SizeType sz):
+        revenue(sz + 1, std::numeric_limits<ValueType>::min())
     {}
 
     /**
@@ -77,9 +77,9 @@ public:
      *
      * call this function when applied on another array.
      */
-    void reset(Iter first, Iter last)
+    void reset(SizeType sz)
     {
-        revenue = Container(first,last);
+        *this = RodCutter(sz);
     }
 
     /**
@@ -128,11 +128,12 @@ public:
     /**
      * @brief Ctor for top-down dynamic programming
      */
-    RodCutterTopDown(Iter first, Iter last):
-        B(first,last)
+    RodCutterTopDown(SizeType sz):
+        B(sz)
     {}
 
     virtual ~RodCutterTopDown(){}
+
 protected:
 
     using B::revenue;
@@ -190,7 +191,7 @@ private:
 //    using TopDown   =   ch15::RodCutterTopDown<Iter>;
 
 //    //! allocation for the top-down dynamic programming
-//    auto cut =  std::make_shared<TopDown>(v.begin(), v.end());
+//    auto cut =  std::make_shared<TopDown>(v.size());
 
 //    //! print
 //    std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;

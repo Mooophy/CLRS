@@ -10,7 +10,7 @@ int main()
     using TopDown   =   ch15::RodCutterTopDown<Iter>;
 
     //! allocation for the top-down dynamic programming
-    auto cut =  std::make_shared<TopDown>(v.begin(), v.end());
+    auto cut =  std::make_shared<TopDown>(v.size());
 
     //! print
     std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;
