@@ -125,13 +125,7 @@ public:
     using SizeType  =   typename    B::SizeType;
     using ValueType =   typename    B::ValueType;
 
-    /**
-     * @brief Ctor for top-down
-     */
-    RodCutterTopDown(SizeType sz):
-        B(sz)
-    {}
-
+    using B::RodCutter;
     virtual ~RodCutterTopDown(){}
 
 protected:
@@ -183,13 +177,7 @@ public:
     using SizeType  =   typename    B::SizeType;
     using ValueType =   typename    B::ValueType;
 
-    /**
-     * @brief Ctor for bottom-up
-     */
-    RodCutterBottomUp(SizeType sz):
-        B(sz)
-    {}
-
+    using B::RodCutter;
     virtual ~RodCutterBottomUp(){}
 protected:
     using B::revenue;
