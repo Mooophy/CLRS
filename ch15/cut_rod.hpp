@@ -126,7 +126,7 @@ public:
     using ValueType =   typename    B::ValueType;
 
     /**
-     * @brief Ctor for top-down dynamic programming
+     * @brief Ctor for top-down
      */
     RodCutterTopDown(SizeType sz):
         B(sz)
@@ -175,6 +175,41 @@ private:
     }
 };
 
+template<typename Iter>
+class RodCutterBottomUp : public RodCutter<Iter>
+{
+public:
+    using B         =               ch15::RodCutter<Iter>;
+    using SizeType  =   typename    B::SizeType;
+    using ValueType =   typename    B::ValueType;
+
+    /**
+     * @brief Ctor for bottom-up
+     */
+    RodCutterBottomUp(SizeType sz):
+        B(sz)
+    {}
+
+    virtual ~RodCutterBottomUp(){}
+protected:
+    using B::revenue;
+
+    /**
+     * @brief the virtual function
+     */
+    virtual ValueType dynamic_program(Iter first, SizeType len) override
+    {
+        std::cout << color::yellow("By bottom-up dynamic programming:\n");
+        return bottom_up(first, len);
+    }
+
+private:
+    ValueType top_down(Iter first, SizeType len)
+    {
+
+    }
+
+};
 }//namespace
 #endif // CUT_ROD_HPP
 
