@@ -17,11 +17,14 @@ template<typename Iter>
 typename std::iterator_traits<Iter>::value_type
 cut_rod(Iter first, typename std::iterator_traits<Iter>::difference_type len);
 
+template<typename Iter>
+class RodCutter;
+
 /**
  * @brief cut_rod
  *          return the optimal solution without using dynamic programming
- * @param first
- * @param len
+ * @param first     the first iterator of p
+ * @param len       n
  *
  * @complx  O(2^n)
  * @page    363, CLRS
@@ -42,11 +45,37 @@ cut_rod(Iter first, typename std::iterator_traits<Iter>::difference_type len)
 
     //! iteration with recursion
     for(SizeType count = 0 ; count != len ; ++count)
-        ret =   std::max(ret, *(first + count) + cut_rod(first, len - count - 1));
+        ret = std::max(ret, *(first + count) + cut_rod(first,len - count - 1));
 
     return ret;
 }
 
-}
+/**
+ * @brief The RodCutter class
+ *
+ * abstract class
+ */
+template<typename Iter>
+class RodCutter
+{
+public:
+    using ValueType =   typename    std::iterator_traits<Iter>::value_type;
+    using SizeType  =   typename    std::iterator_traits<Iter>::difference_type;
+    using Container =               std::vector<ValueType>;
 
+    ValueType operator()(Iter first, SizeType len)
+    {
+        return dynamic_program(first, len);
+    }
+
+    ~RodCutter(){}
+
+protected:
+    Container   vec;
+
+    virtual ValueType dynamic_program(Iter first, SizeType len) = 0;
+};
+
+
+}//namespace
 #endif // CUT_ROD_HPP
