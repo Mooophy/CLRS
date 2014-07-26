@@ -5,7 +5,7 @@
 int main()
 {
     //! build the array r
-    std::vector<int> v = {1,5,8,9};
+    std::vector<int> v = {1,5,8,10};
     using Iter      =   std::vector<int>::iterator;
     using TopDown   =   ch15::RodCutterTopDown<Iter>;
     using BottomUp  =   ch15::RodCutterBottomUp<Iter>;
@@ -16,6 +16,7 @@ int main()
     //! print
     std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;
     cut->print_container();
+    cut->print_solutions(v.begin(),v.size());
 
     return 0;
 }

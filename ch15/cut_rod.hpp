@@ -69,7 +69,8 @@ public:
      * essentially, implementing MEMOIZED-CUT-ROD
      */
     RodCutter(SizeType sz):
-        revenue(sz + 1, std::numeric_limits<ValueType>::min())
+        revenue(sz + 1, std::numeric_limits<ValueType>::min()),
+        solutions(sz + 1)
     {}
 
     /**
@@ -103,15 +104,22 @@ public:
         std::cout << std::endl;
     }
 
+    void print_solutions(Iter first, SizeType len)
+    {
+        print_solu(first, len);
+    }
+
     virtual ~RodCutter(){}
 
 protected:
     Container   revenue;
+    Container   solutions;
 
     /**
      * @brief the virtual function.
      */
     virtual ValueType dynamic_program(Iter first, SizeType len) = 0;
+    virtual void print_solu(Iter first, SizeType len) = 0;
 };
 
 /**
@@ -184,6 +192,7 @@ public:
 
 protected:
     using B::revenue;
+    using B::solutions;
 
     /**
      * @brief the virtual function
@@ -192,6 +201,18 @@ protected:
     {
         std::cout << color::yellow("By bottom-up dynamic programming:\n");
         return bottom_up(first, len);
+    }
+
+    virtual void print_solu(Iter first, SizeType len)
+    {
+        bottom_up(first, len);
+
+        std::cout << color::green("the optimal solution is:\n");
+        while(len > 0)
+        {
+            std::cout << solutions[len];
+            len -=  solutions[len];
+        }
     }
 
 private:
@@ -214,7 +235,11 @@ private:
         {
             ValueType result = std::numeric_limits<ValueType>::min();
             for(int inner = 0; inner != outer; ++inner)
-                result = std::max(result, *(first + inner) + revenue[outer - inner - 1]);
+            {
+                result = std::max(result,
+                                  *(first + inner) + revenue[outer - inner - 1]);
+                solutions[outer] =  inner + 1;
+            }
 
             revenue[outer] = result;
         }
