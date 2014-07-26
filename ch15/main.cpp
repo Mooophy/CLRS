@@ -8,9 +8,10 @@ int main()
     std::vector<int> v = {1,5,8,9};
     using Iter      =   std::vector<int>::iterator;
     using TopDown   =   ch15::RodCutterTopDown<Iter>;
+    using BottomUp  =   ch15::RodCutterBottomUp<Iter>;
 
     //! allocation for the top-down dynamic programming
-    auto cut =  std::make_shared<TopDown>(v.size());
+    auto cut =  std::make_shared<BottomUp>(v.size());
 
     //! print
     std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;

@@ -149,6 +149,8 @@ private:
      *
      * @page 365
      * @note essentially implementing MEMOIZED-CUT-ROD-AUX(p,n,r)
+     *
+     * @complx O(n^2)
      */
     ValueType top_down(Iter first, SizeType len)
     {
@@ -179,6 +181,7 @@ public:
 
     using B::RodCutter;
     virtual ~RodCutterBottomUp(){}
+
 protected:
     using B::revenue;
 
@@ -192,11 +195,32 @@ protected:
     }
 
 private:
-    ValueType top_down(Iter first, SizeType len)
+    /**
+     * @brief top_down
+     * @param first
+     * @param len
+     *
+     * @page 366
+     * @note essentially, BOTTOM-UP-CUT-ROD(p,n)
+     *
+     * @complx O(n^2)
+     */
+    ValueType bottom_up(Iter first, SizeType len)
     {
+        //! update the container
+        std::fill(revenue.begin(),revenue.end(),0);
 
+        for(int outer = 1; outer != len + 1; ++outer)
+        {
+            ValueType result = std::numeric_limits<ValueType>::min();
+            for(int inner = 0; inner != outer; ++inner)
+                result = std::max(result, *(first + inner) + revenue[outer - inner - 1]);
+
+            revenue[outer] = result;
+        }
+
+        return revenue.back();
     }
-
 };
 }//namespace
 #endif // CUT_ROD_HPP
@@ -222,3 +246,27 @@ private:
 
 //    return 0;
 //}
+
+//! test bottom-up
+//#include <iostream>
+//#include <memory>
+//#include "cut_rod.hpp"
+//#include "color.hpp"
+//int main()
+//{
+//    //! build the array r
+//    std::vector<int> v = {1,5,8,9};
+//    using Iter      =   std::vector<int>::iterator;
+//    using TopDown   =   ch15::RodCutterTopDown<Iter>;
+//    using BottomUp  =   ch15::RodCutterBottomUp<Iter>;
+
+//    //! allocation for the top-down dynamic programming
+//    auto cut =  std::make_shared<BottomUp>(v.size());
+
+//    //! print
+//    std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;
+//    cut->print_container();
+
+//    return 0;
+//}
+
