@@ -5,7 +5,7 @@
 int main()
 {
     //! build the array r
-    std::vector<int> v = {1,5,8,10};
+    std::vector<int> v = {1,5,8,9,10,17,17,20,24,30};
     using Iter      =   std::vector<int>::iterator;
     using TopDown   =   ch15::RodCutterTopDown<Iter>;
     using BottomUp  =   ch15::RodCutterBottomUp<Iter>;
@@ -18,6 +18,7 @@ int main()
     cut->print_container();
     cut->print_solutions(v.begin(),v.size());
 
+    std::cout << color::red("\nend\n");
     return 0;
 }
 

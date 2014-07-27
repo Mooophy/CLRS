@@ -116,7 +116,7 @@ protected:
     Container   solutions;
 
     /**
-     * @brief the virtual function.
+     * @brief a virtual function.
      */
     virtual ValueType dynamic_program(Iter first, SizeType len) = 0;
     virtual void print_solu(Iter first, SizeType len) = 0;
@@ -179,6 +179,9 @@ private:
     }
 };
 
+/**
+ * @brief BottomUp
+ */
 template<typename Iter>
 class RodCutterBottomUp : public RodCutter<Iter>
 {
@@ -203,6 +206,13 @@ protected:
         return bottom_up(first, len);
     }
 
+    /**
+     * @brief print_solu
+     *
+     * @pseudocode  PRINT-CUT-SOLUTION(p,n)
+     * @page    369,CLRS
+     * @complx  O(n)
+     */
     virtual void print_solu(Iter first, SizeType len)
     {
         bottom_up(first, len);
@@ -210,7 +220,7 @@ protected:
         std::cout << color::green("the optimal solution is:\n");
         while(len > 0)
         {
-            std::cout << solutions[len];
+            std::cout << solutions[len] << " ";
             len -=  solutions[len];
         }
     }
@@ -218,12 +228,9 @@ protected:
 private:
     /**
      * @brief top_down
-     * @param first
-     * @param len
      *
-     * @page 366
-     * @note essentially, BOTTOM-UP-CUT-ROD(p,n)
-     *
+     * @pseudocode  BOTTOM-UP-CUT-ROD, EXTENDED-BOTTOM-UP-CUT-ROD
+     * @page 366, 369, CLRS
      * @complx O(n^2)
      */
     ValueType bottom_up(Iter first, SizeType len)
@@ -236,11 +243,13 @@ private:
             ValueType result = std::numeric_limits<ValueType>::min();
             for(int inner = 0; inner != outer; ++inner)
             {
-                result = std::max(result,
-                                  *(first + inner) + revenue[outer - inner - 1]);
-                solutions[outer] =  inner + 1;
+                if(result   <   *(first + inner) + revenue[outer - inner - 1] )
+                {
+                    result = std::max(result,
+                                      *(first + inner) + revenue[outer - inner - 1]);
+                    solutions[outer] =  inner + 1;
+                }
             }
-
             revenue[outer] = result;
         }
 
@@ -292,6 +301,31 @@ private:
 //    std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;
 //    cut->print_container();
 
+//    return 0;
+//}
+
+//! test extended-bottom-up-cut-rod and print-cut-rod-solution
+//#include <iostream>
+//#include <memory>
+//#include "cut_rod.hpp"
+//#include "color.hpp"
+//int main()
+//{
+//    //! build the array r
+//    std::vector<int> v = {1,5,8,9,10,17,17,20,24,30};
+//    using Iter      =   std::vector<int>::iterator;
+//    using TopDown   =   ch15::RodCutterTopDown<Iter>;
+//    using BottomUp  =   ch15::RodCutterBottomUp<Iter>;
+
+//    //! allocation for the top-down dynamic programming
+//    auto cut =  std::make_shared<BottomUp>(v.size());
+
+//    //! print
+//    std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;
+//    cut->print_container();
+//    cut->print_solutions(v.begin(),v.size());
+
+//    std::cout << color::red("\nend\n");
 //    return 0;
 //}
 
