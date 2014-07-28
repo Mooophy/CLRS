@@ -4,6 +4,14 @@
  *  @date       17  July 2014
  *  @remark     Implementation of CLRS algorithms, using C++ templates.
  ***************************************************************************/
+//!
+//! ex15.1-3
+//! Consider a modification of the rod-cutting problem in which, in addition to a
+//! price pi for each rod, each cut incurs a fixed cost of c. The revenue associated with
+//! a solution is now the sum of the prices of the pieces minus the costs of making the
+//! cuts. Give a dynamic-programming algorithm to solve this modified problem.
+//!
+
 #ifndef CUT_ROD_HPP
 #define CUT_ROD_HPP
 
