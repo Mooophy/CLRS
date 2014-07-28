@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iterator>
 #include <limits>
+#include <assert.h>
 #include "color.hpp"
 
 namespace ch15 {
@@ -17,6 +18,19 @@ namespace ch15 {
 template<typename Iter>
 typename std::iterator_traits<Iter>::value_type
 cut_rod(Iter first, typename std::iterator_traits<Iter>::difference_type len);
+
+template<typename Range>
+typename Range::value_type
+bottom_up_with_cost(const Range& prices, typename Range::value_type cost);
+
+template<typename Iter>
+typename std::iterator_traits<Iter>::value_type
+bottom_up_with_cost(
+            Iter first,
+            Iter last,
+            const typename std::iterator_traits<Iter>::value_type& per_cut
+                    );
+
 
 /**
  * @brief cut_rod
@@ -48,12 +62,58 @@ cut_rod(Iter first, typename std::iterator_traits<Iter>::difference_type len)
     return ret;
 }
 
+/**
+ * @brief bottom_up_with_cost
+ * @param first
+ * @param last
+ * @param per_cut
+ *
+ * @ex  15.1-3
+ * @page 370, CLRS
+ * @complx  O(n^2)
+ */
+template<typename Iter>
+inline typename std::iterator_traits<Iter>::value_type
+bottom_up_with_cost(
+            Iter first,
+            Iter last,
+            const typename std::iterator_traits<Iter>::value_type& per_cut
+                    )
+{
+    using ValueType =   typename    std::iterator_traits<Iter>::value_type;
+    using DiffType  =   typename    std::iterator_traits<Iter>::difference_type;
+
+    //! lambda for cut cost
+    auto cost = [&](DiffType outer, DiffType inner)->ValueType
+    {
+          return (outer == inner)?  0   :   per_cut;
+    };
+
+    DiffType size   =   last - first;
+    assert(size > 0);
+    std::vector<ValueType>  records(size + 1, 0);
+
+    //! find solutions to all lengths , storing in records
+    for(DiffType outer = 0; outer != size; ++outer)
+    {
+        ValueType maximum = std::numeric_limits<ValueType>::min();
+
+        //! find the optimal solution for the current length
+        for(DiffType inner = 0; inner != outer + 1; ++inner)
+            maximum = std::max(maximum,
+                              *(first + inner) + records[outer - inner]
+                                    - cost(outer, inner));
+
+        records[outer + 1] = maximum;
+    }
+    return records.back();
+}
 
 
 /**
  * @brief The RodCutter class
  *
- * abstract class
+ * abstract
  */
 template<typename Iter>
 class RodCutter
@@ -74,19 +134,9 @@ public:
     {}
 
     /**
-     * @brief reset
-     *
-     * call this function when applied on another array.
-     */
-    void reset(SizeType sz)
-    {
-        *this = RodCutter(sz);
-    }
-
-    /**
      * @brief   return the optimal revenue
      *
-     * @note    just a wraper for virtual functions
+     * @note    just a wraper for virtual function
      */
     ValueType optimize(Iter first, SizeType len)
     {
@@ -104,6 +154,9 @@ public:
         std::cout << std::endl;
     }
 
+    /**
+     * @brief print_solutions
+     */
     void print_solutions(Iter first, SizeType len)
     {
         print_solu(first, len);
@@ -115,8 +168,9 @@ protected:
     Container   revenue;
     Container   solutions;
 
+private:
     /**
-     * @brief a virtual function.
+     * @brief private absolute virtual functions
      */
     virtual ValueType dynamic_program(Iter first, SizeType len) = 0;
     virtual void print_solu(Iter first, SizeType len) = 0;
@@ -213,7 +267,7 @@ protected:
      * @page    369,CLRS
      * @complx  O(n)
      */
-    virtual void print_solu(Iter first, SizeType len)
+    virtual void print_solu(Iter first, SizeType len) override
     {
         bottom_up(first, len);
 
@@ -225,7 +279,6 @@ protected:
         }
     }
 
-private:
     /**
      * @brief top_down
      *
@@ -233,7 +286,7 @@ private:
      * @page 366, 369, CLRS
      * @complx O(n^2)
      */
-    ValueType bottom_up(Iter first, SizeType len)
+    virtual ValueType bottom_up(Iter first, SizeType len)
     {
         //! update the container
         std::fill(revenue.begin(),revenue.end(),0);
@@ -256,6 +309,7 @@ private:
         return revenue.back();
     }
 };
+
 }//namespace
 #endif // CUT_ROD_HPP
 

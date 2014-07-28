@@ -5,18 +5,15 @@
 int main()
 {
     //! build the array r
-    std::vector<int> v = {1,5,8,9,10,17,17,20,24,30};
-    using Iter      =   std::vector<int>::iterator;
-    using TopDown   =   ch15::RodCutterTopDown<Iter>;
-    using BottomUp  =   ch15::RodCutterBottomUp<Iter>;
+    std::vector<int> v = {1,5,8,9,10};
 
-    //! allocation for the top-down dynamic programming
-    auto cut =  std::make_shared<BottomUp>(v.size());
+    int result = ch15::bottom_up_with_cost(v.begin(), v.end(), 1);
 
-    //! print
-    std::cout << cut->optimize(v.begin(),v.size()) <<std::endl;
-    cut->print_container();
-    cut->print_solutions(v.begin(),v.size());
+    std::cout << result << std::endl;
+
+
+
+
 
     std::cout << color::red("\nend\n");
     return 0;
