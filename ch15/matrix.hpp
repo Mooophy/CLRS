@@ -19,6 +19,10 @@ template<typename T>
 Matrix<T>
 operator*(const Matrix<T>& lhs, const Matrix<T>& rhs);
 
+/**
+ * @brief print
+ * @param mat
+ */
 template<typename T>
 void print(const Matrix<T>& mat)
 {
@@ -27,6 +31,14 @@ void print(const Matrix<T>& mat)
             std::cout << mat(r,c) << std::endl;
 }
 
+/**
+ * @brief operator *
+ * @param lhs
+ * @param rhs
+ *
+ * @page 371
+ * @pseudocode MATRIX-MULTIPLY
+ */
 template<typename T>
 inline Matrix<T>
 operator*(const Matrix<T>& lhs, const Matrix<T>& rhs)
