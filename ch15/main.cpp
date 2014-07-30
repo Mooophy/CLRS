@@ -1,14 +1,12 @@
 #include <iostream>
-#include <memory>
-#include "color.hpp"
-#include "fibonacci.hpp"
+#include <matrix.hpp>
+#include <color.hpp>
 
 int main()
 {
-    ch15::Fibonacci<long long> fibo;
+    ch15::Matrix<int> mat;
 
-    std::cout << fibo(50) << std::endl;
-    fibo.print();
+
 
     std::cout << color::red("\nend\n");
     return 0;

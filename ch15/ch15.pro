@@ -9,5 +9,6 @@ SOURCES += main.cpp
 HEADERS += \
     cut_rod.hpp \
     color.hpp \
-    fibonacci.hpp
+    fibonacci.hpp \
+    matrix.hpp
 
