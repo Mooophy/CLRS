@@ -1,6 +1,6 @@
 #include <iostream>
-#include <matrix.hpp>
-#include <color.hpp>
+#include "matrix.hpp"
+#include "color.hpp"
 
 int main()
 {
