@@ -38,9 +38,14 @@ public:
     }
 
     /**
-     * @brief build_solutions
+     * @brief build
+     *
+     * @pseudocode  MATRIX-CHAIN-ORDER
+     * @page 375,CLRS
+     * @time complx  theta(n^3)
+     * @space required  theta(n^2)
      */
-    void build_solutions()
+    void build()
     {
         //! (head == tail) == true
         for(SizeType head = 0; head != size; ++head)
@@ -63,7 +68,7 @@ public:
                     if(result < m(head,tail))
                     {
                         m(head,tail)  =   result;
-                        s(head,tail)  =   split;
+                        s(head,tail)  =   split + 1;
                     }
                 }
             }
@@ -108,3 +113,22 @@ private:
 
 } //namespace
 #endif // MATRIX_CHAIN_H
+
+//! test for
+//#include <iostream>
+//#include "matrix.hpp"
+//#include "color.hpp"
+//#include "matrix_chain.hpp"
+
+//int main()
+//{
+//    std::vector<int> v = {30,35,15,5,10,20,25};
+//    ch15::MatrixChain<decltype(v)> chain(v);
+
+//    chain.build();
+//    chain.print();
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+
