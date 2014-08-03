@@ -36,18 +36,19 @@ public:
         for(SizeType i = 0; i != size; ++i)
             m(i,i)  =   0;
 
-        ValueType result;
+
         for(SizeType len = 2; len != size + 1; ++len)
         {
             for(SizeType i = 0; i != size; ++i)
             {
                 SizeType j = i + len - 1;
                 m(i,j)  =   std::numeric_limits<ValueType>::max();
+
                 for(SizeType split = i; split != j; ++split)
                 {
-                    result  =   m(i,split)
-                                +   m(split + 1, j)
-                                +   data(i -1) * data(split) * data(j);
+                    ValueType result  =
+                            m(i,split)  +   m(split + 1, j)
+                                        +   data(i -1) * data(split) * data(j);
 
                     if(result < m(i,j))
                     {
