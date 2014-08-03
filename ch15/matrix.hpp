@@ -27,8 +27,11 @@ template<typename T>
 void print(const Matrix<T>& mat)
 {
     for(unsigned r = 0; r != mat.size1(); ++r)
+    {
         for(unsigned c = 0; c != mat.size2(); ++c)
-            std::cout << mat(r,c) << std::endl;
+            std::cout << mat(r,c) << " ";
+        std::cout << std::endl;
+    }
 }
 
 /**

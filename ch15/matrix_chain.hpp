@@ -9,6 +9,7 @@
 #define MATRIX_CHAIN_H
 
 #include <iterator>
+#include "color.hpp"
 #include "matrix.hpp"
 
 namespace ch15 {
@@ -30,16 +31,14 @@ public:
         assert(size > 1);
     }
 
-
-    void build_solutions() const
+    void build_solutions()
     {
         for(SizeType i = 0; i != size; ++i)
             m(i,i)  =   0;
 
-
         for(SizeType len = 2; len != size + 1; ++len)
         {
-            for(SizeType i = 0; i != size; ++i)
+            for(SizeType i = 0; i != size - len; ++i)
             {
                 SizeType j = i + len - 1;
                 m(i,j)  =   std::numeric_limits<ValueType>::max();
@@ -48,7 +47,7 @@ public:
                 {
                     ValueType result  =
                             m(i,split)  +   m(split + 1, j)
-                                        +   data(i -1) * data(split) * data(j);
+                                        +   data[i] * data[split] * data[j];
 
                     if(result < m(i,j))
                     {
@@ -58,6 +57,18 @@ public:
                 }
             }
         }
+    }
+
+    void print_m()const
+    {
+        std::cout << color::green("table m :\n");
+        ch15::print(m);
+    }
+
+    void print_s()const
+    {
+        std::cout << color::yellow("table s :\n");
+        ch15::print(s);
     }
 
     const Range& data;
