@@ -5,15 +5,13 @@
 
 int main()
 {
-    std::vector<int> v = {1,2,3,4};
+    std::vector<int> v = {30,35,15,5,10,20,25};
     ch15::MatrixChain<decltype(v)> chain(v);
 
     chain.build_solutions();
+    chain.print();
 
 
-    chain.print_s();
-    std::cout << "\n";
-    chain.print_m();
 
     std::cout << color::red("\nend\n");
     return 0;
