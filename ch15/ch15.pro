@@ -10,5 +10,6 @@ HEADERS += \
     cut_rod.hpp \
     color.hpp \
     fibonacci.hpp \
-    matrix.hpp
+    matrix.hpp \
+    matrix_chain.hpp
 

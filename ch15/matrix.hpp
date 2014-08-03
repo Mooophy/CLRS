@@ -1,5 +1,5 @@
 /***************************************************************************
- *  @file       node.hpp
+ *  @file       matrix.hpp
  *  @author     Alan.W
  *  @date       28  July 2014
  *  @remark     Implementation for CLRS, using C++ templates.
