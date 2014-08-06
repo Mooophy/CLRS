@@ -41,7 +41,7 @@ public:
      * @brief build
      *
      * @pseudocode  MATRIX-CHAIN-ORDER
-     * @page 375,CLRS
+     * @page 375, CLRS
      * @time complx  theta(n^3)
      * @space required  theta(n^2)
      */
@@ -76,7 +76,7 @@ public:
     }
 
     /**
-     * @brief print_m
+     * @brief print m table
      */
     void print_m()const
     {
@@ -85,7 +85,7 @@ public:
     }
 
     /**
-     * @brief print_s
+     * @brief print s table
      */
     void print_s()const
     {
@@ -103,18 +103,38 @@ public:
         print_s();
     }
 
+    /**
+     * @brief print_optimal
+     * @param head  :   i
+     * @param tail  :   j
+     *
+     * @pseudocode PRINT-OPTIMAL-PARENTS
+     * @page    377, CLRS
+     */
+    void print_optimal(SizeType head, SizeType tail)const
+    {
+        if(head  == tail)
+            std ::cout << "A" << head;
+        else
+        {
+            std::cout << color::yellow("(");
+            print_optimal(head, s(head - 1,tail - 2));
+            print_optimal(s(head - 1,tail - 2) + 1, tail);
+            std::cout << color::yellow(")");
+        }
+    }
+
 private:
     const Range& data;
     Matrix m;
     Matrix s;
     SizeType size;
-
 };
 
 } //namespace
 #endif // MATRIX_CHAIN_H
 
-//! test for
+//! test for MATRIX-CHAIN-ORDER and PRINT-OPTIMAL-PARENTS
 //#include <iostream>
 //#include "matrix.hpp"
 //#include "color.hpp"
@@ -127,6 +147,8 @@ private:
 
 //    chain.build();
 //    chain.print();
+
+//    chain.print_optimal(1,6);
 
 //    std::cout << color::red("\nend\n");
 //    return 0;

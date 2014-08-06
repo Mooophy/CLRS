@@ -11,6 +11,8 @@ int main()
     chain.build();
     chain.print();
 
+    chain.print_optimal(1,6);
+
     std::cout << color::red("\nend\n");
     return 0;
 }
