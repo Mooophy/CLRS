@@ -31,7 +31,7 @@ public:
     MatrixChain(const Range& d):
         data(d),
         m(d.size() - 1, d.size() - 1),
-        s(d.size() - 1, d.size() - 1),
+        s(d.size() - 2, d.size() - 2),
         size(d.size() - 1)
     {
         assert(size > 1);
@@ -67,8 +67,8 @@ public:
 
                     if(result < m(head,tail))
                     {
-                        m(head,tail)  =   result;
-                        s(head,tail)  =   split + 1;
+                        m(head,tail)        =   result;
+                        s(head,tail - 1)    =   split + 1;
                     }
                 }
             }
