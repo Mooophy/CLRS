@@ -18,7 +18,7 @@ namespace ch15 {
  * @brief The MatrixChain class
  */
 template<typename Range>
-class MatrixChain
+class MatrixChainOrder
 {
 public:
     using ValueType =   typename    Range::value_type;
@@ -28,7 +28,7 @@ public:
     /**
      * @brief Ctor
      */
-    MatrixChain(const Range& d):
+    MatrixChainOrder(const Range& d):
         data(d),
         m(d.size() - 1, d.size() - 1),
         s(d.size() - 2, d.size() - 2),

@@ -11,5 +11,6 @@ HEADERS += \
     color.hpp \
     fibonacci.hpp \
     matrix.hpp \
-    matrix_chain.hpp
+    matrix_chain_mutiply.hpp \
+    matrix_chain_order.hpp
 
