@@ -1,5 +1,5 @@
 ﻿/***************************************************************************
- *  @file       redblacktree.hpp
+ *  @file       persistent_red_black_tree.hpp
  *  @author     Yue Wang
  *  @date       09  July 2014
  *  @remark     Algorithims implementation for CLRS, using C++ templates.
