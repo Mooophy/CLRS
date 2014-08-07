@@ -1,18 +1,22 @@
 #include <iostream>
-#include "matrix.hpp"
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/io.hpp>
 #include "color.hpp"
+#include "matrix.hpp"
 #include "matrix_chain_order.hpp"
 #include "matrix_chain_mutiply.hpp"
 
 int main()
 {
-    std::vector<int> v = {30,35,15,5,10,20,25};
-    ch15::MatrixChainOrder<decltype(v)> chain(v);
+    using namespace boost::numeric::ublas;
 
-    chain.build();
-    chain.print();
+    std::vector<int> v = {1,2,3,4,5,6,7,8,9};
+    matrix<int> mat(3,3);
 
-    chain.print_optimal(1,6);
+    mat <<= v;
+
+
+    std::cout << (mat * mat)<< std::endl;
 
     std::cout << color::red("\nend\n");
     return 0;

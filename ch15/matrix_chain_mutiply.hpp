@@ -31,14 +31,6 @@ template<typename T>
 using Chain = std::vector<ch15::Matrix<T>>;
 
 
-template<typename T>
-class MatrixChianMultiply
-{
-public:
-
-private:
-
-};
 
 }//namepspace
 #endif // MATRIX_CHAIN_MUTIPLY_HPP
