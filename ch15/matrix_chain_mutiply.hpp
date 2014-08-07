@@ -53,7 +53,6 @@ build_chain(ch15::Chain<typename Range::value_type>& chain,
     }
 }
 
-
 /**
  * @brief print_matrix_chain
  * @param chain
@@ -66,7 +65,26 @@ print_matrix_chain(const ch15::Chain<T>& chain)
         std::cout << mat << std::endl << std::endl;
 }
 
-
-
 }//namepspace
 #endif // MATRIX_CHAIN_MUTIPLY_HPP
+
+//! test build_chain
+//#include <iostream>
+//#include <boost/numeric/ublas/io.hpp>
+//#include "color.hpp"
+//#include "matrix.hpp"
+//#include "matrix_chain_mutiply.hpp"
+//#include "matrix_chain_order.hpp"
+
+//int main()
+//{
+//    std::vector<int> v = {30,35,15,5,10,20,25};
+
+//    ch15::Chain<int> chain;
+//    ch15::build_chain(chain, v, 1);
+//    ch15::print_matrix_chain(chain);
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+

@@ -13,7 +13,6 @@ int main()
     ch15::build_chain(chain, v, 1);
     ch15::print_matrix_chain(chain);
 
-
     std::cout << color::red("\nend\n");
     return 0;
 }
