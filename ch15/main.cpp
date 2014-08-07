@@ -10,7 +10,7 @@ int main()
     std::vector<int> v = {30,35,15,5,10,20,25};
 
     ch15::Chain<int> chain;
-    ch15::build_chain(chain, v);
+    ch15::build_chain(chain, v, 1);
     ch15::print_matrix_chain(chain);
 
 

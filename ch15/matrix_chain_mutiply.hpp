@@ -40,14 +40,19 @@ using Chain = std::vector<ch15::Matrix<T>>;
  */
 template<typename Range>
 void
-build_chain(ch15::Chain<typename Range::value_type>& chain, const Range& dimensions)
+build_chain(ch15::Chain<typename Range::value_type>& chain,
+            const Range& dimensions,
+            const typename Range::value_type& init_val = 0)
 {
+    using ValueType =   typename Range::value_type;
+
     for(auto it = dimensions.begin(); it != dimensions.end() - 1; ++it)
     {
-        auto mat = ch15::Matrix<typename Range::value_type>(*it, *(it + 1));
+        auto mat = ch15::Matrix<ValueType>(*it, *(it + 1), init_val);
         chain.push_back(mat);
     }
 }
+
 
 /**
  * @brief print_matrix_chain
@@ -60,6 +65,8 @@ print_matrix_chain(const ch15::Chain<T>& chain)
     for(const auto& mat : chain)
         std::cout << mat << std::endl << std::endl;
 }
+
+
 
 }//namepspace
 #endif // MATRIX_CHAIN_MUTIPLY_HPP
