@@ -10,13 +10,11 @@ int main()
 {
     using namespace boost::numeric::ublas;
 
-    std::vector<int> v = {1,2,3,4,5,6,7,8,9};
+    std::vector<int> v = {1,3,3,4,5,6,7,8,9};
     matrix<int> mat(3,3);
 
-    mat <<= v;
-
-
-    std::cout << (mat * mat)<< std::endl;
+    v >>= mat;
+    std::cout << mat << std::endl;
 
     std::cout << color::red("\nend\n");
     return 0;
