@@ -1,3 +1,3 @@
-#tried clang++, but failed	-alan
+# for c++14 @alan
 all:
-	g++ -std=c++11 -Wall -o run *.cpp
+	g++-4.9 -std=c++1y -Wall -o run_me *.cpp
