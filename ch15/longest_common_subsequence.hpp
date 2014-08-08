@@ -56,6 +56,7 @@ build_lcs_table(const Range& lhs, const Range& rhs)
     using TableType =   Table<SizeType, A>;
     using EntryType =   Entry<SizeType, A>;
 
+    //! init
     SizeType rows = lhs.size() + 1;
     SizeType cols = rhs.size() + 1;
     TableType lcs(rows, cols, ch15::Entry<SizeType,A>());
