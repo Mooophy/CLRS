@@ -17,7 +17,7 @@
 #define MATRIX_CHAIN_MUTIPLY_HPP
 
 #include <vector>
-#include <memory>
+#include <functional>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include "matrix_chain_order.hpp"
@@ -46,6 +46,9 @@ build_dimensions(const ch15::Chain<typename Range::value_type>& chain,
 template<typename T>
 void print_matrix_chain(const ch15::Chain<T>& chain);
 
+template<typename T>
+ch15::Matrix<T>
+matrix_chain_multiply(const ch15::Chain<T>& chain);
 
 
 
@@ -99,6 +102,40 @@ build_dimensions(const ch15::Chain<typename Range::value_type>& chain,
     dimensions.push_back( chain.begin()->size1() );
     for(const auto& mat : chain)
         dimensions.push_back( mat.size2());
+}
+
+template<typename T>
+ch15::Matrix<T>
+matrix_chain_multiply(const ch15::Chain<T>& chain)
+{
+    //! type def for MatrixChainOrder's parameter
+    using RangeType =   std::vector<T>;
+    using SizeType  =   typename ch15::Matrix<T>::size_type;
+
+    //! build dimensions
+    RangeType dimens;
+    ch15::build_dimensions(chain, dimens);
+
+    //! build optimal order
+    ch15::MatrixChainOrder<RangeType> order(dimens);
+    order.build();
+    order.print_optimal(1,chain.size());
+    std::cout << std::endl;
+
+    //! lambda to do the real job recursively
+    std::function<ch15::Matrix<T>(SizeType,SizeType)> multiply
+            = [&](SizeType head, SizeType tail)
+    {
+        if(head == tail)
+            return chain[head];
+        else
+            return multiply(head, order.s(head - 1,tail - 2))
+                   *
+                   multiply(order.s(head - 1,tail - 2) + 1, tail);
+    };
+
+    //! return the product
+    return multiply(1, chain.size());
 }
 
 }//namepspace

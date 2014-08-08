@@ -12,7 +12,18 @@
 #include "color.hpp"
 #include "matrix.hpp"
 
+
 namespace ch15 {
+
+template<typename T>
+using Chain = std::vector<ch15::Matrix<T>>;
+
+//! forwad declarations
+template<typename Range>
+class MatrixChainOrder;
+
+template<typename T>
+ch15::Matrix<T> matrix_chain_multiply(const ch15::Chain<T>& chain);
 
 /**
  * @brief The MatrixChain class
@@ -20,6 +31,9 @@ namespace ch15 {
 template<typename Range>
 class MatrixChainOrder
 {
+    friend ch15::Matrix<typename Range::value_type>
+        matrix_chain_multiply<typename Range::value_type>
+            (const ch15::Chain<typename Range::value_type>& chain);
 public:
     using ValueType =   typename    Range::value_type;
     using SizeType  =   typename    Range::size_type;
