@@ -12,5 +12,6 @@ HEADERS += \
     fibonacci.hpp \
     matrix.hpp \
     matrix_chain_mutiply.hpp \
-    matrix_chain_order.hpp
+    matrix_chain_order.hpp \
+    longest_common_subsequence.hpp
 

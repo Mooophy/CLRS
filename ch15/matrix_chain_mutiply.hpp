@@ -1,5 +1,5 @@
 /***************************************************************************
- *  @file       node.hpp
+ *  @file       matrix_chain_mutiply.hpp
  *  @author     Alan.W
  *  @date       03  August 2014
  *  @remark     CLRS Algorithms implementation, using C++ templates.
