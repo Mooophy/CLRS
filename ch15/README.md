@@ -1,7 +1,7 @@
 15	Dynamic Programming
 ---------------------------
 
-## cut_rod.hpp
+##### cut_rod.hpp
  - CUT-ROD
  - MEMOIZED-CUT-ROD
  - MEMOIZED-CUT-ROD-AUX
@@ -10,15 +10,15 @@
  - PRINT-CUT-ROD-SOLUTION
  - ex15.1-3
 
-- fibonacci.hpp
+##### fibonacci.hpp
  - ex15.1-5
 
--  matrix.hpp
+#####  matrix.hpp
  - MATRIX-MULTIPLY
 
-- matrix_chain_order.hpp
+##### matrix_chain_order.hpp
  - MATRIX-CHAIN-ORDER
  - PRINT-OPTIMAL-PARENTS
 
-- matrix_chain_mutiply.hpp
+##### matrix_chain_mutiply.hpp
  - ex15.2-2
