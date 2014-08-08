@@ -12,67 +12,16 @@
 
 namespace ch15
 {
+
+//! alias for cha15
 template<typename T>
 using Matrix = boost::numeric::ublas::matrix<T>;
-
-template<typename T>
-Matrix<T>
-operator*(const Matrix<T>& lhs, const Matrix<T>& rhs);
-
-template<typename T>
-Matrix<T>
-operator <<= (Matrix<T>& lhs, const std::vector<T>& rhs);
-
-
-/**
- * @brief print
- * @param mat
- */
-template<typename T>
-void print(const Matrix<T>& mat)
-{
-    for(unsigned r = 0; r != mat.size1(); ++r)
-    {
-        for(unsigned c = 0; c != mat.size2(); ++c)
-            std::cout << mat(r,c) << " ";
-        std::cout << std::endl;
-    }
-}
-
-/**
- * @brief operator *
- * @param lhs
- * @param rhs
- *
- * @page 371
- * @pseudocode MATRIX-MULTIPLY
- */
-template<typename T>
-inline Matrix<T>
-operator*(const Matrix<T>& lhs, const Matrix<T>& rhs)
-{
-    assert(lhs.size2() == rhs.size1());
-
-    Matrix<T> ret(lhs.size1(), rhs.size2());
-    for(unsigned row = 0; row != lhs.size1(); ++row)
-        for(unsigned col = 0; col != rhs.size2(); ++ col)
-        {
-            ret(row,col) = 0;
-            for(unsigned count = 0 ; count != lhs.size2(); ++count)
-                ret(row,col) += lhs(row,count) * rhs(count, col);
-        }
-
-    return ret;
-}
-
-
 
 }//namespace ch15
 
 
-/**
- *  @brief  extending boost matrix
- */
+
+//! @brief  extending boost matrix
 namespace boost { namespace numeric { namespace ublas {
 
 /**

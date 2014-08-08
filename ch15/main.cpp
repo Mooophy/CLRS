@@ -11,11 +11,7 @@ int main()
 
     ch15::Chain<int> chain;
     ch15::build_chain(chain, v, 2);
-
-
     std::cout << ch15::matrix_chain_multiply(chain) << std::endl;
-
-
 
     std::cout << color::red("\nend\n");
     return 0;

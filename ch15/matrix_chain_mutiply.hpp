@@ -12,6 +12,8 @@
 //! {A1,A2,...An}, the s table computed by MATRIX-CHAIN-ORDER , and the indices i and j .
 //! (The initial call would be MATRIX-CHAIN-MULTIPLY (A, s, 1, n))
 //!
+//  check the lambda in function matrix_chain_multiply.
+//!
 
 #ifndef MATRIX_CHAIN_MUTIPLY_HPP
 #define MATRIX_CHAIN_MUTIPLY_HPP
@@ -28,8 +30,8 @@ namespace ch15 {
 /**
  *  @brief typedef for  matrix chain
  */
-template<typename T>
-using Chain = std::vector<ch15::Matrix<T>>;
+//template<typename T>
+//using Chain = std::vector<ch15::Matrix<T>>;
 
 //! foward declarations
 template<typename Range>
@@ -104,6 +106,12 @@ build_dimensions(const ch15::Chain<typename Range::value_type>& chain,
         dimensions.push_back( mat.size2());
 }
 
+/**
+ * @brief matrix_chain_multiply
+ * @param chain
+ *
+ * for ex15.2-2
+ */
 template<typename T>
 ch15::Matrix<T>
 matrix_chain_multiply(const ch15::Chain<T>& chain)
@@ -123,11 +131,13 @@ matrix_chain_multiply(const ch15::Chain<T>& chain)
     std::cout << std::endl;
 
     //! lambda to do the real job recursively
+    //! @note   ex15.2-2
     std::function<ch15::Matrix<T>(SizeType,SizeType)> multiply
             = [&](SizeType head, SizeType tail)
     {
+        //! @attention below is the pseudocode for ex15.2-2
         if(head == tail)
-            return chain[head];
+            return chain[head - 1];
         else
             return multiply(head, order.s(head - 1,tail - 2))
                    *
@@ -162,6 +172,27 @@ matrix_chain_multiply(const ch15::Chain<T>& chain)
 //    ch15::build_dimensions(chain, dimens);
 //    for(auto d : dimens)
 //        std::cout << d << " ";
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+
+//! @test   matrix_chain_multiply
+//!         ex15.2-2
+//#include <iostream>
+//#include <boost/numeric/ublas/io.hpp>
+//#include "color.hpp"
+//#include "matrix.hpp"
+//#include "matrix_chain_mutiply.hpp"
+//#include "matrix_chain_order.hpp"
+
+//int main()
+//{
+//    std::vector<int> v = {30,35,15,5,10,20,25};
+
+//    ch15::Chain<int> chain;
+//    ch15::build_chain(chain, v, 2);
+//    std::cout << ch15::matrix_chain_multiply(chain) << std::endl;
 
 //    std::cout << color::red("\nend\n");
 //    return 0;

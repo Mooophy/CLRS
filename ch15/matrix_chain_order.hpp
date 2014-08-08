@@ -48,7 +48,7 @@ public:
         s(d.size() - 2, d.size() - 2),
         size(d.size() - 1)
     {
-        assert(size > 1);
+        assert(size > 0);
     }
 
     /**
@@ -87,34 +87,6 @@ public:
                 }
             }
         }
-    }
-
-    /**
-     * @brief print m table
-     */
-    void print_m()const
-    {
-        std::cout << color::green("table m :\n");
-        ch15::print(m);
-    }
-
-    /**
-     * @brief print s table
-     */
-    void print_s()const
-    {
-        std::cout << color::yellow("table s :\n");
-        ch15::print(s);
-    }
-
-    /**
-     * @brief print
-     */
-    void print()const
-    {
-        print_m();
-        std::cout << std::endl;
-        print_s();
     }
 
     /**
@@ -160,11 +132,8 @@ private:
 //    ch15::MatrixChainOrder<decltype(v)> chain_order(v);
 
 //    chain_order.build();
-//    chain_order.print();
-
 //    chain_order.print_optimal(1,6);
 
 //    std::cout << color::red("\nend\n");
 //    return 0;
 //}
-
