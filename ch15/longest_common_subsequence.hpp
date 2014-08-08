@@ -20,7 +20,7 @@ enum class Arrow
 template<typename T, typename A>
 struct Entry
 {
-    //! @brief  default Ctor
+    //! default Ctor
     Entry() = default;
 
     //! Ctor
