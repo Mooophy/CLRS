@@ -31,6 +31,25 @@ namespace ch15 {
 template<typename T>
 using Chain = std::vector<ch15::Matrix<T>>;
 
+//! foward declarations
+template<typename Range>
+void
+build_chain(ch15::Chain<typename Range::value_type>& chain,
+            const Range& dimensions,
+            const typename Range::value_type& init_val = 0);
+
+template<typename Range>
+void
+build_dimensions(const ch15::Chain<typename Range::value_type>& chain,
+                 Range& dimensions);
+
+template<typename T>
+void print_matrix_chain(const ch15::Chain<T>& chain);
+
+
+
+
+
 /**
  * @brief build_chain
  * @param chain
@@ -39,10 +58,10 @@ using Chain = std::vector<ch15::Matrix<T>>;
  * build a matrix chain using dimemsions stored in a stl container
  */
 template<typename Range>
-void
+inline void
 build_chain(ch15::Chain<typename Range::value_type>& chain,
             const Range& dimensions,
-            const typename Range::value_type& init_val = 0)
+            const typename Range::value_type& init_val)
 {
     using ValueType =   typename Range::value_type;
 
@@ -58,17 +77,35 @@ build_chain(ch15::Chain<typename Range::value_type>& chain,
  * @param chain
  */
 template<typename T>
-void
+inline void
 print_matrix_chain(const ch15::Chain<T>& chain)
 {
     for(const auto& mat : chain)
         std::cout << mat << std::endl << std::endl;
 }
 
+/**
+ * @brief build_dimensions
+ * @param chain
+ * @param dimensions
+ *
+ * build dimensions from matrix chain
+ */
+template<typename Range>
+inline void
+build_dimensions(const ch15::Chain<typename Range::value_type>& chain,
+                 Range& dimensions)
+{
+    dimensions.push_back( chain.begin()->size1() );
+    for(const auto& mat : chain)
+        dimensions.push_back( mat.size2());
+}
+
 }//namepspace
 #endif // MATRIX_CHAIN_MUTIPLY_HPP
 
-//! test build_chain
+//! test: build_chain
+//!     : build_dimensions
 //#include <iostream>
 //#include <boost/numeric/ublas/io.hpp>
 //#include "color.hpp"
@@ -81,10 +118,16 @@ print_matrix_chain(const ch15::Chain<T>& chain)
 //    std::vector<int> v = {30,35,15,5,10,20,25};
 
 //    ch15::Chain<int> chain;
-//    ch15::build_chain(chain, v, 1);
+//    ch15::build_chain(chain, v, 2);
 //    ch15::print_matrix_chain(chain);
+
+//    std::vector<int> dimens;
+//    ch15::build_dimensions(chain, dimens);
+//    for(auto d : dimens)
+//        std::cout << d << " ";
 
 //    std::cout << color::red("\nend\n");
 //    return 0;
 //}
+
 
