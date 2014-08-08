@@ -27,12 +27,6 @@
 
 namespace ch15 {
 
-/**
- *  @brief typedef for  matrix chain
- */
-//template<typename T>
-//using Chain = std::vector<ch15::Matrix<T>>;
-
 //! foward declarations
 template<typename Range>
 void
