@@ -104,6 +104,7 @@ build_dimensions(const ch15::Chain<typename Range::value_type>& chain,
  * @brief matrix_chain_multiply
  * @param chain
  *
+ * @complx  O(n^3)
  * for ex15.2-2
  */
 template<typename T>
