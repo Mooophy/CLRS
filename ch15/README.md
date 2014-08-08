@@ -1,7 +1,7 @@
 15	Dynamic Programming
 ---------------------------
 
-# cut_rod.hpp
+## cut_rod.hpp
  - CUT-ROD
  - MEMOIZED-CUT-ROD
  - MEMOIZED-CUT-ROD-AUX
