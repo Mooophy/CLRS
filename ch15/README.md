@@ -16,5 +16,9 @@
 -  matrix.hpp
  - MATRIX-MULTIPLY
 
+- matrix_chain_order.hpp
+ - MATRIX-CHAIN-ORDER
+ - PRINT-OPTIMAL-PARENTS
 
-
+- matrix_chain_mutiply.hpp
+ - ex15.2-2
