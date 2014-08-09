@@ -22,3 +22,7 @@
 
 - matrix_chain_mutiply.hpp
  - ex15.2-2
+
+- longest_common_subsequence.hpp
+ - LCS-LENGTH
+ - PRINT-LCS
