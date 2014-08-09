@@ -8,6 +8,7 @@
 #ifndef LONGEST_COMMON_SUBSEQUENCE_HPP
 #define LONGEST_COMMON_SUBSEQUENCE_HPP
 
+#include <functional>
 #include "matrix.hpp"
 #include "color.hpp"
 
@@ -128,6 +129,77 @@ build_lcs_table(const Range& lhs, const Range& rhs)
     return lcs;
 }
 
+/**
+ * @brief The LongestCommonSubsequence class
+ */
+template<typename Range, typename A = ch15::Arrow>
+class LongestCommonSubsequence
+{
+public:
+    //! types def
+    using SizeType  =   typename Range::size_type;
+    using TableType =   ch15::Table<SizeType, A>;
+    using Pointer   =   const Range*;
+
+    //! Ctor
+    LongestCommonSubsequence(const Range& l, const Range& r):
+        lhs(&l),
+        rhs(&r),
+        maze(ch15::build_lcs_table(l,r))
+    {}
+
+    /**
+     * @brief print_maze
+     *
+     * print the maze built by build_lcs_table
+     */
+    void print_maze()const
+    {
+        ch15::print(maze);
+    }
+
+    /**
+     * @brief return the generated longest common sequence
+     *
+     * @pseudocode PRINT-LCS
+     * @page    395, CLRS
+     * @complx  O(m + n)
+     */
+    Range generate() const
+    {
+        assert(lhs && rhs);
+        using Lambda = std::function<void(SizeType, SizeType)>;
+        Range lcs;
+
+        //! a recursive lamda that performs the real work
+        Lambda build_lcs = [&lcs, &build_lcs, this](SizeType row, SizeType col)
+        {
+            //! stop condition
+            if(row == 0 || col == 0)    return;
+
+            //! build the longest common sequence
+            if(maze(row, col).arrow ==  Arrow::DIAGONAL)
+            {
+                build_lcs(row - 1, col - 1);
+                lcs.push_back((*lhs)[row - 1]);
+            }
+            else if(maze(row, col).arrow ==  Arrow::UP)
+                build_lcs(row - 1, col);
+            else
+                build_lcs(row, col - 1);
+        };
+
+        //! call the lambda
+        build_lcs(lhs->size(), rhs->size());
+        return lcs;
+    }
+
+private:
+    Pointer lhs;
+    Pointer rhs;
+    TableType maze;
+};
+
 }//namespace
 #endif // LONGEST_COMMON_SUBSEQUENCE_HPP
 
@@ -150,6 +222,7 @@ build_lcs_table(const Range& lhs, const Range& rhs)
 
 //! @test   build_lcs_table
 //!         i.e. LCS-LENGTH
+//!
 //#include <iostream>
 //#include <boost/numeric/ublas/io.hpp>
 //#include "longest_common_subsequence.hpp"
@@ -169,6 +242,51 @@ build_lcs_table(const Range& lhs, const Range& rhs)
 //}
 
 
+//! @test   The LongestCommonSubsequence class
+//!         i.e. LCS-LENGTH and PRINT-LCS
+//!
+//#include <iostream>
+//#include <boost/numeric/ublas/io.hpp>
+//#include "longest_common_subsequence.hpp"
+//#include "color.hpp"
+
+//int main()
+//{
+//    //! strings used on page 394, CLRS.
+//    std::string lhs = "ABCBDAB";
+//    std::string rhs = "BDCABA";
+
+//    using LCS   =   ch15::LongestCommonSubsequence<std::string>;
+//    LCS lcs(lhs, rhs);
+//    lcs.print_maze();
+
+//    auto sequence = lcs.generate();
+//    std::cout << "The longest common sequence = ";
+//    std::cout << color::yellow(sequence) << std::endl;
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+//! @output:
+//[0, ] [0, ] [0, ] [0, ] [0, ] [0, ] [0, ]
+
+//[0, ] [0,^] [0,^] [0,^] [1,\] [1,<] [1,\]
+
+//[0, ] [1,\] [1,<] [1,<] [1,^] [2,\] [2,<]
+
+//[0, ] [1,^] [1,^] [2,\] [2,<] [2,^] [2,^]
+
+//[0, ] [1,\] [1,^] [2,^] [2,^] [3,\] [3,<]
+
+//[0, ] [1,^] [2,\] [2,^] [2,^] [3,^] [3,^]
+
+//[0, ] [1,^] [2,^] [2,^] [3,\] [3,^] [4,\]
+
+//[0, ] [1,\] [2,^] [2,^] [3,^] [4,\] [4,^]
+
+//The longest common sequence = BCBA
+
+//end
 
 
 

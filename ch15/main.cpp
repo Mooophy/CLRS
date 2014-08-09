@@ -5,12 +5,17 @@
 
 int main()
 {
-    //! the same strings as that on page 394, CLRS.
-    std::vector<std::string> lhs = {"A", "B", "C", "B", "D", "A", "B"};
-    std::vector<std::string> rhs = {"B", "D", "C", "A", "B", "A"};
+    //! strings used on page 394, CLRS.
+    std::string lhs = "ABCBDAB";
+    std::string rhs = "BDCABA";
 
-    auto ret = ch15::build_lcs_table(lhs, rhs);
-    ch15::print(ret);
+    using LCS   =   ch15::LongestCommonSubsequence<std::string>;
+    LCS lcs(lhs, rhs);
+    lcs.print_maze();
+
+    auto sequence = lcs.generate();
+    std::cout << "The longest common sequence = ";
+    std::cout << color::yellow(sequence) << std::endl;
 
     std::cout << color::red("\nend\n");
     return 0;
