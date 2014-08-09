@@ -17,6 +17,22 @@ namespace ch15
 template<typename T>
 using Matrix = boost::numeric::ublas::matrix<T>;
 
+/**
+ * @brief print a matrix like a matrix
+ */
+template<typename T>
+void print(const ch15::Matrix<T>& mat)
+{
+    using SizeType  =   typename ch15::Matrix<T>::size_type;
+
+    for(SizeType row = 0; row != mat.size1(); ++row)
+    {
+        for(SizeType col = 0; col != mat.size2(); ++col)
+            std::cout << mat(row, col) << " ";
+        std::cout << "\n\n";
+    }
+}
+
 }//namespace ch15
 
 

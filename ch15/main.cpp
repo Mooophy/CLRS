@@ -5,11 +5,12 @@
 
 int main()
 {
-    std::vector<int> lhs = {1,5,6,7,9};
-    std::vector<int> rhs = {6,7,9};
+    //! the same strings as that on page 394, CLRS.
+    std::vector<std::string> lhs = {"A", "B", "C", "B", "D", "A", "B"};
+    std::vector<std::string> rhs = {"B", "D", "C", "A", "B", "A"};
 
     auto ret = ch15::build_lcs_table(lhs, rhs);
-    std::cout << ret << std::endl;
+    ch15::print(ret);
 
     std::cout << color::red("\nend\n");
     return 0;
