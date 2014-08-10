@@ -1,21 +1,16 @@
 #include <iostream>
 #include <boost/numeric/ublas/io.hpp>
-#include "longest_common_subsequence.hpp"
+#include "lcs_with_one_table.hpp"
 #include "color.hpp"
 
 int main()
 {
-    //! strings used on page 394, CLRS.
     std::string lhs = "ABCBDAB";
     std::string rhs = "BDCABA";
 
-    using LCS   =   ch15::LongestCommonSubsequence<std::string>;
-    LCS lcs(lhs, rhs);
-    lcs.print_maze();
+    ch15::LcsWithOneTable<std::string> lcs(lhs, rhs);
 
-    auto sequence = lcs.generate();
-    std::cout << "The longest common sequence = ";
-    std::cout << color::yellow(sequence) << std::endl;
+    lcs.print_maze();
 
     std::cout << color::red("\nend\n");
     return 0;

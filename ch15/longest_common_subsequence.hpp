@@ -113,6 +113,9 @@ build_lcs_table(const Range& lhs, const Range& rhs)
     SizeType rows = lhs.size() + 1;
     SizeType cols = rhs.size() + 1;
     TableType lcs(rows, cols);
+    //! ^^^^^^^^^^^^^^^^^^^^^^@attention  :
+    //!     the Entry's default ctor grantee that its member length has
+    //!     default value 0.so no need to implementlines 4 - 7 explicitly.
 
     //! build lcs table
     for(SizeType r = 1; r != rows; ++r)
