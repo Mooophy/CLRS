@@ -8,9 +8,13 @@ int main()
     std::string lhs = "ABCBDAB";
     std::string rhs = "BDCABA";
 
-    ch15::LcsWithOneTable<std::string> lcs(lhs, rhs);
-
+    using LCS   =   ch15::LcsWithOneTable<std::string>;
+    LCS lcs(lhs, rhs);
     lcs.print_maze();
+
+    auto sequence = lcs.generate();
+    std::cout << "The longest common sequence = ";
+    std::cout << color::yellow(*sequence) << std::endl;
 
     std::cout << color::red("\nend\n");
     return 0;

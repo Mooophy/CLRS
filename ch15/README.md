@@ -26,3 +26,6 @@
 - longest_common_subsequence.hpp
  - LCS-LENGTH
  - PRINT-LCS
+
+- lcs_with_one_table.hpp
+ - ex15.4-2

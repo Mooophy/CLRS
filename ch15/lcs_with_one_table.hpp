@@ -19,11 +19,15 @@
 
 namespace ch15 {
 
+/**
+ * @brief The LcsWithOneTable class
+ *
+ * for ex15.4-2
+ */
 template<typename Range>
 class LcsWithOneTable
 {
 public:
-    using ValueType =   typename Range::value_type;
     using SizeType  =   typename Range::size_type;
     using Pointer   =   const Range*;
     using sPointer  =   std::shared_ptr<Range>;
@@ -54,6 +58,7 @@ public:
         assert(lhs && rhs);
         sPointer lcs = std::make_shared<Range>();
 
+        //! lambda to do the real work
         using Lambda = std::function<void(SizeType, SizeType)>;
         Lambda build_lcs = [&lcs, &build_lcs, this](SizeType l, SizeType r)
         {
@@ -69,9 +74,11 @@ public:
             else if (maze(l - 1, r) >= maze(l, r - 1))
                 build_lcs(l - 1, r);
             else
-                build_lcs(r, l - 1);
+                build_lcs(l, r - 1);
         };
 
+        //! call the lambda
+        build_lcs(lhs->size(),rhs->size());
         return lcs;
     }
 
@@ -82,6 +89,9 @@ private:
 
     /**
      * @brief build_maze
+     *
+     * @complx  O(m + n)
+     * for ex15.4-2
      */
     void build_maze()
     {
@@ -101,9 +111,47 @@ private:
 }//namespace
 #endif // LCS_WITH_ONE_TABLE_HPP
 
+//! @test   for ex15.4-2
+//!
+//#include <iostream>
+//#include <boost/numeric/ublas/io.hpp>
+//#include "lcs_with_one_table.hpp"
+//#include "color.hpp"
 
+//int main()
+//{
+//    std::string lhs = "ABCBDAB";
+//    std::string rhs = "BDCABA";
 
+//    using LCS   =   ch15::LcsWithOneTable<std::string>;
+//    LCS lcs(lhs, rhs);
+//    lcs.print_maze();
 
+//    auto sequence = lcs.generate();
+//    std::cout << "The longest common sequence = ";
+//    std::cout << color::yellow(*sequence) << std::endl;
 
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
 
+//! @output:
+//!
+//0 0 0 0 0 0 0
+
+//0 0 0 0 1 1 1
+
+//0 1 1 1 1 2 2
+
+//0 1 1 2 2 2 2
+
+//0 1 1 2 2 3 3
+
+//0 1 2 2 2 3 3
+
+//0 1 2 2 3 3 4
+
+//0 1 2 2 3 4 4
+
+//The longest common sequence = BCBA
 
