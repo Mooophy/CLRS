@@ -1,20 +1,14 @@
 #include <iostream>
 #include <boost/numeric/ublas/io.hpp>
-#include "lcs_with_one_table.hpp"
 #include "color.hpp"
+#include "matrix.hpp"
 
 int main()
 {
-    std::string lhs = "ABCBDAB";
-    std::string rhs = "BDCABA";
+    ch15::Matrix<int> mat(3,3,0);
 
-    using LCS   =   ch15::LcsWithOneTable<std::string>;
-    LCS lcs(lhs, rhs);
-    lcs.print_maze();
-
-    auto sequence = lcs.generate();
-    std::cout << "The longest common sequence = ";
-    std::cout << color::yellow(*sequence) << std::endl;
+    ch15::copy_row(mat, std::vector<int>({1,2,3}), 0);
+    ch15::print(mat);
 
     std::cout << color::red("\nend\n");
     return 0;

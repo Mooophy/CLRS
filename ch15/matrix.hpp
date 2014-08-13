@@ -33,6 +33,29 @@ void print(const ch15::Matrix<T>& mat)
     }
 }
 
+/**
+ * @brief alan_insert_row
+ * @param mat
+ * @param rng
+ * @param row
+ *
+ * copy a row from a std container. This is to extend boost matrix.
+ * implemented for longest_mono_increasing.hpp
+ */
+template<typename Range>
+void inline
+copy_row(ch15::Matrix<typename Range::value_type>& mat,
+                const Range& rng,
+                typename ch15::Matrix<typename Range::value_type>::size_type
+                        row)
+{
+    assert(rng.size()   ==  mat.size2());
+    using SizeType  =   typename Range::size_type;
+
+    for(SizeType count = 0; count != rng.size(); ++count)
+        mat(row, count) =   rng[count];
+}
+
 }//namespace ch15
 
 
@@ -141,3 +164,35 @@ operator*(const matrix<T>& lhs, const matrix<T>& rhs)
 //    std::cout << color::red("\nend\n");
 //    return 0;
 //}
+
+//! @test   ch15::copy_row
+//!
+//#include <iostream>
+//#include <boost/numeric/ublas/io.hpp>
+//#include "color.hpp"
+//#include "matrix.hpp"
+
+//int main()
+//{
+//    ch15::Matrix<int> mat(3,3,0);
+
+//    ch15::copy_row(mat, std::vector<int>({1,2,3}), 0);
+//    ch15::print(mat);
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+//! @output:
+//!
+
+//1 2 3
+
+//0 0 0
+
+//0 0 0
+
+
+//end
+
+
+

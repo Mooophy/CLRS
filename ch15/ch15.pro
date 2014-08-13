@@ -14,5 +14,6 @@ HEADERS += \
     matrix_chain_mutiply.hpp \
     matrix_chain_order.hpp \
     longest_common_subsequence.hpp \
-    lcs_with_one_table.hpp
+    lcs_with_one_table.hpp \
+    longest_mono_increasing_subseq.hpp
 
