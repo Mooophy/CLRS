@@ -77,36 +77,34 @@ operator +(const typename Range::value_type& lhs, const Range& rhs)
 namespace ch15 {
 
 /**
- * @brief find_lmis
- * @param rest
+ * @brief return the longest mono increasing subsequence
+ * @param rng
  * @param bigger_than
  *
  * @complx  O(2^n)
- * based on a python code on SO:
+ * @pyseudocode      a python code on SO:
  * http://stackoverflow.com/questions/2631726/how-to-determine-the-longest-increasing-subsequence-using-dynamic-programming
- * tested
  *
- * for ex15.4-5, but this one is just a recursion version taking O(2^n).
+ * for ex15.4-5, this one takes O(2^n).
  */
 template<typename Range>
 inline Range
-find_lmis(const Range& rest, const typename Range::value_type* bigger_than = nullptr)
+find_lmis(const Range& rng,
+          const typename Range::value_type* threshold = nullptr)
 {
     //! trivial case
-    if(rest.empty())    return rest;
+    if(rng.empty())    return rng;
 
-    Range best_sequence = find_lmis(Range(rest.begin() + 1, rest.end()), bigger_than);
+    auto first  =   rng.begin();
+    auto last   =   rng.end();
 
-    auto first = rest.front();
-    if(bigger_than == nullptr || first > *bigger_than)
-    {
-        Range sequence_with =
-                first + find_lmis(Range(rest.begin() + 1, rest.end()), &first);
-        if(sequence_with.size() >= best_sequence.size())
-            best_sequence   =   sequence_with;
-    }
+    Range case_1    =   find_lmis(Range(first + 1, last), threshold);
 
-    return best_sequence;
+    Range case_2(0);
+    if(!threshold || *first > *threshold)
+        case_2  =   *first + find_lmis(Range(first + 1, last), &*first);
+
+    return case_2.size() >= case_1.size()?     case_2   :   case_1;
 }
 
 }//namespace ch15
