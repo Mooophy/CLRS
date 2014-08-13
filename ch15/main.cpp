@@ -1,14 +1,17 @@
 #include <iostream>
-#include <boost/numeric/ublas/io.hpp>
 #include "color.hpp"
-#include "matrix.hpp"
+#include "longest_mono_increasing_subseq.hpp"
+#include <vector>
+
 
 int main()
 {
-    ch15::Matrix<int> mat(3,3,0);
+    std::vector<int> lhs = {1,2,3};
+    std::vector<int> rhs = {4,5,6};
+    auto ret = lhs + rhs;
 
-    ch15::copy_row(mat, std::vector<int>({1,2,3}), 0);
-    ch15::print(mat);
+    for(auto elem : ret)
+        std::cout << elem << " ";
 
     std::cout << color::red("\nend\n");
     return 0;

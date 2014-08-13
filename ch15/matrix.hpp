@@ -34,12 +34,14 @@ void print(const ch15::Matrix<T>& mat)
 }
 
 /**
- * @brief alan_insert_row
+ * @brief copy_row
  * @param mat
  * @param rng
  * @param row
  *
- * copy a row from a std container. This is to extend boost matrix.
+ * @date  13 aug 2014
+ *
+ * copy a row from a std container into a boost matrix.
  * implemented for longest_mono_increasing.hpp
  */
 template<typename Range>
