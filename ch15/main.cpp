@@ -1,25 +1,14 @@
 #include <iostream>
+#include <vector>
 #include "color.hpp"
 #include "longest_mono_increasing_subseq.hpp"
-#include <vector>
-
 
 int main()
 {
-    std::vector<int> lhs = {1,2,3};
-    std::vector<int> rhs = {4,5,6};
-
-    for(auto elem : (lhs + rhs))
+    std::vector<int> v = {1,5,2,3,6,7,0,4,99};
+    auto lmis = ch15::find_lmis(v);
+    for(auto elem : lmis)
         std::cout << elem << " ";
-    std::cout << std::endl;
-
-    for(auto elem : (lhs + 99))
-        std::cout << elem << " ";
-    std::cout << std::endl;
-
-    for(auto elem : (99 + rhs))
-        std::cout << elem << " ";
-    std::cout << std::endl;
 
     std::cout << color::red("\nend\n");
     return 0;

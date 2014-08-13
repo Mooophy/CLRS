@@ -5,11 +5,16 @@
  *  @remark     CLRS Algorithms implementation, using C++ templates.
  ***************************************************************************/
 
+//! ex15.4-5
+//!     Give an O(n^2)-time algorithm to find the longest monotonically increasing subse-
+//!     quence of a sequence of n numbers.
+
 #ifndef LONGEST_MONO_INCREASING_SUBSEQ_HPP
 #define LONGEST_MONO_INCREASING_SUBSEQ_HPP
 
 #include <memory>
 #include <limits>
+#include <iterator>
 #include "matrix.hpp"
 
 namespace std {
@@ -71,8 +76,38 @@ operator +(const typename Range::value_type& lhs, const Range& rhs)
 
 namespace ch15 {
 
+/**
+ * @brief find_lmis
+ * @param rest
+ * @param bigger_than
+ *
+ * @complx  O(2^n)
+ * based on a python code on SO:
+ * http://stackoverflow.com/questions/2631726/how-to-determine-the-longest-increasing-subsequence-using-dynamic-programming
+ * tested
+ *
+ * for ex15.4-5, but this one is just a recursion version taking O(2^n).
+ */
+template<typename Range>
+inline Range
+find_lmis(const Range& rest, const typename Range::value_type* bigger_than = nullptr)
+{
+    //! trivial case
+    if(rest.empty())    return rest;
 
+    Range best_sequence = find_lmis(Range(rest.begin() + 1, rest.end()), bigger_than);
 
+    auto first = rest.front();
+    if(bigger_than == nullptr || first > *bigger_than)
+    {
+        Range sequence_with =
+                first + find_lmis(Range(rest.begin() + 1, rest.end()), &first);
+        if(sequence_with.size() >= best_sequence.size())
+            best_sequence   =   sequence_with;
+    }
+
+    return best_sequence;
+}
 
 }//namespace ch15
 #endif // LONGEST_MONO_INCREASING_SUBSEQ_HPP
@@ -112,3 +147,24 @@ namespace ch15 {
 
 //end
 
+//! @test   the O(2^n) version:
+//!
+//#include <iostream>
+//#include <vector>
+//#include "color.hpp"
+//#include "longest_mono_increasing_subseq.hpp"
+
+//int main()
+//{
+//    std::vector<int> v = {1,5,2,3,6,7,0,4,99};
+//    auto lmis = ch15::find_lmis(v);
+//    for(auto elem : lmis)
+//        std::cout << elem << " ";
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+//! @output:
+//!
+//1 2 3 6 7 99
+//end
