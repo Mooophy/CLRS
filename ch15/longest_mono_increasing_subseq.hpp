@@ -1,3 +1,10 @@
+/***************************************************************************
+ *  @file       longest_mono_increasing_subseq.hpp
+ *  @author     alan.w
+ *  @date       13  August 2014
+ *  @remark     CLRS Algorithms implementation, using C++ templates.
+ ***************************************************************************/
+
 #ifndef LONGEST_MONO_INCREASING_SUBSEQ_HPP
 #define LONGEST_MONO_INCREASING_SUBSEQ_HPP
 
@@ -31,6 +38,35 @@ operator +(const Range& lhs, const Range& rhs)
     return ret;
 }
 
+/**
+ * @brief operator +
+ * @param lhs   range
+ * @param rhs   val
+ */
+template<typename Range>
+inline Range
+operator + (const Range& lhs, const typename Range::value_type& rhs)
+{
+    Range ret = lhs;
+    ret.push_back(rhs);
+
+    return ret;
+}
+
+/**
+ * @brief operator +
+ * @param lhs   val
+ * @param rhs   range
+ */
+template<typename Range>
+inline Range
+operator +(const typename Range::value_type& lhs, const Range& rhs)
+{
+    Range ret;
+    ret.push_back(lhs);
+
+    return ret + rhs;
+}
 }//namespace std
 
 namespace ch15 {
@@ -41,7 +77,7 @@ namespace ch15 {
 }//namespace ch15
 #endif // LONGEST_MONO_INCREASING_SUBSEQ_HPP
 
-//! @test operator + for two std container
+//! @test the three operator+
 //!
 //#include <iostream>
 //#include "color.hpp"
@@ -52,10 +88,18 @@ namespace ch15 {
 //{
 //    std::vector<int> lhs = {1,2,3};
 //    std::vector<int> rhs = {4,5,6};
-//    auto ret = lhs + rhs;
 
-//    for(auto elem : ret)
+//    for(auto elem : (lhs + rhs))
 //        std::cout << elem << " ";
+//    std::cout << std::endl;
+
+//    for(auto elem : (lhs + 99))
+//        std::cout << elem << " ";
+//    std::cout << std::endl;
+
+//    for(auto elem : (99 + rhs))
+//        std::cout << elem << " ";
+//    std::cout << std::endl;
 
 //    std::cout << color::red("\nend\n");
 //    return 0;
@@ -63,4 +107,8 @@ namespace ch15 {
 //! @output:
 //!
 //1 2 3 4 5 6
+//1 2 3 99
+//99 4 5 6
+
 //end
+
