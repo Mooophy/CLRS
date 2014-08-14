@@ -35,7 +35,7 @@ public:
     using sPointer  =   std::shared_ptr<NodeBase>;
     using wPointer  =   std::weak_ptr<NodeBase>;
 
-    //! Ctos
+    //! Ctors
     NodeBase() = default;
     NodeBase(const KeyType& key, const ValueType& val):
         key(key),
@@ -61,8 +61,6 @@ public:
     Node(const std::string& key, const std::string& val):
         B::NodeBase(key,val)
     {}
-
-    ~Node(){}
 };
 
 /**
