@@ -30,5 +30,8 @@ def dynamic_programming_solution(sequence):
   while current_backreference is not None:                                       
     ret.append(sequence[current_backreference])                     
     current_backreference = backreference_for_subsequence_ending_with[current_backreference]
+
+  #for debug	
+#  print(backreference_for_subsequence_ending_with)
   ret.reverse()                                                     
   return ret  

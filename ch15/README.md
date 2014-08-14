@@ -29,3 +29,6 @@
 
 - lcs_with_one_table.hpp
  - ex15.4-2
+
+- longest_mono_increasing_subseq.hpp
+ - ex15.4-5

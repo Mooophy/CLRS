@@ -113,19 +113,27 @@ find_lmis(const Range& rng,
  * @brief find the longest mono increasing subsequence, the O(n^2) version
  * @param sequence
  *
- * @complx  O(n^2)
+ * @complx          O(n^2)
+ * @extra space     O(n)
+ * @note    shared pointer for implementing None in python.
+ *
+ * based on a python code found on SO, check the folder in_python for copy.
+ * for ex15.4-5
  */
 template<typename Range>
 inline Range
 find_lmis_On2(const Range& sequence)
 {
+    //! types def
     using SizeType  =   typename Range::size_type;
     using sPointer  =   std::shared_ptr<SizeType>;
     using Vector    =   std::vector<sPointer>;
 
+    //! init vectors of pointers
     Vector  ends, back_ref;
-    SizeType current_best_end = 0;
+    SizeType best_end = 0;
 
+    //! nested loops causes to O(n^2)
     for(SizeType curr = 0; curr != sequence.size(); ++curr)
     {
         ends.push_back(std::make_shared<SizeType>(1));
@@ -133,24 +141,26 @@ find_lmis_On2(const Range& sequence)
 
         for(SizeType prev = 0; prev != curr; ++ prev)
         {
-            auto through_prev   =   ends[prev] + 1;
-            if(sequence[prev] < sequence[curr]  &&  through_prev > ends[curr])
+            auto through_prev   =   *ends[prev] + 1;
+            if(sequence[prev] < sequence[curr]  &&  through_prev > *ends[curr])
             {
-                ends[curr]      =   through_prev;
-                back_ref[curr]  =   curr;
+                *ends[curr]     =   through_prev;
+                back_ref[curr]  =   std::make_shared<SizeType>(prev);
             }
         }
 
-        if(ends[curr]   >   ends[current_best_end])
-            current_best_end    =   curr;
+        //! update
+        if(ends[curr]   >   ends[best_end])
+            best_end    =   curr;
     }
 
+    //! build ret
     Range ret;
-    sPointer curr_back_ref = std::make_shared<SizeType>(current_best_end);
+    sPointer curr_back_ref = std::make_shared<SizeType>(best_end);
     while(curr_back_ref)
     {
         ret.push_back(sequence[*curr_back_ref]);
-        curr_back_ref   =   back_ref[curr_back_ref];
+        curr_back_ref   =   back_ref[*curr_back_ref];
     }
 
     std::reverse(ret.begin(), ret.end());
@@ -215,3 +225,26 @@ find_lmis_On2(const Range& sequence)
 //!
 //1 2 3 6 7 99
 //end
+
+//! @test   the O(n^2) version
+//! for ex15.4-5
+//#include <iostream>
+//#include <vector>
+//#include "color.hpp"
+//#include "alan.hpp"
+//#include "longest_mono_increasing_subseq.hpp"
+
+//int main()
+//{
+//    std::vector<int> v = {1,2,5,3,4};
+//    auto lmis = ch15::find_lmis_On2(v);
+//    alan::print_container(lmis);
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}
+//! @output:
+//!
+//1 2 3 4
+//end
+
