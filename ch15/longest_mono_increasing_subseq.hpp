@@ -15,6 +15,8 @@
 #include <memory>
 #include <limits>
 #include <iterator>
+#include <vector>
+#include <algorithm>
 #include "matrix.hpp"
 
 namespace std {
@@ -77,9 +79,9 @@ operator +(const typename Range::value_type& lhs, const Range& rhs)
 namespace ch15 {
 
 /**
- * @brief return the longest mono increasing subsequence
+ * @brief find the longest mono increasing subsequence
  * @param rng
- * @param bigger_than
+ * @param threshold
  *
  * @complx  O(2^n)
  * @pyseudocode      a python code on SO:
@@ -107,6 +109,53 @@ find_lmis(const Range& rng,
     return case_2.size() >= case_1.size()?     case_2   :   case_1;
 }
 
+/**
+ * @brief find the longest mono increasing subsequence, the O(n^2) version
+ * @param sequence
+ *
+ * @complx  O(n^2)
+ */
+template<typename Range>
+inline Range
+find_lmis_On2(const Range& sequence)
+{
+    using SizeType  =   typename Range::size_type;
+    using sPointer  =   std::shared_ptr<SizeType>;
+    using Vector    =   std::vector<sPointer>;
+
+    Vector  ends, back_ref;
+    SizeType current_best_end = 0;
+
+    for(SizeType curr = 0; curr != sequence.size(); ++curr)
+    {
+        ends.push_back(std::make_shared<SizeType>(1));
+        back_ref.push_back(nullptr);
+
+        for(SizeType prev = 0; prev != curr; ++ prev)
+        {
+            auto through_prev   =   ends[prev] + 1;
+            if(sequence[prev] < sequence[curr]  &&  through_prev > ends[curr])
+            {
+                ends[curr]      =   through_prev;
+                back_ref[curr]  =   curr;
+            }
+        }
+
+        if(ends[curr]   >   ends[current_best_end])
+            current_best_end    =   curr;
+    }
+
+    Range ret;
+    sPointer curr_back_ref = std::make_shared<SizeType>(current_best_end);
+    while(curr_back_ref)
+    {
+        ret.push_back(sequence[*curr_back_ref]);
+        curr_back_ref   =   back_ref[curr_back_ref];
+    }
+
+    std::reverse(ret.begin(), ret.end());
+    return ret;
+}
 }//namespace ch15
 #endif // LONGEST_MONO_INCREASING_SUBSEQ_HPP
 

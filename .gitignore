@@ -26,5 +26,7 @@
 *.pdf
 *build-*-Desktop_gcc-Debug
 *build-*-clang-*/
+*build-*
 *lines
-
+*pyc
+*py.swp
