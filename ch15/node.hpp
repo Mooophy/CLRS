@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *  @file       node.hpp
  *  @author     alan.w
  *  @date       15  August 2014
@@ -21,8 +21,14 @@ template<typename K, typename V>
 std::ostream&
 operator <<(std::ostream& os, const Node<K,V>& node);
 
+template<typename K, typename V>
+using sPointer  =   std::shared_ptr<Node<K,V>>;
+
+template<typename K, typename V>
+using wPointer  =   std::weak_ptr<Node<K,V>>;
+
 /**
- * @brief The NodeBase class
+ * @brief The Node class
  */
 template<typename K, typename V>
 class Node
@@ -32,8 +38,8 @@ class Node
 public:
     using KeyType   =   K;
     using ValueType =   V;
-    using sPointer  =   std::shared_ptr<Node>;
-    using wPointer  =   std::weak_ptr<Node>;
+    using sPointer  =   ch15::sec5::sPointer<K,V>;
+    using wPointer  =   ch15::sec5::wPointer<K,V>;
 
     //! Ctors
     Node() = default;
@@ -50,6 +56,11 @@ protected:
     wPointer parent;
 };
 
+/**
+ * @brief operator <<
+ * @param os
+ * @param node
+ */
 template<typename K, typename V>
 std::ostream&
 operator <<(std::ostream& os, const Node<K, V> &node)
@@ -60,6 +71,24 @@ operator <<(std::ostream& os, const Node<K, V> &node)
     return os;
 }
 
-
 }}//namespace
 #endif // NODE_HPP
+
+//! @test   Node and opertor <<
+//#include <iostream>
+//#include <vector>
+//#include <memory>
+//#include "color.hpp"
+//#include "node.hpp"
+
+//int main()
+//{
+//    using NodeType  =   ch15::sec5::Node<std::string,std::string>;
+//    using sPointer  =   ch15::sec5::sPointer<std::string,std::string>;
+
+//    sPointer node(new NodeType("eng","fre"));
+//    std::cout << *node << std::endl;
+
+//    std::cout << color::red("\nend\n");
+//    return 0;
+//}

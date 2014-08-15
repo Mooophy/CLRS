@@ -12,6 +12,8 @@
 
 namespace ch15 { namespace sec5 {
 
+
+
 template<typename Node>
 class OptimalBsTree;
 
@@ -20,8 +22,12 @@ template<typename Node>
 class OptimalBsTree
 {
 public:
-    using sPointer  =   std::shared_ptr<Node>;
-    OptimalBsTree() = default;
+    using sPointer  =   typename Node::sPointer;
+
+    OptimalBsTree() =   default;
+    OptimalBsTree(sPointer root):
+        root(root)
+    {}
 private:
     sPointer root;
 };

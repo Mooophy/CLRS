@@ -1,18 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <boost/numeric/ublas/io.hpp>
-#include "alan.hpp"
 #include "color.hpp"
 #include "node.hpp"
-#include "matrix.hpp"
-#include "optimal_bst.hpp"
 
 int main()
 {
+    using NodeType  =   ch15::sec5::Node<std::string,std::string>;
+    using sPointer  =   ch15::sec5::sPointer<std::string,std::string>;
 
-
-
+    sPointer node(new NodeType("eng","fre"));
+    std::cout << *node << std::endl;
 
     std::cout << color::red("\nend\n");
     return 0;
