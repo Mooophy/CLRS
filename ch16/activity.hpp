@@ -33,8 +33,7 @@ activity_select_recur(const Range& starts,
     assert(starts.size() == finishes.size());
 
     //! search for next activity
-    using SizeType  =   typename Range::size_type;
-    SizeType curr = pos + 1;
+    auto curr = pos + 1;
     while(curr < starts.size()  &&  starts[curr] < finishes[pos])   ++curr;
 
     //! if within the boundary, push back and recur
@@ -42,6 +41,24 @@ activity_select_recur(const Range& starts,
     {
         output.push_back(curr);
         activity_select_recur(starts, finishes, curr, output);
+    }
+}
+
+template<typename Range>
+inline void
+activity_select_itera(const Range& starts, const Range& finishes, Range& output)
+{
+    output.push_back(0);
+
+    using SizeType  =   typename Range::size_type;
+    SizeType pos    =   0;
+    for(SizeType curr = 1; curr != starts.size(); ++curr)
+    {
+        if(starts[curr] >=  finishes[pos])
+        {
+            output.push_back(curr);
+            pos = curr;
+        }
     }
 }
 
