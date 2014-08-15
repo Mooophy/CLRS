@@ -16,7 +16,5 @@ HEADERS += \
     longest_common_subsequence.hpp \
     lcs_with_one_table.hpp \
     longest_mono_increasing_subseq.hpp \
-    alan.hpp \
-    node.hpp \
-    optimal_bst.hpp
+    alan.hpp
 
