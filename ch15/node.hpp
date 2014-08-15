@@ -55,7 +55,7 @@ std::ostream&
 operator <<(std::ostream& os, const Node<K, V> &node)
 {
     os << color::yellow("key = "    +   node.key) << " "
-       << color::green("value = "   +   node.value);
+       << color::green("value = "   +   node.value) << std::endl;
 
     return os;
 }

@@ -23,7 +23,7 @@ inline void
 print_container(const Range& rng)
 {
     for(const auto& elem : rng)
-        std::cout << elem << " ";
+        std::cout << elem ;
 }
 
 }//namespaces
