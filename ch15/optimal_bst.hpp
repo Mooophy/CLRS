@@ -8,10 +8,27 @@
 #define OPTIMAL_BST_HPP
 
 #include "node.hpp"
+#include "matrix.hpp"
 
 namespace ch15 { namespace sec5 {
 
+template<typename Node, typename S>
+class OptimalBsTree
+{
+public:
+    using SizeType  =   S;
+    using sPointer  =   std::shared_ptr<Node>;
+    using Table     =   ch15::Matrix<SizeType>;
 
+    OptimalBsTree() = default;
+    OptimalBsTree(const Table& table)
+    {
+
+    }
+
+protected:
+    sPointer root;
+};
 
 }}//namespace
 
