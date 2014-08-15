@@ -12,23 +12,21 @@
 
 namespace ch15 { namespace sec5 {
 
-template<typename Node, typename Range>
+template<typename Node>
+class OptimalBsTree;
+
+
+template<typename Node>
 class OptimalBsTree
 {
 public:
-    using SizeType  =   typename Range::size_type;
     using sPointer  =   std::shared_ptr<Node>;
-    using Table     =   ch15::Matrix<SizeType>;
-
     OptimalBsTree() = default;
-    OptimalBsTree(const Table& table, const Range& range)
-    {
-
-    }
-
-protected:
+private:
     sPointer root;
 };
+
+
 
 }}//namespace
 
