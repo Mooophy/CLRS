@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <activity.hpp>
+#include "activity.hpp"
+#include "alan.hpp"
 
 int main()
 {
@@ -9,10 +10,9 @@ int main()
     std::vector<int> activites;
 
     ch16::activity_select_recur(starts, finishes, 0, activites);
+    alan::print_container(activites);
 
-    for(auto elem : activites)
-        std::cout << elem << " ";
-
+    std::cout << alan::green("\nexit normally.\n");
     return 0;
 }
 

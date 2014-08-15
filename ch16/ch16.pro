@@ -7,5 +7,6 @@ CONFIG += c++11
 SOURCES += main.cpp
 
 HEADERS += \
-    activity.hpp
+    activity.hpp \
+    alan.hpp
 
