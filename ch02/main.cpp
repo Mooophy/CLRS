@@ -1,15 +1,12 @@
 #include <iostream>
 #include <vector>
-#include "insertion_sort.hpp"
 #include "alan.hpp"
-
+#include "linear_search.hpp"
 int main()
 {
     std::vector<int> v = {3,2,1,6,99,0};
-    clrs::ch2::insertion_sort(v.begin(), v.end(), std::greater<int>());
+    std::cout << *clrs::ch2::linear_search(v.begin(),v.end(),99);
 
-    alan::prompt("the sorted sequence:");
-    alan::print_container(v);
     alan::end();
     return 0;
 }

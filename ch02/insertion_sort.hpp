@@ -14,17 +14,11 @@
 #ifndef INSERTION_SORT_HPP
 #define INSERTION_SORT_HPP
 
-#include <iterator>
+#include <iterator.hpp>
 #include <assert.h>
 #include <functional>
 
 namespace clrs { namespace ch2 {
-
-/**
- *  @brief  aliasing for value type an iterator points to
- */
-template<typename Iter>
-using IterValue = typename std::iterator_traits<Iter>::value_type;
 
 /**
  * @brief insertion_sort
@@ -38,7 +32,7 @@ using IterValue = typename std::iterator_traits<Iter>::value_type;
  * @exercise        ex2.1-2, Page 22, CLRS
  * @complx          O(n^2)
  */
-template<typename Iter, typename Comp = std::greater<IterValue<Iter> > >
+template<typename Iter, typename Comp = std::greater<clrs::IterValue<Iter> > >
 void insertion_sort(Iter first, Iter last, Comp compare = Comp())
 {
     //! trivial case

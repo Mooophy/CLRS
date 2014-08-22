@@ -9,4 +9,6 @@ SOURCES += \
 
 HEADERS += \
     insertion_sort.hpp \
-    alan.hpp
+    alan.hpp \
+    iterator.hpp \
+    linear_search.hpp
