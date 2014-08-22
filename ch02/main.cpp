@@ -6,7 +6,7 @@
 int main()
 {
     std::vector<int> v = {3,2,1,6,99,0};
-    clrs::ch2::insertion_sort(v.begin(), v.end());
+    clrs::ch2::insertion_sort(v.begin(), v.end(), std::greater<int>());
 
     alan::prompt("the sorted sequence:");
     alan::print_container(v);
