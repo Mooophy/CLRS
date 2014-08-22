@@ -67,7 +67,7 @@ void insertion_sort(Iter first, Iter last, Comp compare = Comp())
 
 
 //! @test   insertion_sort
-//!         insertion_sort with predicate   as required in ex2.1-2
+//!         insertion_sort with predicate,   for ex2.1-2
 //!
 //! @output
 //!
