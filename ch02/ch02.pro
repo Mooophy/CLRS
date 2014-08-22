@@ -8,4 +8,5 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    insertion_sort.hpp
+    insertion_sort.hpp \
+    alan.hpp
