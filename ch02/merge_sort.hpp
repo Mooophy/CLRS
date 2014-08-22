@@ -14,6 +14,16 @@
 
 namespace clrs {namespace ch2 {
 
+
+/**
+ * @brief merge
+ * @param first
+ * @param mid
+ * @param last
+ *
+ * @pseudocode  MERGE, page 31, clrs.
+ * @complx  O(n)
+ */
 template<typename Iter>
 void merge(Iter first, Iter mid, Iter last )
 {
@@ -39,6 +49,14 @@ void merge(Iter first, Iter mid, Iter last )
         while(it != last)   *it++ = *l++;
 }
 
+/**
+ * @brief merge_sort
+ * @param first
+ * @param last
+ *
+ * @pseudocode  MERGE-SORT, page 34, clrs.
+ * @complx  O(n lg n)
+ */
 template<typename Iter>
 void merge_sort(Iter first, Iter last)
 {
@@ -53,6 +71,29 @@ void merge_sort(Iter first, Iter last)
 }
 
 
-}}
+}}//namespace
 
 #endif // MERGE_SORT_HPP
+
+//! @test   merge sort
+//!
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "merge_sort.hpp"
+
+//int main()
+//{
+//    std::vector<std::string> v{"99","22","z55","s11","b33"};
+
+//    clrs::ch2::merge_sort(v.begin(), v.end());
+//    alan::print_container(v);
+
+//    alan::end();
+//    return 0;
+//}
+
+//! @output
+//!
+//22 99 b33 s11 z55
+//exit normally
