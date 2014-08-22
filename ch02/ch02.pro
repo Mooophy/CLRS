@@ -11,4 +11,5 @@ HEADERS += \
     insertion_sort.hpp \
     alan.hpp \
     iterator.hpp \
-    linear_search.hpp
+    linear_search.hpp \
+    merge_sort.hpp
