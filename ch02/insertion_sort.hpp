@@ -7,8 +7,15 @@
  ***************************************************************************/
 //!
 //! ex2.1-2
-//! Rewrite the I NSERTION -S ORT procedure to sort into nonincreasing instead of non-
+//! Rewrite the INSERTION-SORT procedure to sort into nonincreasing instead of non-
 //! decreasing order.
+//!
+//!
+//! ex2.3-4
+//! We can express insertion sort as a recursive procedure as follows. In order to sort
+//! A[1..n], we recursively sort A[1..n-1] and then insert A[n] into the sorted array
+//! A[1..n-1]. Write a recurrence for the running time of this recursive version of
+//! insertion sort.
 //!
 
 #ifndef INSERTION_SORT_HPP
@@ -50,8 +57,38 @@ void insertion_sort(Iter first, Iter last, Comp compare = Comp())
             *(prev + 1) =   *prev;
             --prev;
         }
+        *(prev + 1) =   key;
+    }
+}
 
-        //! place the element curr points to
+/**
+ * @brief insertion_sort_recur
+ * @param first
+ * @param last
+ *
+ * @typename        Iter    iterator
+ * @typename        Comp    callable
+ *
+ * @exercise        ex2.3-4, Page 39, CLRS
+ * @complx          O(n^2)
+ */
+template<typename Iter, typename Comp = std::greater<clrs::IterValue<Iter> > >
+void insertion_sort_recur(Iter first, Iter last, Comp compare = Comp())
+{
+    if(last - first > 1)
+    {
+        auto curr   =   last - 1;
+        insertion_sort_recur(first, curr);  //recur
+
+        //! find the right place
+        auto prev   =   curr - 1;
+        auto key    =   *curr;
+        while(prev != first - 1     &&  compare(*prev, key))
+        {
+            *(prev + 1) =   *prev;
+            --prev;
+        }
+        //! insert
         *(prev + 1) =   key;
     }
 }
@@ -85,4 +122,24 @@ void insertion_sort(Iter first, Iter last, Comp compare = Comp())
 //    return 0;
 //}
 
+//! @test   insertion_sort_recur for ex2.3-4
+//!
+//! @output
+//! 0 33 a22 s11
+//! exit normally
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "insertion_sort.hpp"
+
+//int main()
+//{
+//    std::vector<std::string> v{"a22","s11","33","0"};
+
+//    clrs::ch2::insertion_sort_recur(v.begin(), v.end());
+//    alan::print_container(v);
+
+//    alan::end();
+//    return 0;
+//}
 
