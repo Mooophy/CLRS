@@ -1,14 +1,13 @@
 #include <iostream>
 #include <vector>
 #include "alan.hpp"
-#include "insertion_sort.hpp"
-
+#include "binary_search.hpp"
 int main()
 {
-    std::vector<std::string> v{"a22","s11","33","0"};
+    std::vector<int> v{1,2,3,4,5,6,32,99};
 
-    clrs::ch2::insertion_sort_recur(v.begin(), v.end());
-    alan::print_container(v);
+    auto ret = clrs::ch2::binary_search(v.begin(),v.end(),32);
+    std::cout << *ret;
 
     alan::end();
     return 0;

@@ -18,18 +18,64 @@
 #ifndef BINARY_SEARCH_HPP
 #define BINARY_SEARCH_HPP
 
+#include <functional>
+#include "iterator.hpp"
+
+namespace clrs{namespace ch2{
+
+/**
+ * @brief binary_search
+ * @param first
+ * @param last
+ * @param val
+ * @return      the iterator pointing to the element looked for
+ *              or last iterator when nothing found
+ * @ex2.3-5
+ * @complx  O(lg n)
+ */
 template<typename Iter>
 Iter binary_search(Iter first, Iter last, const IterValue<Iter>& val)
 {
-    auto mid_point = first + (last - first)/2;
-    if(*mid_point   ==  val)
-        return mid_point;
-    else if(*mid_point > val)
-        return binary_search(first, mid_point);
-    else
-        return binary_search(mid_point, last);
+    //! define a lambda for real work
+    Iter nil;
+    using Lambda    =   std::function<Iter(Iter,Iter)>;
+    Lambda  recur   =   [&](Iter first, Iter last)
+    {
+        auto mid    =   first + (last - first)/2;
 
+        if(*mid ==  val)        return mid;
+        else if(mid ==  first)  return nil;
+        else if(*mid > val)     return recur(first,mid);
+        else                    return recur(mid,last);
+    };
+
+    //! call the lamda and return result
+    auto ret = recur(first, last);
+    return ret == nil?  last    :   ret;
 }
 
-
+}}//namespace
 #endif // BINARY_SEARCH_HPP
+
+
+//! @test   binary_search
+//!
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "binary_search.hpp"
+//int main()
+//{
+//    std::vector<int> v{1,2,3,4,5,6,32,99};
+
+//    auto ret = clrs::ch2::binary_search(v.begin(),v.end(),32);
+//    std::cout << *ret;
+
+//    alan::end();
+//    return 0;
+//}
+
+//! @output
+//!
+//32
+//exit normally
