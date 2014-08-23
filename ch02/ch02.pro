@@ -12,4 +12,5 @@ HEADERS += \
     alan.hpp \
     iterator.hpp \
     linear_search.hpp \
-    merge_sort.hpp
+    merge_sort.hpp \
+    binary_search.hpp
