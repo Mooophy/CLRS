@@ -13,4 +13,5 @@ HEADERS += \
     iterator.hpp \
     linear_search.hpp \
     merge_sort.hpp \
-    binary_search.hpp
+    binary_search.hpp \
+    selection_sort.hpp
