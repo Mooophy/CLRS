@@ -13,5 +13,6 @@
 - binary_search.hpp
  - ex2.3-5
  - ex2.3-7 ★
-
+- selection_sort.hpp
+ - ex2.2-2
 
