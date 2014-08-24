@@ -23,7 +23,7 @@
 //  step 2: iterate the sorted sequence         --  O(n)
 //      step 2.1    binary_search(sum - *iter)  --  O(lg n)
 //  running time = O(n lg n) + O(n) * O(lg n) = 2 * O(n lg n) = O(n lg n)
-//  check the codes below for implementation.
+//  check is_sum below for implementation.
 //!
 
 #ifndef BINARY_SEARCH_HPP
@@ -66,15 +66,27 @@ Iter binary_search(Iter first, Iter last, const IterValue<Iter>& val)
     return ret == nil?  last    :   ret;
 }
 
+/**
+ * @brief is_sum
+ * @param first
+ * @param last
+ * @param sum
+ *
+ * @ex2.3-7 ★
+ * @complx  O(n lg n)
+ */
 template<typename Iter>
-Iter find_sum(Iter first, Iter last, const IterValue<Iter>& sum)
+bool is_sum(Iter first, Iter last, const IterValue<Iter>& sum)
 {
+    //! sort    --  O(n lg n)
     clrs::ch2::merge_sort(first, last);
+
+    //! iteration and binary search     --  O(n lg n)
     auto ret = last;
-    for(auto it = first; it != last     &&  found == last; ++it)
+    for(auto it = first; it != last     &&  ret == last; ++it)
         ret = binary_search(first, last, sum - *it);
 
-    return found;
+    return ret != last;
 }
 
 }}//namespace
@@ -101,4 +113,26 @@ Iter find_sum(Iter first, Iter last, const IterValue<Iter>& sum)
 //! @output
 //!
 //32
+//exit normally
+
+
+//! @test   is_sum  for ex2.3-7 ★
+//!
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "binary_search.hpp"
+//int main()
+//{
+//    std::vector<int> v{1,2,3,4,5,6,32,99};
+
+//    auto ret = clrs::ch2::is_sum(v.begin(), v.end(), 100);
+//    std::cout << ret;
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
+//!
+//1
 //exit normally
