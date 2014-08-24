@@ -14,12 +14,24 @@
 //! sequence each time. Write pseudocode, either iterative or recursive, for binary
 //! search. Argue that the worst-case running time of binary search is O(lg n).
 //!
+//! ex2.3-7 ★
+//! Given a set S of n intergers and another integer x.
+//! Describe a O(nlog2(n))- time algorithm to determine whether or not there exist
+//! two elements in S whose sum is exactly x.
+//!
+//  step 1: merge sort                          --  O(n lg n)
+//  step 2: iterate the sorted sequence         --  O(n)
+//      step 2.1    binary_search(sum - *iter)  --  O(lg n)
+//  running time = O(n lg n) + O(n) * O(lg n) = 2 * O(n lg n) = O(n lg n)
+//  check the codes below for implementation.
+//!
 
 #ifndef BINARY_SEARCH_HPP
 #define BINARY_SEARCH_HPP
 
 #include <functional>
 #include "iterator.hpp"
+#include "merge_sort.hpp"
 
 namespace clrs{namespace ch2{
 
@@ -52,6 +64,17 @@ Iter binary_search(Iter first, Iter last, const IterValue<Iter>& val)
     //! call the lamda and return result
     auto ret = recur(first, last);
     return ret == nil?  last    :   ret;
+}
+
+template<typename Iter>
+Iter find_sum(Iter first, Iter last, const IterValue<Iter>& sum)
+{
+    clrs::ch2::merge_sort(first, last);
+    auto ret = last;
+    for(auto it = first; it != last     &&  found == last; ++it)
+        ret = binary_search(first, last, sum - *it);
+
+    return found;
 }
 
 }}//namespace
