@@ -5,7 +5,9 @@
 
 int main()
 {
-    std::vector<int> v{1,6,88,2,0,77};
+    std::vector<int> v{1,6,88,2,3,77};
+    auto ret = clrs::ch2::horner_rule(v.begin(), v.end(),3);
+    std::cout << ret;
 
     alan::end();
     return 0;
