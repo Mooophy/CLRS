@@ -8,8 +8,6 @@
 //!
 //! @problem 2-1 Insertion sort on small arrays in merge sort
 //!
-
-
 #ifndef MERGE_WITH_INSERTION_SORT_HPP
 #define MERGE_WITH_INSERTION_SORT_HPP
 
