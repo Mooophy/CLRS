@@ -17,3 +17,6 @@
  - ex2.2-2
 - merge_with_insertion_sort.hpp
  - problem 2-1 Insertion sort on small arrays in merge sort
+- bubble_sort.hpp
+ - problem 2-2 Correctness of bubblesort
+
