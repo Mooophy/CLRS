@@ -36,6 +36,25 @@ horner_rule(Iter first, Iter last, const clrs::IterValue<Iter>& x)
     return ret;
 }
 
+template<typename ValueType>
+inline ValueType
+power(int order, const ValueType& x)
+{
+    return  order > 0?    x * power(order - 1, x) :   1;
+}
+
+template<typename Iter>
+clrs::IterValue<Iter>
+polynomial_evaluate(Iter first, Iter last, const clrs::IterValue<Iter>& x)
+{
+    IterValue<Iter> ret = 0;
+    int order = 0;
+    for(auto it = first; it != last; ++it)
+        ret += *it  *   power(order++, x);
+
+    return ret;
+}
+
 }}//namespace
 
 #endif // HORNER_RULE_HPP
