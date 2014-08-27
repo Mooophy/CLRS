@@ -19,4 +19,5 @@
  - problem 2-1 Insertion sort on small arrays in merge sort
 - bubble_sort.hpp
  - problem 2-2 Correctness of bubblesort
-
+- horner_rule.hpp
+ - problem 2-3 Correctness of Horner’s rule
