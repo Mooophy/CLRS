@@ -14,4 +14,5 @@ HEADERS += \
     linear_search.hpp \
     merge_sort.hpp \
     binary_search.hpp \
-    selection_sort.hpp
+    selection_sort.hpp \
+    merge_with_insertion_sort.hpp
