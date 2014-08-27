@@ -1,5 +1,5 @@
 /***************************************************************************
- *  @file       insertion_sort.hpp
+ *  @file       merge_with_insertion_sort.hpp
  *  @author     Alan.W
  *  @date       27  Aug 2014
  *  @version    2
@@ -26,7 +26,8 @@ namespace clrs {namespace ch2 {
  * @complx  theta(n*k + n lg(n/k))
  */
 template<typename Iter, typename SizeType>
-void merge_with_insertion_sort(Iter first, Iter last, SizeType thresh)
+inline void
+merge_with_insertion_sort(Iter first, Iter last, SizeType thresh)
 {
     assert(last - first >= thresh);
 

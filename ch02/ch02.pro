@@ -15,4 +15,5 @@ HEADERS += \
     merge_sort.hpp \
     binary_search.hpp \
     selection_sort.hpp \
-    merge_with_insertion_sort.hpp
+    merge_with_insertion_sort.hpp \
+    bubble_sort.hpp
