@@ -36,6 +36,14 @@ horner_rule(Iter first, Iter last, const clrs::IterValue<Iter>& x)
     return ret;
 }
 
+/**
+ * @brief power
+ * @param order
+ * @param x
+ *
+ * @ex  problem 2-3 part c
+ * @complx  O(n)
+ */
 template<typename ValueType>
 inline ValueType
 power(int order, const ValueType& x)
@@ -43,6 +51,14 @@ power(int order, const ValueType& x)
     return  order > 0?    x * power(order - 1, x) :   1;
 }
 
+/**
+ * @brief naive polynomial evaluate
+ * @param first
+ * @param last
+ * @param x
+ *
+ * @complx  O(n^2)
+ */
 template<typename Iter>
 clrs::IterValue<Iter>
 polynomial_evaluate(Iter first, Iter last, const clrs::IterValue<Iter>& x)
@@ -50,7 +66,7 @@ polynomial_evaluate(Iter first, Iter last, const clrs::IterValue<Iter>& x)
     IterValue<Iter> ret = 0;
     int order = 0;
     for(auto it = first; it != last; ++it)
-        ret += *it  *   power(order++, x);
+        ret     +=      *it  *   power(order++, x);
 
     return ret;
 }
@@ -69,13 +85,20 @@ polynomial_evaluate(Iter first, Iter last, const clrs::IterValue<Iter>& x)
 //int main()
 //{
 //    std::vector<int> v{1,6,88,2,3,77};
-//    auto ret = clrs::ch2::horner_rule(v.begin(), v.end(),3);
-//    std::cout << ret;
+
+//    auto by_horner  =   clrs::ch2::horner_rule(v.begin(), v.end(),3);
+//    auto by_naive   =   clrs::ch2::polynomial_evaluate(v.begin(), v.end(), 3);
+//    std::cout << "by horner : " << by_horner << std::endl;
+//    std::cout << "by naive  : " << by_naive  << std::endl;
 
 //    alan::end();
 //    return 0;
 //}
+
 //! @output
 //!
-//19819
+//by horner : 19819
+//by naive  : 19819
+
 //exit normally
+
