@@ -21,3 +21,6 @@
  - problem 2-2 Correctness of bubblesort
 - horner_rule.hpp
  - problem 2-3 Correctness of Horner’s rule
+- inversions.hpp
+ - problem 2-4 Inversions
+
