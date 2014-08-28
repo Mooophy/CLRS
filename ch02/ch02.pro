@@ -17,4 +17,5 @@ HEADERS += \
     selection_sort.hpp \
     merge_with_insertion_sort.hpp \
     bubble_sort.hpp \
-    horner_rule.hpp
+    horner_rule.hpp \
+    inversions.hpp
