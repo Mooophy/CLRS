@@ -9,4 +9,5 @@ SOURCES += \
 
 HEADERS += \
     alan.hpp \
-    iterator.hpp
+    iterator.hpp \
+    max_subarray.hpp
