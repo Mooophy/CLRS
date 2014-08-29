@@ -5,6 +5,7 @@
  *  @version    2
  *  @remark     CLRS Algorithms implementation in C++ templates.
  ***************************************************************************/
+//!
 //! ex4.1-2
 //! Write pseudocode for the brute-force method of solving the maximum-subarray problem.
 //! Your procedure should run in n^2 time.
