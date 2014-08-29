@@ -105,23 +105,28 @@ find_max_crossing_subarray(Iter first, Iter mid, Iter last)
     return {max_left, max_right, left_sum + right_sum};
 }
 
+/**
+ * @brief find_max_subarray
+ * @param first
+ * @param last
+ */
 template<typename Iter>
-Record<Iter>
-find_max_subarray(Iter first, Iter last)
+Record<Iter> find_max_subarray(Iter first, Iter last)
 {
     //! base case
     if(first == last - 1)
         return {first, last, *first};
 
-    auto mid    =   first + (last - first)/2;
-    auto left   =   find_max_subarray(first, mid);
-    auto right  =   find_max_subarray(mid, last);
-    auto cross  =   find_max_crossing_subarray(first, mid, last);
+    //! recur
+    Iter mid = first + (last - first)/2;
+    Record<Iter> left   =   find_max_subarray(first, mid);
+    Record<Iter> right  =   find_max_subarray(mid, last);
+    Record<Iter> cross  =   find_max_crossing_subarray(first, mid, last);
 
-    if(left >= right    &&  left >= cross)
-        return left;
-    else
-        return (right >= left   &&  right >= cross)?    right   :   cross;
+    //! return the largest one
+    if(left >= right    &&  left >= cross)          return left;
+    else if(right >= left   &&  right >= cross)     return right;
+    else                                            return cross;
 }
 
 }}//namespace
