@@ -53,6 +53,51 @@ brute_force_find_max_subarray(Iter first, Iter last)
     return max;
 }
 
+/**
+ * @brief find_max_crossing_subarray
+ * @param first
+ * @param mid
+ * @param last
+ * @return the Struct for max crossing subarray
+ *
+ * @pyseudocode FIND-MAX-CROSSING-SUBARRAY, page 71.
+ * @complx  theta(n)
+ */
+template<typename Iter>
+Record<Iter>
+find_max_crossing_subarray(Iter first, Iter mid, Iter last)
+{
+    //! left subarray   <--
+    auto left_sum = *(mid - 1);
+    IterValue<Iter> sum = 0;
+    auto max_left = mid - 1;
+    for(auto l = mid - 1; l != first - 1; --l)
+    {
+        sum += *l;
+        if(sum > left_sum)
+        {
+            left_sum = sum;
+            max_left = l;
+        }
+    }
+
+    //! right subarray  -->
+    auto right_sum = *mid;
+    sum = 0;
+    auto max_right = mid;
+    for(auto r = mid; r != last; ++r)
+    {
+        sum += *r;
+        if(sum > right_sum)
+        {
+            right_sum = sum;
+            max_right = r;
+        }
+    }
+
+    return {max_left, max_right, left_sum + right_sum};
+}
+
 }}//namespace
 #endif // MAX_SUBARRAY_HPP
 
@@ -67,6 +112,29 @@ brute_force_find_max_subarray(Iter first, Iter last)
 //{
 //    std::vector<int> v{2,-1, 3,};
 //    auto ret = clrs::ch4::brute_force_find_max_subarray(v.begin(), v.end());
+//    std::cout << ret.sum;
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
+//!
+//4
+//exit normally
+
+//! @test   find_max_crossing_subarray
+//!         for FIND-MAX-CROSSING-SUBARRAY
+//!
+
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "max_subarray.hpp"
+
+//int main()
+//{
+//    std::vector<int> v{2,-1, 3,};
+//    auto ret = clrs::ch4::find_max_crossing_subarray(v.begin(),v.begin() + 1, v.end());
 //    std::cout << ret.sum;
 
 //    alan::end();
