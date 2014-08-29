@@ -17,6 +17,9 @@
 
 namespace clrs { namespace ch4 {
 
+/**
+ * @brief The Record struct
+ */
 template<typename Iter>
 struct Record
 {
@@ -29,7 +32,10 @@ struct Record
  * @brief brute_force_find_max_subarray
  * @param first
  * @param last
- * @return
+ * @return  a struct containing first and last for the max subarray and its sum.
+ *
+ * @complx  O(n^2)
+ * for ex4.1-2
  */
 template<typename Iter>
 Record<Iter>
@@ -48,3 +54,24 @@ brute_force_find_max_subarray(Iter first, Iter last)
 
 }}//namespace
 #endif // MAX_SUBARRAY_HPP
+
+//! @test   brute_force_find_max_subarray
+//!         for ex4.1-2
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "max_subarray.hpp"
+
+//int main()
+//{
+//    std::vector<int> v{2,-1, 3,};
+//    auto ret = clrs::ch4::brute_force_find_max_subarray(v.begin(), v.end());
+//    std::cout << ret.sum;
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
+//!
+//4
+//exit normally
