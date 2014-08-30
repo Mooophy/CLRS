@@ -57,13 +57,43 @@ void max_heapify(Range& rng, typename Range::size_type curr)
     auto r = right(curr);
     if(r < rng.size()   &&  rng[r] > rng[largest])  largest = r;
 
-    //! recur when necessary
+    //! recur
     if(largest != curr)
     {
         std::swap(rng[largest], rng[curr]);
         max_heapify(rng, largest);
     }
 }
+
+/**
+ * @brief min_heapify
+ * @param rng
+ * @param curr
+ *
+ * @recurrence T(n) <= T(2n/3) + theta(1)
+ * @complx  O(lg n)
+ *
+ * for ex6.2-2
+ */
+template<typename Range>
+void min_heapify(Range& rng, typename Range::size_type curr)
+{
+    //! compare with left child
+    auto l = left(curr);
+    auto smallest = (l < rng.size()  &&  rng[l] < rng[curr])?  l   :   curr;
+
+    //! compare with right child
+    auto r = right(curr);
+    if(r < rng.size()   &&  rng[r] < rng[smallest])  smallest = r;
+
+    //! recur
+    if(smallest != curr)
+    {
+        std::swap(rng[smallest], rng[curr]);
+        max_heapify(rng, smallest);
+    }
+}
+
 
 }}//namespace
 #endif // HEAP_HPP
