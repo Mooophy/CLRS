@@ -14,6 +14,8 @@
 #define MAX_SUBARRAY_HPP
 
 #include <algorithm>
+#include <vector>
+#include <assert.h>
 #include "iterator.hpp"
 
 namespace clrs { namespace ch4 {
@@ -134,6 +136,32 @@ Record<Iter> find_max_subarray(Iter first, Iter last)
     if(left >= right    &&  left >= cross)          return left;
     else if(right >= left   &&  right >= cross)     return right;
     else                                            return cross;
+}
+
+template<typename Iter>
+Record<Iter> find_max_subarray_linear(Iter first, Iter last)
+{
+    using Vec = std::vector<Record<Iter>>;
+    Vec v(last - first);
+    v[0] = {first, first + 1, *first};
+    for(Vec::size_type curr = 1; curr != v.size(); ++curr)
+    {
+        if(v[curr]->sum   <=  0)
+            v[curr] =
+            {
+                first + curr,
+                first + curr + 1,
+                *(first + curr)
+            };
+        else
+            v[curr] =
+            {
+                v[curr - 1]->first,
+                first + curr + 1,
+                v[curr - 1]->sum + *(first + curr)
+            };
+    }
+    return std::max_element(v.begin(), v.end());
 }
 
 }}//namespace
