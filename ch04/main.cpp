@@ -5,7 +5,6 @@
 int main ()
 {
     using namespace boost::numeric::ublas;
-
     matrix<int> lhs(2,2), rhs(2,2);
 
     lhs(0,0) = 1;
@@ -23,12 +22,3 @@ int main ()
     std::cout << clrs::ch4::square_matrix_multiply_strassen(lhs,rhs)   << std::endl;
 
 }
-
-
-
-
-
-
-
-
-
