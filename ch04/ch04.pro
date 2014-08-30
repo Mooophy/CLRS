@@ -10,4 +10,5 @@ SOURCES += \
 HEADERS += \
     alan.hpp \
     iterator.hpp \
-    max_subarray.hpp
+    max_subarray.hpp \
+    square_matrix_multiply.hpp
