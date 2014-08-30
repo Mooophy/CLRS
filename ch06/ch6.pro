@@ -13,5 +13,6 @@ HEADERS += \
     stack.h \
     queue.h \
     d_ary_heap.h \
-    Young_tableau.h
+    Young_tableau.h \
+    heap.hpp
 
