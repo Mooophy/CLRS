@@ -109,6 +109,13 @@ find_max_crossing_subarray(Iter first, Iter mid, Iter last)
  * @brief find_max_subarray
  * @param first
  * @param last
+ *
+ * @recurrence      T(n) = theta(1)             if n = 1
+ *                  T(n) = 2T(n/2) + theta(n)   if n > 1
+ *
+ * @complx          theta(n lg n)
+ *
+ * @pseudocode      FIND-MAXIMUM-SUBARRAY   Page 72
  */
 template<typename Iter>
 Record<Iter> find_max_subarray(Iter first, Iter last)
@@ -119,9 +126,9 @@ Record<Iter> find_max_subarray(Iter first, Iter last)
 
     //! recur
     Iter mid = first + (last - first)/2;
-    Record<Iter> left   =   find_max_subarray(first, mid);
-    Record<Iter> right  =   find_max_subarray(mid, last);
-    Record<Iter> cross  =   find_max_crossing_subarray(first, mid, last);
+    Record<Iter> left   =   find_max_subarray(first, mid);                  //T(n)
+    Record<Iter> right  =   find_max_subarray(mid, last);                   //T(n)
+    Record<Iter> cross  =   find_max_crossing_subarray(first, mid, last);   //theta(n)
 
     //! return the largest one
     if(left >= right    &&  left >= cross)          return left;
@@ -156,7 +163,6 @@ Record<Iter> find_max_subarray(Iter first, Iter last)
 //! @test   find_max_crossing_subarray
 //!         for FIND-MAX-CROSSING-SUBARRAY
 //!
-
 //#include <iostream>
 //#include <vector>
 //#include "alan.hpp"
@@ -174,4 +180,26 @@ Record<Iter> find_max_subarray(Iter first, Iter last)
 //! @output
 //!
 //4
+//exit normally
+
+
+//! @test   find_max_subarray
+//!         for FIND-MAXIMUM-SUBARRAY
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "max_subarray.hpp"
+
+//int main()
+//{
+//    std::vector<int> v{2,-1, 3,5};
+//    auto ret = clrs::ch4::find_max_subarray(v.begin(), v.end());
+//    std::cout << ret.sum;
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
+//!
+//9
 //exit normally
