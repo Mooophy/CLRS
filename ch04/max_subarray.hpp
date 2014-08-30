@@ -6,10 +6,20 @@
  *  @remark     CLRS Algorithms implementation in C++ templates.
  ***************************************************************************/
 //!
-//! ex4.1-2
+//! @ex4.1-2
 //! Write pseudocode for the brute-force method of solving the maximum-subarray problem.
 //! Your procedure should run in n^2 time.
 //!
+//  check implementation below
+//!
+//! @ex4.1-5
+//! idea
+//! step one :  build a container that stores the max subarray ending at each element
+//! step two :  find the largest one from the container and return it.
+//!
+//  check find_max_subarray_linear function below for implementation
+//!
+
 #ifndef MAX_SUBARRAY_HPP
 #define MAX_SUBARRAY_HPP
 
@@ -38,6 +48,12 @@ operator >=(const Record<Iter>& lhs, const Record<Iter>& rhs)
     return lhs.sum  >= rhs.sum;
 }
 
+template<typename Iter>
+inline bool
+operator <(const Record<Iter>& lhs, const Record<Iter>& rhs)
+{
+    return lhs.sum  < rhs.sum;
+}
 /**
  * @brief brute_force_find_max_subarray
  * @param first
@@ -138,15 +154,27 @@ Record<Iter> find_max_subarray(Iter first, Iter last)
     else                                            return cross;
 }
 
+/**
+ * @brief find max subarray in linear time
+ * @param first
+ * @param last
+ * @return the max subarray
+ *
+ * @complx  2 * theta(n) = theta(n)
+ *
+ * for ex4.1-5:
+ * First part build a container that stores each max subarray ending at
+ * each element.Then return the max element from this container.
+ */
 template<typename Iter>
 Record<Iter> find_max_subarray_linear(Iter first, Iter last)
 {
     using Vec = std::vector<Record<Iter>>;
     Vec v(last - first);
     v[0] = {first, first + 1, *first};
-    for(Vec::size_type curr = 1; curr != v.size(); ++curr)
+    for(typename Vec::size_type curr = 1; curr != v.size(); ++curr)
     {
-        if(v[curr]->sum   <=  0)
+        if(v[curr - 1].sum   <=  0)
             v[curr] =
             {
                 first + curr,
@@ -156,12 +184,12 @@ Record<Iter> find_max_subarray_linear(Iter first, Iter last)
         else
             v[curr] =
             {
-                v[curr - 1]->first,
+                v[curr - 1].first,
                 first + curr + 1,
-                v[curr - 1]->sum + *(first + curr)
+                v[curr - 1].sum + *(first + curr)
             };
     }
-    return std::max_element(v.begin(), v.end());
+    return *std::max_element(v.begin(),v.end());
 }
 
 }}//namespace
@@ -229,5 +257,25 @@ Record<Iter> find_max_subarray_linear(Iter first, Iter last)
 //}
 //! @output
 //!
+//9
+//exit normally
+
+//! @test   find max subarray in linear time
+//!
+//#include <iostream>
+//#include <vector>
+//#include "alan.hpp"
+//#include "max_subarray.hpp"
+
+//int main()
+//{
+//    std::vector<int> v{2,-1, 3,5};
+//    auto ret = clrs::ch4::find_max_subarray_linear(v.begin(), v.end());
+//    std::cout << ret.sum;
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
 //9
 //exit normally
