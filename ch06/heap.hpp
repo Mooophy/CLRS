@@ -158,6 +158,14 @@ void heapify_itera(Range& rng, typename Range::size_type curr, Comp compare = Co
     }
 }
 
+template<typename Range>
+inline void build_max_heap(Range& rng)
+{
+    using Index = typename Range::difference_type;
+    for(Index curr = rng.size()/2 - 1; curr != -1; --curr)
+        max_heapify(rng,curr);
+}
+
 }}//namespace
 #endif // HEAP_HPP
 
@@ -198,9 +206,6 @@ void heapify_itera(Range& rng, typename Range::size_type curr, Comp compare = Co
 //    alan::end();
 //    return 0;
 //}
-
-
-
 //! @output
 //!
 //16 14 10 8 7 9 3 2 4 1
