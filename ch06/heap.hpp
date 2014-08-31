@@ -124,10 +124,44 @@ void heapify(Range& rng, typename Range::size_type curr, Comp compare = Comp())
     }
 }
 
+/**
+ * @brief heapify_itera
+ * @param rng
+ * @param curr
+ * @param compare
+ *
+ * @recurrence T(n) <= T(2n/3) + theta(1)
+ * @complx  O(lg n)
+ *
+ * for ex6.2-5
+ */
+template<typename Range, typename Comp = std::greater<typename Range::value_type> >
+void heapify_itera(Range& rng, typename Range::size_type curr, Comp compare = Comp())
+{
+    while(true)
+    {
+        //! find max or min, depending on Comp.
+        auto l = left(curr);
+        auto extreme =
+                (l < rng.size()  &&  compare(rng[l], rng[curr]))?  l   :   curr;
+        auto r = right(curr);
+        if(r < rng.size()   &&  compare(rng[r], rng[extreme]))
+            extreme = r;
+
+        //! iteration check
+        if(extreme != curr)
+        {
+            std::swap(rng[extreme], rng[curr]);
+            curr = extreme;
+        }
+        else    break;
+    }
+}
+
 }}//namespace
 #endif // HEAP_HPP
 
-//! @test   max_heapify, min_heapify, heapify
+//! @test   max_heapify, min_heapify, heapify, heapify_itera
 //!
 //#include <vector>
 //#include <iostream>
@@ -140,6 +174,7 @@ void heapify(Range& rng, typename Range::size_type curr, Comp compare = Comp())
 //    std::vector<int> v1,v2,v3,v4,v5,v6;
 //    v1 = v2 = v3 = v4 = v5 = v6 = v;
 
+//    //! max heapify
 //    clrs::ch6::max_heapify(v1,1);
 //    alan::print_container(v1);
 //    std::cout << "\n";
@@ -148,21 +183,30 @@ void heapify(Range& rng, typename Range::size_type curr, Comp compare = Comp())
 
 //    std::cout << "\n\n";
 
+//    //! min heapify
 //    clrs::ch6::min_heapify(v3,1);
 //    alan::print_container(v3);
 //    std::cout << "\n";
 //    clrs::ch6::heapify(v4,1,std::less<int>());
 //    alan::print_container(v4);
 
+//    //! iteration version
+//    std::cout << "\n";
+//    clrs::ch6::heapify_itera(v5,1,std::less<int>());
+//    alan::print_container(v5);
+
 //    alan::end();
 //    return 0;
 //}
+
+
 
 //! @output
 //!
 //16 14 10 8 7 9 3 2 4 1
 //16 14 10 8 7 9 3 2 4 1
 
+//16 4 10 14 7 9 3 2 8 1
 //16 4 10 14 7 9 3 2 8 1
 //16 4 10 14 7 9 3 2 8 1
 //exit normally
