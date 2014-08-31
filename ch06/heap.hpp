@@ -8,6 +8,8 @@
 #ifndef HEAP_HPP
 #define HEAP_HPP
 
+#include <functional>
+
 namespace clrs { namespace ch6 {
 
 /**
@@ -94,11 +96,38 @@ void min_heapify(Range& rng, typename Range::size_type curr)
     }
 }
 
+/**
+ * @brief heapify
+ * @param rng
+ * @param curr
+ * @param compare
+ *
+ * @recurrence T(n) <= T(2n/3) + theta(1)
+ * @complx  O(lg n)
+ */
+template<typename Range, typename Comp = std::greater<typename Range::value_type> >
+void heapify(Range& rng, typename Range::size_type curr, Comp compare = Comp())
+{
+    //! compare with left child
+    auto l = left(curr);
+    auto extreme = (l < rng.size()  &&  compare(rng[l], rng[curr]))?  l   :   curr;
+
+    //! compare with right child
+    auto r = right(curr);
+    if(r < rng.size()   &&  compare(rng[r], rng[extreme]))  extreme = r;
+
+    //! recur
+    if(extreme != curr)
+    {
+        std::swap(rng[extreme], rng[curr]);
+        heapify(rng, extreme);
+    }
+}
 
 }}//namespace
 #endif // HEAP_HPP
 
-//! @test
+//! @test   max_heapify, min_heapify, heapify
 //!
 //#include <vector>
 //#include <iostream>
@@ -108,13 +137,33 @@ void min_heapify(Range& rng, typename Range::size_type curr)
 //int main()
 //{
 //    std::vector<int> v {16,4,10,14,7,9,3,2,8,1};
-//    clrs::ch6::max_heapify(v,1);
-//    alan::print_container(v);
+//    std::vector<int> v1,v2,v3,v4,v5,v6;
+//    v1 = v2 = v3 = v4 = v5 = v6 = v;
+
+//    clrs::ch6::max_heapify(v1,1);
+//    alan::print_container(v1);
+//    std::cout << "\n";
+//    clrs::ch6::heapify(v2,1,std::greater<int>());
+//    alan::print_container(v2);
+
+//    std::cout << "\n\n";
+
+//    clrs::ch6::min_heapify(v3,1);
+//    alan::print_container(v3);
+//    std::cout << "\n";
+//    clrs::ch6::heapify(v4,1,std::less<int>());
+//    alan::print_container(v4);
 
 //    alan::end();
 //    return 0;
 //}
+
 //! @output
 //!
 //16 14 10 8 7 9 3 2 4 1
+//16 14 10 8 7 9 3 2 4 1
+
+//16 4 10 14 7 9 3 2 8 1
+//16 4 10 14 7 9 3 2 8 1
 //exit normally
+
