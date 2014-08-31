@@ -51,7 +51,7 @@ inline Iter right(Iter first, Iter curr)
  * @complx  O(lg n)
  */
 template<typename Iter, typename Comp = std::greater<IterValue<Iter> > >
-void heapify(Iter first, Iter last, Iter curr, Comp compare = Comp())
+void heapify(Iter first, Iter last, Iter curr, Comp&& compare = Comp())
 {
     //! left and right child
     Iter l = left(first, curr), r = right(first, curr);
@@ -78,9 +78,11 @@ void heapify(Iter first, Iter last, Iter curr, Comp compare = Comp())
  *
  * @recurrence T(n) <= T(2n/3) + theta(1)
  * @complx  O(lg n)
+ *
+ * for ex6.2-5
  */
 template<typename Iter, typename Comp = std::greater<IterValue<Iter> > >
-void heapify_itera(Iter first, Iter last, Iter curr, Comp compare = Comp())
+void heapify_itera(Iter first, Iter last, Iter curr, Comp&& compare = Comp())
 {
     for(;;)
     {
@@ -100,6 +102,25 @@ void heapify_itera(Iter first, Iter last, Iter curr, Comp compare = Comp())
         }
         else    break;
     }
+}
+
+/**
+ * @brief build_heap
+ * @param first
+ * @param last
+ * @param compare
+ *
+ * @pseudocode  BUILD-MAX-HEAP, Page 157.
+ * @complx  O(n)
+ * @proof   Page 159.
+ */
+template<typename Iter,typename Comp = std::greater<IterValue<Iter> > >
+inline void
+build_heap(Iter first, Iter last, Comp&& compare = Comp())
+{
+    auto size = last - first;
+    for(auto curr = first + size/2 - 1; curr != first - 1; --curr)
+        heapify(first, last, curr, compare);
 }
 
 }}//namespace
@@ -134,3 +155,23 @@ void heapify_itera(Iter first, Iter last, Iter curr, Comp compare = Comp())
 //16 4 10 14 7 9 3 2 8 1
 //exit normally
 
+//! @test
+//!
+//#include <vector>
+//#include <iostream>
+//#include "../misc/alan.hpp"
+//#include "heap.hpp"
+
+//int main()
+//{
+//    std::vector<int> v {4,1,3,2,16,9,10,14,8,7};
+//    clrs::ch6::build_heap(v.begin(), v.end());
+//    alan::print_container(v);
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
+//!
+//16 14 10 8 7 9 3 2 4 1
+//exit normally
