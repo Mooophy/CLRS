@@ -44,7 +44,7 @@ void heapify(Iter first, Iter last, Iter curr, Comp compare = Comp())
     if(max_min != curr)
     {
         std::swap(*max_min, *curr);
-        heapify(first, last, max_min, Comp());
+        heapify(first, last, max_min, compare);
     }
 
 }
