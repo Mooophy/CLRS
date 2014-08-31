@@ -70,7 +70,7 @@ void heapify(Iter first, Iter last, Iter curr, Comp compare = Comp())
 }
 
 /**
- * @brief heapify
+ * @brief heapify iteration version
  * @param first
  * @param last
  * @param curr
@@ -82,17 +82,17 @@ void heapify(Iter first, Iter last, Iter curr, Comp compare = Comp())
 template<typename Iter, typename Comp = std::greater<IterValue<Iter> > >
 void heapify_itera(Iter first, Iter last, Iter curr, Comp compare = Comp())
 {
-    while(true)
+    for(;;)
     {
-        //! left and right child
-        Iter l = left(first, curr), r = right(first, curr);
+        Iter l = left(first, curr);
+        Iter r = right(first, curr);
 
-        //! find the max or min depending on Comp object
+        //! find max(or min) amoung curr, left and right.
         auto max_min = (l < last    &&  compare(*l, *curr))?    l   :   curr;
         if(r < last     &&  compare(*r, *max_min))
                 max_min = r;
 
-        //! iteration or break
+        //! exchange
         if(max_min != curr)
         {
             std::swap(*max_min, *curr);
@@ -105,7 +105,7 @@ void heapify_itera(Iter first, Iter last, Iter curr, Comp compare = Comp())
 }}//namespace
 #endif // HEAP_HPP
 
-//! @test
+//! @test   heapify, heapify_itera.
 //!
 //#include <vector>
 //#include <iostream>
@@ -115,14 +115,15 @@ void heapify_itera(Iter first, Iter last, Iter curr, Comp compare = Comp())
 //int main()
 //{
 //    std::vector<int> v {16,4,10,14,7,9,3,2,8,1};
-//    clrs::ch6::heapify(v.begin(), v.end(), v.begin());
+//    auto v2 = v;
+
+//    clrs::ch6::heapify(v.begin(), v.end(), v.begin() + 1);
 //    alan::print_container(v);
 
 //    std::cout << "\n";
 
-//    auto v2 = v;
-//    clrs::ch6::heapify(v.begin(), v.end(), v.begin());
-//    alan::print_container(v);
+//    clrs::ch6::heapify_itera(v2.begin(), v2.end(), v2.begin() + 1);
+//    alan::print_container(v2);
 
 //    alan::end();
 //    return 0;
