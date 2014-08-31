@@ -5,9 +5,14 @@
 
 int main()
 {
-    std::vector<int> v {1,4};
-//    clrs::ch6::heap_sort(v);
-    clrs::ch6::heapify(v.begin(), v.end(), v.begin() + 1);
+    std::vector<int> v {16,4,10,14,7,9,3,2,8,1};
+    clrs::ch6::heapify(v.begin(), v.end(), v.begin());
+    alan::print_container(v);
+
+    std::cout << "\n";
+
+    auto v2 = v;
+    clrs::ch6::heapify(v.begin(), v.end(), v.begin());
     alan::print_container(v);
 
     alan::end();
