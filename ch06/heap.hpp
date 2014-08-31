@@ -158,10 +158,18 @@ void heapify_itera(Range& rng, typename Range::size_type curr, Comp compare = Co
     }
 }
 
+/**
+ * @brief build_max_heap
+ * @param rng
+ *
+ * @pseudocode  BUILD-MAX-HEAP, Page 157
+ * @complx  O(n)
+ */
 template<typename Range>
 inline void build_max_heap(Range& rng)
 {
     using Index = typename Range::difference_type;
+
     for(Index curr = rng.size()/2 - 1; curr != -1; --curr)
         max_heapify(rng,curr);
 }
@@ -216,3 +224,23 @@ inline void build_max_heap(Range& rng)
 //16 4 10 14 7 9 3 2 8 1
 //exit normally
 
+//! @test build_max_heap
+//!
+//#include <vector>
+//#include <iostream>
+//#include "../misc/alan.hpp"
+//#include "heap.hpp"
+
+//int main()
+//{
+//    std::vector<int> v {4,1,3,2,16,9,10,14,8,7};
+//    clrs::ch6::build_max_heap(v);
+//    alan::print_container(v);
+
+//    alan::end();
+//    return 0;
+//}
+//! @output
+//!
+//16 14 10 8 7 9 3 2 4 1
+//exit normally
