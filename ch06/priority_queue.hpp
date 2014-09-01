@@ -136,7 +136,7 @@ private:
         vec.front()   =   vec.back();
         vec.resize(size() - 1);
 
-        heapify(vec.begin(), vec.end(), vec.begin());
+        heapify(begin(), end(), begin());
         return max;
     }
 
