@@ -15,5 +15,6 @@ HEADERS += \
     d_ary_heap.h \
     Young_tableau.h \
     heap.hpp \
-    heap_sort.hpp
+    heap_sort.hpp \
+    priority_queue.hpp
 

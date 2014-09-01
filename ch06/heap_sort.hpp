@@ -1,3 +1,10 @@
+/***************************************************************************
+ *  @file       heap_sort.hpp
+ *  @author     Yue Wang
+ *  @date       30  Aug 2014
+ *  @version    2
+ *  @remark     CLRS Algorithms implementation in C++ templates.
+ ***************************************************************************/
 #ifndef HEAP_SORT_HPP
 #define HEAP_SORT_HPP
 
