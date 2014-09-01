@@ -11,7 +11,7 @@ namespace clrs {namespace ch6 {
  * @param last
  *
  * @pseudocode HEAPSORT, Page 160.
- * @complx  O(n lg n)
+ * @complx  theta(n lg n)   check ex6.4-3 for proof
  */
 template<typename Iter>
 inline void heap_sort(Iter first, Iter last)
