@@ -35,7 +35,7 @@ public:
      */
     explicit PriorityQueue(std::initializer_list<ValueType>&& list,
                            Compare&& c = std::greater<ValueType>()) noexcept:
-        vec{std::move(list)}, compare(c)
+        vec{std::move(list)}, compare{c}
     {
         clrs::ch6::build_heap(begin(), end(), compare);
     }
