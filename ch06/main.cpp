@@ -1,18 +1,18 @@
 #include <vector>
 #include <iostream>
 #include "../misc/alan.hpp"
-#include "priority_queue.hpp"
+#include "queue.hpp"
 
 int main()
 {
-    clrs::ch6::PriorityQueue<int> queue {{1,2,3,4,5,6}, std::greater<int>()};
-    queue.push(43);
-    queue.push(42);
-    queue.pop();
-    for(auto elem : {11,13,15,16,19})
+    using namespace clrs::ch6;
+    Queue<std::string> queue;
+
+    for(auto&& elem : {"alan01","alan02","alan03"})
         queue.push(elem);
 
-    std::cout << queue.top();
+    while(!queue.empty())
+        std::cout << queue.pop() << std::endl;
 
     alan::end();
     return 0;

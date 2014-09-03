@@ -1,3 +1,10 @@
+/***************************************************************************
+ *  @file       priority_queue.hpp
+ *  @author     Yue Wang
+ *  @date       31  Aug 2014
+ *  @version    2
+ *  @remark     CLRS Algorithms implementation in C++ templates.
+ ***************************************************************************/
 #ifndef PRIORITY_QUEUE_HPP
 #define PRIORITY_QUEUE_HPP
 
@@ -106,10 +113,6 @@ public:
         insert(std::move(added));
     }
 
-private:
-    Vector vec;
-    Compare compare;
-
     /**
      * @brief begin
      */
@@ -125,6 +128,11 @@ private:
     {
         return vec.end();
     }
+
+private:
+    Vector vec;
+    Compare compare;
+
 
     /**
      * @brief parent
