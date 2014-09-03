@@ -26,6 +26,9 @@ struct Element
     PriorityType prio;
 };
 
+/**
+ * @brief operator <
+ */
 template<typename T>
 inline bool
 operator <(const Element<T>& lhs, const Element<T>& rhs)

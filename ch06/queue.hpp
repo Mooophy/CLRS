@@ -35,6 +35,9 @@ public:
         curr{0}
     {}
 
+    /**
+     * @brief push
+     */
     void push(const T& added)
     {
         pq.push({added, curr++});
