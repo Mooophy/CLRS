@@ -150,12 +150,24 @@ private:
      * @pseudocode  MAX-HEAP-INSERT,    page 164
      *              HEAP-INCREASE-KEY,  page 164
      * @complx  O(lg n)
+     *
+     * modified for ex6.5-6 that requires using use
+     * the idea of the inner loop of INSERTION-SORT .
      */
     void insert(const ValueType& added)
     {
-        vec.push_back(added);
-        for(auto it = end() - 1; it > begin()  &&  *parent(it) < *it; it = parent(it))
-            std::swap(*parent(it), *it);
+        //! find the right place for added
+        vec.resize(size() + 1);
+        auto curr = end() - 1;
+        while(curr > begin()    &&  added > *parent(curr))
+        {
+            *curr = *parent(curr);
+            curr = parent(curr);
+        }
+
+        //! insert added.
+        (curr < begin()?    vec.front() :   *curr)  =   added;
+
     }
 };
 
