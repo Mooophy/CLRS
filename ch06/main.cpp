@@ -5,7 +5,7 @@
 
 int main()
 {
-    clrs::ch6::PriorityQueue<int> queue {1,2,3,4,5,6};
+    clrs::ch6::PriorityQueue<int> queue {{1,2,3,4,5,6}, std::greater<int>()};
     queue.push(43);
     queue.push(42);
     queue.pop();

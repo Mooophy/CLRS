@@ -96,6 +96,16 @@ public:
         insert(added);
     }
 
+    /**
+     * @brief push
+     * @param added
+     * @note  move semantics
+     */
+    void push(ValueType&& added) noexcept
+    {
+        insert(std::move(added));
+    }
+
 private:
     Vector vec;
     Compare compare;
@@ -139,7 +149,7 @@ private:
         vec.front()   =   vec.back();
         vec.resize(size() - 1);
 
-        heapify(begin(), end(), begin());
+        heapify(begin(), end(), begin(), compare);
         return max;
     }
 
@@ -159,7 +169,7 @@ private:
         //! find the right place for added
         vec.resize(size() + 1);
         auto curr = end() - 1;
-        while(curr > begin()    &&  added > *parent(curr))
+        while(curr > begin()    &&  compare(added, *parent(curr)))
         {
             *curr = *parent(curr);
             curr = parent(curr);
@@ -174,8 +184,7 @@ private:
 }}//namespace
 #endif // PRIORITY_QUEUE_HPP
 
-
-//! @test   class PriorityQueue and it's member functions
+//! @test   class PriorityQueue with min-heap
 //!
 //#include <vector>
 //#include <iostream>
@@ -184,7 +193,7 @@ private:
 
 //int main()
 //{
-//    clrs::ch6::PriorityQueue<int> queue {1,2,3,4,5,6};
+//    clrs::ch6::PriorityQueue<int> queue {{1,2,3,4,5,6}, std::less<int>()};
 //    queue.push(43);
 //    queue.push(42);
 //    queue.pop();
@@ -196,7 +205,32 @@ private:
 //    alan::end();
 //    return 0;
 //}
-//! @output
+
+//! @output for min heap
 //!
-//42
+//2
 //exit normally
+
+//! @test   class PriorityQueue with max-heap
+//!
+//#include <vector>
+//#include <iostream>
+//#include "../misc/alan.hpp"
+//#include "priority_queue.hpp"
+
+//int main()
+//{
+//    clrs::ch6::PriorityQueue<int> queue {{1,2,3,4,5,6}, std::greater<int>()};
+//    queue.push(43);
+//    queue.push(42);
+//    queue.pop();
+//    for(auto elem : {11,13,15,16,19})
+//        queue.push(elem);
+
+//    std::cout << queue.top();
+
+//    alan::end();
+//    return 0;
+//}
+//! @output for max heap
+//!
