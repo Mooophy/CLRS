@@ -17,5 +17,6 @@ HEADERS += \
     heap_sort.hpp \
     priority_queue.hpp \
     element.hpp \
-    queue.hpp
+    queue.hpp \
+    stack.hpp
 
