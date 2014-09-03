@@ -10,4 +10,7 @@
  - BUILD-MAX-HEAP
 - heap_sort.hpp
  - HEAPSORT
-
+- priority_queue.hpp
+ - HEAP-EXTRACT-MAX
+ - MAX-HEAP-INSERT
+ - HEAP-INCREASE-KEY

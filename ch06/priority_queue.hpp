@@ -126,6 +126,9 @@ private:
 
     /**
      * @brief extract_max
+     *
+     * @pseudocode HEAP-EXTRACT-MAX, Page 163
+     * @complx  O(lg n)
      */
     ValueType extract_max()
     {
@@ -143,6 +146,10 @@ private:
     /**
      * @brief insert
      * @param added
+     *
+     * @pseudocode  MAX-HEAP-INSERT,    page 164
+     *              HEAP-INCREASE-KEY,  page 164
+     * @complx  O(lg n)
      */
     void insert(const ValueType& added)
     {
@@ -156,7 +163,7 @@ private:
 #endif // PRIORITY_QUEUE_HPP
 
 
-//! @test   PriorityQueue
+//! @test   class PriorityQueue and it's member functions
 //!
 //#include <vector>
 //#include <iostream>
