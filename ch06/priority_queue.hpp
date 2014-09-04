@@ -91,7 +91,7 @@ public:
      */
     void pop()
     {
-        extract_max();
+        extract();
     }
 
     /**
@@ -148,17 +148,17 @@ private:
      * @pseudocode HEAP-EXTRACT-MAX, Page 163
      * @complx  O(lg n)
      */
-    ValueType extract_max()
+    ValueType extract()
     {
         if(empty())
             throw std::underflow_error{"heap underflow."};
 
-        auto max = vec.front();
+        auto front = vec.front();
         vec.front()   =   vec.back();
         vec.resize(size() - 1);
 
         heapify(begin(), end(), begin(), compare);
-        return max;
+        return front;
     }
 
     /**
