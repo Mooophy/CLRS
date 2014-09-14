@@ -16,4 +16,5 @@
  - HEAP-INCREASE-KEY
  - ex6.5-2
  - ex6.5-3
-
+- stack_n_queue.hpp
+ - ex6.5-7
