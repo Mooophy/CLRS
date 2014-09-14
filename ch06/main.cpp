@@ -1,21 +1,16 @@
 #include <iostream>
 #include "../misc/alan.hpp"
-#include "stack_n_queue.hpp"
+#include "merge_k_sorted_lists.hpp"
 
 int main()
 {
     using namespace clrs::ch6;
-    StaQue<int,decltype(std::less<Element<int> >{})> queue;
+    using NodeType  =   Node<int, std::string>;
 
-    queue.push(42);
-    queue.push(41);
-    queue.push(40);
-
-    while(! queue.empty())
-    {
-        std::cout << queue.top() << " ";
-        queue.pop();
-    }
+    auto lhs = std::make_shared<NodeType>(NodeType{42, "node1", nullptr});
+    auto rhs = std::make_shared<NodeType>(NodeType{99, "node1", nullptr});
+    std::cout << *lhs << std::endl << *rhs;
+    std::cout << (*lhs < *rhs?  "less"  :   "greater");
 
     alan::end();
     return 0;

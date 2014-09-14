@@ -18,5 +18,6 @@ HEADERS += \
     priority_queue.hpp \
     element.hpp \
     queue.hpp \
-    stack_n_queue.hpp
+    stack_n_queue.hpp \
+    merge_k_sorted_lists.hpp
 

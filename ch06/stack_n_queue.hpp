@@ -19,7 +19,10 @@
 namespace clrs {namespace ch6 {
 
 /**
- * @brief The StaQue class
+ * @brief   The StaQue class
+ * @note    use std::greater for stack
+ *          use std::less    for queue
+ *          check test codes below for detail
  */
 template<typename T, typename Comp>
 class StaQue
