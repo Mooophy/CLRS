@@ -36,5 +36,12 @@ operator <(const Element<T>& lhs, const Element<T>& rhs)
     return lhs.prio < rhs.prio;
 }
 
+template<typename T>
+inline bool
+operator >(const Element<T>& lhs, const Element<T>& rhs)
+{
+    return lhs.prio > rhs.prio;
+}
+
 }}//namespace
 #endif // ELEMENT_HPP

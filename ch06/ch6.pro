@@ -18,5 +18,5 @@ HEADERS += \
     priority_queue.hpp \
     element.hpp \
     queue.hpp \
-    stack.hpp
+    stack_n_queue.hpp
 

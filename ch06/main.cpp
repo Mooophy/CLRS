@@ -1,19 +1,21 @@
-#include <vector>
 #include <iostream>
 #include "../misc/alan.hpp"
-#include "priority_queue.hpp"
+#include "stack_n_queue.hpp"
 
 int main()
 {
-    clrs::ch6::PriorityQueue<int> queue {{1,2,3,4,5,6}, std::less<int>()};
+    using namespace clrs::ch6;
+    StaQue<int,decltype(std::less<Element<int> >{})> queue;
 
-    queue.push(43);
     queue.push(42);
-    queue.pop();
-    for(auto elem : {11,13,15,16,19})
-        queue.push(elem);
+    queue.push(41);
+    queue.push(40);
 
-    std::cout << queue.top();
+    while(! queue.empty())
+    {
+        std::cout << queue.top() << " ";
+        queue.pop();
+    }
 
     alan::end();
     return 0;
