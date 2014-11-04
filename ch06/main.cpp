@@ -9,8 +9,10 @@ int main()
 
     auto lhs = std::make_shared<NodeType>(NodeType{42, "node1", nullptr});
     auto rhs = std::make_shared<NodeType>(NodeType{99, "node1", nullptr});
-    std::cout << *lhs << std::endl << *rhs;
-    std::cout << (*lhs < *rhs?  "less"  :   "greater");
+
+
+
+    std::cout << *it;
 
     alan::end();
     return 0;

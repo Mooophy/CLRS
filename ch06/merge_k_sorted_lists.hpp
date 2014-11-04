@@ -19,7 +19,7 @@ struct Node
 {
     using KeyType   =   K;
     using DataType  =   D;
-    using sPointer = std::shared_ptr<Node<K,D>>;
+    using sPointer  =   std::shared_ptr<Node<K,D>>;
 
     K key;
     D data;
@@ -45,12 +45,20 @@ operator <(const Node& lhs, const Node& rhs)
     return lhs.key  <   rhs.key;
 }
 
-template<typename Node>
-class List
-{
-private:
 
-};
+//template<typename Node>
+//class List
+//{
+//public:
+//    using sPointer  =   typename Node::sPointer;
+
+//    List():
+//        head{nullptr},tail{nullptr}
+//    {}
+
+//private:
+
+//};
 
 }}//namespace
 #endif // MERGE_K_SORTED_LISTS_HPP
