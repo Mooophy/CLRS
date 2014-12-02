@@ -39,7 +39,7 @@ void merge(Iter first, Iter mid, Iter last )
     for(; l != left.end() and r != right.end();  *it++ = *(*r < *l ? r : l)++);
 
     //! copy the rest.
-    for(auto rest = (l == left.cend() ? r : l);  it != last;  *it++ = *rest++);
+    for(auto rest = (l == left.end() ? r : l);  it != last;  *it++ = *rest++);
 }
 
 
