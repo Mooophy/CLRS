@@ -29,13 +29,12 @@ namespace clrs {namespace ch2 {
 template<typename Iter>
 void merge(Iter first, Iter mid, Iter last )
 {
-    //! init
     using Vector = std::vector<clrs::IterValue<Iter>>;
     Vector left(first, mid), right(mid, last);
     auto l = left.cbegin(), r = right.cbegin();
     auto it = first;
 
-    //! copy until either one reaches its end
+    //! compare and copy, until either one exausted
     for(; l != left.end() and r != right.end();  *it++ = *(*r < *l ? r : l)++);
 
     //! copy the rest.
@@ -54,9 +53,8 @@ void merge(Iter first, Iter mid, Iter last )
 template<typename Iter>
 void merge_sort(Iter first, Iter last)
 {
-    if(first + 1 < last )
-    {
-        auto mid = first + (last - first)/2;
+    if(first+1 < last){
+        auto mid = first + (last-first)/2;
         merge_sort(first, mid );
         merge_sort(mid  , last);
         merge(first, mid, last);
