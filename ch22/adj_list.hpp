@@ -8,14 +8,17 @@
 #ifndef ADJ_LIST_HPP
 #define ADJ_LIST_HPP
 
+
 #include <iostream>
 #include <map>
 #include <vector>
 #include <limits>
 
+
 using std::map;
 using std::vector;
 using std::pair;
+
 
 namespace clrs {namespace ch22 {
 
@@ -42,6 +45,13 @@ struct Vertex
     const Data key_{0};
 };
 
+template<typename T>
+inline bool
+operator <(Vertex<T> const& lhs, Vertex<T> const& rhs)
+{
+    return lhs.key_ < rhs.key_;
+}
+
 
 template<typename Data>
 using Edge = pair<Vertex<Data>,Vertex<Data>>;
@@ -51,7 +61,9 @@ template<typename Data>
 class UndirectedGraph : public map<Vertex <Data>, vector<Vertex<Data>*> >
 {
 public:
-    using Adj =  map<Vertex<Data>, vector<Vertex<Data>* > >;
+    using Vector    =   std::vector<Vertex<Data>* >;
+    using Pair      =   std::pair<Vertex<Data>, vector<Vertex<Data>* > >;
+    using Adj       =   std::map<Vertex<Data>, vector<Vertex<Data>* > >;
     using Adj::Adj;
 
     UndirectedGraph() : Adj(){}
@@ -60,7 +72,8 @@ public:
     template<typename Iter>
     UndirectedGraph(Iter first, Iter last): Adj{}
     {
-
+        for(auto it = first; it != last; ++it)
+            Adj::insert(Pair{it->first, {} });
     }
 };
 
