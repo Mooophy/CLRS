@@ -1,3 +1,10 @@
+//!
+//! @author Yue Wang
+//! @date   18.12.2014
+//!
+//! @brief  Adjacency list representations for Graph
+//!
+
 #ifndef ADJ_LIST_HPP
 #define ADJ_LIST_HPP
 
@@ -11,6 +18,7 @@ using std::vector;
 using std::pair;
 
 namespace clrs {namespace ch22 {
+
 
 enum {White, Gray, Black};
 
@@ -54,8 +62,6 @@ public:
 
     }
 };
-
-
 
 
 }}//namespace
