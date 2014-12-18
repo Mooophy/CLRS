@@ -10,15 +10,17 @@
 
 
 #include <iostream>
-#include <map>
 #include <vector>
 #include <limits>
+#include <list>
+#include <algorithm>
 
 
-using std::map;
 using std::vector;
 using std::pair;
 using std::string;
+using std::list;
+using std::find_if;
 
 
 namespace clrs {namespace ch22 {
@@ -27,14 +29,14 @@ namespace clrs {namespace ch22 {
 enum {White, Gray, Black};
 
 
-template <typename Key, typename Data = string>
+template <typename Key, typename Data>
 struct Vertex
 {
     Vertex() = default;
     Vertex(int c, long long d, Vertex* p, Key k, Data dt = Data{}):
         color_{c},distance_{d},parent_{p},key_{k}, data_{dt}
     {}
-    explicit Vertex( Data k ) :
+    explicit Vertex(Key k) :
         Vertex{White, std::numeric_limits<long long>::max(), nullptr, k, Data{}}
     {}
 
@@ -53,6 +55,13 @@ operator <(Vertex<K,D> const& lhs, Vertex<K,D> const& rhs)
     return lhs.key_ < rhs.key_;
 }
 
+template<typename K, typename D>
+inline bool
+operator ==(Vertex<K,D> const& lhs, Vertex<K,D> const& rhs)
+{
+    return lhs.key_ == rhs.key_;
+}
+
 
 template<typename K,typename D>
 struct Edge
@@ -61,6 +70,44 @@ struct Edge
 };
 
 
+template<typename Key,typename Data>
+class UndirectedGraph
+{
+    using V     =   Vertex<Key,Data>;
+    struct List
+    {
+        V vertex_;
+        std::list<Key> neighbors_;
+    };
+    using Adj   =   vector<List>;
+
+public:
+
+    using SizeType = typename Adj::size_type;
+
+    UndirectedGraph() = default;
+
+    void add_vertex(V const& v)
+    {
+        adj_.push_back(List{v, {}});
+    }
+
+    typename Adj::iterator find(V const& v)
+    {
+        return find_if(adj_.begin(), adj_.end(),[&v](List const& li){
+            return  li.vertex_ == v;
+        });
+    }
+
+    typename Adj::iterator begin()  {return adj_.begin();   }
+    typename Adj::iterator end()    {return adj_.end();     }
+
+    SizeType    size()  const   {   return adj_.size();     }
+    bool        empty() const   {   return adj_.empty();    }
+
+private:
+    Adj adj_;
+};
 
 
 }}//namespace
