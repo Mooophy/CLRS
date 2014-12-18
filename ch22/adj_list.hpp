@@ -18,6 +18,7 @@
 using std::map;
 using std::vector;
 using std::pair;
+using std::string;
 
 
 namespace clrs {namespace ch22 {
@@ -26,56 +27,40 @@ namespace clrs {namespace ch22 {
 enum {White, Gray, Black};
 
 
-template <typename Data>
+template <typename Key, typename Data = string>
 struct Vertex
 {
     Vertex() = default;
-
-    Vertex(int c, long long d, Vertex* p, Data k):
-        color_{c},distance_{d},parent_{p},key_{k}
+    Vertex(int c, long long d, Vertex* p, Key k, Data dt = Data{}):
+        color_{c},distance_{d},parent_{p},key_{k}, data_{dt}
     {}
-
     explicit Vertex( Data k ) :
-        Vertex{White, std::numeric_limits<long long>::max(), nullptr, k}
+        Vertex{White, std::numeric_limits<long long>::max(), nullptr, k, Data{}}
     {}
 
     int color_ {White};
     long long distance_ {std::numeric_limits<long long>::max()};
     Vertex* parent_{nullptr};
-    const Data key_{0};
+    const Key key_{0};
+    Data data_{};
 };
 
-template<typename T>
+
+template<typename K, typename D>
 inline bool
-operator <(Vertex<T> const& lhs, Vertex<T> const& rhs)
+operator <(Vertex<K,D> const& lhs, Vertex<K,D> const& rhs)
 {
     return lhs.key_ < rhs.key_;
 }
 
 
-template<typename Data>
-using Edge = pair<Vertex<Data>,Vertex<Data>>;
-
-
-template<typename Data>
-class UndirectedGraph : public map<Vertex <Data>, vector<Vertex<Data>*> >
+template<typename K,typename D>
+struct Edge
 {
-public:
-    using Vector    =   std::vector<Vertex<Data>* >;
-    using Pair      =   std::pair<Vertex<Data>, vector<Vertex<Data>* > >;
-    using Adj       =   std::map<Vertex<Data>, vector<Vertex<Data>* > >;
-    using Adj::Adj;
-
-    UndirectedGraph() : Adj(){}
-
-    //! Ctor with edges list
-    template<typename Iter>
-    UndirectedGraph(Iter first, Iter last): Adj{}
-    {
-        for(auto it = first; it != last; ++it)
-            Adj::insert(Pair{it->first, {} });
-    }
+    Vertex<K,D> u_,v_;
 };
+
+
 
 
 }}//namespace
