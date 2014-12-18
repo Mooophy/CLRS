@@ -42,6 +42,7 @@ struct Vertex
     const Data key_{0};
 };
 
+
 template<typename Data>
 using Edge = pair<Vertex<Data>,Vertex<Data>>;
 
