@@ -90,9 +90,9 @@ struct Edge
 
 
 template<typename Key,typename Data>
-class UndirectedGraph;
+class AdjList;
 template<typename Key,typename Data>
-ostream& operator<<(ostream& os, UndirectedGraph<Key, Data> const&);
+ostream& operator<<(ostream& os, AdjList<Key, Data> const&);
 
 
 /**
@@ -102,10 +102,10 @@ ostream& operator<<(ostream& os, UndirectedGraph<Key, Data> const&);
  *      Container::push_back()
  */
 template<typename Key,typename Data>
-class UndirectedGraph
+class AdjList
 {
     friend ostream&
-    operator<< <Key, Data> (ostream& os, UndirectedGraph<Key, Data> const&);
+    operator<< <Key, Data> (ostream& os, AdjList<Key, Data> const&);
 
     using V     =   Vertex<Key,Data>;
     using E     =   Edge<Key,Data>;
@@ -123,7 +123,7 @@ public:
     using Iter      =   typename Adj::iterator;
     using ConstIter =   typename Adj::const_iterator;
 
-    UndirectedGraph() = default;
+    AdjList() = default;
 
     void add_vertex(V const& v)
     {
@@ -160,7 +160,7 @@ private:
 
 
 template<typename Key,typename Data>
-ostream& operator<<(ostream& os, UndirectedGraph<Key, Data> const& g)
+ostream& operator<<(ostream& os, AdjList<Key, Data> const& g)
 {
     for(auto const& li : g)
     {

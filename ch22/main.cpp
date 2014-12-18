@@ -7,7 +7,7 @@ int main()
     using namespace std;
     using V = clrs::ch22::Vertex<int,std::string>;
     using E = clrs::ch22::Edge<int,std::string>;
-    using G = clrs::ch22::UndirectedGraph<int,std::string>;
+    using G = clrs::ch22::AdjList<int,std::string>;
 
     V v1{1}, v2{2}, v5{5};
     vector<V> vs {v1, v2, v5};
