@@ -10,11 +10,15 @@ int main()
     using G = clrs::ch22::UndirectedGraph<int,std::string>;
 
     V v1{1}, v2{2}, v5{5};
-    std::vector<V> seq {v1, v2, v5};
+    vector<V> vs {v1, v2, v5};
+
+    E e12{v1, v2}, e15{v1, v5}, e25{v2, v5};
+    vector<E> es {e12, e15, e25};
 
     G g;
-    for(auto const& vertex : seq)
-        g.add_vertex(vertex);
+    for(auto const& vertex : vs)    g.add_vertex(vertex);
+    for(auto const& edge : es)      g.add_edge(edge);
+
 
     cout << g.empty() << endl;
     cout << g.size()  << endl;

@@ -33,7 +33,7 @@ template <typename Key, typename Data>
 struct Vertex
 {
     Vertex() = default;
-    Vertex(int c, long long d, Vertex* p, Key k, Data dt = Data{}):
+    Vertex(int c, long long d, const Vertex* p, Key k, Data dt = Data{}):
         color_{c},distance_{d},parent_{p},key_{k}, data_{dt}
     {}
     explicit Vertex(Key k) :
@@ -42,7 +42,7 @@ struct Vertex
 
     int color_ {White};
     long long distance_ {std::numeric_limits<long long>::max()};
-    Vertex* parent_{nullptr};
+    const Vertex* parent_{0};
     const Key key_{0};
     Data data_{};
 };
@@ -70,40 +70,57 @@ struct Edge
 };
 
 
-template<typename Key,typename Data>
+/**
+ * @brief The UndirectedGraph class
+ *
+ * @concepts:
+ *      Container::push_back()
+ */
+template<typename Key,typename Data, typename Container = std::vector<Key> >
 class UndirectedGraph
 {
     using V     =   Vertex<Key,Data>;
+    using E     =   Edge<Key,Data>;
     struct List
     {
+        void add(Key k){    neighbours_.push_back(k);   }
         V vertex_;
-        std::list<Key> neighbors_;
+        Container neighbours_;
     };
     using Adj   =   vector<List>;
 
 public:
 
-    using SizeType = typename Adj::size_type;
+    using SizeType  =   typename Adj::size_type;
+    using Iter      =   typename Adj::iterator;
 
     UndirectedGraph() = default;
 
     void add_vertex(V const& v)
     {
-        adj_.push_back(List{v, {}});
+        if(end() == find(v))
+            adj_.push_back(List{v, {}});
     }
 
-    typename Adj::iterator find(V const& v)
+    void add_edge(E const& e)
+    {
+        add_vertex(e.u_);
+        add_vertex(e.v_);
+        find(e.u_)->add(e.v_.key_);
+    }
+
+    Iter find(V const& v)
     {
         return find_if(adj_.begin(), adj_.end(),[&v](List const& li){
             return  li.vertex_ == v;
         });
     }
 
-    typename Adj::iterator begin()  {return adj_.begin();   }
-    typename Adj::iterator end()    {return adj_.end();     }
+    Iter begin()  { return adj_.begin();   }
+    Iter end()    { return adj_.end();     }
 
-    SizeType    size()  const   {   return adj_.size();     }
-    bool        empty() const   {   return adj_.empty();    }
+    SizeType    size()  const {   return adj_.size();     }
+    bool        empty() const {   return adj_.empty();    }
 
 private:
     Adj adj_;
