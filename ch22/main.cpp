@@ -19,11 +19,11 @@ int main()
     for(auto const& vertex : vs)    g.add_vertex(vertex);
     for(auto const& edge : es)      g.add_edge(edge);
 
-
     cout << g.empty() << endl;
     cout << g.size()  << endl;
 
     cout << (g.find(v1) != g.end() ? "found" : "no such thing") << endl;
+    cout << g ;
 
     return 0;
 }
