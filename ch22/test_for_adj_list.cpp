@@ -1,3 +1,10 @@
+//!
+//! @author Yue Wang
+//! @date   19.12.2014
+//!
+//! @brief  test_for_adj_list.cpp
+//!
+
 #include <iostream>
 #include <string>
 #include "adj_list.hpp"
@@ -37,4 +44,22 @@ int main()
 
     return 0;
 }
+//!
+//! output:
+//!
+//0
+//3
+//found
+//[1]-------{2,5}
+//[2]-------{5}
+//[5]-------{}
 
+
+//----------------
+
+//0
+//3
+//found
+//[1]-------{2,5}
+//[2]-------{1,5}
+//[5]-------{1,2}

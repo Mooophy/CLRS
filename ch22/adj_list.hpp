@@ -59,13 +59,6 @@ struct Vertex
 };
 
 
-template<typename Key, typename Data>
-inline ostream& operator <<(ostream& os, Vertex<Key, Data> const& v)
-{
-    return os << "[" << v.key_ << "]";
-}
-
-
 template<typename K, typename D>
 inline bool
 operator <(Vertex<K,D> const& lhs, Vertex<K,D> const& rhs)
