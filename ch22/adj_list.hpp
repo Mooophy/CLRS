@@ -197,11 +197,23 @@ class DirectedGraph : public AdjList<Key, Data>
 
 public:
     using Table = map<Key, typename Super::SizeType>;
+
     Table outdegree() const
     {
         Table ret;
         for(auto const& li : *this)
             ret[li.vertex_.key_] = li.neighbours_.size();
+        return ret;
+    }
+
+    Table indegre() const
+    {
+        Table ret;
+        for(auto const& li : *this)
+            ret[li.vertex_.key_] = 0;
+        for(auto const& li : *this)
+            for(auto const& key : li.neighbours_)
+                ++ret[key];
         return ret;
     }
 };

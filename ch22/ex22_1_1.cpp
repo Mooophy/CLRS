@@ -16,16 +16,35 @@ int main()
     Graph g;
     for(auto const& edge : es)
         g.add_edge(edge);
-    cout << g;
+    cout << "Directed Graph g :\n" << g << endl;
 
-    auto print_outdegree = [&g]{
-        cout << "outdegree of directed graph g:\n";
-        auto table = g.outdegree();
+    auto print = [&](typename Graph::Table const& table ) -> ostream& {
         for(auto const& pair : table)
-            cout << pair.first << "-->" << pair.second << endl;
+            cout << pair.first << " : " << pair.second << endl;
+        return cout;
     };
 
-    print_outdegree();
+    cout << "deg+\n";
+    print(g.outdegree()) << endl;
+    cout << "deg-\n";
+    print(g.indegre());
 
     return 0;
 }
+//!
+//! @output :
+//!
+//Directed Graph g :
+//[1]-------{2,5}
+//[2]-------{5}
+//[5]-------{}
+
+//deg+
+//1 : 2
+//2 : 1
+//5 : 0
+
+//deg-
+//1 : 0
+//2 : 1
+//5 : 2
