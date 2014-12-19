@@ -95,7 +95,7 @@ ostream& operator<<(ostream& os, AdjList<Key, Data> const&);
 
 /**
  * @brief Adjacency list
- * @note abstract class
+ * @note abstract base class for both Directed and Undirected Graph
  *
  * @concepts:
  *      Container::push_back()
@@ -155,7 +155,7 @@ public:
 protected:
     Adj adj_;
 private:
-     virtual void do_add_edge(E const& edge) = 0;
+     virtual void do_add_edge(E const&) = 0;
 };
 
 
