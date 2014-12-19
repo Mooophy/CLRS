@@ -15,6 +15,7 @@
 #include <list>
 #include <algorithm>
 #include <string>
+#include <map>
 
 
 using std::vector;
@@ -25,6 +26,7 @@ using std::find_if;
 using std::ostream;
 using std::endl;
 using std::to_string;
+using std::map;
 
 
 namespace clrs {namespace ch22 {
@@ -33,6 +35,9 @@ namespace clrs {namespace ch22 {
 enum {White, Gray, Black};
 
 
+/**
+ * @brief Vertex
+ */
 template <typename Key, typename Data>
 struct Vertex
 {
@@ -89,7 +94,8 @@ ostream& operator<<(ostream& os, AdjList<Key, Data> const&);
 
 
 /**
- * @brief The UndirectedGraph class
+ * @brief Adjacency list
+ * @note abstract class
  *
  * @concepts:
  *      Container::push_back()
@@ -173,6 +179,11 @@ ostream& operator<<(ostream& os, AdjList<Key, Data> const& g)
 }
 
 
+/**
+ * @brief Directed Graph
+ *
+ * Adjacency list representation.
+ */
 template<typename Key, typename Data>
 class DirectedGraph : public AdjList<Key, Data>
 {
@@ -183,9 +194,24 @@ class DirectedGraph : public AdjList<Key, Data>
         Super::add_vertex(edge.v_);
         Super::find(edge.u_)->add(edge.v_.key_);
     }
+
+public:
+    using Table = map<Key, typename Super::SizeType>;
+    Table outdegree() const
+    {
+        Table ret;
+        for(auto const& li : *this)
+            ret[li.vertex_.key_] = li.neighbours_.size();
+        return ret;
+    }
 };
 
 
+/**
+ * @brief The UndirectedGraph class
+ *
+ * Adjacency list representation.
+ */
 template<typename Key, typename Data>
 class UndirectedGraph : public AdjList<Key, Data>
 {
