@@ -179,15 +179,30 @@ ostream& operator<<(ostream& os, AdjList<Key, Data> const& g)
     return os;
 }
 
+
 template<typename Key, typename Data>
 class DirectedGraph : public AdjList<Key, Data>
 {
     using Super = AdjList<Key,Data>;
-    virtual void do_add_edge(Edge<Key,Data> const& e) override
+    virtual void do_add_edge(Edge<Key,Data> const& edge) override
     {
-        Super::add_vertex(e.u_);
-        Super::add_vertex(e.v_);
-        Super::find(e.u_)->add(e.v_.key_);
+        Super::add_vertex(edge.u_);
+        Super::add_vertex(edge.v_);
+        Super::find(edge.u_)->add(edge.v_.key_);
+    }
+};
+
+
+template<typename Key, typename Data>
+class UndirectedGraph : public AdjList<Key, Data>
+{
+    using Super = AdjList<Key,Data>;
+    virtual void do_add_edge(Edge<Key,Data> const& edge) override
+    {
+        Super::add_vertex(edge.u_);
+        Super::add_vertex(edge.v_);
+        Super::find(edge.u_)->add(edge.v_.key_);
+        Super::find(edge.v_)->add(edge.u_.key_);
     }
 };
 
