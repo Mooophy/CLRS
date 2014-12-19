@@ -131,11 +131,9 @@ public:
             adj_.push_back(List{v, {}});
     }
 
-    void add_edge(E const& e)
+    void add_edge(E const& edge)
     {
-        add_vertex(e.u_);
-        add_vertex(e.v_);
-        find(e.u_)->add(e.v_.key_);
+        do_add_edge(edge);
     }
 
     Iter find(V const& v)
@@ -154,8 +152,11 @@ public:
     SizeType    size()      const   {   return adj_.size();     }
     bool        empty()     const   {   return adj_.empty();    }
 
-private:
+    virtual ~AdjList(){}
+protected:
     Adj adj_;
+private:
+     virtual void do_add_edge(E const& edge) = 0;
 };
 
 
@@ -177,6 +178,18 @@ ostream& operator<<(ostream& os, AdjList<Key, Data> const& g)
     }
     return os;
 }
+
+template<typename Key, typename Data>
+class DirectedGraph : public AdjList<Key, Data>
+{
+    using Super = AdjList<Key,Data>;
+    virtual void do_add_edge(Edge<Key,Data> const& e) override
+    {
+        Super::add_vertex(e.u_);
+        Super::add_vertex(e.v_);
+        Super::find(e.u_)->add(e.v_.key_);
+    }
+};
 
 
 }}//namespace
