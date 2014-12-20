@@ -11,10 +11,7 @@ using std::vector;
 namespace clrs {namespace ch22 {
 
 template<typename Key>
-struct Matrix : public vector<vector<Key> >
-{
-
-};
+struct Matrix : public vector<vector<Key> >{};
 
 }}//namespace
 #endif // ADJACENCY_MATRIX_HPP

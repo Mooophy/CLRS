@@ -3,6 +3,7 @@
 
 
 #include <string>
+#include <limits>
 
 
 namespace clrs {namespace ch22 {
