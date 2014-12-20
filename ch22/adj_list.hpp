@@ -124,6 +124,13 @@ public:
 
     AdjList() = default;
 
+//    //! ctor with sequence of edges
+//    template<typename Iterator>
+//    AdjList(Iterator first, Iterator last) : AdjList{}
+//    {
+//        for(auto it = first; it != last; ++it)    add_edge(*it);
+//    }
+
     void add_vertex(V const& v)
     {
         if(end() == find(v))
@@ -198,6 +205,13 @@ class DirectedGraph : public AdjList<Key, Data>
 public:
     using Table = map<Key, typename Super::SizeType>;
 
+    DirectedGraph() = default;
+    template<typename Iter>
+    DirectedGraph(Iter first, Iter last) : Super{}
+    {
+        for(auto it = first; it != last; ++it)    Super::add_edge(*it);
+    }
+
     Table outdegree() const
     {
         Table ret;
@@ -234,6 +248,14 @@ class UndirectedGraph : public AdjList<Key, Data>
         Super::add_vertex(edge.v_);
         Super::find(edge.u_)->add(edge.v_.key_);
         Super::find(edge.v_)->add(edge.u_.key_);
+    }
+
+public:
+    UndirectedGraph() = default;
+    template<typename Iter>
+    UndirectedGraph(Iter first, Iter last) : Super{}
+    {
+        for(auto it = first; it != last; ++it)    Super::add_edge(*it);
     }
 };
 

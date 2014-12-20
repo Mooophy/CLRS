@@ -24,39 +24,37 @@ inline ostream& operator<<(ostream& os, typename DG::Table const& table)
     return os;
 }
 
+vector<E> make_edges()
+{
+    V v1{1}, v2{2}, v5{5};
+    E e12{v1, v2}, e15{v1, v5}, e25{v2, v5};
+    return {e12, e15, e25};
+}
 
 int main()
 {
+    vector<E> es = make_edges();
 
-    V v1{1}, v2{2}, v5{5};
-    vector<V> vs {v1, v2, v5};
-    E e12{v1, v2}, e15{v1, v5}, e25{v2, v5};
-    vector<E> es {e12, e15, e25};
-
-    DG dg;
-    for(auto const& vertex : vs)    dg.add_vertex(vertex);
-    for(auto const& edge : es)      dg.add_edge(edge);
-
+    DG dg(es.cbegin(), es.cend());
     cout << "Directed Graph:\n";
     cout << dg.empty() << endl;
     cout << dg.size()  << endl;
-    cout << (dg.find(v1) != dg.end() ? "found" : "no such thing") << endl;
+    cout << (dg.find(V{1}) != dg.end() ? "found" : "no such thing") << endl;
     cout << dg;
     cout << "deg+ : \n" << dg.outdegree()   << endl;
     cout << "deg- : \n" << dg.indegre()     << endl;
 
     cout << "-------------------\n\n";
 
-    UG ug;
-    for(auto const& vertex : vs)    ug.add_vertex(vertex);
-    for(auto const& edge : es)      ug.add_edge(edge);
+    UG ug(es.cbegin(),es.cend());
 
     cout << "Undirected Graph:\n";
     cout << ug.empty() << endl;
     cout << ug.size()  << endl;
-    cout << (ug.find(v1) != ug.end() ? "found" : "no such thing") << endl;
+    cout << (ug.find(V{1}) != ug.end() ? "found" : "no such thing") << endl;
     cout << ug ;
 
+    cout << "\nexit normally\n";
     return 0;
 }
 //!
