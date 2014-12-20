@@ -9,13 +9,24 @@
 #include <string>
 #include "adj_list.hpp"
 
+
+using namespace std;
+using V  = clrs::ch22::Vertex<int,std::string>;
+using E  = clrs::ch22::Edge<int,std::string>;
+using DG = clrs::ch22::DirectedGraph<int,std::string>;
+using UG = clrs::ch22::UndirectedGraph<int,std::string>;
+
+
+inline ostream& operator<<(ostream& os, typename DG::Table const& table)
+{
+    for(auto const& pair : table)
+        os << pair.first << " : " << pair.second << endl;
+    return os;
+}
+
+
 int main()
 {
-    using namespace std;
-    using V  = clrs::ch22::Vertex<int,std::string>;
-    using E  = clrs::ch22::Edge<int,std::string>;
-    using DG = clrs::ch22::DirectedGraph<int,std::string>;
-    using UG = clrs::ch22::UndirectedGraph<int,std::string>;
 
     V v1{1}, v2{2}, v5{5};
     vector<V> vs {v1, v2, v5};
@@ -26,17 +37,21 @@ int main()
     for(auto const& vertex : vs)    dg.add_vertex(vertex);
     for(auto const& edge : es)      dg.add_edge(edge);
 
+    cout << "Directed Graph:\n";
     cout << dg.empty() << endl;
     cout << dg.size()  << endl;
     cout << (dg.find(v1) != dg.end() ? "found" : "no such thing") << endl;
-    cout << dg ;
+    cout << dg;
+    cout << "deg+ : \n" << dg.outdegree()   << endl;
+    cout << "deg- : \n" << dg.indegre()     << endl;
 
-    cout << "\n\n----------------\n\n";
+    cout << "-------------------\n\n";
 
     UG ug;
     for(auto const& vertex : vs)    ug.add_vertex(vertex);
     for(auto const& edge : es)      ug.add_edge(edge);
 
+    cout << "Undirected Graph:\n";
     cout << ug.empty() << endl;
     cout << ug.size()  << endl;
     cout << (ug.find(v1) != ug.end() ? "found" : "no such thing") << endl;

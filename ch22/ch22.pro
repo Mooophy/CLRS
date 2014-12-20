@@ -5,7 +5,7 @@ CONFIG -= qt
 CONFIG += C++11
 
 SOURCES += \
-    ex22_1_1.cpp
+    test_for_adj_list.cpp
 
 HEADERS += \
     adj_list.hpp
