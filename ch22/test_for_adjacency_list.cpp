@@ -2,12 +2,12 @@
 //! @author Yue Wang
 //! @date   19.12.2014
 //!
-//! @brief  test_for_adj_list.cpp
+//! @brief  test code for Adjacency List representations for graph
 //!
 
 #include <iostream>
 #include <string>
-#include "adj_list.hpp"
+#include "adjacency_list.hpp"
 
 
 using namespace std;
@@ -43,7 +43,7 @@ vector<E> make_edges()
 int main()
 {
     vector<E> es = make_edges();
-    cout << "testing Adjacency List :\n";
+    cout << "testing Adjacency List \n\n";
 
     DG dg(es.cbegin(), es.cend());
     cout << "Directed Graph :\n";

@@ -5,8 +5,8 @@ CONFIG -= qt
 CONFIG += C++11
 
 SOURCES += \
-    test_for_adj_list.cpp
+    test_for_adjacency_list.cpp
 
 HEADERS += \
-    adj_list.hpp
+    adjacency_list.hpp
 

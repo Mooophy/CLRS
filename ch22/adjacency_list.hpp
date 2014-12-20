@@ -5,8 +5,8 @@
 //! @brief  Adjacency list representations for Graph
 //!
 
-#ifndef ADJ_LIST_HPP
-#define ADJ_LIST_HPP
+#ifndef ADJACENCY_LIST_HPP
+#define ADJACENCY_LIST_HPP
 
 
 #include <iostream>
@@ -123,13 +123,6 @@ public:
     using ConstIter =   typename Adj::const_iterator;
 
     AdjList() = default;
-
-//    //! ctor with sequence of edges
-//    template<typename Iterator>
-//    AdjList(Iterator first, Iterator last) : AdjList{}
-//    {
-//        for(auto it = first; it != last; ++it)    add_edge(*it);
-//    }
 
     void add_vertex(V const& v)
     {
@@ -261,4 +254,4 @@ public:
 
 
 }}//namespace
-#endif // ADJ_LIST_HPP
+#endif // ADJACENCY_LIST_HPP
