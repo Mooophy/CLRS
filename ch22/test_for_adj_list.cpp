@@ -16,7 +16,9 @@ using E  = clrs::ch22::Edge<int,std::string>;
 using DG = clrs::ch22::DirectedGraph<int,std::string>;
 using UG = clrs::ch22::UndirectedGraph<int,std::string>;
 
-
+/**
+ * @brief operator << for degree table
+ */
 inline ostream& operator<<(ostream& os, typename DG::Table const& table)
 {
     for(auto const& pair : table)
@@ -24,6 +26,13 @@ inline ostream& operator<<(ostream& os, typename DG::Table const& table)
     return os;
 }
 
+
+/**
+ * @brief make 3 edges
+ *          {1  -> 2, 1  -> 5, 2  -> 5}    seen by directed    graph
+ *          {1 <-> 2, 1 <-> 5, 2 <-> 5}    seen by unddirected graph
+ * @return
+ */
 vector<E> make_edges()
 {
     V v1{1}, v2{2}, v5{5};
@@ -34,44 +43,56 @@ vector<E> make_edges()
 int main()
 {
     vector<E> es = make_edges();
+    cout << "testing Adjacency List :\n";
 
     DG dg(es.cbegin(), es.cend());
-    cout << "Directed Graph:\n";
-    cout << dg.empty() << endl;
-    cout << dg.size()  << endl;
+    cout << "Directed Graph :\n";
+    cout << "empty() = " << dg.empty()      << endl;
+    cout << "size()  = " << dg.size()       << endl;
     cout << (dg.find(V{1}) != dg.end() ? "found" : "no such thing") << endl;
     cout << dg;
     cout << "deg+ : \n" << dg.outdegree()   << endl;
     cout << "deg- : \n" << dg.indegre()     << endl;
 
+
     cout << "-------------------\n\n";
 
-    UG ug(es.cbegin(),es.cend());
 
-    cout << "Undirected Graph:\n";
-    cout << ug.empty() << endl;
-    cout << ug.size()  << endl;
+    UG ug(es.cbegin(),es.cend());
+    cout << "Undirected Graph :\n";
+    cout << "empty() = " << ug.empty()      << endl;
+    cout << "size()  = " << ug.size()       << endl;
     cout << (ug.find(V{1}) != ug.end() ? "found" : "no such thing") << endl;
     cout << ug ;
 
-    cout << "\nexit normally\n";
     return 0;
 }
 //!
 //! output:
 //!
-//0
-//3
+//testing Adjacency List :
+//Directed Graph :
+//empty() = 0
+//size()  = 3
 //found
 //[1]-------{2,5}
 //[2]-------{5}
 //[5]-------{}
+//deg+ :
+//1 : 2
+//2 : 1
+//5 : 0
 
+//deg- :
+//1 : 0
+//2 : 1
+//5 : 2
 
-//----------------
+//-------------------
 
-//0
-//3
+//Undirected Graph :
+//empty() = 0
+//size()  = 3
 //found
 //[1]-------{2,5}
 //[2]-------{1,5}
