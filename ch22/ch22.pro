@@ -8,5 +8,7 @@ SOURCES += \
     test_for_adjacency_list.cpp
 
 HEADERS += \
-    adjacency_list.hpp
+    adjacency_list.hpp \
+    adjacency_matrix.hpp \
+    vertex_and_edge.hpp
 
