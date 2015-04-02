@@ -17,9 +17,9 @@ end
 ##Ex2.1-3
  * pseudocode:
 ```cpp
-Linear-Search(arr, value)
+Linear-Search(arr, val)
 1 for i = 0 to arr.length - 1
-2   if value == arr[i]
+2   if val == arr[i]
 3     return i
 4 return Nil
 ```
@@ -27,12 +27,29 @@ Linear-Search(arr, value)
 
  ```cpp
 At the start of each iteration of the for loop, 
-all items stored in subarray arr[0..i] have been compared with value, 
+all items preceeding arr[i] have been compared with val, 
 but none is equal to it.
  ```
  * proof:
  
 ```cpp
+I: 
+  i = 0 -> 
+  nothing preceeds arr[0] ->
+  trivially, all items preceeding arr[i] have been compared with val, but none is equal to it. ->
+  it is true prior to the first iteration of the loop.
+  
+M: 
+  Suppose it holds for i = k. For i = k + 1, to continue the loop arr[k + 1] must be unequal to val. ->
+  after this iteration the loop invariant for i = k + 1. ->
+  the second property holds.
+  
+T:
+  the termination conditions are either i is equal to arr.length or the first item that is equal to val is found. ->
+  for the first case, all items in arr are unequal to val and Nil is returned; for the second case, the index that points to the value equal to val will be returned. ->
+  both case return the result desired. ->
+  the third property holds.
 
+Hence this algorithm is correct.  
 ```
  
