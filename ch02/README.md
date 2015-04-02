@@ -51,7 +51,7 @@ I and M and T ->
 this algorithm is correct.  
 ```
  
-##Ex2.1-3
+##Ex2.1-4
  * problem description:
 ```cpp
 Input: two arrays lhs and rhs which store two n-bit binary numbers respectively
