@@ -11,8 +11,8 @@ end
 ```
 ##Ex2.1-2
  * A functor for comparison can be passed in to specify order direction, such as `std::greater<T>` or `std::less<T>`
- * For source : `insertion_sort.hpp`
- * For test : `test_insertion_sort.hpp`
+ * For implementation: `insertion_sort.hpp`
+ * For test: `test_insertion_sort.cpp`
 
 ##Ex2.1-3
  * pseudocode:
@@ -52,3 +52,20 @@ I and M and T ->
 this algorithm is correct.  
 ```
  
+##Ex2.1-3
+ * problem description:
+```cpp
+Input: two arrays lhs and rhs which store two n-bit binary numbers respectively
+Output: one array that stores an n+1-bit binary number, such that it is equal to the sum of lhs and rhs 
+```
+ * pseudocode:
+```cpp
+Add-Binary-Numbers(lhs, rhs)
+1 def sum as an array with sum.length = lhs.lengh + 1
+2 def carry = 0
+3 for i = lhs.lengh - 1 to 0
+4   sum[i + 1] = (carry + lhs[i] + rhs[i]) % 2
+5   carry = (carry + lhs[i] + rhs[i]) / 2
+6 sum[0] = carry
+7 return sum
+```
