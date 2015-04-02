@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../ch02_src/insertion_sort.hpp"
+#include "../src/insertion_sort.hpp"
 #include <vector>
 #include <deque>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace unit_test
-{		
+{
 	TEST_CLASS(insertion_sort)
 	{
 	public:
-		
+
 		TEST_METHOD(insertion_sort_case1)
 		{
 			std::vector<int> sample = { 1, 5, 2, 1, 6 };
