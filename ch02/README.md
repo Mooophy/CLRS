@@ -21,7 +21,7 @@ end
 1   for i = 0 to arr.length - 1
 2     if value == arr[i]
 3       return i
-4 return Nil
+4   return Nil
 ```
  * loop invariant:
 
