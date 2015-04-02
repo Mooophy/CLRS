@@ -24,10 +24,9 @@ Linear-Search(arr, val)
 4 return Nil
 ```
  * loop invariant:
-
- ```cpp
+```cpp
 At the start of each iteration of the for loop, no item preceeding arr[i] is equal to val.
- ```
+```
  * proof:
  
 ```cpp
