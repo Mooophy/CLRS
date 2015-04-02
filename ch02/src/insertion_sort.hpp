@@ -1,6 +1,5 @@
 #pragma once 
 #include <functional>
-#include "../../misc/utility.hpp"
 
 namespace clrs
 {
@@ -14,7 +13,6 @@ namespace clrs
 			CompareFunc compare;
 			for (int i = 1; i != seq.size(); ++i)
 			{
-				std::cout << " i = " << i << " ";
 				auto key = seq[i];
 				auto j = i - 1;
 				for (; j >= 0 && compare(seq[j], key); --j)	seq[j + 1] = seq[j];

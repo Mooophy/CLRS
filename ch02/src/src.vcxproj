@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="add_binary_numbers.hpp" />
     <ClInclude Include="insertion_sort.hpp" />
   </ItemGroup>
   <ItemGroup>
