@@ -26,30 +26,29 @@ Linear-Search(arr, val)
  * loop invariant:
 
  ```cpp
-At the start of each iteration of the for loop, 
-all items preceeding arr[i] have been compared with val, 
-but none is equal to it.
+At the start of each iteration of the for loop, no item preceeding arr[i] is equal to val.
  ```
  * proof:
  
 ```cpp
 I: 
   i = 0 -> 
-  nothing preceeds arr[0] ->
-  trivially, all items preceeding arr[i] have been compared with val, but none is equal to it. ->
-  it is true prior to the first iteration of the loop.
+  nothing preceeds index 0 ->
+  trivially, no item preceeding index 0 is equal to val. ->
+  I holds.
   
 M: 
-  Suppose it holds for i = k. For i = k + 1, to continue the loop arr[k + 1] must be unequal to val. ->
-  after this iteration the loop invariant for i = k + 1. ->
-  the second property holds.
+  suppose it holds for i = 0 to k. For i = k + 1, to continue the loop, arr[k + 1] must be unequal to val. ->
+  after this iteration the loop invariant holds for i = k + 1. ->
+  M holds.
   
 T:
-  the termination conditions are either i is equal to arr.length or the first item that is equal to val is found. ->
-  for the first case, all items in arr are unequal to val and Nil is returned; for the second case, the index that points to the value equal to val will be returned. ->
-  both case return the result desired. ->
-  the third property holds.
+  the termination conditions are either that i is equal to arr.length or that the item equal to val is found. ->
+  for the first case, all items preceeding index arr.lengh, aka the entire array at this moment, are unequal to val, so Nil is returned; for the second case, the index that points to the value equal to val will be returned. ->
+  both case return results as desired. ->
+  T holds.
 
-Hence this algorithm is correct.  
+I and M and T -> 
+this algorithm is correct.  
 ```
  
