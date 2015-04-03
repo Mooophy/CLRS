@@ -115,9 +115,7 @@ Not sure about this question.Perhaps a precheck can be carried out to see if the
 
 ##Ex2.3-1
 ```cpp
-
-
-      {3, 9, 26, 38, 41, 49, 52, 57}
+     {3, 9, 26, 38, 41, 49, 52, 57}
   {3, 26, 41, 52}       {9, 38, 49, 57}
 {3, 41}   {26, 52}    {38, 57}    {9, 49}     
 {3} {41}  {52}  {26}  {38}  {57}  {9} {49}
