@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClInclude Include="add_binary_numbers.hpp" />
     <ClInclude Include="insertion_sort.hpp" />
+    <ClInclude Include="merge_sort.hpp" />
     <ClInclude Include="selection_sort.hpp" />
   </ItemGroup>
   <ItemGroup>
