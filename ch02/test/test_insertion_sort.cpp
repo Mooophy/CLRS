@@ -6,9 +6,9 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace unit_test
+namespace test
 {
-	TEST_CLASS(insertion_sort)
+	TEST_CLASS(test_insertion_sort)
 	{
 	public:
 

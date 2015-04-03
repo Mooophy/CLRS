@@ -11,10 +11,10 @@ namespace clrs
 			auto l = lhs.crbegin();
 			auto r = rhs.crbegin();
 			typename Container::value_type carry = 0;
-			for (auto& curr : sum)
+			for (auto curr = sum.rbegin(); curr != sum.rend() - 1; ++curr)
 			{
-				unsigned bit_sum = *l++ + *r++;
-				curr = bit_sum % 2;
+				unsigned bit_sum = *l++ + *r++ + carry;
+				*curr = bit_sum % 2;
 				carry = bit_sum / 2;
 			}
 			sum[0] = carry;
