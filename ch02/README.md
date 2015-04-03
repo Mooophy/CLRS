@@ -70,3 +70,8 @@ Add-Binary-Numbers(lhs, rhs)
 ```
 * Implementation : `add_binary_numbers.hpp`
 * Test : `test_add_binary_numbers.cpp`
+
+##Ex2.2-1
+```cpp
+\theta(n^3)
+```
