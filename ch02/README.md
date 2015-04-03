@@ -103,3 +103,12 @@ For worst case, time complexity for line 5 equals to c5 x (n - 2) x (n / 2 - 1).
 ```
  * Implementaion: `selection_sort.hpp`
  * Test: `test_selection_sort.cpp`
+
+##Ex2.2-3
+ * n/2 elements need to be checked on average.
+ * For worst case, n elements need to be checked.
+ * For average-case, `theta(n/2) -> theta(n)`
+ * For worst case, `theta(n)`
+
+##Ex2.2-4
+Not sure about this question.Perhaps a precheck can be carried out to see if the input is desired or not.
