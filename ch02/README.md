@@ -111,4 +111,4 @@ For worst case, time complexity for line 5 equals to c5 x (n - 2) x (n / 2 - 1).
  * For worst case, `theta(n)`
 
 ##Ex2.2-4
-Not sure about this question.Perhaps a precheck can be carried out to see if the input is desired or not.
+Not sure about this question.Perhaps a precheck can be carried out to see if the input is desired already.
