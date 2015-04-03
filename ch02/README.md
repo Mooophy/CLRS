@@ -101,3 +101,5 @@ Also items in range [0, i) have been sorted.
 For best case, time complexity for line 5 equals to 0. Total time required : \theta(n^2)
 For worst case, time complexity for line 5 equals to c5 x (n - 2) x (n / 2 - 1). Total time required : \theta(n^2)
 ```
+ * Implementaion: `selection_sort.hpp`
+ * Test: `test_selection_sort.cpp`
