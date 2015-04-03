@@ -88,3 +88,9 @@ Selection-Sort(arr)
 6   swap arr[i] and arr[min]
 7 return arr
 ```
+
+ * Loop invariant:
+```cpp
+At the start of each iteration of the for loop, all items in range [0, i) are less than any item in range [i, length - 1); Also  items in range [0, i) have been sorted.
+```
+ * When i equals to arr.length - 1, only one item left in range[arr.length - 1, arr.length). If this algorithms runs n times, what it does in the last run will always be swap (arr[arr.length - 1], arr[arr.length - 1]). Hence, n - 1 times is enogh. 
