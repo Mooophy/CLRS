@@ -11,11 +11,11 @@ end
 ```
 ##Ex2.1-2
  * A functor for comparison can be passed in to specify order direction, such as `std::greater<T>` or `std::less<T>`
- * For implementation: `insertion_sort.hpp`
- * For test: `test_insertion_sort.cpp`
+ * Implementation: `insertion_sort.hpp`
+ * Test: `test_insertion_sort.cpp`
 
 ##Ex2.1-3
- * pseudocode:
+ * Pseudocode:
 ```cpp
 Linear-Search(arr, val)
 1 for i = 0 to arr.length - 1
@@ -23,11 +23,11 @@ Linear-Search(arr, val)
 3     return i
 4 return Nil
 ```
- * loop invariant:
+ * Loop invariant:
 ```cpp
 At the start of each iteration of the for loop, no item preceeding arr[i] is equal to val.
 ```
- * proof:
+ * Proof:
  
 ```cpp
 I: 
@@ -52,12 +52,12 @@ this algorithm is correct.
 ```
  
 ##Ex2.1-4
- * problem description:
+ * Problem description:
 ```cpp
 Input: two arrays lhs and rhs which store two n-bit binary numbers respectively
 Output: one array that stores an n+1-bit binary number, such that it is equal to the sum of lhs and rhs 
 ```
- * pseudocode:
+ * Pseudocode:
 ```cpp
 Add-Binary-Numbers(lhs, rhs)
 1 def sum as an array with sum.length = lhs.lengh + 1
@@ -68,3 +68,5 @@ Add-Binary-Numbers(lhs, rhs)
 6 sum[0] = carry
 7 return sum
 ```
+* Implementation : `add_binary_numbers.hpp`
+* Test : `test_add_binary_numbers.cpp`
