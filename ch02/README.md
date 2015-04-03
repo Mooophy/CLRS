@@ -75,3 +75,16 @@ Add-Binary-Numbers(lhs, rhs)
 ```cpp
 \theta(n^3)
 ```
+
+##Ex2.2-2
+ * Pseudocode:
+```cpp
+Selection-Sort(arr)
+1 for i = 0 to arr.length - 2
+2   def index_for_min = arr[i]
+3   for j = i to arr.length - 1
+4     if arr[min] > arr[j]
+5       index_for_min = j
+6   swap arr[i] and arr[min]
+7 return arr
+```
