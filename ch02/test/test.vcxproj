@@ -92,6 +92,7 @@
     </ClCompile>
     <ClCompile Include="test_add_binary_numbers.cpp" />
     <ClCompile Include="test_insertion_sort.cpp" />
+    <ClCompile Include="test_selection_sort.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

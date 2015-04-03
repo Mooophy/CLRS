@@ -21,6 +21,9 @@
     <ClInclude Include="add_binary_numbers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="selection_sort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
