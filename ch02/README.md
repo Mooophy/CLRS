@@ -80,17 +80,24 @@ Add-Binary-Numbers(lhs, rhs)
  * Pseudocode:
 ```cpp
 Selection-Sort(arr)
-1 for i = 0 to arr.length - 2
-2   def index_for_min = arr[i]
-3   for j = i to arr.length - 1
-4     if arr[min] > arr[j]
-5       index_for_min = j
-6   swap arr[i] and arr[min]
-7 return arr
+1 for i = 0 to arr.length - 2     <-  c1 x (n - 1)
+2   def index_for_min = arr[i]    <-  c2 x (n - 2)
+3   for j = i to arr.length - 1   <-  c3 x (n - 2) x n / 2
+4     if arr[min] > arr[j]        <-  c4 x (n - 2) x (n / 2 - 1)
+5       index_for_min = j         <-  time belongs to range [0, c5 x (n - 2) x (n / 2 - 1)]
+6     swap arr[i] and arr[min]    <-  c6 x (n - 2) x (n / 2 - 1)  
+7 return arr                      <-  c7
 ```
 
  * Loop invariant:
 ```cpp
-At the start of each iteration of the for loop, all items in range [0, i) are less than any item in range [i, length - 1); Also  items in range [0, i) have been sorted.
+At the start of each iteration of the for loop, 
+all items in range [0, i) are less than any item in range [i, length - 1); 
+Also items in range [0, i) have been sorted.
 ```
- * When i equals to arr.length - 1, only one item left in range[arr.length - 1, arr.length). If this algorithms runs n times, what it does in the last run will always be swap (arr[arr.length - 1], arr[arr.length - 1]). Hence, n - 1 times is enogh. 
+ * With n = arr.length, when i == n - 1 , only one item left in range[n - 1, n). If this algorithm runs n times, what it does in the last run will always be swap (arr[arr.length - 1], arr[arr.length - 1]). Hence, n - 1 times is enogh. 
+ * Time complexity:
+```cpp
+For best case, time complexity for line 5 equals to 0. Total time required : \theta(n^2)
+For worst case, time complexity for line 5 equals to c5 x (n - 2) x (n / 2 - 1). Total time required : \theta(n^2)
+```
