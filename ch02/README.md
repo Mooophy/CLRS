@@ -201,7 +201,7 @@ From the pseudocode
   
 ##Ex2.3-7
 * Pseudocode
-```cpp
+```python
 //Combine sorting and binary search together.
 Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
   set.sort()
