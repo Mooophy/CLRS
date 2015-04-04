@@ -122,6 +122,8 @@ Not sure about this question.Perhaps a precheck can be carried out to see if the
 ```
 
 ##Ex2.3-2
+ * Implementation: `merge_sort.hpp`
+ * Test: `test_merge_sort.cpp`
 
 ##Ex2.3-3
 ```cpp
