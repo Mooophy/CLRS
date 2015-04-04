@@ -5,7 +5,7 @@ namespace clrs
 	namespace ch02
 	{
 		template<typename Container>
-		Container merge(Container && lhs, Container && rhs)
+		Container merge(Container lhs, Container rhs)
 		{
 			Container ret;
 			auto l = lhs.cbegin();
@@ -32,10 +32,11 @@ namespace clrs
 			if (seq.size() > 1)
 			{
 				auto mid = seq.cbegin() + seq.size() / 2;
-				auto fst = merge_sort(Container(seq.cbegin(), mid));
-				auto snd = merge_sort(Contianer(mid, seq.cend()));
-				return merge(fst, snd);
+				auto lhs = merge_sort(Container(seq.cbegin(), mid));
+				auto rhs = merge_sort(Container(mid, seq.cend()));
+				return merge(lhs, rhs);
 			}
+			return seq;
 		}
 	}
 }
