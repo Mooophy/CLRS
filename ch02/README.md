@@ -172,3 +172,26 @@ Insertion-Sort-by-Recursion(arr)
 T(n) = theta(1)         , if n = 1
      = T(n - 1) + O(n)  , if n > 1
 ```
+
+##Ex2.3-5
+ * Pseudocode:
+```cpp
+Binary-Search-by-Recursion(arr, fst, lst, val)    //[fst, lst)
+  low = 0
+  high = arr.length - 1
+  while low <= high       //T(n/2)
+    mid = (low + high)/2
+    if arr[mid] > val
+      high = mid - 1
+    else if arr[mid] < val
+      low = mid + 1
+    else
+      return mid
+  return Nil
+```
+ * Proof for time complexity
+```cpp
+From the pseudocode
+->  T(n) = T(n/2) + theta(1)  
+->  T(n) = theta(lg(n))
+```
