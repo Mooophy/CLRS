@@ -195,3 +195,6 @@ From the pseudocode
 ->  T(n) = T(n/2) + theta(1)  
 ->  T(n) = theta(lg(n))
 ```
+
+##Ex2.3-6
+ * No. lines 5 - 7 from Insertion-Sort are doing two things: Firstly, it finds the correct position to insert; Secondly, it pushes elements with greater value backwards. For an arrry, binary search cann't improve the pushing part, For a linked list, binary seach cann't handle the first task.   
