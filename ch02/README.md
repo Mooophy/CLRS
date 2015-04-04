@@ -170,6 +170,6 @@ Insertion-Sort-by-Recursion(arr)
 ```
   * Recurrence:
 ```cpp
-T(n) = theta(1) , if n = 1
-     = T(n - 1) + O(n)
+T(n) = theta(1)         , if n = 1
+     = T(n - 1) + O(n)  , if n > 1
 ```
