@@ -120,3 +120,27 @@ Not sure about this question.Perhaps a precheck can be carried out to see if the
 {3, 41}   {26, 52}    {38, 57}    {9, 49}     
 {3} {41}  {52}  {26}  {38}  {57}  {9} {49}
 ```
+
+##Ex2.3-2
+
+##Ex2.3-3
+```cpp
+basis:
+  n = 1   
+  ->  LHS = 2 and RHS = 2 x lg(2) = 2 x 1 = 2   
+  ->  LHS == RHS
+  
+induction:
+  suppose: the equaltion is correct for n = 2^k, where K > 1.   
+  ->  T(2^k) = 2^k x lg(2^k) -- eq2
+  
+  for n = k + 1:
+  LHS = 2T(2^(k+1)/2) + 2^(k+1)
+      = 2T(2^k) + 2^(k+1)
+    using eq2
+      = 2 x 2^k x lg(2^k) + 2^(k+1)
+      = 2^(k+1) x lg(2^k) + 2^(k+1)
+      = 2^(k+1) 
+  
+  
+```
