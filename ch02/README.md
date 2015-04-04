@@ -176,7 +176,7 @@ T(n) = theta(1)         , if n = 1
 ##Ex2.3-5
  * Pseudocode:
 ```cpp
-Binary-Search-by-Recursion(arr, fst, lst, val)    //[fst, lst)
+Binary-Search-by-Recursion(arr, val)    
   low = 0
   high = arr.length - 1
   while low <= high       //T(n/2)
