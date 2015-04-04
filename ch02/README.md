@@ -198,3 +198,15 @@ From the pseudocode
 
 ##Ex2.3-6
  * No. lines 5 - 7 from Insertion-Sort are doing two things: Firstly, it finds the correct position to insert; Secondly, it pushes elements with greater value backwards. For an arrry, binary search can't improve the pushing part, For a linked list, binary seach can't handle the first task.   
+  
+##Ex2.3-7
+* Pseudocode
+```cpp
+//Combine sorting and binary search together.
+Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
+  set.sort()
+  for curr = 0 to set.length - 1
+    if Nil != binary_search(arr = set[curr:], val = sum - set[curr])
+      return true
+  return false
+```
