@@ -151,3 +151,20 @@ induction:
   LHS = RHS
   ->  This equation is correct.
 ```
+
+##Ex2.3-4
+ * Pseudocode:
+```cpp
+Insertion-Sort-by-Recursion(arr)  
+    if arr.length < 2
+        return arr
+    else
+        arr = Insertion-Sort-by-Recursion(arr[:-1]) + arr[-1])  
+        def key = arr[-1]
+        def curr = arr.length - 1
+        while curr != 1 and arr[curr] > key
+            arr[curr + 1] = arr[curr]
+            --curr
+        arr[curr + 1] = key
+        return arr
+```
