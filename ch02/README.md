@@ -131,16 +131,21 @@ basis:
   ->  LHS == RHS
   
 induction:
-  suppose: the equaltion is correct for n = 2^k, where K > 1.   
-  ->  T(2^k) = 2^k x lg(2^k) -- eq2
+  suppose: the equaltion is correct for n = 2^k, where k > 1.   
+  ->  T(2^k) = 2^k x lg(2^k)
+             = (2^k) x k    --  eq2  
   
   for n = k + 1:
   LHS = 2T(2^(k+1)/2) + 2^(k+1)
-      = 2T(2^k) + 2^(k+1)
-    using eq2
-      = 2 x 2^k x lg(2^k) + 2^(k+1)
-      = 2^(k+1) x lg(2^k) + 2^(k+1)
-      = 2^(k+1) 
+      = 2T(2^k)       + 2^(k+1)
+    using eq2:
+      = 2k(2^k)       + 2^(k+1)
+      = k(2^(k+1))    + 2^(k+1)
+      = (2^(k+1)) x (k+1)
+              
+  RHS = (2^(k+1)) x lg(2^(k+1)) 
+      = (2^(k+1)) x (k+1)
   
-  
+  LHS = RHS
+  ->  This equation is correct.
 ```
