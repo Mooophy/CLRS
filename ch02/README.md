@@ -156,15 +156,20 @@ induction:
  * Pseudocode:
 ```cpp
 Insertion-Sort-by-Recursion(arr)  
-    if arr.length < 2
-        return arr
-    else
-        arr = Insertion-Sort-by-Recursion(arr[:-1]) + arr[-1])  
-        def key = arr[-1]
-        def curr = arr.length - 1
-        while curr != 1 and arr[curr] > key
-            arr[curr + 1] = arr[curr]
-            --curr
-        arr[curr + 1] = key
-        return arr
+    if arr.length < 2                                           //theta(1)
+        return arr                                              //theta(1)
+    else                                                        //theta(1)
+        arr = Insertion-Sort-by-Recursion(arr[:-1]) + arr[-1]   //T(n - 1) + theta(1)
+        def key = arr[-1]                                       //theta(1)
+        def curr = arr.length - 1                               //theta(1)
+        while curr != 0 and arr[curr] > key                     //O(n)
+            arr[curr + 1] = arr[curr]                           //O(n)
+            --curr                                              //O(n)
+        arr[curr + 1] = key                                     //theta(1)
+        return arr                                              //theta(1)
+```
+  * Recurrence:
+```cpp
+T(n) = theta(1) , if n = 1
+     = T(n - 1) + O(n)
 ```
