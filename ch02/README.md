@@ -204,9 +204,9 @@ From the pseudocode
 ```python
 #Combine sorting and binary search together.
 Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
-  set.sort() //O(n lg n)
-  for curr = 0 to set.length - 1 //O(n)
-    if Nil != binary_search(arr = set[curr:], val = sum - set[curr]) //O(n lg n)
+  set.sort() #O(n lg n)
+  for curr = 0 to set.length - 1 #O(n)
+    if Nil != binary_search(arr = set[curr:], val = sum - set[curr]) #O(n lg n)
       return true
   return false
 ```
