@@ -210,3 +210,14 @@ Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
       return true
   return false
 ```
+
+##Problem 2-1
+ 1. 
+```cpp
+time complexity : 
+    (n/k) x theta(k^2) = theta(nk)
+```
+ 2.
+ ```cpp
+ 
+ ```
