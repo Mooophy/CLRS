@@ -294,8 +294,9 @@ M:
   
   Applying the property T from part b and above
   ->  A[i] = max( left_set ), A[i] = min( right_set )
-        where right_set = { x | x <- A[ i : ]}
-              left_set  = { x | x <- A[ : i ]}
+        where   left_set  = { x | x <- A[ : i ]}
+                right_set = { x | x <- A[ i : ]}
+              
       increment i to i + 1
   ->  LI holds before next iteration
   
