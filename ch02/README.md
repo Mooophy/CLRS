@@ -226,3 +226,9 @@ As shown in Figure 2.5:
         theta(n(lg(n) - lg(k))) = theta(n(lg(n/k)))
 Hence, it takes T(n) = theta(n(lg(n/k))) to merge the sublists.
 ```
+ * the largest value is k = lg(n)
+```cpp
+
+when k = 1, aka the smallest possible value for k, the time complexity becomes theta(n + n x lg(n)). This is standard merge sort time complexity.
+
+```
