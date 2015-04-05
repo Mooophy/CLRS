@@ -229,6 +229,11 @@ Hence, it takes T(n) = theta(n(lg(n/k))) to merge the sublists.
  * the largest value is k = lg(n)
 ```cpp
 
-when k = 1, aka the smallest possible value for k, the time complexity becomes theta(n + n x lg(n)). This is standard merge sort time complexity.
-
+T(n) = theta(n + n x lg(n)) , if k = 1
+  This is exact merge sort with no optimization.
+  
+T(n) = theta(n x lg(n) + n x lg(n / lg(n))), if k = lg(n)
+  Since n is supposed to be greater than 2, the first term n x lg(n) is the significant part.
+  Anything greater than lg(n) will make the first term greater than theta(n x lg(n)) and the second term is always postive.
+  Hence the largest value is k = lg(n)
 ```
