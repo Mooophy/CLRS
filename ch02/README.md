@@ -219,10 +219,10 @@ Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
  *  Time complexity for merging all sublists
  
 ```cpp
- From Figure 2.5:
-  it takes theta(n) to merge each level in recursion tree. "
-  total height of the recursion is theta(lg(n))
-  merging start from the first level to lg(k)
-    theta(n(lg(n) - lg(k))) = theta(n(lg(n/k)))
+As shown in Figure 2.5:
+    it takes theta(n) to merge each level in recursion tree. "
+    total height of the recursion is theta(lg(n))
+    merging start from the first level to lg(k)
+        theta(n(lg(n) - lg(k))) = theta(n(lg(n/k)))
 Hence, it takes T(n) = theta(n(lg(n/k))) to merge the sublists.
 ```
