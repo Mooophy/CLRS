@@ -212,11 +212,11 @@ Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
 ```
 
 ##Problem 2-1 Merge-Sort + Insertion-Sort
- *  Time complexity for sorting n/k sublists with insertion sort:  
+ *  a. Time complexity for sorting n/k sublists with insertion sort:  
 ```cpp
     (n/k) x theta(k^2) = theta(nk)
 ```
- *  Time complexity for merging all sublists
+ *  b. Time complexity for merging all sublists
  
 ```cpp
 As shown in Figure 2.5:
@@ -226,7 +226,7 @@ As shown in Figure 2.5:
         theta(n(lg(n) - lg(k))) = theta(n(lg(n/k)))
 Hence, it takes T(n) = theta(n(lg(n/k))) to merge the sublists.
 ```
- *  k = lg(n) is the largest value that meets requirement.
+ *  c. k = lg(n) is the largest value that meets requirement.
 ```cpp
 
 T(n) = theta(n + n x lg(n)) , if k = 1
@@ -237,11 +237,11 @@ T(n) = theta(n x lg(n) + n x lg(n / lg(n))), if k = lg(n)
   Anything greater than lg(n) will make the first term greater than theta(n x lg(n)) and the second term is always postive.
   Hence the largest value is k = lg(n)
 ```
- * The desired value can be found by testing values from range [1, lg(n)].
+ * d. The desired value can be found by testing values from range [1, lg(n)].
 
 ##Problem 2-1 Bubble-Sort
- * One more thing need to prove is that no item in A has been deleted nor item added into A'.In another word, A' must be a permutation of A.
- * Loop invariant and its proof for lines 2-4
+ * a. One more thing need to prove is that no item in A has been deleted nor item added into A'.In another word, A' must be a permutation of A.
+ * b. Loop invariant and its proof for lines 2-4
 ```cpp
 Loop invariant:
   Prior to each iteration of the for loop, A[j] = min(s) , where set s = { x | x <- A[j, A.length] } .
@@ -276,7 +276,7 @@ T:
 I and M and T -> loop invariant holds 
 ```
 
- * Loop invariant and its proof for lines 1-4
+ * c. Loop invariant and its proof for lines 1-4
 ```cpp
 Loop invariant:
   Prior to each iteration of the for loop, 
@@ -307,3 +307,5 @@ T:
   
 I.M.T -> LI holds.  
 ```
+
+ * d. time complexity = theta(n^2). Insertion-Sort is better. Because for average case and best case Insertion-Sort doesn't have to carry out theta(n) for its nested loop. whereas Bubble-Sort has to do so for any case.
