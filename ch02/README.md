@@ -226,7 +226,7 @@ As shown in Figure 2.5:
         theta(n(lg(n) - lg(k))) = theta(n(lg(n/k)))
 Hence, it takes T(n) = theta(n(lg(n/k))) to merge the sublists.
 ```
- * the largest value is k = lg(n)
+ *  k = lg(n) is the largest value that meets requirement.
 ```cpp
 
 T(n) = theta(n + n x lg(n)) , if k = 1
@@ -237,3 +237,4 @@ T(n) = theta(n x lg(n) + n x lg(n / lg(n))), if k = lg(n)
   Anything greater than lg(n) will make the first term greater than theta(n x lg(n)) and the second term is always postive.
   Hence the largest value is k = lg(n)
 ```
+ * The desired value can be found by testing values from range [1, lg(n)].
