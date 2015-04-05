@@ -239,7 +239,7 @@ T(n) = theta(n x lg(n) + n x lg(n / lg(n))), if k = lg(n)
 ```
  * d. The desired value can be found by testing values from range [1, lg(n)].
 
-##Problem 2-1 Bubble-Sort
+##Problem 2-2 Bubble-Sort
  * a. One more thing need to prove is that no item in A has been deleted nor item added into A'.In another word, A' must be a permutation of A.
  * b. Loop invariant and its proof for lines 2-4
 ```cpp
@@ -309,3 +309,17 @@ I.M.T -> LI holds.
 ```
 
  * d. time complexity = theta(n^2). Insertion-Sort is better. Because for average case and best case Insertion-Sort doesn't have to carry out theta(n) for its nested loop. whereas Bubble-Sort has to do so for any case.
+
+##Problem 2-3 Horner’s rule
+
+ * Time complexity : theta(n)
+ * pseudocode
+```python
+Naive-Polynomial-Evaluation(arr_of_terms, x)
+  y = 0;
+  for term in arr_of_terms
+    X = 1
+    for i = 1 to term.k
+      X *= x
+    y += term.ak * X
+```
