@@ -20,5 +20,16 @@ namespace clrs
 
 			return y;
 		}
+
+		template<typename Sequence>
+		typename Sequence::value_type horner_evaluate(Sequence const& seq, typename Sequence::value_type x)
+		{
+			using Value = typename Sequence::value_type;
+
+			auto y = Value(0);
+			for (auto coefficient = seq.crbegin(); coefficient != seq.crend(); ++coefficient)
+				y = *coefficient + x*y;
+			return y;
+		}
 	}
 }
