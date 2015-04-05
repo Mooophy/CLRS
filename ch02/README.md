@@ -249,8 +249,7 @@ Loop invariant:
 Proof  
 I:
   Prior to the first iteration
-  ->  j = A.length
-  ->  s = { x | x <- A[A.length, A.length] } 
+  ->  j = A.length, s = { x | x <- A[A.length, A.length] } 
   ->  A[A.length] is the only element in s
   ->  I holds.
   
@@ -275,4 +274,35 @@ T:
   ->  T holds.
   
 I and M and T -> loop invariant holds 
+```
+
+ * Loop invariant and its proof for lines 1-4
+```cpp
+Loop invariant:
+  Prior to each iteration of the for loop, 
+  all elements in subarray [ : i - 1] are smaller than anything in subarray [i : ],
+  and are sorted.
+
+Proof
+I:
+  Prior to the first iteration, [ : i - 1] is empty
+  ->  I holds.
+  
+M:
+  Suppose LI holds before i = i
+  ->  all elements in subarray A[ : i - 1] are smaller than anything in subarray A[i : ], and are sorted.
+  
+  Applying the property T from part b and above
+  ->  A[i] = max( left_set ), A[i] = min( right_set )
+        where right_set = { x | x <- A[ i : ]}
+              left_set  = { x | x <- A[ : i ]}
+      increment i to i + 1
+  ->  LI holds before next iteration
+  
+T:
+  i = A.length is the termination condition
+  ->  subarray A[ : A.length - 1] has been sorted and A[A.length], the only element in subarray A[A.length, A.length], is greater than or equal to the largest element in A[ : A.length - 1]
+  ->  A is sorted.
+  
+I.M.T -> LI holds.  
 ```
