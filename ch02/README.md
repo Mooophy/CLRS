@@ -211,7 +211,7 @@ Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
   return false
 ```
 
-##Problem 2-1
+##Problem 2-1 Merge-Sort + Insertion-Sort
  *  Time complexity for sorting n/k sublists with insertion sort:  
 ```cpp
     (n/k) x theta(k^2) = theta(nk)
@@ -238,3 +238,41 @@ T(n) = theta(n x lg(n) + n x lg(n / lg(n))), if k = lg(n)
   Hence the largest value is k = lg(n)
 ```
  * The desired value can be found by testing values from range [1, lg(n)].
+
+##Problem 2-1 Bubble-Sort
+ * One more thing need to prove is that no item in A has been deleted nor item added into A'.In another word, A' must be a permutation of A.
+ * Loop invariant and its proof for lines 2-4
+```cpp
+Loop invariant:
+  Prior to each iteration of the for loop, A[j] = min(s) , where set s = { x | x <- A[j, A.length] } .
+
+Proof  
+I:
+  Prior to the first iteration
+  ->  j = A.length
+  ->  s = { x | x <- A[A.length, A.length] } 
+  ->  A[A.length] is the only element in s
+  ->  I holds.
+  
+M:
+  Let loop invariant holds before j = k
+  ->  A[k] = min(s), where s = { x | x <- A[k, A.length] } -- equation 1
+  
+  The semantics of lines 3 and 4   
+  ->  swap A[k] and A[k-1], if A[k] < A[k - 1]
+  ->  decrement k to k - 1
+  
+  Applying equation 1
+  ->  j becomes k - 1
+  ->  A[k - 1] = min(s), where s = { x | x <- A[k - 1, A.length] }
+  ->  loop invariant holds before next iteration
+  ->  M holds.
+  
+T:
+  Termination condition is j = i
+  ->  A[i] = min(s), where s = { x | x <- A[i, A.length] }
+  ->  this property is useful and exactly expected
+  ->  T holds.
+  
+I and M and T -> loop invariant holds 
+```
