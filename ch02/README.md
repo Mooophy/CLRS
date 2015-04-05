@@ -212,11 +212,12 @@ Are-There-Two-Elements-That-Have-Sum-As-Specified(set, sum)
 ```
 
 ##Problem 2-1
- *  time complexity for sorting n/k sublists with insertion sort:  
+ *  Time complexity for sorting n/k sublists with insertion sort:  
 ```cpp
     (n/k) x theta(k^2) = theta(nk)
 ```
- *  time complexity for merging all sublists 
+ *  Time complexity for merging all sublists
+ 
  ```cpp
  From Figure 2.5:
   it takes theta(n) to merge each level in recursion tree. "
