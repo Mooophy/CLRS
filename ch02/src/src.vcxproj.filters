@@ -30,6 +30,9 @@
     <ClInclude Include="polynomial.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="find_inversions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

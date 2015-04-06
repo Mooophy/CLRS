@@ -41,5 +41,8 @@
     <ClCompile Include="test_polynomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_find_inversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

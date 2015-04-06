@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="add_binary_numbers.hpp" />
+    <ClInclude Include="find_inversions.hpp" />
     <ClInclude Include="insertion_sort.hpp" />
     <ClInclude Include="merge_sort.hpp" />
     <ClInclude Include="polynomial.hpp" />

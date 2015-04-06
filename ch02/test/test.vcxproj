@@ -91,6 +91,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_add_binary_numbers.cpp" />
+    <ClCompile Include="test_find_inversions.cpp" />
     <ClCompile Include="test_insertion_sort.cpp" />
     <ClCompile Include="test_merge_sort.cpp" />
     <ClCompile Include="test_polynomial.cpp" />
