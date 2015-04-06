@@ -315,11 +315,20 @@ I.M.T -> LI holds.
  * Time complexity : theta(n)
  * pseudocode
 ```python
-Naive-Polynomial-Evaluation(arr_of_terms, x)
-  y = 0;
-  for term in arr_of_terms
+Naive-Polynomial-Evaluation(arr, x)
+  y = 0
+  for i = 0 to arr.length - 1
     X = 1
-    for i = 1 to term.k
+    for k = i downto 1
       X *= x
-    y += term.ak * X
+    y += X * arr[i]
+  return y
+```
+
+ * LI and proof
+```cpp
+(To avoid Greek letter Sigma, here is using sum(head, tail)() function instead)
+LI:
+  At the start of each iteration of the for loop of lines 2–3,
+  y = sum(k = 0, k = n - (i + 1)) ()
 ```
