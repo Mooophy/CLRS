@@ -328,7 +328,40 @@ Naive-Polynomial-Evaluation(arr, x)
  * LI and proof
 ```cpp
 (To avoid Greek letter Sigma, here is using sum(head, tail)() function instead)
-LI:
+L.I.:
   At the start of each iteration of the for loop of lines 2–3,
-  y = sum(k = 0, k = n - (i + 1)) ()
+  y = sum(k = 0, k = n - (i + 1)) (a(k + i + 1) * x ^ k)
+  
+I.:
+  Prior to the first iteration, 
+    y = sum(k = 0, k = -1) (a(k + i + 1) * x ^ k)
+    upper limit is lower than lower limit, this equation is meaningless, y = 0
+  Hence, I holds.
+
+M.:
+  Suppose L.I. holds before i = i
+    y = sum(k = 0, k = n - (i + 1)) (a(k + i + 1) * x ^ k)
+    
+    by line 2 - 3,            LHS becomes:
+      y = a(i) + x * y
+        = a(i) + x * ( a(i + 1) + a(i + 2) * x + ... + a(n) * x^(n - i - 1)
+        = a(i) + a(i + 1) * x + a(i + 2) * x^2 + ... + a(n) * x^(n - i)
+        
+    when i = i - 1            RHS becomes
+      sum(k = 0, k = n - i) (a(k + i) * x ^ k)  
+        = a(i) + a(i + 1) * x + a(i + 2) * x^2 + ... + a(n) * x^(n - i)
+      
+  LHS = RHS, hence M holds for next iteration.
+  
+T.:
+  The termination condition is i = -1
+  y = sum(k = 0, k = n - (-1 + 1)) (a(k - 1 + 1) * x ^ k)
+    = sum(k = 0, k = n) (a(k) * x ^ k)
+  Hence, T holds.
+  
+L.I. holds.
+    
+  
+      
+
 ```
