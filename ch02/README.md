@@ -377,3 +377,10 @@ number of inversions = n(n - 1)/2
 ```cpp
 T(n) = theta(number_of_inversions + n)
 ```
+ * Algorithm to find inversions in theta(n(lg(n))):
+```cpp
+Modify Merge-Sort as following:
+1 Pass count as a reference or a pointer into procedure Merge and Merge-Sort
+2 add statement : count += n1 - i into Merge between line 16 and line 17
+```
+ * code : `find_inversions.hpp` and `test_find_inversions.cpp`.
