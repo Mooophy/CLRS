@@ -315,11 +315,65 @@ I.M.T -> LI holds.
  * Time complexity : theta(n)
  * pseudocode
 ```python
-Naive-Polynomial-Evaluation(arr_of_terms, x)
-  y = 0;
-  for term in arr_of_terms
+Naive-Polynomial-Evaluation(arr, x)
+  y = 0
+  for i = 0 to arr.length - 1
     X = 1
-    for i = 1 to term.k
+    for k = i downto 1
       X *= x
-    y += term.ak * X
+    y += X * arr[i]
+  return y
+```
+
+ * LI and proof
+```cpp
+(To avoid Greek letter Sigma, here is using sum(head, tail)() function instead)
+L.I.:
+  At the start of each iteration of the for loop of lines 2–3,
+  y = sum(k = 0, k = n - (i + 1)) (a(k + i + 1) * x ^ k)
+  
+I.:
+  Prior to the first iteration, 
+    y = sum(k = 0, k = -1) (a(k + i + 1) * x ^ k)
+    upper limit is lower than lower limit, this equation is meaningless, y = 0
+  Hence, I holds.
+
+M.:
+  Suppose L.I. holds before i = i
+    y = sum(k = 0, k = n - (i + 1)) (a(k + i + 1) * x ^ k)
+    
+    by line 2 - 3,            LHS becomes:
+      y = a(i) + x * y
+        = a(i) + x * ( a(i + 1) + a(i + 2) * x + ... + a(n) * x^(n - i - 1)
+        = a(i) + a(i + 1) * x + a(i + 2) * x^2 + ... + a(n) * x^(n - i)
+        
+    when i = i - 1            RHS becomes
+      sum(k = 0, k = n - i) (a(k + i) * x ^ k)  
+        = a(i) + a(i + 1) * x + a(i + 2) * x^2 + ... + a(n) * x^(n - i)
+      
+  LHS = RHS, hence M holds for next iteration.
+  
+T.:
+  The termination condition is i = -1
+  y = sum(k = 0, k = n - (-1 + 1)) (a(k - 1 + 1) * x ^ k)
+    = sum(k = 0, k = n) (a(k) * x ^ k)
+  Hence, T holds.
+  
+L.I. holds.
+```
+
+ * As shown above, this code fragment correctly evaluates a polynomial.
+
+##Problem 2-4 Inversions
+ *  Five inversions:
+```cpp
+{2,1}, {3,1}, {8,1}, {6,1}, {8,6}
+```
+ * set {n, n-1, n-2, ...,2, 1}, i.e. numbers in descending order has most inversions.
+```
+number of inversions = n(n - 1)/2
+```
+ * As shown below, the expression `A[i] > key` in line 5 Insertion-Sort is in essence checking for an inversion. So a function can be made to describe the relationship between the running time and number of inversions:
+```cpp
+T(n) = theta(number_of_inversions + n)
 ```
