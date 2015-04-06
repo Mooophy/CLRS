@@ -375,5 +375,5 @@ number of inversions = n(n - 1)/2
 ```
  * As shown below, the expression `A[i] > key` in line 5 Insertion-Sort is in essence checking for an inversion. So a function can be made to describe the relationship between the running time and number of inversions:
 ```cpp
-  T(n) = theta(number_of_inversions + n)
+T(n) = theta(number_of_inversions + n)
 ```
