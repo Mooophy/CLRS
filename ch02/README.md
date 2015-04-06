@@ -363,3 +363,9 @@ L.I. holds.
 ```
 
  * As shown above, this code fragment correctly evaluates a polynomial.
+
+##Problem 2-3 Inversions
+ *  Five inversions:
+```cpp
+{2,1}, {3,1}, {8,1}, {6,1}, {8,6}
+```
