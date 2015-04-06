@@ -360,8 +360,6 @@ T.:
   Hence, T holds.
   
 L.I. holds.
-    
-  
-      
-
 ```
+
+ * As shown above, this code fragment correctly evaluates a polynomial.
