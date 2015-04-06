@@ -311,7 +311,7 @@ I.M.T -> LI holds.
  * d. time complexity = theta(n^2). Insertion-Sort is better. Because for average case and best case Insertion-Sort doesn't have to carry out theta(n) for its nested loop. whereas Bubble-Sort has to do so for any case.
 
 ##Problem 2-3 Horner’s rule
-
+ * code : `polynomial.hpp`, `test_polynomial.hpp`
  * Time complexity : theta(n)
  * pseudocode
 ```python
