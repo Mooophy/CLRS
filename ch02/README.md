@@ -364,13 +364,16 @@ L.I. holds.
 
  * As shown above, this code fragment correctly evaluates a polynomial.
 
-##Problem 2-3 Inversions
+##Problem 2-4 Inversions
  *  Five inversions:
 ```cpp
 {2,1}, {3,1}, {8,1}, {6,1}, {8,6}
 ```
  * set {n, n-1, n-2, ...,2, 1}, i.e. numbers in descending order has most inversions.
+```
+number of inversions = n(n - 1)/2
+```
  * As shown below, the expression `A[i] > key` in line 5 Insertion-Sort is in essence checking for an inversion. So a function can be made to describe the relationship between the running time and number of inversions:
 ```cpp
-  T(n) = theta(n * number_of_inversions + n)
+  T(n) = theta(number_of_inversions + n)
 ```
