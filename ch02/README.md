@@ -370,12 +370,7 @@ L.I. holds.
 {2,1}, {3,1}, {8,1}, {6,1}, {8,6}
 ```
  * set {n, n-1, n-2, ...,2, 1}, i.e. numbers in descending order has most inversions.
- * As shown below, the expression `A[i] > key` is in essence checking for an inversion. So a function can be made to describe the relationship between the running time and number of inversions:
+ * As shown below, the expression `A[i] > key` in line 5 Insertion-Sort is in essence checking for an inversion. So a function can be made to describe the relationship between the running time and number of inversions:
 ```cpp
   T(n) = theta(n * number_of_inversions + n)
-```
-
-```cpp
-//from Insertion-Sort
-5     while i > 0 and A[i] > key
 ```
