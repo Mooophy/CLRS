@@ -117,7 +117,7 @@ Not sure about this question.Perhaps a precheck can be carried out to see if the
 {3} {41}  {52}  {26}  {38}  {57}  {9} {49}
 ```
 
-##Ex2.3-2 [Merge Sort](src/merge_sort.hpp) | [Test](test_merge_sort.cpp)
+##Ex2.3-2 [Merge Sort](src/merge_sort.hpp) | [Test](test/test_merge_sort.cpp)
 
 ##Ex2.3-3
 ```cpp
@@ -304,7 +304,7 @@ I.M.T -> LI holds.
 
  * d. time complexity = theta(n^2). Insertion-Sort is better. Because for average case and best case Insertion-Sort doesn't have to carry out theta(n) for its nested loop. whereas Bubble-Sort has to do so for any case.
 
-##Problem 2-3 Horner’s rule [Implementation](src/polynomial.hpp) | |[Test](test/test_polynomial.hpp)
+##Problem 2-3 Horner’s rule [Implementation](src/polynomial.hpp) | [Test](test/test_polynomial.cpp)
  * Time complexity : theta(n)
  * pseudocode
 ```python
@@ -357,7 +357,7 @@ L.I. holds.
 
  * As shown above, this code fragment correctly evaluates a polynomial.
 
-##Problem 2-4 Inversions [Implementation](src/find_inversions.hpp) | [Test](src/test_find_inversions.cpp)
+##Problem 2-4 Inversions [Implementation](src/find_inversions.hpp) | [Test](test/test_find_inversions.cpp)
  *  Five inversions:
 ```cpp
 {2,1}, {3,1}, {8,1}, {6,1}, {8,6}
