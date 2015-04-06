@@ -11,7 +11,7 @@ algorithm begin:
 end
 
 ```
-##Ex2.1-2 [insertion_sort](src/insertion_sort.hpp) | [test](test/test_insertion_sort.cpp)
+##Ex2.1-2 [Insertion Sort](src/insertion_sort.hpp) | [Test](test/test_insertion_sort.cpp)
  * A functor for comparison can be passed in to specify order direction, such as `std::greater<T>` or `std::less<T>`
 
 ##Ex2.1-3
@@ -51,7 +51,7 @@ I and M and T ->
 this algorithm is correct.  
 ```
  
-##Ex2.1-4 [add_binary_numbers](src/add_binary_numbers.hpp) | [test](test/test_add_binary_numbers.cpp)
+##Ex2.1-4 [Implementation](src/add_binary_numbers.hpp) | [Test](test/test_add_binary_numbers.cpp)
  * Problem description:
 ```cpp
 Input: two arrays lhs and rhs which store two n-bit binary numbers respectively
@@ -74,7 +74,7 @@ Add-Binary-Numbers(lhs, rhs)
 \theta(n^3)
 ```
 
-##Ex2.2-2 [selection_sort](src/selection_sort.hpp) | [test](test/test_selection_sort.cpp)
+##Ex2.2-2 [Selection Sort](src/selection_sort.hpp) | [Test](test/test_selection_sort.cpp)
  * Pseudocode:
 ```cpp
 Selection-Sort(arr)
@@ -117,7 +117,7 @@ Not sure about this question.Perhaps a precheck can be carried out to see if the
 {3} {41}  {52}  {26}  {38}  {57}  {9} {49}
 ```
 
-##Ex2.3-2 [merge_sort](src/merge_sort.hpp) | [test](test_merge_sort.cpp)
+##Ex2.3-2 [Merge Sort](src/merge_sort.hpp) | [Test](test_merge_sort.cpp)
 
 ##Ex2.3-3
 ```cpp
@@ -304,7 +304,7 @@ I.M.T -> LI holds.
 
  * d. time complexity = theta(n^2). Insertion-Sort is better. Because for average case and best case Insertion-Sort doesn't have to carry out theta(n) for its nested loop. whereas Bubble-Sort has to do so for any case.
 
-##Problem 2-3 Horner’s rule [implementation](src/polynomial.hpp)|[test])(test/test_polynomial.hpp)
+##Problem 2-3 Horner’s rule [Implementation](src/polynomial.hpp)|[Test])(test/test_polynomial.hpp)
  * Time complexity : theta(n)
  * pseudocode
 ```python
@@ -357,7 +357,7 @@ L.I. holds.
 
  * As shown above, this code fragment correctly evaluates a polynomial.
 
-##Problem 2-4 Inversions [implementation](find_inversions.hpp)|[test](test_find_inversions.cpp)
+##Problem 2-4 Inversions [Implementation](find_inversions.hpp)|[Test](test_find_inversions.cpp)
  *  Five inversions:
 ```cpp
 {2,1}, {3,1}, {8,1}, {6,1}, {8,6}
