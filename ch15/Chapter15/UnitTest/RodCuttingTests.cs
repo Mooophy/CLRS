@@ -9,11 +9,11 @@ namespace UnitTest
         [TestMethod]
         public void CutRod()
         {
-            var ps = new[] { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30 };
-            Assert.AreEqual(30, Algorithms.CutRod(ps, ps.Length - 0));
-            Assert.AreEqual(25, Algorithms.CutRod(ps, ps.Length - 1));
-            Assert.AreEqual(22, Algorithms.CutRod(ps, ps.Length - 2));
-            Assert.AreEqual(18, Algorithms.CutRod(ps, ps.Length - 3));
+            var p = new[] { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30 };
+            Assert.AreEqual(30, Algorithms.CutRod(p, p.Length - 0));
+            Assert.AreEqual(25, Algorithms.CutRod(p, p.Length - 1));
+            Assert.AreEqual(22, Algorithms.CutRod(p, p.Length - 2));
+            Assert.AreEqual(18, Algorithms.CutRod(p, p.Length - 3));
         }
     }
 }
