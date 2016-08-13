@@ -57,7 +57,7 @@ namespace Chapter15
                         new[] { 0 }.AsEnumerable(),
                         (r, j) => r
                             .Concat(
-                                new[] { Range(1, j).Aggregate(int.MinValue, (q, i) => Max(q, p[i - 1] + r.ElementAt(j - i))) }
+                                new[] { Range(1, j).Select(i => p[i - 1] + r.ElementAt(j - i)).Max() }
                             )
                     )
                     .Last();
