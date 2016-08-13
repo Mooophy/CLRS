@@ -24,5 +24,14 @@ namespace UnitTest
             Assert.AreEqual(22, Algorithms.MemoizedCutRod(p, p.Length - 2));
             Assert.AreEqual(18, Algorithms.MemoizedCutRod(p, p.Length - 3));
         }
+
+        [TestMethod]
+        public void BottomUpCutRod()
+        {
+            Assert.AreEqual(30, Algorithms.BottomUpCutRod(p, p.Length - 0));
+            Assert.AreEqual(25, Algorithms.BottomUpCutRod(p, p.Length - 1));
+            Assert.AreEqual(22, Algorithms.BottomUpCutRod(p, p.Length - 2));
+            Assert.AreEqual(18, Algorithms.BottomUpCutRod(p, p.Length - 3));
+        }
     }
 }

@@ -44,6 +44,29 @@ namespace Chapter15
                 return r[n] = Range(1, n)
                     .Aggregate(int.MinValue, (q, i) => Max(q, p[i - 1] + MemoizedCutRodAux(p, n - i, r)));
             }
+            /// <summary>
+            /// O(n^2), The Bottom Up DP.
+            /// </summary>
+            /// <param name="p">Prices</param>
+            /// <param name="n">Length</param>
+            /// <returns></returns>
+            public static int BottomUpCutRod(IList<int> p, int n)
+            {
+                return Range(1, n)
+                    .Aggregate(
+                        Range(0, n + 1).Select(i => 0).ToList(),
+                        (r, j) =>
+                        {
+                            r[j] = Range(1, j)
+                                .Aggregate(
+                                    int.MinValue, 
+                                    (q, i) => Max(q, p[i - 1] + r[j - i])
+                                );
+                            return r;
+                        }
+                    )
+                    .Last();
+            }
         }
     }
 }
