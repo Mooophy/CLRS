@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using static System.Linq.Enumerable;
-using static System.Math;
 
 namespace Chapter15
 {
