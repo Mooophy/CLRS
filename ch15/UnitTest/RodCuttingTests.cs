@@ -6,10 +6,10 @@ namespace UnitTest
     [TestClass]
     public class RodCuttingTests
     {
+        private int[] p = new[] { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30 };
         [TestMethod]
         public void CutRod()
         {
-            var p = new[] { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30 };
             Assert.AreEqual(30, Algorithms.CutRod(p, p.Length - 0));
             Assert.AreEqual(25, Algorithms.CutRod(p, p.Length - 1));
             Assert.AreEqual(22, Algorithms.CutRod(p, p.Length - 2));
@@ -19,7 +19,6 @@ namespace UnitTest
         [TestMethod]
         public void MemoizedCutRod()
         {
-            var p = new[] { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30 };
             Assert.AreEqual(30, Algorithms.MemoizedCutRod(p, p.Length - 0));
             Assert.AreEqual(25, Algorithms.MemoizedCutRod(p, p.Length - 1));
             Assert.AreEqual(22, Algorithms.MemoizedCutRod(p, p.Length - 2));
