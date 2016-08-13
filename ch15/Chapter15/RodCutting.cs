@@ -54,16 +54,11 @@ namespace Chapter15
             {
                 return Range(1, n)
                     .Aggregate(
-                        Range(0, n + 1).Select(i => 0).ToList(),
-                        (r, j) =>
-                        {
-                            r[j] = Range(1, j)
-                                .Aggregate(
-                                    int.MinValue, 
-                                    (q, i) => Max(q, p[i - 1] + r[j - i])
-                                );
-                            return r;
-                        }
+                        new[] { 0 }.AsEnumerable(),
+                        (r, j) => r
+                            .Concat(
+                                new[] { Range(1, j).Aggregate(int.MinValue, (q, i) => Max(q, p[i - 1] + r.ElementAt(j - i))) }
+                            )
                     )
                     .Last();
             }
