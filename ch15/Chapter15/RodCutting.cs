@@ -18,7 +18,8 @@ namespace Chapter15
             public static int CutRod(IList<int> p, int n)
             {
                 return n == 0 ? 0 : Range(1, n)
-                    .Aggregate(int.MinValue, (q, i) => Max(q, p[i - 1] + CutRod(p, n - i)));
+                    .Select(i => p[i - 1] + CutRod(p, n - i))
+                    .Max();
             }
             /// <summary>
             /// O(n^2), The Top Down DP.
@@ -42,7 +43,8 @@ namespace Chapter15
                 if (n == 0)
                     return r[0] = 0;
                 return r[n] = Range(1, n)
-                    .Aggregate(int.MinValue, (q, i) => Max(q, p[i - 1] + MemoizedCutRodAux(p, n - i, r)));
+                    .Select(i => p[i - 1] + MemoizedCutRodAux(p, n - i, r))
+                    .Max();
             }
             /// <summary>
             /// O(n^2), The Bottom Up DP.
